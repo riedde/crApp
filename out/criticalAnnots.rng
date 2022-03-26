@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"
+         xmlns:teix="http://www.tei-c.org/ns/Examples"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+         ns="http://baumann-digital.de/ns/criticalRemarks"><!--
+Schema generated from ODD source 2022-03-20T17:33:15Z. .
+TEI Edition: Version 4.3.0. Last updated on
+        31st August 2021, revision b4f72b1ff
+TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
+  
+--><!---->
+   <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+           prefix="tei"
+           uri="http://www.tei-c.org/ns/1.0"/>
+   <define name="att.key.attributes">
+      <ref name="att.key.attribute.key"/>
+   </define>
+   <define name="att.key.attribute.key">
+      <optional>
+         <attribute name="key">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.numbering.attributes">
+      <ref name="att.numbering.attribute.no"/>
+      <ref name="att.numbering.attribute.sortNo"/>
+   </define>
+   <define name="att.numbering.attribute.no">
+      <optional>
+         <attribute name="no">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.numbering.attribute.sortNo">
+      <optional>
+         <attribute name="sortNo">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.siglum.attributes">
+      <ref name="att.siglum.attribute.siglum"/>
+   </define>
+   <define name="att.siglum.attribute.siglum">
+      <optional>
+         <attribute name="siglum">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="critRemarks">
+      <element name="critRemarks">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Root element for the critical remarks.</a:documentation>
+         <ref name="setting"/>
+         <oneOrMore>
+            <ref name="remark"/>
+         </oneOrMore>
+         <optional>
+            <attribute name="relWork">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">related work. Das Werk, dem die Annotationen zugehörig sind.</a:documentation>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="setting">
+      <element name="setting">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</a:documentation>
+         <ref name="voices"/>
+         <ref name="sources"/>
+         <ref name="editions"/>
+      </element>
+   </define>
+   <define name="remark">
+      <element name="remark">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Eine kritische Anmerkung</a:documentation>
+         <ref name="item"/>
+         <ref name="mdiv"/>
+         <group>
+            <ref name="measure"/>
+            <optional>
+               <ref name="measure"/>
+            </optional>
+         </group>
+         <group>
+            <ref name="count"/>
+            <optional>
+               <ref name="count"/>
+            </optional>
+         </group>
+         <ref name="voices"/>
+         <ref name="layers"/>
+         <ref name="annots"/>
+         <ref name="sources"/>
+         <ref name="editions"/>
+         <optional>
+            <attribute name="xml:id">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <choice>
+                  <value>editorial</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Eingriff (Hg.)</a:documentation>
+                  <value>reading</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Lesart</a:documentation>
+                  <value>annotation</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Anmerkung (Hg.)</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="item">
+      <element name="item">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+      </element>
+   </define>
+   <define name="mdiv">
+      <element name="mdiv">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+      </element>
+   </define>
+   <define name="measure">
+      <element name="measure">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+      </element>
+   </define>
+   <define name="count">
+      <element name="count">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+      </element>
+   </define>
+   <define name="voices">
+      <element name="voices">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for voices (voice-elements)</a:documentation>
+         <oneOrMore>
+            <ref name="voice"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="voice">
+      <element name="voice">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+         <ref name="att.key.attributes"/>
+         <ref name="att.numbering.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="layers">
+      <element name="layers">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for layers (layer-elements)</a:documentation>
+         <oneOrMore>
+            <ref name="layer"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="layer">
+      <element name="layer">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+      </element>
+   </define>
+   <define name="annots">
+      <element name="annots">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for annotations (annot-elements)</a:documentation>
+         <oneOrMore>
+            <ref name="annot"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="annot">
+      <element name="annot">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+      </element>
+   </define>
+   <define name="sources">
+      <element name="sources">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for sources (source-elements)</a:documentation>
+         <oneOrMore>
+            <ref name="source"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="source">
+      <element name="source">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+         <ref name="att.numbering.attributes"/>
+         <ref name="att.siglum.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="editions">
+      <element name="editions">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for editions (edition-elements)</a:documentation>
+         <oneOrMore>
+            <ref name="edition"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="edition">
+      <element name="edition">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+         <ref name="att.siglum.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <start>
+      <choice>
+         <ref name="critRemarks"/>
+      </choice>
+   </start>
+</grammar>
