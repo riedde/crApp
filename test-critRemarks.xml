@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<critRemarks xmlns="http://baumann-digital.de/ns/criticalRemarks">
+<critApp xmlns="http://baumann-digital.de/ns/criticalApparatus">
     <setting>
         <mdivs>
-            <mdiv n="0">Vorspiel</mdiv>
-            <mdiv n="1">Chor</mdiv>
+            <!-- @no is used for the schema -->
+            <mdiv no="0">Vorspiel</mdiv>
+            <mdiv no="1">Chor</mdiv>
         </mdivs>
         <voices>
-            <voice key="flute" voiceNo="1">Flöte I</voice>
-            <voice key="flute" voiceNo="2">Flöte II</voice>
+            <!-- @key is used for the schema -->
+            <voice key="flute.1">Flöte I</voice>
+            <voice key="flute.2">Flöte II</voice>
         </voices>
         <sources>
-            <source siglum="SV" sortNo="1">Stichvorlage</source>
+            <!-- @siglum is used for the schema -->
+            <source siglum="SV" sortNo="1" target="link-to-file.xml">Stichvorlage</source>
             <source siglum="ED" sortNo="2">Erstdruck</source>
         </sources>
         <editions>
             <edition siglum="BauA">Baumann-Ausgabe</edition>
         </editions>
+        <categories>
+            <category>cat1</category>
+            <category>cat2</category>
+        </categories>
     </setting>
-    <remark>
-        <item></item>
-        <mdiv></mdiv>
-        <timing>
-            <startPoint measure="1" count="1"/>
-            <endPoint measure="1" count="3"/>
-        </timing>
-        <voices>
-            <voice/>
-        </voices>
-        <layers>
-            <layer/>
-        </layers>
-        <annots>
-            <annot></annot>
-        </annots>
-        <sources>
-            <source/>
-        </sources>
-        <editions>
-            <edition/>
-        </editions>
-    </remark>
-</critRemarks>
+    <remarks>
+        <remark>
+            <category>cat2</category>
+            <mdiv>1</mdiv>
+            <occurance>
+<!--                <where measure="1" count="1"/>-->
+                <from measure="1" count="1"/>
+                <to measure="1" count="3"/>
+            </occurance>
+            <voices>
+                <voice>flute.1</voice>
+            </voices>
+            <layers>
+                <layer/>
+            </layers>
+            <annots>
+                <annot/>
+            </annots>
+            <sources>
+                <source>SV</source>
+            </sources>
+            <editions>
+                <edition/>
+            </editions>
+        </remark>
+    </remarks>
+</critApp>
