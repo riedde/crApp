@@ -4,8 +4,8 @@
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
-         ns="http://baumann-digital.de/ns/criticalRemarks"><!--
-Schema generated from ODD source 2022-03-20T17:33:15Z. .
+         ns="http://baumann-digital.de/ns/criticalApparatus"><!--
+Schema generated from ODD source 2022-03-27T15:52:23Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -42,6 +42,24 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          </attribute>
       </optional>
    </define>
+   <define name="att.timing.attributes">
+      <ref name="att.timing.attribute.measure"/>
+      <ref name="att.timing.attribute.count"/>
+   </define>
+   <define name="att.timing.attribute.measure">
+      <optional>
+         <attribute name="measure">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.timing.attribute.count">
+      <optional>
+         <attribute name="count">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.siglum.attributes">
       <ref name="att.siglum.attribute.siglum"/>
    </define>
@@ -52,12 +70,22 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          </attribute>
       </optional>
    </define>
-   <define name="critRemarks">
-      <element name="critRemarks">
+   <define name="att.target.attributes">
+      <ref name="att.target.attribute.target"/>
+   </define>
+   <define name="att.target.attribute.target">
+      <optional>
+         <attribute name="target">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="critApp">
+      <element name="critApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Root element for the critical remarks.</a:documentation>
          <ref name="setting"/>
          <oneOrMore>
-            <ref name="remark"/>
+            <ref name="remarks"/>
          </oneOrMore>
          <optional>
             <attribute name="relWork">
@@ -70,28 +98,27 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="setting">
       <element name="setting">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</a:documentation>
+         <ref name="mdivs"/>
          <ref name="voices"/>
          <ref name="sources"/>
          <ref name="editions"/>
+         <ref name="categories"/>
+      </element>
+   </define>
+   <define name="remarks">
+      <element name="remarks">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <oneOrMore>
+            <ref name="remark"/>
+         </oneOrMore>
       </element>
    </define>
    <define name="remark">
       <element name="remark">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Eine kritische Anmerkung</a:documentation>
-         <ref name="item"/>
+         <ref name="category"/>
          <ref name="mdiv"/>
-         <group>
-            <ref name="measure"/>
-            <optional>
-               <ref name="measure"/>
-            </optional>
-         </group>
-         <group>
-            <ref name="count"/>
-            <optional>
-               <ref name="count"/>
-            </optional>
-         </group>
+         <ref name="occurance"/>
          <ref name="voices"/>
          <ref name="layers"/>
          <ref name="annots"/>
@@ -118,28 +145,70 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <empty/>
       </element>
    </define>
-   <define name="item">
-      <element name="item">
+   <define name="categories">
+      <element name="categories">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+         <oneOrMore>
+            <ref name="category"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="category">
+      <element name="category">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+      </element>
+   </define>
+   <define name="mdivs">
+      <element name="mdivs">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <oneOrMore>
+            <ref name="mdiv"/>
+         </oneOrMore>
       </element>
    </define>
    <define name="mdiv">
       <element name="mdiv">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+         <text/>
+         <ref name="att.numbering.attributes"/>
+         <empty/>
       </element>
    </define>
-   <define name="measure">
-      <element name="measure">
+   <define name="occurance">
+      <element name="occurance">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+         <choice>
+            <ref name="where"/>
+            <group>
+               <ref name="from"/>
+               <ref name="to"/>
+            </group>
+         </choice>
       </element>
    </define>
-   <define name="count">
-      <element name="count">
+   <define name="where">
+      <element name="where">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
+         <empty/>
+         <ref name="att.timing.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="from">
+      <element name="from">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <empty/>
+         <ref name="att.timing.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="to">
+      <element name="to">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <empty/>
+         <ref name="att.timing.attributes"/>
+         <empty/>
       </element>
    </define>
    <define name="voices">
@@ -201,6 +270,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <text/>
          <ref name="att.numbering.attributes"/>
          <ref name="att.siglum.attributes"/>
+         <ref name="att.target.attributes"/>
          <empty/>
       </element>
    </define>
@@ -222,7 +292,41 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    </define>
    <start>
       <choice>
-         <ref name="critRemarks"/>
+         <ref name="critApp"/>
       </choice>
    </start>
+   <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+               xmlns:xi="http://www.w3.org/2001/XInclude"
+               xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+               xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+               xmlns:functx="http://www.functx.com"
+               xmlns="http://www.tei-c.org/ns/1.0"
+               queryBinding="xslt2">
+      <sch:ns uri="http://baumann-digital.de/ns/criticalApparatus" prefix="crapp"/>
+      <xsl:function name="functx:is-value-in-sequence" as="xs:boolean">
+         <xsl:param name="value" as="xs:anyAtomicType?"/>
+         <xsl:param name="seq" as="xs:anyAtomicType*"/>
+         <xsl:sequence select="$value = $seq"/>
+      </xsl:function>
+      <xsl:function name="crapp:checkValues">
+         <xsl:param name="element" as="node()"/>
+         <xsl:variable name="elementName" select="local-name($element)"/>
+         <xsl:variable name="elementText" select="$element/text()"/>
+         <xsl:variable name="element2check"
+                       select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
+         <xsl:value-of select="functx:is-value-in-sequence($elementText, if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()))"/>
+      </xsl:function>
+      <xsl:function name="crapp:valuesAllowed">
+         <xsl:param name="element" as="node()"/>
+         <xsl:variable name="elementName" select="local-name($element)"/>
+         <xsl:variable name="element2check"
+                       select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
+         <xsl:value-of select="string-join(if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()),', ')"/>
+      </xsl:function>
+      <sch:pattern id="checkValues">
+         <sch:rule context="crapp:remark//crapp:source | crapp:remark//crapp:category | crapp:remark//crapp:voice | crapp:remark//crapp:mdiv">
+            <sch:assert test="crapp:checkValues(.) = true()" role="fatal">The value <sch:value-of select="."/> is not allowed here. Please use: <sch:value-of select="crapp:valuesAllowed(.)"/>.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </sch:schema>
 </grammar>
