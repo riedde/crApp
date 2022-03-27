@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:cr="http://baumann-digital.de/ns/criticalRemarks" xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+  xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+  xmlns:functx="http://www.functx.com" xmlns="http://www.tei-c.org/ns/1.0">    
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -15,7 +17,7 @@
   </teiHeader>
   <text>
     <body>
-      <schemaSpec ident="odd-critRemarks" start="critRemarks" ns="http://baumann-digital.de/ns/criticalRemarks">
+      <schemaSpec ident="odd-critRemarks" start="critApp" ns="http://baumann-digital.de/ns/criticalApparatus">
         
         <classSpec type="atts" ident="att.key">
           <attList>
@@ -36,6 +38,17 @@
           </attList>
         </classSpec>
         
+        <classSpec type="atts" ident="att.timing">
+          <attList>
+            <attDef ident="measure">
+              <datatype><dataRef key="integer"/></datatype>
+            </attDef>
+            <attDef ident="count">
+              <datatype><dataRef key="integer"/></datatype>
+            </attDef>
+          </attList>
+        </classSpec>
+        
         <classSpec type="atts" ident="att.siglum">
           <attList>
             <attDef ident="siglum">
@@ -43,11 +56,54 @@
             </attDef>
           </attList>
         </classSpec>
-        <elementSpec ident="critRemarks">
+        
+        <classSpec type="atts" ident="att.target">
+          <attList>
+            <attDef ident="target">
+              <datatype><dataRef key="URI"/></datatype>
+            </attDef>
+          </attList>
+        </classSpec>
+        
+        <constraintSpec ident="content-categories" scheme="schematron">
+          <constraint>
+            <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+              <sch:ns uri="http://baumann-digital.de/ns/criticalApparatus" prefix="crapp"/>
+              
+              <xsl:function name="functx:is-value-in-sequence" as="xs:boolean"
+                xmlns:functx="http://www.functx.com">
+                <xsl:param name="value" as="xs:anyAtomicType?"/>
+                <xsl:param name="seq" as="xs:anyAtomicType*"/>
+                <xsl:sequence select="$value = $seq"/>
+              </xsl:function>
+              
+              <xsl:function name="crapp:checkValues">
+                <xsl:param name="element" as="node()"/>
+                <xsl:variable name="elementName" select="local-name($element)"/>
+                <xsl:variable name="elementText" select="$element/text()"/>
+                <xsl:variable name="element2check" select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
+                <xsl:value-of select="functx:is-value-in-sequence($elementText, if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()))"/>
+              </xsl:function>
+              <xsl:function name="crapp:valuesAllowed">
+                <xsl:param name="element" as="node()"/>
+                <xsl:variable name="elementName" select="local-name($element)"/>
+                <xsl:variable name="element2check" select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
+                <xsl:value-of select="string-join(if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()),', ')"/>
+              </xsl:function>
+              <sch:pattern id="checkValues">
+                <sch:rule context="crapp:remark//crapp:source | crapp:remark//crapp:category | crapp:remark//crapp:voice | crapp:remark//crapp:mdiv"> 
+                  <sch:assert test="crapp:checkValues(.) = true()" role="fatal">The value <sch:value-of select="."/> is not allowed here. Please use: <sch:value-of select="crapp:valuesAllowed(.)"/>.</sch:assert>
+                </sch:rule>
+              </sch:pattern>
+            </sch:schema>
+          </constraint>
+        </constraintSpec>
+        
+        <elementSpec ident="critApp">
           <desc>Root element for the critical remarks.</desc>
           <content>
             <elementRef key="setting" minOccurs="1" maxOccurs="1"/>
-            <elementRef key="remark" minOccurs="1" maxOccurs="unbounded"/>
+            <elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
           </content>
           <attList>
             <attDef ident="relWork">
@@ -62,24 +118,30 @@
         <elementSpec ident="setting">
           <desc>Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</desc>
           <content>
+            <elementRef key="mdivs"/>
             <elementRef key="voices"/>
             <elementRef key="sources"/>
             <elementRef key="editions"/>
+            <elementRef key="categories"/>
           </content>
         </elementSpec>
         
+        <elementSpec ident="remarks">
+          <content>
+            <elementRef key="remark" minOccurs="1" maxOccurs="unbounded"/>
+          </content>
+        </elementSpec>
         <elementSpec ident="remark">
           <desc>Eine kritische Anmerkung</desc>
           <content>
-            <elementRef key="item" minOccurs="1" maxOccurs="1"/>
+            <elementRef key="category"/>
             <elementRef key="mdiv"/>
-            <elementRef key="measure" maxOccurs="2"/>
-            <elementRef key="count" maxOccurs="2"/>
-            <elementRef key="voices"/>
-            <elementRef key="layers"/>
+            <elementRef key="occurance" maxOccurs="1"/>
+            <elementRef key="voices" maxOccurs="1"/>
+            <elementRef key="layers" maxOccurs="1"/>
             <elementRef key="annots"/>
-            <elementRef key="sources"/>
-            <elementRef key="editions"/>
+            <elementRef key="sources" maxOccurs="1"/>
+            <elementRef key="editions" maxOccurs="1"/>
           </content>
           <attList>
             <attDef ident="xml:id">
@@ -103,14 +165,61 @@
           </attList>
         </elementSpec>
 
-        <elementSpec ident="item"/>
-        <elementSpec ident="mdiv"/>
-        <elementSpec ident="measure">
+        <elementSpec ident="categories">
           <content>
-            <dataRef key="measure.data"/>
+            <elementRef key="category" minOccurs="1" maxOccurs="unbounded"/>
           </content>
         </elementSpec>
-        <elementSpec ident="count"/>
+        <elementSpec ident="category">
+          <content><textNode/></content>
+        </elementSpec>
+        <elementSpec ident="mdivs">
+          <content>
+            <elementRef key="mdiv" minOccurs="1" maxOccurs="unbounded"/>
+          </content>
+        </elementSpec>
+        <elementSpec ident="mdiv">
+          <classes>
+            <memberOf key="att.numbering"/>
+          </classes>
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        <elementSpec ident="occurances">
+          <content>
+            <elementRef key="occurance" minOccurs="1" maxOccurs="unbounded"/>
+          </content>
+        </elementSpec>
+        
+        <elementSpec ident="occurance">
+          <content>
+            <alternate>
+              <elementRef key="where"/>
+              <sequence>
+                <elementRef key="from"/>
+                <elementRef key="to"/>
+              </sequence>
+            </alternate>
+          </content>
+        </elementSpec>
+        <elementSpec ident="where">
+          <classes>
+            <memberOf key="att.timing"/>
+          </classes>
+        </elementSpec>
+        <elementSpec ident="from">
+          <classes>
+            <memberOf key="att.timing"/>
+          </classes>
+        </elementSpec>
+        <elementSpec ident="to">
+          <classes>
+            <memberOf key="att.timing"/>
+          </classes>
+        </elementSpec>
+        
         <elementSpec ident="voices">
           <desc>A Wrapper for voices (voice-elements)</desc>
           <content>
@@ -158,6 +267,7 @@
           <classes>
             <memberOf key="att.numbering"/>
             <memberOf key="att.siglum"/>
+            <memberOf key="att.target"/>
           </classes>
           <content>
             <textNode/>
@@ -177,23 +287,6 @@
             <textNode/>
           </content>
         </elementSpec>
-
-        <!--<critAnnots xmlns="http://www.baumann-digital.de/ns/criticalanotations" work="baudi-02-aedbaef3">
-          <remark xml:id="baudi-30-dc7a4a67" type="editorial">
-            <item category="Notentext"/>
-            <mdiv>0</mdiv>
-            <measureStart>4</measureStart>
-            <countTimeStart>1</countTimeStart>
-            <measureEnd>4</measureEnd>
-            <countTimeEnd>1</countTimeEnd>
-            <layer organI="true"/>
-            <voice/>
-            <note>In ED-KA c2 statt ces2, in ED-KA2 @ mit Bleistift nachgetragen (vgl. auch Hrn. I in A-P1)</note>
-            <note type="intern"/>
-            <sources sourceVIII="true" sourceIX="true" sourceIII="true"/>
-            <editions/>
-          </remark>-->
-
       </schemaSpec>
     </body>
   </text>
