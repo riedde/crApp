@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/criticalApparatus"><!--
-Schema generated from ODD source 2022-03-27T15:52:23Z. .
+Schema generated from ODD source 2022-03-29T10:14:37Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -80,8 +80,8 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          </attribute>
       </optional>
    </define>
-   <define name="critApp">
-      <element name="critApp">
+   <define name="apparatus">
+      <element name="apparatus">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Root element for the critical remarks.</a:documentation>
          <ref name="setting"/>
          <oneOrMore>
@@ -118,9 +118,10 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Eine kritische Anmerkung</a:documentation>
          <ref name="category"/>
          <ref name="mdiv"/>
-         <ref name="occurance"/>
+         <optional>
+            <ref name="occurances"/>
+         </optional>
          <ref name="voices"/>
-         <ref name="layers"/>
          <ref name="annots"/>
          <ref name="sources"/>
          <ref name="editions"/>
@@ -171,43 +172,71 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="mdiv">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      is-a="checkValues">
+            <sch:param name="elementName" value="mdiv"/>
+            <sch:param name="attrStr" value="no"/>
+         </sch:pattern>
          <ref name="att.numbering.attributes"/>
          <empty/>
+      </element>
+   </define>
+   <define name="occurances">
+      <element name="occurances">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <oneOrMore>
+            <ref name="occurance"/>
+         </oneOrMore>
       </element>
    </define>
    <define name="occurance">
       <element name="occurance">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <choice>
-            <ref name="where"/>
+            <ref name="position"/>
             <group>
-               <ref name="from"/>
-               <ref name="to"/>
+               <ref name="range"/>
+               <ref name="range"/>
             </group>
          </choice>
       </element>
    </define>
-   <define name="where">
-      <element name="where">
+   <define name="position">
+      <element name="position">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <empty/>
          <ref name="att.timing.attributes"/>
          <empty/>
       </element>
    </define>
-   <define name="from">
-      <element name="from">
+   <define name="range">
+      <element name="range">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <empty/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0">
+            <sch:rule context="crapp:range">
+               <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
+               <sch:assert test="parent::node()/crapp:range[2]/@type='stop'">The value of @type in the second range must be 'stop'</sch:assert>
+            </sch:rule>
+         </sch:pattern>
          <ref name="att.timing.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="to">
-      <element name="to">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <empty/>
-         <ref name="att.timing.attributes"/>
+         <attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <choice>
+               <value>start</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(starting point) The location where the range of the occurance starts.</a:documentation>
+               <value>stop</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(stopping point) The location where the range of the occurance stops.</a:documentation>
+            </choice>
+         </attribute>
          <empty/>
       </element>
    </define>
@@ -223,23 +252,33 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="voice">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      is-a="checkValues">
+            <sch:param name="elementName" value="voice"/>
+            <sch:param name="attrStr" value="key"/>
+         </sch:pattern>
          <ref name="att.key.attributes"/>
          <ref name="att.numbering.attributes"/>
          <empty/>
-      </element>
-   </define>
-   <define name="layers">
-      <element name="layers">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for layers (layer-elements)</a:documentation>
-         <oneOrMore>
-            <ref name="layer"/>
-         </oneOrMore>
       </element>
    </define>
    <define name="layer">
       <element name="layer">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      is-a="checkValues">
+            <sch:param name="elementName" value="layer"/>
+            <sch:param name="attrStr" value="key"/>
+         </sch:pattern>
       </element>
    </define>
    <define name="annots">
@@ -268,6 +307,15 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="source">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      is-a="checkValues">
+            <sch:param name="elementName" value="source"/>
+            <sch:param name="attrStr" value="siglum"/>
+         </sch:pattern>
          <ref name="att.numbering.attributes"/>
          <ref name="att.siglum.attributes"/>
          <ref name="att.target.attributes"/>
@@ -286,20 +334,31 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="edition">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      is-a="checkValues">
+            <sch:param name="elementName" value="edition"/>
+            <sch:param name="attrStr" value="siglum"/>
+         </sch:pattern>
+         <ref name="att.numbering.attributes"/>
          <ref name="att.siglum.attributes"/>
+         <ref name="att.target.attributes"/>
          <empty/>
       </element>
    </define>
    <start>
       <choice>
-         <ref name="critApp"/>
+         <ref name="apparatus"/>
       </choice>
    </start>
    <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-               xmlns:xi="http://www.w3.org/2001/XInclude"
                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
                xmlns:functx="http://www.functx.com"
+               xmlns:mei="http://www.music-encoding.org/ns/mei"
                xmlns="http://www.tei-c.org/ns/1.0"
                queryBinding="xslt2">
       <sch:ns uri="http://baumann-digital.de/ns/criticalApparatus" prefix="crapp"/>
@@ -309,23 +368,36 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <xsl:sequence select="$value = $seq"/>
       </xsl:function>
       <xsl:function name="crapp:checkValues">
-         <xsl:param name="element" as="node()"/>
-         <xsl:variable name="elementName" select="local-name($element)"/>
-         <xsl:variable name="elementText" select="$element/text()"/>
-         <xsl:variable name="element2check"
-                       select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
-         <xsl:value-of select="functx:is-value-in-sequence($elementText, if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()))"/>
+         <xsl:param name="elem" as="node()"/>
+         <xsl:param name="attName" as="xs:string"/>
+         <xsl:variable name="elemName" select="local-name($elem)"/>
+         <xsl:variable name="elemText" select="$elem/text()"/>
+         <xsl:variable name="setVals"
+                       select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
+         <xsl:value-of select="functx:is-value-in-sequence($elemText, if($setVals/attribute::node()[local-name()=$attName])then($setVals/attribute::node()[local-name()=$attName]) else($setVals/text()))"/>
       </xsl:function>
       <xsl:function name="crapp:valuesAllowed">
-         <xsl:param name="element" as="node()"/>
-         <xsl:variable name="elementName" select="local-name($element)"/>
-         <xsl:variable name="element2check"
-                       select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
-         <xsl:value-of select="string-join(if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()),', ')"/>
+         <xsl:param name="elem" as="node()"/>
+         <xsl:param name="attName" as="xs:string"/>
+         <xsl:variable name="elemName" select="local-name($elem)"/>
+         <xsl:variable name="elemText" select="$elem/text()"/>
+         <xsl:variable name="setVals"
+                       select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
+         <xsl:for-each select="$setVals">
+            <xsl:value-of select="if(attribute::node()[local-name()=$attName]) then(concat(attribute::node()[local-name()=$attName]/string(), ' (', text(), ')')) else(text())"/>
+         </xsl:for-each>
       </xsl:function>
-      <sch:pattern id="checkValues">
-         <sch:rule context="crapp:remark//crapp:source | crapp:remark//crapp:category | crapp:remark//crapp:voice | crapp:remark//crapp:mdiv">
-            <sch:assert test="crapp:checkValues(.) = true()" role="fatal">The value <sch:value-of select="."/> is not allowed here. Please use: <sch:value-of select="crapp:valuesAllowed(.)"/>.</sch:assert>
+      <xsl:function name="crapp:valuesAllowedJoined">
+         <xsl:param name="elem" as="node()"/>
+         <xsl:param name="attName" as="xs:string"/>
+         <xsl:value-of select="string-join(crapp:valuesAllowed($elem, $attName), ', ')"/>
+      </xsl:function>
+      <sch:pattern abstract="true" id="checkValues">
+         <sch:rule context="crapp:remark//node()[local-name()='$elementName']">
+            <sch:assert test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName'])"
+                        role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define this in setting before use.</sch:assert>
+            <sch:report test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName']) and crapp:checkValues(., '$attrStr') = false()"
+                        role="error">The value <sch:value-of select="."/> is not allowed here. Please use one of these: <sch:value-of select="crapp:valuesAllowedJoined(., '$attrStr')"/>.</sch:report>
          </sch:rule>
       </sch:pattern>
    </sch:schema>
