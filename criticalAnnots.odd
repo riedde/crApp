@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+<TEI xmlns:sch="http://purl.oclc.org/dsdl/schematron"
   xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
-  xmlns:functx="http://www.functx.com" xmlns="http://www.tei-c.org/ns/1.0">    
+  xmlns:functx="http://www.functx.com"
+  xmlns:mei="http://www.music-encoding.org/ns/mei"
+  xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -17,8 +19,7 @@
   </teiHeader>
   <text>
     <body>
-      <schemaSpec ident="odd-critRemarks" start="critApp" ns="http://baumann-digital.de/ns/criticalApparatus">
-        
+      <schemaSpec ident="odd-critRemarks" start="apparatus" ns="http://baumann-digital.de/ns/criticalApparatus" xmlns:mei="http://www.music-encoding.org/ns/mei">
         <classSpec type="atts" ident="att.key">
           <attList>
             <attDef ident="key">
@@ -65,7 +66,7 @@
           </attList>
         </classSpec>
         
-        <constraintSpec ident="content-categories" scheme="schematron">
+        <constraintSpec ident="setting-values-check" scheme="schematron">
           <constraint>
             <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
               <sch:ns uri="http://baumann-digital.de/ns/criticalApparatus" prefix="crapp"/>
@@ -78,28 +79,41 @@
               </xsl:function>
               
               <xsl:function name="crapp:checkValues">
-                <xsl:param name="element" as="node()"/>
-                <xsl:variable name="elementName" select="local-name($element)"/>
-                <xsl:variable name="elementText" select="$element/text()"/>
-                <xsl:variable name="element2check" select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
-                <xsl:value-of select="functx:is-value-in-sequence($elementText, if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()))"/>
+                <xsl:param name="elem" as="node()"/>
+                <xsl:param name="attName" as="xs:string"/>
+                <xsl:variable name="elemName" select="local-name($elem)"/>
+                <xsl:variable name="elemText" select="$elem/text()"/>
+                <xsl:variable name="setVals" select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
+                <xsl:value-of select="functx:is-value-in-sequence($elemText, if($setVals/attribute::node()[local-name()=$attName])then($setVals/attribute::node()[local-name()=$attName]) else($setVals/text()))"/>
               </xsl:function>
               <xsl:function name="crapp:valuesAllowed">
-                <xsl:param name="element" as="node()"/>
-                <xsl:variable name="elementName" select="local-name($element)"/>
-                <xsl:variable name="element2check" select="$element/ancestor::crapp:critApp//crapp:setting//node()[local-name()=$elementName]"/>
-                <xsl:value-of select="string-join(if($element2check/@key) then($element2check/@key) else if($element2check/@siglum) then($element2check/@siglum) else if($element2check/@no) then($element2check/@no) else($element2check/text()),', ')"/>
+                <xsl:param name="elem" as="node()"/>
+                <xsl:param name="attName" as="xs:string"/>
+                <xsl:variable name="elemName" select="local-name($elem)"/>
+                <xsl:variable name="elemText" select="$elem/text()"/>
+                <xsl:variable name="setVals" select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
+                <xsl:for-each select="$setVals">
+                  <xsl:value-of select="if(attribute::node()[local-name()=$attName]) then(concat(attribute::node()[local-name()=$attName]/string(), ' (', text(), ')')) else(text())"/>
+                </xsl:for-each>
               </xsl:function>
-              <sch:pattern id="checkValues">
-                <sch:rule context="crapp:remark//crapp:source | crapp:remark//crapp:category | crapp:remark//crapp:voice | crapp:remark//crapp:mdiv"> 
-                  <sch:assert test="crapp:checkValues(.) = true()" role="fatal">The value <sch:value-of select="."/> is not allowed here. Please use: <sch:value-of select="crapp:valuesAllowed(.)"/>.</sch:assert>
+              <xsl:function name="crapp:valuesAllowedJoined">
+                <xsl:param name="elem" as="node()"/>
+                <xsl:param name="attName" as="xs:string"/>
+                <xsl:value-of select="string-join(crapp:valuesAllowed($elem, $attName), ', ')"/>
+              </xsl:function>
+              
+              <sch:pattern abstract="true" id="checkValues">
+                <sch:rule context="crapp:remark//node()[local-name()='$elementName']"> 
+                  <sch:assert test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName'])" role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define the setting before use.</sch:assert>
+                  <sch:report test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName']) and crapp:checkValues(., '$attrStr') = false()"
+                    role="error">The value <sch:value-of select="."/> is not allowed here. Please use one of these: <sch:value-of select="crapp:valuesAllowedJoined(., '$attrStr')"/>.</sch:report>
                 </sch:rule>
               </sch:pattern>
             </sch:schema>
           </constraint>
         </constraintSpec>
         
-        <elementSpec ident="critApp">
+        <elementSpec ident="apparatus">
           <desc>Root element for the critical remarks.</desc>
           <content>
             <elementRef key="setting" minOccurs="1" maxOccurs="1"/>
@@ -136,10 +150,10 @@
           <content>
             <elementRef key="category"/>
             <elementRef key="mdiv"/>
-            <elementRef key="occurance" maxOccurs="1"/>
+            <elementRef key="occurances" minOccurs="0" maxOccurs="1"/>
             <elementRef key="voices" maxOccurs="1"/>
-            <elementRef key="layers" maxOccurs="1"/>
-            <elementRef key="annots"/>
+<!--            <elementRef key="layers" maxOccurs="1"/>-->
+            <elementRef key="annots" minOccurs="1"/>
             <elementRef key="sources" maxOccurs="1"/>
             <elementRef key="editions" maxOccurs="1"/>
           </content>
@@ -185,6 +199,14 @@
           <content>
             <textNode/>
           </content>
+          <constraintSpec ident="check-values-mdiv" scheme="schematron">
+            <constraint>
+                <sch:pattern is-a="checkValues">
+                  <sch:param name="elementName" value="mdiv"/>
+                  <sch:param name="attrStr" value="no"/>
+                </sch:pattern>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         
         <elementSpec ident="occurances">
@@ -195,30 +217,50 @@
         
         <elementSpec ident="occurance">
           <content>
-            <alternate>
-              <elementRef key="where"/>
+              <alternate>
+                <elementRef key="position" minOccurs="1" maxOccurs="1"/>
               <sequence>
-                <elementRef key="from"/>
-                <elementRef key="to"/>
+                <elementRef key="range"/>
+                <elementRef key="range"/>
               </sequence>
-            </alternate>
+              </alternate>
           </content>
         </elementSpec>
-        <elementSpec ident="where">
+        <elementSpec ident="position">
           <classes>
             <memberOf key="att.timing"/>
           </classes>
         </elementSpec>
-        <elementSpec ident="from">
+        <elementSpec ident="range">
           <classes>
             <memberOf key="att.timing"/>
           </classes>
+          <constraintSpec ident="range-type-vals" scheme="schematron">
+            <constraint>
+              <sch:pattern>
+                <sch:rule context="crapp:range">
+                  <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
+                  <sch:assert test="parent::node()/crapp:range[2]/@type='stop'">The value of @type in the second range must be 'stop'</sch:assert>
+                </sch:rule>
+              </sch:pattern>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="type" usage="req">
+              <valList type="closed">
+                <valItem ident="start">
+                  <gloss xml:lang="en">starting point</gloss>
+                  <desc xml:lang="en">The location where the range of the occurance starts.</desc>
+                </valItem>
+                <valItem ident="stop">
+                  <gloss xml:lang="en">stopping point</gloss>
+                  <desc xml:lang="en">The location where the range of the occurance stops.</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
         </elementSpec>
-        <elementSpec ident="to">
-          <classes>
-            <memberOf key="att.timing"/>
-          </classes>
-        </elementSpec>
+        
         
         <elementSpec ident="voices">
           <desc>A Wrapper for voices (voice-elements)</desc>
@@ -234,6 +276,14 @@
           <content>
             <textNode/>
           </content>
+          <constraintSpec ident="check-values-voice" scheme="schematron">
+            <constraint>
+              <sch:pattern is-a="checkValues">
+                <sch:param name="elementName" value="voice"/>
+                <sch:param name="attrStr" value="key"/>
+              </sch:pattern>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         <elementSpec ident="layers">
           <desc>A Wrapper for layers (layer-elements)</desc>
@@ -245,16 +295,32 @@
           <content>
             <textNode/>
           </content>
+          <constraintSpec ident="check-values-layer" scheme="schematron">
+            <constraint>
+              <sch:pattern is-a="checkValues">
+                <sch:param name="elementName" value="layer"/>
+                <sch:param name="attrStr" value="key"/>
+              </sch:pattern>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         <elementSpec ident="annots">
           <desc>A Wrapper for annotations (annot-elements)</desc>
           <content>
             <elementRef key="annot" minOccurs="1" maxOccurs="unbounded"/>
+            <!-- source="../../MusicEncoding/music-encoding/source/modules/MEI.shared.xml" -->
           </content>
         </elementSpec>
         <elementSpec ident="annot">
           <content>
-            <textNode/>
+<!--            <alternate>-->
+              <textNode/>
+              <!--<sequence preserveOrder="false">
+                <textNode/>
+                <elementRef key="app"/>
+                <textNode/>
+              </sequence>-->
+            <!--</alternate>-->
           </content>
         </elementSpec>
         <elementSpec ident="sources">
@@ -272,6 +338,14 @@
           <content>
             <textNode/>
           </content>
+          <constraintSpec ident="check-values-source" scheme="schematron">
+            <constraint>
+              <sch:pattern is-a="checkValues">
+                <sch:param name="elementName" value="source"/>
+                <sch:param name="attrStr" value="siglum"/>
+              </sch:pattern>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         <elementSpec ident="editions">
           <desc>A Wrapper for editions (edition-elements)</desc>
@@ -281,11 +355,21 @@
         </elementSpec>
         <elementSpec ident="edition">
           <classes>
-            <memberOf key="att.siglum"></memberOf>
+            <memberOf key="att.numbering"/>
+            <memberOf key="att.siglum"/>
+            <memberOf key="att.target"/>
           </classes>
           <content>
             <textNode/>
           </content>
+          <constraintSpec ident="check-values-edition" scheme="schematron">
+            <constraint>
+              <sch:pattern is-a="checkValues">
+                <sch:param name="elementName" value="edition"/>
+                <sch:param name="attrStr" value="siglum"/>
+              </sch:pattern>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
       </schemaSpec>
     </body>
