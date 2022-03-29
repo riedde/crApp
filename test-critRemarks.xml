@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<critApp xmlns="http://baumann-digital.de/ns/criticalApparatus">
+<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus">
     <setting>
         <mdivs>
-            <!-- @no is used for the schema -->
+            <!-- @no is used for the schema values but should be: Use 0 (Vorspiel), 1 (Chor) -->
+<!--            <mdiv no="NUMBER">TITLE</mdiv>-->
             <mdiv no="0">Vorspiel</mdiv>
             <mdiv no="1">Chor</mdiv>
         </mdivs>
         <voices>
             <!-- @key is used for the schema -->
+<!--            <voice key="Instrument.PartNo">InstrumentName</voice>-->
             <voice key="flute.1">Flöte I</voice>
             <voice key="flute.2">Flöte II</voice>
         </voices>
         <sources>
             <!-- @siglum is used for the schema -->
-            <source siglum="SV" sortNo="1" target="link-to-file.xml">Stichvorlage</source>
+<!--            <source siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the source</source>-->
+            <source siglum="SV" sortNo="1" target="link/to-file.xml">Stichvorlage</source>
             <source siglum="ED" sortNo="2">Erstdruck</source>
         </sources>
         <editions>
+            <!--<edition siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the edition</edition>-->
             <edition siglum="BauA">Baumann-Ausgabe</edition>
         </editions>
         <categories>
@@ -30,26 +34,27 @@
         <remark>
             <category>cat2</category>
             <mdiv>1</mdiv>
-            <occurance>
-<!--                <where measure="1" count="1"/>-->
-                <from measure="1" count="1"/>
-                <to measure="1" count="3"/>
+            <occurances>
+                <occurance>
+                    <position/>
+<!--                  <position measure="1" count="1"/>-->
+                    <!--<range type="start" measure="1" count="1"/>
+                    <range type="stop" measure="2" count="3"/>-->
             </occurance>
+            </occurances>
             <voices>
                 <voice>flute.1</voice>
             </voices>
-            <layers>
-                <layer/>
-            </layers>
             <annots>
-                <annot/>
+                <annot>dfghjk</annot>
+                <annot>test text</annot>
             </annots>
             <sources>
                 <source>SV</source>
             </sources>
             <editions>
-                <edition/>
+                <edition>BauA</edition>
             </editions>
         </remark>
     </remarks>
-</critApp>
+</apparatus>
