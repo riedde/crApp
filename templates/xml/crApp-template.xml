@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../resources/schema/criticalAnnots.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="../resources/schema/criticalAnnots.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-00001">
+<?xml-model href="../../resources/schema/crApp-schema.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../../resources/schema/crApp-schema.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-template">
     <setting>
         <mdivs>
             <!-- @no is used for the schema values but should be: Use 0 (Vorspiel), 1 (Chor) -->
-<!--            <mdiv no="NUMBER">TITLE</mdiv>-->
+            <!--            <mdiv no="NUMBER">TITLE</mdiv>-->
             <mdiv no="0">Vorspiel</mdiv>
             <mdiv no="1">Chor</mdiv>
         </mdivs>
         <voices>
             <!-- @key is used for the schema -->
-<!--            <voice key="Instrument.PartNo">InstrumentName</voice>-->
-            <voice key="flute.1">Flöte I</voice>
-            <voice key="flute.2">Flöte II</voice>
+            <!--            <voice key="Instrument.PartNo">InstrumentName</voice>-->
+            <voiceGrp key="woods">
+                <voiceGrp key="flutes">
+                    <voice key="flute.1">Flöte I</voice>
+                    <voice key="flute.2">Flöte II</voice>
+                </voiceGrp>
+                <voiceGrp key="oboes">
+                    <voice key="oboe.1">Oboe I</voice>
+                    <voice key="oboe.2">Oboe II</voice>
+                </voiceGrp>
+                <voice key="horn.english">E.H.</voice>
+                <voice key="basson">Fagott</voice>
+            </voiceGrp>
+            <voice key="organ">Orgel</voice>
         </voices>
         <relWorks>
             <work xml:id="ID" target="link.xml"/>
         </relWorks>
         <relSources>
             <!-- @siglum is used for the schema -->
-<!--            <source siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the source</source>-->
+            <!--            <source siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the source</source>-->
             <source siglum="SV" sortNo="1" target="link/to-file.xml">Stichvorlage</source>
             <source siglum="ED" sortNo="2">Erstdruck</source>
         </relSources>
@@ -28,25 +39,29 @@
             <!--<edition siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the edition</edition>-->
             <edition siglum="BauA">Baumann-Ausgabe</edition>
         </relEditions>
-        <categories>
-            <category>cat1</category>
-            <category>cat2</category>
-        </categories>
+        <classifications>
+            <classGrp label="Art">
+                <class key="class1">MS</class>
+                <class key="class2">PR</class>
+            </classGrp>
+        </classifications>
     </setting>
     <remarks>
         <remark>
-            <category>cat2</category>
+            <class>class2</class>
             <mdiv>1</mdiv>
             <occurances>
                 <occurance>
                     <position/>
-<!--                  <position measure="1" count="1"/>-->
+                    <!--                  <position measure="1" count="1"/>-->
                     <!--<range type="start" measure="1" count="1"/>
                     <range type="stop" measure="2" count="3"/>-->
-            </occurance>
+                </occurance>
             </occurances>
             <voices>
                 <voice>flute.1</voice>
+                <voice>oboe.1</voice>
+                <voice>organ</voice>
             </voices>
             <annots>
                 <annot>dfghjk</annot>
