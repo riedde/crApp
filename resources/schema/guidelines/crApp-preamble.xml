@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://jenkins.tei-c.org/job/TEIP5-dev/lastStableBuild/artifact/P5/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<div xmlns="http://www.tei-c.org/ns/1.0" xml:id="chap-preamble" xml:lang="de">
+  <head>Einleitung</head>
+  <p>Absatz über Baumann, Projekt und so.</p>
+  <closer>
+    <dateline><name type="settlement">Waldsee</name>, <date when="2022-03-31">31. März 2022</date></dateline>
+    <signed><name type="person"><ref target="https://orcid.org/0000-0001-5545-2088">Dennis Ried</ref></name></signed>
+  </closer>
+</div>
