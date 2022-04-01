@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/criticalApparatus"><!--
-Schema generated from ODD source 2022-03-29T10:14:37Z. .
+Schema generated from ODD source 2022-04-01T10:52:35Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -88,8 +88,8 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <ref name="remarks"/>
          </oneOrMore>
          <optional>
-            <attribute name="relWork">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">related work. Das Werk, dem die Annotationen zugehörig sind.</a:documentation>
+            <attribute name="xml:id">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">ID of the file. Must be unique in the context of this framework.</a:documentation>
             </attribute>
          </optional>
          <empty/>
@@ -395,7 +395,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <sch:pattern abstract="true" id="checkValues">
          <sch:rule context="crapp:remark//node()[local-name()='$elementName']">
             <sch:assert test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName'])"
-                        role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define this in setting before use.</sch:assert>
+                        role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define the setting before use.</sch:assert>
             <sch:report test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName']) and crapp:checkValues(., '$attrStr') = false()"
                         role="error">The value <sch:value-of select="."/> is not allowed here. Please use one of these: <sch:value-of select="crapp:valuesAllowedJoined(., '$attrStr')"/>.</sch:report>
          </sch:rule>

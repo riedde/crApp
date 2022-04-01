@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="out/criticalAnnots.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus">
+<?xml-model href="../resources/schema/criticalAnnots.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../resources/schema/criticalAnnots.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-00001">
     <setting>
         <mdivs>
             <!-- @no is used for the schema values but should be: Use 0 (Vorspiel), 1 (Chor) -->
@@ -15,16 +15,19 @@
             <voice key="flute.1">Flöte I</voice>
             <voice key="flute.2">Flöte II</voice>
         </voices>
-        <sources>
+        <relWorks>
+            <work xml:id="ID" target="link.xml"/>
+        </relWorks>
+        <relSources>
             <!-- @siglum is used for the schema -->
 <!--            <source siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the source</source>-->
             <source siglum="SV" sortNo="1" target="link/to-file.xml">Stichvorlage</source>
             <source siglum="ED" sortNo="2">Erstdruck</source>
-        </sources>
-        <editions>
+        </relSources>
+        <relEditions>
             <!--<edition siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the edition</edition>-->
             <edition siglum="BauA">Baumann-Ausgabe</edition>
-        </editions>
+        </relEditions>
         <categories>
             <category>cat1</category>
             <category>cat2</category>

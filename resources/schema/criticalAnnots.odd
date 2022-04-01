@@ -120,8 +120,8 @@
             <elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
           </content>
           <attList>
-            <attDef ident="relWork">
-              <desc>related work. Das Werk, dem die Annotationen zugehörig sind.</desc>
+            <attDef ident="xml:id">
+              <desc>ID of the file. Must be unique in the context of this framework.</desc>
               <datatype>
                 <dataRef key="ID"/>
               </datatype>
@@ -134,8 +134,9 @@
           <content>
             <elementRef key="mdivs"/>
             <elementRef key="voices"/>
-            <elementRef key="sources"/>
-            <elementRef key="editions"/>
+            <elementRef key="relWorks"/>
+            <elementRef key="relSources"/>
+            <elementRef key="relEditions"/>
             <elementRef key="categories"/>
           </content>
         </elementSpec>
