@@ -30,6 +30,7 @@
     </front>
     <body>
       <include xmlns="http://www.w3.org/2001/XInclude" href="crApp-preamble.xml"/>
+      <include xmlns="http://www.w3.org/2001/XInclude" href="crApp-documentation.xml"/>
     </body>
     <back>
       <div>

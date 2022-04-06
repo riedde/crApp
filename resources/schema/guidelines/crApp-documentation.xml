@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://jenkins.tei-c.org/job/TEIP5-dev/lastStableBuild/artifact/P5/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<div xmlns="http://www.tei-c.org/ns/1.0" xml:id="chap-docu" xml:lang="de">
+  <head>Die Infrastruktur</head>
+  <div xml:id="chap-setting">
+    <head>Setting</head>
+    <p>Um Kritische Anmerkungen systematisch erfassen zu können, müssen zunächst einige Grundparameter festgelegt werden: Welche Quellen gibt es? Welche Instrumente sind beteiligt? Wird auf Editionen referenziert? Usw.</p>
+    <p>Für die Erfassung der Kritischen Anmerkungen ist es grundlegend, dass es die zuvor genannten Objekte definiert sind. Die Abhängigkeiten untereinander (bspw. bei den Quellen [Stemma]), ist an dieser Stelle aus technischer Sicht noch nicht relevant; die Abhängigkeiten untereinander haben keinen Einfluss auf das Datenmodell.</p>
+    <p>Im sogenannten Setting werden die Weichen für die spätere Kodierung gestellt, weshalb dieser Bereich im Folgenden kurz dargestellt werden wird.</p>
+    <specList>
+      <specDesc key="setting"/>
+    </specList>
+    <p>Hierbei handelt es sich um einen Wrapper, der sämtliche Defintionen für die vorliegende Datei enthält. Dieses Element dient allein der Definition der Infrastruktur.</p>
+    <div>
+      <head>Musikalische Struktur</head>
+      <specList>
+        <specDesc key="mdivs"/>
+        <specDesc key="mdiv"/>
+      </specList>
+      <p>Das an MEI angelehte Element <gi>mdiv</gi> steht für einen musikalsichen Abschnitt (musical division). Dieses generische Element kann verwendet werden, um Sätze eines Werkes, Lieder oder Stücke einer Sammlung, Nummern einer Oper oder sonstige Strukturen abzubilden. Die Numerierung der <gi>mdiv</gi> Elemente mit dem Atttribut <att>no</att> ist obligatorisch und als technische Zählung zu betrachten. Als Werte sind ausschließlich Natürliche Zahlen (inklusive der <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich, weshalb hier bspw. keine römische Zählung erlaubt ist. Zur verdeutlichung worum es sich konkret handelt, kann der Satztitel inkl. einer Zählung hinzugefügt werden. Der Textknoten des Elementes fungiert als Freitext.
+        </p><p>Das Element <gi>mdivs</gi> fungiert als Wrapper, der alle <gi>mdiv</gi> Elemente in sich beherbergt.</p>
+    </div>
+    <div>
+      <head>Instrumentation bzw. Besetzung</head>
+      <specList>
+        <specDesc key="voices"/>
+        <specDesc key="voiceGrp"/>
+        <specDesc key="voice"/>
+      </specList>
+      <p>Die Instrumentation kann sich äußerst komplex gestalten, weshalb es hier nötig sein kann, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>voices</gi> ist hier wieder ein Wrapper, der die Definition der Instrumentation enthält, egal wie diese organisiert ist.</p>
+      <p>Das Element <gi>voiceGrp</gi> ist ebenfalls ein Wrapper, der zur Gruppierung verwendet wird. Dies kann auch auf mehreren Ebenen geschehen, wie das folgende Beispiel zeigt.</p>
+      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+        <voiceGrp key="woods">
+          <voiceGrp key="flutes">
+            <voice key="flute.1">Flöte I</voice>
+            <voice key="flute.2">Flöte II</voice>
+          </voiceGrp>
+        </voiceGrp>
+      </egXML>
+      <p>Der verwendete Wert im Atttribut <att>key</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den betroffenen Stimmen hergestellt wird. Es empfielt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung von Umlauten und Leerzeichen, da damit technische Probleme wie bspw. eine unpraktische Sortierung in den Fehlermeldungen vermieden wird.</p>
+      <p>Der Grund, der für eine Gruppierung spricht ist, dass damit später auf eine ganze Stimmgruppe verwiesen werden kann wie z.B. <val>flutes</val> oder <val>woods</val>, ohne jede Stimme einzeln nennen zu müssen.</p>
+      <p>Das Datenmodell ist in der Lage eine gewisse Kompexität (siehe voriges Beispiel) abzubilden, die gleichzeitig durch das Schema validiert werden kann.</p>
+    </div>
+    <div xml:id="relWorks">
+      <head>Assoziierte Werke (related works)</head>
+      <specList>
+        <specDesc key="relWorks"/>
+        <specDesc key="work"/>
+      </specList>
+      <p>An dieser Stelle erfolgt die Zuordnung der kritischen Anmerkungen zu einem Werk. Dies kann mittels ID-Verweis geschehen (<att>key</att>) oder über einen expliziten Dateipfad, der im Attribut <att>target</att> angegeben wird. Hier ist zu beachten, welchen Zweck die Zuordnung verfolgen soll bzw. in welchen Kontext die Kritischen Anmekrungen eingebunden werden.</p>
+      <p>Sollen die erfassten Anmerkungen über die crApp-Applikation visualisiert werden, so ist es es ausreichend, wenn die Referenzierung über <att>key</att> erfolgt. Vorausgesetzt natürlich, dass sich die Referenzdatensätze in der selben Datenbank befinden in der die Applikation installiert ist.</p>
+      <p>Im Falle, dass der Pfad zum Referenzdatensatz an einen anderen Ort zeigen soll, kann der entsprechende Pfad als Wert von <att>target</att> eingegeben werden. Dies bietet sich beispielsweise dann an, wenn lokal Transformationen durchgeführt werden, bei denen eine Ansprache über eine ID zu viel Rechenzeit erfordern würden.</p>
+    </div>
+    <div xml:id="relSources">
+      <head>Assoziierte Quellen (related sources)</head>
+      <specList>
+        <specDesc key="relSources"/>
+        <specDesc key="source"/>
+      </specList>
+      <p>Die Refernzierung von Refernzdatensätzen zu Quellen erfolgt wie unter <ref target="#relWorks">Assoziierte Werke</ref> beschrieben.</p>
+      <p>Im Vergleich zu <gi>work</gi> weist das Element <gi>source</gi> zwei Besonderheiten auf: Zum einen wird ein <att>siglum</att> definiert, welches nötig ist, um betroffene Quellen in den Einzelanmerkungen zu referenzieren. Weiter kann das Attribut <att>sortNo</att> dafür verwendet werden, um eine Sortierreihenfolge für die Siglen festzulegen.</p>
+    </div>
+    <div xml:id="relEditions">
+      <head>Assoziierte Editionen (related editions)</head>
+      <specList>
+        <specDesc key="relEdition"/>
+        <specDesc key="edition"/>
+      </specList>
+      <p>Diese Elemente verhalten sich analog zu den <ref target="#relSources">Quellen</ref>.</p>
+    </div>
+    <div xml:id="classifications">
+      <head>Klassifikationen</head>
+      <specList>
+        <specDesc key="classifications"/>
+        <specDesc key="classGrp"/>
+        <specDesc key="class"/>
+      </specList>
+      <p>Klassifikationen sind das A und O bei der Erfassung strukturierter Daten. Diese sind unabdingbar, wenn Anmerkungen bestimmten Gruppen zugeordnet oder im Nachhinnein Gruppiert oder ausgewertet werden sollen.</p>
+      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+        <classifications>
+          <classGrp label="sourceType">
+            <class key="ms">Handschrift</class>
+            <class key="pr">Druck</class>
+          </classGrp>
+        </classifications>
+      </egXML>
+      <p>Im angeführten Beispiel wird eine Klassifikationsgruppe gezeigt, die Arten von Quellen definiert; hier: Handschriften (<val>ms</val>=manuscripts) und Drucke (<val>pr</val>=prints).</p>
+      <p>Es können beliebig viele <gi>classGrp</gi>s definiert werden, die wiederum beliebig viele <gi>class</gi> Elemente enthalten.</p>
+    </div>
+  </div>
+  <div>
+    <head>Die Kritische Anmerkung</head>
+    <specList>
+      <specDesc key="remarks"/>
+      <specDesc key="remark"/>
+    </specList>
+    <p>Der Wrapper <gi>remarks</gi> beinhaltet die Kritischen Anmerkungen. Das Element <gi>remark</gi> stellt die Einzelanmerkung dar.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <remark>
+        <class>ms</class>
+        <mdiv>1</mdiv>
+        <occurances>
+          <occurance>
+            <position/>
+            <!--                  <position measure="1" count="1"/>-->
+            <!--<range type="start" measure="1" count="1"/>
+                    <range type="stop" measure="2" count="3"/>-->
+          </occurance>
+        </occurances>
+        <voices>
+          <voice>flute.1</voice>
+          <voice>oboe.1</voice>
+        </voices>
+        <annots>
+          <annot>Dies ist eine Anmekrung von großer Wichtigkeit.</annot>
+        </annots>
+        <sources>
+          <source>SV</source>
+        </sources>
+        <editions>
+          <edition>BauA</edition>
+        </editions>
+      </remark>
+    </egXML>
+    <specList>
+      <specDesc key="class"/>
+    </specList>
+    <p>Das Element <gi>class</gi> dient der Klassifizierung. Die Werte, die als Text eingegeben werden können, sind in <gi>setting</gi> in der Klassifizierung definiert. Wird ein Wert eingegeben, der zuvor nicht definiert wurde wirft die Schematron-Validierung einen Fehler aus.</p>
+    <specList>
+      <specDesc key="mdiv"/>
+    </specList>
+    <p>Über <gi>mdiv</gi> erfolgt eine Zuordnung zu dem musikalischen Abschnitt, in dem die Anmerkung vorkommt. Für den eher seltenen Fall, dass eine Anmerkung sich auf mehrere Sätze bezieht (bspw. bei einer Parallelstelle, die in einem anderen Satz in Erscheinung tritt), können mehrere <gi>mdiv</gi> Elemente verwendet werden. In diesem Falle wird von der Schematron-Validierung eine Information angezeigt, dass dieses Verfahren möglich jedoch eher unüblich ist. Ein Validierungsfehler wird dadurch nicht verursacht. Im Gegensatz dazu kann auf <gi>mdiv</gi> verzichtet werden, wenn es sich um eine Generalanmerkung handelt, die für das gesamte Werk oder eine einzelne Quelle gilt.</p>
+    <specList>
+      <specDesc key="occurances"/>
+      <specDesc key="occurance"/>
+      <specDesc key="position"/>
+    </specList>
+    <p>Das Element <gi>occurances</gi> ist ein Wrapper und verzeichnet diejenigen Stellen, an denen besagte Anmerkung von Relevanz ist. Da es durchaus sein kann, dass eine Anmerkung des öfteren von Relevanz ist (bspw. in den Takten 2,4,5 und 8 enden die Bögen bereits eine Achtel früher), ist es auch möglich das Element <gi>occurance</gi> mehrfach zu verwenden. Ziel dieser Kodierung ist es, dass ein und diesselbe Anmerkung, die für mehrere Stellen gilt nicht mehrfach geschrieben wird, sondern die einzelnen Stellen dem Befund zugeordnet werden.</p>
+    <p>Die Stelle kann auf zwei verschiedene Arten identidiziert werden: als Stelle (<gi>position</gi>) oder als Bereich. Im ersten Fall handelt es sich um ein Vorkommen dessen Position sich durch eine Taktzahl und ggf. durch eine Zählzeit angeben lässt. Eine Schema-basierte Validierung von Taktzahlen und Zählzeiten ist derzeit nicht verfügbar, da eine Erfassung der Taktstruktur sowie des möglicherweise wechselnden Metrums zur Zeit nicht vorgesehen ist. Es ist allerdings denkbar, dass diese Struktur später über die referenzierten Quellen eingebunden werden könnte.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <occurance>
+        <position measure="2" count="3"/>
+      </occurance>
+    </egXML>
+    <p>Betrifft die Anmerkung nicht eine einzelne Position, sondern einen Bereich (bspw. Takt 1 Zählzeit 1 bis Takt 3 Zählzeit 4 ohne Dynamikangaben) kann dieser ebenfalls über das Element <gi>position</gi> unter Verwendung des Attributes <att>type</att> (Werte <val>start</val>/<val>stop</val>) erfasst werden.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <occurance>
+        <position type="start" measure="1" count="1"/>
+        <position type="stop" measure="3" count="4"/>
+      </occurance>
+    </egXML>
+  </div>
+</div>
