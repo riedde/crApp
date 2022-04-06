@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/criticalApparatus"><!--
-Schema generated from ODD source 2022-04-01T14:40:20Z. .
+Schema generated from ODD source 2022-04-06T07:24:27Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -136,7 +136,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <zeroOrMore>
             <ref name="class"/>
          </zeroOrMore>
-         <ref name="mdiv"/>
+         <zeroOrMore>
+            <ref name="mdiv"/>
+         </zeroOrMore>
          <optional>
             <ref name="occurances"/>
          </optional>
@@ -217,6 +219,15 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <sch:param name="elementName" value="mdiv"/>
             <sch:param name="attrStr" value="no"/>
          </sch:pattern>
+         <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns="http://www.tei-c.org/ns/1.0">
+            <sch:rule context="crapp:remark">
+               <sch:assert test="count(crapp:mdiv) = 1" role="info">Please note there is more then one occurance of mdiv.</sch:assert>
+            </sch:rule>
+         </sch:pattern>
          <ref name="att.numbering.attributes"/>
          <empty/>
       </element>
@@ -233,10 +244,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="occurance">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <choice>
-            <ref name="position"/>
             <group>
-               <ref name="range"/>
-               <ref name="range"/>
+               <ref name="position"/>
+               <optional>
+                  <ref name="position"/>
+               </optional>
             </group>
          </choice>
       </element>
@@ -245,34 +257,29 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="position">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <empty/>
-         <ref name="att.timing.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="range">
-      <element name="range">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <empty/>
          <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
                       xmlns="http://www.tei-c.org/ns/1.0">
-            <sch:rule context="crapp:range">
-               <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
-               <sch:assert test="parent::node()/crapp:range[2]/@type='stop'">The value of @type in the second range must be 'stop'</sch:assert>
+            <sch:rule context="crapp:position">
+               <sch:report test="if(count(parent::node()/crapp:position) = 1) then(self::node()[@type])else(false())">If there is only one position @type is not allowed.</sch:report>
+               <sch:assert test="if(count(parent::node()/crapp:position) = 2) then(parent::node()/crapp:position[1]/@type='start')else(true())">The value of @type in the first position must be 'start'</sch:assert>
+               <sch:assert test="if(count(parent::node()/crapp:position) = 2) then(parent::node()/crapp:position[2]/@type='stop')else(true())">The value of @type in the second position must be 'stop'</sch:assert>
             </sch:rule>
          </sch:pattern>
          <ref name="att.timing.attributes"/>
-         <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-            <choice>
-               <value>start</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(starting point) The location where the range of the occurance starts.</a:documentation>
-               <value>stop</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(stopping point) The location where the range of the occurance stops.</a:documentation>
-            </choice>
-         </attribute>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <choice>
+                  <value>start</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(starting point) The location where the range of the occurance starts.</a:documentation>
+                  <value>stop</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(stopping point) The location where the range of the occurance stops.</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -449,7 +456,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A reference to a work this critical apparatus is made for.</a:documentation>
          <text/>
          <ref name="att.target.attributes"/>
-         <ref name="att.id.attributes"/>
+         <ref name="att.key.attributes"/>
          <empty/>
       </element>
    </define>
