@@ -27,7 +27,7 @@
             <voice key="organ">Orgel</voice>
         </voices>
         <relWorks>
-            <work xml:id="ID" target="link.xml"/>
+            <work key="ID" target="link.xml"/>
         </relWorks>
         <relSources>
             <!-- @siglum is used for the schema -->
@@ -40,31 +40,30 @@
             <edition siglum="BauA">Baumann-Ausgabe</edition>
         </relEditions>
         <classifications>
-            <classGrp label="Art">
-                <class key="class1">MS</class>
-                <class key="class2">PR</class>
+            <classGrp label="sourceType">
+                <class key="ms">Handschrift</class>
+                <class key="pr">Druck</class>
             </classGrp>
         </classifications>
     </setting>
     <remarks>
         <remark>
-            <class>class2</class>
+            <class>ms</class>
             <mdiv>1</mdiv>
             <occurances>
                 <occurance>
-                    <position/>
-                    <!--                  <position measure="1" count="1"/>-->
-                    <!--<range type="start" measure="1" count="1"/>
-                    <range type="stop" measure="2" count="3"/>-->
+                    <position type="start" measure="1" count="1"/>
+                    <position type="stop" measure="2" count="3"/>
+                </occurance>
+                <occurance>
+                    <position measure="17" count="1"/>
                 </occurance>
             </occurances>
             <voices>
                 <voice>flute.1</voice>
                 <voice>oboe.1</voice>
-                <voice>organ</voice>
             </voices>
             <annots>
-                <annot>dfghjk</annot>
                 <annot>test text</annot>
             </annots>
             <sources>
