@@ -63,7 +63,7 @@
     <div xml:id="relEditions">
       <head>Assoziierte Editionen (related editions)</head>
       <specList>
-        <specDesc key="relEdition"/>
+        <specDesc key="relEditions"/>
         <specDesc key="edition"/>
       </specList>
       <p>Diese Elemente verhalten sich analog zu den <ref target="#relSources">Quellen</ref>.</p>
