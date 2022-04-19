@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/criticalApparatus"><!--
-Schema generated from ODD source 2022-04-06T07:24:27Z. .
+Schema generated from ODD source 2022-04-19T16:24:28Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -20,7 +20,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="att.key.attribute.key">
       <optional>
          <attribute name="key">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute that gives a Key as a pointer to a resource.</a:documentation>
          </attribute>
       </optional>
    </define>
@@ -59,14 +59,14 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="att.timing.attribute.measure">
       <optional>
          <attribute name="measure">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a measure as a time stamp. The value must be a positive integer.</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a measure as a (part of a) time stamp. The value must be a positive integer.</a:documentation>
          </attribute>
       </optional>
    </define>
    <define name="att.timing.attribute.count">
       <optional>
          <attribute name="count">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a count (within a measure) as a detailed part of a time stamp. The value must be a positive integer.</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a count (within a measure) as detailed part of a time stamp. The value must be a positive integer.</a:documentation>
          </attribute>
       </optional>
    </define>
@@ -76,7 +76,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="att.siglum.attribute.siglum">
       <optional>
          <attribute name="siglum">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute containing a text value to classify a source using an abbreviation (siglum).</a:documentation>
          </attribute>
       </optional>
    </define>
@@ -86,7 +86,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="att.label.attribute.label">
       <optional>
          <attribute name="label">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for labelling an element in any way.</a:documentation>
          </attribute>
       </optional>
    </define>
@@ -96,13 +96,13 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="att.target.attribute.target">
       <optional>
          <attribute name="target">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining an explicit target to an other destination. The value must be an URI.</a:documentation>
          </attribute>
       </optional>
    </define>
    <define name="apparatus">
       <element name="apparatus">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The root element for the critical apparatus.</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The root element for the critical apparatus.Das Wurzelelement des Kritischen Apparates.</a:documentation>
          <ref name="setting"/>
          <oneOrMore>
             <ref name="remarks"/>
@@ -113,7 +113,8 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    </define>
    <define name="setting">
       <element name="setting">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Basic information, e.g., relates Sources, Instrumentation/Voices, Editions.</a:documentation>
+         <ref name="editors"/>
          <ref name="mdivs"/>
          <ref name="voices"/>
          <ref name="relWorks"/>
@@ -122,9 +123,25 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <ref name="classifications"/>
       </element>
    </define>
+   <define name="editors">
+      <element name="editors">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A wrapper for <code xmlns="http://www.w3.org/1999/xhtml">&lt;editor&gt;</code> elements.</a:documentation>
+         <oneOrMore>
+            <ref name="editor"/>
+         </oneOrMore>
+      </element>
+   </define>
+   <define name="editor">
+      <element name="editor">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An element that defines an editor responsible for the content.</a:documentation>
+         <text/>
+         <ref name="att.key.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="remarks">
       <element name="remarks">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A wrapper critical remarks.</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A wrapper for critical <code xmlns="http://www.w3.org/1999/xhtml">&lt;remark&gt;</code> elements.</a:documentation>
          <oneOrMore>
             <ref name="remark"/>
          </oneOrMore>
@@ -152,11 +169,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                <choice>
                   <value>editorial</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Eingriff (Hg.)</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Intervention (ed.)</a:documentation>
                   <value>reading</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Lesart</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Reading</a:documentation>
                   <value>annotation</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Anmerkung (Hg.)</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Annotation (ed.)</a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -371,6 +388,12 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       <element name="annot">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <text/>
+         <optional>
+            <attribute name="resp">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute that gives a key of a person that is responsible for the content.</a:documentation>
+            </attribute>
+         </optional>
+         <empty/>
       </element>
    </define>
    <define name="relSources">
@@ -402,6 +425,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <sch:param name="elementName" value="source"/>
             <sch:param name="attrStr" value="siglum"/>
          </sch:pattern>
+         <ref name="att.key.attributes"/>
          <ref name="att.numbering.attributes"/>
          <ref name="att.siglum.attributes"/>
          <ref name="att.target.attributes"/>
@@ -437,6 +461,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <sch:param name="elementName" value="edition"/>
             <sch:param name="attrStr" value="siglum"/>
          </sch:pattern>
+         <ref name="att.key.attributes"/>
          <ref name="att.numbering.attributes"/>
          <ref name="att.siglum.attributes"/>
          <ref name="att.target.attributes"/>
