@@ -2,9 +2,12 @@
 <!--<?xml-model href="https://jenkins.tei-c.org/job/TEIP5-dev/lastStableBuild/artifact/P5/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>-->
 <schemaSpec ident="odd-critRemarks" xml:lang="en" start="apparatus" xmlns="http://www.tei-c.org/ns/1.0" ns="http://baumann-digital.de/ns/criticalApparatus" xmlns:mei="http://www.music-encoding.org/ns/mei" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus" xmlns:functx="http://www.functx.com">
   <classSpec type="atts" ident="att.key">
-    <desc xml:lang="en" versionDate="2022-04-01">A class for key like attributes</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A class for key like attributes.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Klasse für Attribute, die Schlüssel angeben.</desc>
     <attList>
       <attDef ident="key">
+        <desc xml:lang="en" versionDate="2022-04-01">An attribute that gives a Key as a pointer to a resource.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, das einen Schlüssel (Key) angibt, der auf eine bestimmte Ressource verweist.</desc>
         <datatype>
           <dataRef key="text"/>
         </datatype>
@@ -12,7 +15,8 @@
     </attList>
   </classSpec>
   <classSpec type="atts" ident="att.id">
-    <desc xml:lang="en" versionDate="2022-04-01">A class for id like attributes</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A class for id like attributes.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Klasse für ID-ähnliche Attribute.</desc>
     <attList>
       <attDef ident="xml:id">
         <desc xml:lang="en" versionDate="2022-04-01">ID of the file. Must be unique in the context of this framework.</desc>
@@ -23,16 +27,19 @@
     </attList>
   </classSpec>
   <classSpec type="atts" ident="att.numbering">
-    <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Klasse für Attribute, die zur Nummerierung oder zum Zählen verwendet werden.</desc>
     <attList>
       <attDef ident="no">
         <desc xml:lang="en" versionDate="2022-04-01">An attribute for a numbering. The value must be an integer.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut zur Nummerierung. Der Wert muss eine Zahl sein.</desc>
         <datatype>
           <dataRef key="integer"/>
         </datatype>
       </attDef>
       <attDef ident="sortNo">
         <desc xml:lang="en" versionDate="2022-04-01">An attribute for ordering purpose. The value must be a positive integer.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, das für Sortierungsbelange verwendet wird. Der Wert muss eine positive Zahl sein.</desc>
         <datatype>
           <dataRef key="integer"/>
         </datatype>
@@ -41,15 +48,18 @@
   </classSpec>
   <classSpec type="atts" ident="att.timing">
     <desc xml:lang="en" versionDate="2022-04-01">An attribute class for timing concerns.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Klasse für Attribute, die zeitliche Einordnungen betreffen.</desc>
     <attList>
       <attDef ident="measure">
-        <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a measure as a time stamp. The value must be a positive integer.</desc>
+        <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a measure as a (part of a) time stamp. The value must be a positive integer.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut mit dem ein Takt als (Teil eines) Zeitstempel(s) angegeben werden kann. Der Wert muss eine positive Zahl sein.</desc>
         <datatype>
           <dataRef key="integer"/>
         </datatype>
       </attDef>
       <attDef ident="count">
-        <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a count (within a measure) as a detailed part of a time stamp. The value must be a positive integer.</desc>
+        <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a count (within a measure) as detailed part of a time stamp. The value must be a positive integer.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut um eine Zählzeit (in einem Takt) anzugeben, als Teil einer Positionsagabe. Der Wert muss iene positive Zahl sein.</desc>
         <datatype>
           <dataRef key="integer"/>
         </datatype>
@@ -57,9 +67,12 @@
     </attList>
   </classSpec>
   <classSpec type="atts" ident="att.siglum">
-    <desc xml:lang="en" versionDate="2022-04-01">An attribute containing a text value to classify a source using an abbreviation (siglum).</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">An attribute class for classifying using an abbreviation (e.g., a siglum).</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Attributklasse zur Klassifizierung mittels einer Abkürzung (z.B. durch ein Siglum).</desc>
     <attList>
       <attDef ident="siglum">
+        <desc xml:lang="en" versionDate="2022-04-01">An attribute containing a text value to classify a source using an abbreviation (siglum).</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, das einen Text-Wert enthält, um eine Quelle mittels einer Abkürzung (Siglum) zu klassifizieren.</desc>
         <datatype>
           <dataRef key="text"/>
         </datatype>
@@ -67,9 +80,12 @@
     </attList>
   </classSpec>
   <classSpec type="atts" ident="att.label">
-    <desc xml:lang="en" versionDate="2022-04-01">An attribute for labelling an element in any way.</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A class for labelling attributes.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Ein Klasse für Beschriftungs-Attribute.</desc>
     <attList>
       <attDef ident="label">
+        <desc xml:lang="en" versionDate="2022-04-19">An attribute for labelling an element in any way.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, um Elemente zu Beschriften.</desc>
         <datatype>
           <dataRef key="text"/>
         </datatype>
@@ -77,9 +93,12 @@
     </attList>
   </classSpec>
   <classSpec type="atts" ident="att.target">
-    <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining an explicit target to an other destination. The value must be an URI.</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A class for attributes to defining targets.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Eine Klasse für Attribute, die Ziele definieren.</desc>
     <attList>
       <attDef ident="target">
+        <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining an explicit target to an other destination. The value must be an URI.</desc>
+        <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, um ein (externes) Ziel (Dokument) explizit anzugeben. Als Wert ist eine URI erforderlich.</desc>
         <datatype>
           <dataRef key="URI"/>
         </datatype>
@@ -87,7 +106,7 @@
     </attList>
   </classSpec>
   
-  <constraintSpec ident="setting-values-check" scheme="schematron">
+  <constraintSpec ident="setting-check-text-values" scheme="schematron">
     <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called values are defined somewhere in the <gi>setting</gi> element.</desc>
     <constraint>
       <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
@@ -130,7 +149,7 @@
     </constraint>
   </constraintSpec>
   <constraintSpec ident="check-voice-combination" scheme="schematron">
-    <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g. if the parent or ancestor group is also called.</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g., if the parent or ancestor group is also called.</desc>
     <constraint>
       <sch:rule context="crapp:remark//crapp:voice">
         <sch:let name="voiceVal" value="./text()"/>
@@ -139,8 +158,10 @@
       </sch:rule>
     </constraint>
   </constraintSpec>
+  
   <elementSpec ident="apparatus" module="setting">
     <desc xml:lang="en" versionDate="2022-04-01">The root element for the critical apparatus.</desc>
+    <desc xml:lang="en" versionDate="2022-04-19">Das Wurzelelement des Kritischen Apparates.</desc>
     <classes>
       <memberOf key="att.id"/>
     </classes>
@@ -150,7 +171,8 @@
     </content>
   </elementSpec>
   <elementSpec ident="setting" module="setting">
-    <desc xml:lang="en" versionDate="2022-04-01">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</desc>
+    <desc xml:lang="en" versionDate="2022-04-19">Basic information, e.g., relates Sources, Instrumentation/Voices, Editions.</desc>
+    <desc xml:lang="de" versionDate="2022-04-01">Die Grundinformationen, bspw. zugehörige Quellen, Instrumente/Stimmen, Editionen.</desc>
     <content>
       <elementRef key="mdivs"/>
       <elementRef key="voices"/>
@@ -161,13 +183,15 @@
     </content>
   </elementSpec>
   <elementSpec ident="remarks" module="remark">
-    <desc xml:lang="en" versionDate="2022-04-01">A wrapper critical remarks.</desc>
+    <desc xml:lang="en" versionDate="2022-04-01">A wrapper for critical <gi>remark</gi> elements.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Ein Wrapper für <gi>remark</gi> Elemente.</desc>
     <content>
       <elementRef key="remark" minOccurs="1" maxOccurs="unbounded"/>
     </content>
   </elementSpec>
   <elementSpec ident="remark" module="remark">
     <desc xml:lang="en" versionDate="2022-04-01">A critical remark.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Ein kritische Anmerkung.</desc>
     <classes>
       <memberOf key="att.id"/>
     </classes>
@@ -185,13 +209,16 @@
       <attDef ident="type">
         <valList type="closed">
           <valItem ident="editorial">
-            <desc xml:lang="en" versionDate="2022-04-01">Eingriff (Hg.)</desc>
+            <desc xml:lang="en" versionDate="2022-04-19">Intervention (ed.)</desc>
+            <desc xml:lang="de" versionDate="2022-04-01">Eingriff (Hg.)</desc>
           </valItem>
           <valItem ident="reading">
-            <desc xml:lang="en" versionDate="2022-04-01">Lesart</desc>
+            <desc xml:lang="en" versionDate="2022-04-19">Reading</desc>
+            <desc xml:lang="de" versionDate="2022-04-01">Lesart</desc>
           </valItem>
           <valItem ident="annotation">
-            <desc xml:lang="en" versionDate="2022-04-01">Anmerkung (Hg.)</desc>
+            <desc xml:lang="en" versionDate="2022-04-19">Annotation (ed.)</desc>
+            <desc xml:lang="de" versionDate="2022-04-01">Anmerkung (Hg.)</desc>
           </valItem>
         </valList>
       </attDef>
