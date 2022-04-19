@@ -481,6 +481,7 @@
   </elementSpec>
   <elementSpec ident="source" module="setting">
     <classes>
+      <memberOf key="att.key"/>
       <memberOf key="att.numbering"/>
       <memberOf key="att.siglum"/>
       <memberOf key="att.target"/>
@@ -511,6 +512,7 @@
   </elementSpec>
   <elementSpec ident="edition" module="setting">
     <classes>
+      <memberOf key="att.key"/>
       <memberOf key="att.numbering"/>
       <memberOf key="att.siglum"/>
       <memberOf key="att.target"/>
