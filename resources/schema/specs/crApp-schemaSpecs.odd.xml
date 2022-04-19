@@ -174,12 +174,29 @@
     <desc xml:lang="en" versionDate="2022-04-19">Basic information, e.g., relates Sources, Instrumentation/Voices, Editions.</desc>
     <desc xml:lang="de" versionDate="2022-04-01">Die Grundinformationen, bspw. zugehörige Quellen, Instrumente/Stimmen, Editionen.</desc>
     <content>
+      <elementRef key="editors"/>
       <elementRef key="mdivs"/>
       <elementRef key="voices"/>
       <elementRef key="relWorks"/>
       <elementRef key="relSources"/>
       <elementRef key="relEditions"/>
       <elementRef key="classifications"/>
+    </content>
+  </elementSpec>
+  <elementSpec ident="editors" module="setting">
+    <desc xml:lang="en" versionDate="2022-04-01">A wrapper for <gi>editor</gi> elements.</desc>
+    <desc xml:lang="de" versionDate="2022-04-19">Ein Wrapper für <gi>editor</gi> Elemente.</desc>
+    <content>
+      <elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/>
+    </content>
+  </elementSpec>
+  <elementSpec ident="editor" module="setting">
+    <desc xml:lang="en" versionDate="2022-04-01">An element that defines an editor responsible for the content.</desc>
+    <classes>
+      <memberOf key="att.key"/>
+    </classes>
+    <content>
+      <textNode/>
     </content>
   </elementSpec>
   <elementSpec ident="remarks" module="remark">
@@ -440,6 +457,15 @@
               </sequence>-->
       <!--</alternate>-->
     </content>
+    <attList>
+      <attDef ident="resp">
+          <desc xml:lang="en" versionDate="2022-04-01">An attribute that gives a key of a person that is responsible for the content.</desc>
+          <desc xml:lang="de" versionDate="2022-04-19">Ein Attribut, das den Schlüssel (Key) einer Person angibt, die für den Inhalt verantwortlich ist.</desc>
+          <datatype>
+            <dataRef key="text"/>
+          </datatype>
+      </attDef>
+    </attList>
   </elementSpec>
   <elementSpec ident="relSources" module="setting">
     <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for sources related to the critical apparatus</desc>
