@@ -1,135 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="deploy" name="crApp" basedir="." xmlns:unless="ant:unless">
+<project default="crApp" name="crApp" basedir="." xmlns:unless="ant:unless">
     <dirname property="crApp.basedir" file="${ant.file.crApp}"/>
     
     <!-- import default properties from file -->
     <property file="${crApp.basedir}/local.build.properties"/>
     <property file="${crApp.basedir}/build.properties"/>
     
-    <target name="clean-all">
-        <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
+    <condition property="lang" value="${lang}" else="de">
+        <isset property="lang"/>
+    </condition>
+    
+    <target name="dir.check">
+        <condition property="dir.exists">
+            <available file="${compiled.dir}" type="dir"/>
+        </condition>
+    </target>
+    
+    <target name="init" depends="dir.check" unless="dir.exists">
+        <mkdir dir="${compiled.dir}"/>
     </target>
     
     <target name="clean">
-        <antcall target="clean-build"/>
-        <antcall target="clean-dist"/>
-    </target>
-    
-    <target name="clean-build" if="${build.dir}">
-        <delete includeemptydirs="true">
-            <fileset dir="${build.dir}" defaultexcludes="false">
-                <!--<include name="*.xml"/>
-                <include name="*.txt"/>-->
-                <include name="**/*"/>
-                <exclude name="*.xar"/>
-                <exclude name="*.tar.gz"/>
+        <delete>
+            <fileset dir="schema/en">
+                <include name="*.isosch"/>
+            </fileset>
+            <fileset dir="schema/de">
+                <include name="*.isosch"/>
             </fileset>
         </delete>
     </target>
     
-    <target name="clean-dist" if="${dist.dir}">
-        <delete includeemptydirs="true">
-            <fileset dir="${dist.dir}" defaultexcludes="false">
-                <include name="**/*"/>
-            </fileset>
-        </delete>
+    <target name="crApp" depends="init">
+        <antcall target="process">
+            <param name="inputFile" value="${crApp.basedir}/resources/schema/guidelines/crApp-guidelines.odd"/>
+            <param name="outputFileRNG" value="${compiled.dir}/crApp.rng"/>
+            <param name="outputFileSchematron" value="${compiled.dir}/crApp.isosch"/>
+            <param name="selectedSchema" value="crApp"/>
+        </antcall>
+        <property name="schema.outputFileRNG" value="${compiled.dir}/crApp.rng"/>
+        <property name="schema.name" value="crApp"/>
+        <antcall target="check-rng-output"/>
     </target>
     
-    <target name="init" depends="get-current-hash-of-HEAD">
-        <mkdir dir="${build.dir}"/>
-        <mkdir dir="${dist.dir}"/>
+    <!-- processing schema -->
+    <target name="process">
+        <basename property="inputFile.basename" file="${inputFile}" suffix=".odd"/>
+        <!-- TEI is considered default source -->
+        <condition property="source" value="${source}" else="${tei.source}">
+            <isset property="source"/>
+        </condition>
+        <sequential>
+            <echo>Expanding ODD file</echo>
+            <xslt force="yes" style="${stylesheets.dir}/odds/odd2odd.xsl" 
+                in="${inputFile}" out="${compiled.dir}/${inputFile.basename}.compiled.xml">
+                <factory name="net.sf.saxon.TransformerFactoryImpl">
+                    <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+                </factory>
+                <param name="lang" expression="${lang}" if="lang"/>
+                <param name="defaultSource" expression="${source}"/>
+                <param name="selectedSchema" expression="${selectedSchema}"/>
+            </xslt>
+            
+            <echo>Generate html guidelines</echo>
+            <xslt force="yes" style="${stylesheets.dir}/odds/odd2html.xsl" 
+                in="${compiled.dir}/${inputFile.basename}.compiled.xml" out="${compiled.dir}/${inputFile.basename}.html">
+                <factory name="net.sf.saxon.TransformerFactoryImpl">
+                    <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+                </factory>
+                <param name="lang" expression="${lang}" if="lang"/>
+                <param name="defaultSource" expression="${source}"/>
+                <param name="selectedSchema" expression="${selectedSchema}"/>
+            </xslt>
+            
+            <echo>Creating RelaxNG schema</echo>
+            <xslt force="yes" style="${stylesheets.dir}/profiles/default/relaxng/to.xsl" 
+                in="${compiled.dir}/${inputFile.basename}.compiled.xml" out="${outputFileRNG}">
+                <factory name="net.sf.saxon.TransformerFactoryImpl">
+                    <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+                </factory>
+                <param name="inputDir" expression="${crApp.basedir}/"/>
+                <!-- supply name of language-->
+                <param name="lang" expression="${lang}" if="lang"/>
+                <param name="doclang" expression="${lang}" if="lang"/>
+                <param name="documentationLanguage" expression="${lang}" if="lang"/>
+                <!-- emit some diagnostics"-->
+                <param name="debug" expression="${debug}" if="debug"/>
+                <!-- be verbose-->
+                <param name="verbose" expression="${verbose}" if="verbose"/>
+            </xslt>
+            
+            <echo>Extracting Schematron rules</echo>
+            <xslt processor="trax" force="yes" 
+                style="${stylesheets.dir}/profiles/default/schematron/to.xsl" 
+                in="${compiled.dir}/${inputFile.basename}.compiled.xml" out="${outputFileSchematron}">
+                <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+            </xslt>
+        </sequential>
     </target>
     
-    <target name="get-current-hash-of-HEAD">
-        <description>Get the hash of the current git HEAD</description>
-        <exec executable="${bash.command}" outputproperty="local.revision">
-            <arg value="-c"/>
-            <arg value="${git.command} rev-parse --short HEAD"/>
-            <env key="LANG" value="C"/>
-        </exec>
-        <echo>Current HEAD: ${local.revision}</echo>
+    <target name="check-rng-output">
+        <echo>Test if relaxNG is valid.</echo>
+        <taskdef name="jing" classpath="${crApp.basedir}/resources/test/jing.jar" classname="com.thaiopensource.relaxng.util.JingTask"/>
+        <sequential>
+            <echo level="info">Validating RelaxNG output file with RelaxNG.</echo>
+            <jing rngfile="${crApp.basedir}/resources/test/relaxng.rng" file="${schema.outputFileRNG}"/>
+        </sequential>
     </target>
-    
-    <target name="dist" depends="init">
-        <property name="project.app.pkg.name" value="${project.app}-${project.version}-${local.revision}.xar"/>
-        <copy todir="dist/" overwrite="true">
-            <fileset dir=".">
-                <include name="**/*.*"/>
-                <exclude name="build.xml"/>
-                <exclude name=".existdb.json"/>
-                <exclude name=".git*"/>
-                <exclude name="*.tmpl"/>
-                <exclude name="*.xpr"/>
-                <exclude name="*.properties"/>
-                <exclude name="build/**"/>
-                <exclude name="dist/**"/>
-<!--                <exclude name="scripts/**"/>-->
-            </fileset>
-        </copy>
-        
-        <copy file="expath-pkg.xml.tmpl" tofile="dist/expath-pkg.xml" filtering="true" overwrite="true">
-            <filterset>
-                <filter token="project.app" value="${project.app}"/>
-                <filter token="project.name" value="${project.name}"/>
-                <filter token="project.version" value="${project.version}"/>
-                <filter token="project.version.hash" value="${local.revision}"/>
-                <filter token="project.url" value="${project.url}"/>
-            </filterset>
-        </copy>
-        <copy file="repo.xml.tmpl" tofile="dist/repo.xml" filtering="true" overwrite="true">
-            <filterset>
-                <filter token="data.target" value="${project.app}"/>
-                <filter token="project.name" value="${project.name}"/>
-            </filterset>
-        </copy>
-        <copy file="resources/img/crApp-logo-transparent.png" tofile="${dist.dir}/icon.png"></copy>
-        <zip destfile="${build.dir}/${project.app.pkg.name}">
-            <fileset dir="dist/">
-                <include name="**/*.*"/>
-            </fileset>
-        </zip>
-        <delete file="expath-pkg.xml"/>
-        <delete file="repo.xml"/>
-    </target>
-    
-    <!-- Deploy directly to localhost -->
-    <target name="deploy" depends="clean, dist">
-        <path id="classpath.eXist">
-            <fileset dir="${exist.libs}" erroronmissingdir="no">
-                <include name="*.jar"/>
-            </fileset>
-        </path>
-        <typedef resource="org/exist/ant/antlib.xml" uri="http://exist-db.org/ant">
-            <classpath refid="classpath.eXist"/>
-        </typedef>
-        
-        <!-- store xar-file in eXist-db -->
-        <xdb:store xmlns:xdb="http://exist-db.org/ant"
-            uri="${exist.db}/tmp"
-            createcollection="true"
-            createsubcollections="true"
-            user="${exist.user}"
-            password="${exist.pass}"
-            failonerror="true">
-            <fileset file="${build.dir}/${project.app.pkg.name}"/>
-        </xdb:store>
-        
-        <!-- Deploy the xar -->
-        <xdb:xquery  xmlns:xdb="http://exist-db.org/ant"
-            uri="${exist.db}"
-            user="${exist.user}"
-            password="${exist.pass}"
-            failonerror="true">
-            (
-            if("${project.url}" = repo:list()) then (
-            repo:undeploy("${project.url}"),
-            repo:remove("${project.url}")
-            )
-            else (),
-            repo:install-and-deploy-from-db("/db/tmp/${project.app.pkg.name}")
-            )
-        </xdb:xquery>
-    </target>
-    
 </project>
