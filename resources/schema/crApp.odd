@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:crapp="http://baumann-digital.de/ns/criticalApparatus" xmlns:functx="http://www.functx.com" xmlns:mei="http://www.music-encoding.org/ns/mei" xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:crapp="http://baumann-digital.de/ns/crApp" xmlns:functx="http://www.functx.com" xmlns:mei="http://www.music-encoding.org/ns/mei" xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -33,7 +33,7 @@
     <back>
       <div>
         <head>Specifications of crApp</head>
-        <schemaSpec ident="odd-critRemarks" xml:lang="en" start="apparatus remark setting" ns="http://baumann-digital.de/ns/criticalApparatus">
+        <schemaSpec ident="crApp" xml:lang="en" start="crApp remark setting" ns="http://baumann-digital.de/ns/crApp">
           <moduleSpec ident="core">
             <desc>Module for attribut classes, macros, datatypes and constraints.</desc>
           </moduleSpec>
@@ -43,6 +43,13 @@
           <moduleSpec ident="remark">
             <desc>Module for remark elements.</desc>
           </moduleSpec>
+          <!-- mei elements -->
+          <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space syl tempo"/>
+          <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
+          <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
           <macroSpec ident="crApp.list.lang" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
@@ -58,37 +65,6 @@
               </valList>
             </content>
           </macroSpec>
-          <classSpec type="atts" ident="att.lang" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">A class for key like attributes</desc>
-            <attList>
-              <attDef ident="xml:lang">
-                <datatype>
-                  <dataRef key="crApp.list.lang"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
-          <classSpec type="atts" ident="att.key" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">A class for key like attributes</desc>
-            <attList>
-              <attDef ident="key">
-                <datatype>
-                  <dataRef key="text"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
-          <classSpec type="atts" ident="att.id" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">A class for id like attributes</desc>
-            <attList>
-              <attDef ident="xml:id">
-                <desc xml:lang="en" versionDate="2022-04-01">ID of the file. Must be unique in the context of this framework.</desc>
-                <datatype>
-                  <dataRef key="ID"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
           <classSpec type="atts" ident="att.numbering" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
             <attList>
@@ -153,11 +129,19 @@
               </attDef>
             </attList>
           </classSpec>
+          <constraintSpec ident="set_ns" scheme="schematron" mode="add">
+            <constraint>
+              <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" uri="http://baumann-digital.de/ns/crApp"/>
+              <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="crapp" uri="http://baumann-digital.de/ns/crApp"/>
+              <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="mei" uri="http://www.music-encoding.org/ns/mei"/>
+              <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+            </constraint>
+          </constraintSpec>
           <constraintSpec ident="setting-values-check" module="core" scheme="schematron">
             <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called values are defined somewhere in the <gi>setting</gi> element.</desc>
             <constraint>
               <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
-                <sch:ns uri="http://baumann-digital.de/ns/criticalApparatus" prefix="crapp"/>
+                <sch:ns uri="http://baumann-digital.de/ns/crApp" prefix="crapp"/>
                 <xsl:function name="functx:is-value-in-sequence" as="xs:boolean">
                   <xsl:param name="value" as="xs:anyAtomicType?"/>
                   <xsl:param name="seq" as="xs:anyAtomicType*"/>
@@ -166,17 +150,19 @@
                 <xsl:function name="crapp:checkValues">
                   <xsl:param name="elem" as="node()"/>
                   <xsl:param name="attName" as="xs:string"/>
+                  <xsl:variable name="lang" select="$elem/ancestor::crapp:setting/crapp:language/@codedval"/>
                   <xsl:variable name="elemName" select="local-name($elem)"/>
                   <xsl:variable name="elemText" select="$elem/text()"/>
-                  <xsl:variable name="setVals" select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
-                  <xsl:value-of select="functx:is-value-in-sequence($elemText, if($setVals/attribute::node()[local-name()=$attName])then($setVals/attribute::node()[local-name()=$attName]) else($setVals/text()))"/>
+                  <xsl:variable name="setVals" select="$elem/ancestor::crapp:crApp//crapp:setting//node()[local-name()=$elemName]"/>
+                  <xsl:value-of select="functx:is-value-in-sequence($elemText, if($setVals/attribute::node()[local-name()=$attName])then($setVals/attribute::node()[local-name()=$attName]) else($setVals/crapp:label[@xml:lang=$lang]/text()))"/>
                 </xsl:function>
                 <xsl:function name="crapp:valuesAllowed">
                   <xsl:param name="elem" as="node()"/>
                   <xsl:param name="attName" as="xs:string"/>
+                  <xsl:variable name="lang" select="$elem/ancestor::crapp:setting/crapp:language/@codedval"/>
                   <xsl:variable name="elemName" select="local-name($elem)"/>
                   <xsl:variable name="elemText" select="$elem/text()"/>
-                  <xsl:variable name="setVals" select="$elem/ancestor::crapp:apparatus//crapp:setting//node()[local-name()=$elemName]"/>
+                  <xsl:variable name="setVals" select="$elem/ancestor::crapp:crApp//crapp:setting//node()[local-name()=$elemName]"/>
                   <xsl:for-each select="$setVals">
                     <xsl:value-of select="if(attribute::node()[local-name()=$attName]) then(attribute::node()[local-name()=$attName]/string()) else(text())"/>
                   </xsl:for-each>
@@ -188,8 +174,8 @@
                 </xsl:function>
                 <sch:pattern abstract="true" id="checkValues">
                   <sch:rule context="crapp:remark//node()[local-name()='$elementName']">
-                    <sch:assert test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName'])" role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define the setting before use.</sch:assert>
-                    <sch:report test="exists(ancestor::crapp:apparatus/crapp:setting//node()[local-name()='$elementName']) and crapp:checkValues(., '$attrStr') = false()" role="error">The value <sch:value-of select="."/> is not allowed here. Please use one of these: <sch:value-of select="crapp:valuesAllowedJoined(., '$attrStr')"/>.</sch:report>
+                    <sch:assert test="exists(ancestor::crapp:crApp/crapp:setting//node()[local-name()='$elementName'])" role="fatal">No setting for <sch:value-of select="local-name(.)"/> defined. Please define the setting before use.</sch:assert>
+                    <sch:report test="exists(ancestor::crapp:crApp/crapp:setting//node()[local-name()='$elementName']) and crapp:checkValues(., '$attrStr') = false()" role="error">The value <sch:value-of select="."/> is not allowed here. Please use one of these: <sch:value-of select="crapp:valuesAllowedJoined(., '$attrStr')"/>.</sch:report>
                   </sch:rule>
                 </sch:pattern>
               </sch:schema>
@@ -201,30 +187,30 @@
               <sch:rule context="crapp:remark//crapp:voice">
                 <sch:let name="voiceVal" value="./text()"/>
                 <sch:let name="voiceGrpVals" value="string-join(ancestor::crapp:remark//crapp:voiceGrp/text(),' ')"/>
-                <sch:report test=".[ancestor::crapp:apparatus/crapp:setting//crapp:voice[@key = $voiceVal]/ancestor::crapp:voiceGrp[@key][contains($voiceGrpVals, @key)]]" role="warning"><sch:value-of select="$voiceVal"/> is part of <sch:value-of select="tokenize($voiceGrpVals, ' ')[last()]"/>. A second call might be redundant.</sch:report>
+                <sch:report test=".[ancestor::crapp:crApp/crapp:setting//crapp:voice[@key = $voiceVal]/ancestor::crapp:voiceGrp[@key][contains($voiceGrpVals, @key)]]" role="warning"><sch:value-of select="$voiceVal"/> is part of <sch:value-of select="tokenize($voiceGrpVals, ' ')[last()]"/>. A second call might be redundant.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <elementSpec ident="annot" module="remark">
+          <elementSpec ident="annot" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <content>
-              <!--            <alternate>-->
-              <textNode/>
-              <!--<sequence preserveOrder="false">
+              <alternate>
                 <textNode/>
-                <elementRef key="app"/>
-                <textNode/>
-              </sequence>-->
-              <!--</alternate>-->
+                <sequence preserveOrder="false">
+                  <textNode/>
+                  <elementRef key="app"/>
+                  <textNode/>
+                </sequence>
+              </alternate>
             </content>
           </elementSpec>
-          <elementSpec ident="annots" module="remark">
+          <elementSpec ident="annots" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for annotations (annot-elements)</desc>
             <content>
               <elementRef key="annot" minOccurs="1" maxOccurs="unbounded"/>
               <!-- source="../../MusicEncoding/music-encoding/source/modules/MEI.shared.xml" -->
             </content>
           </elementSpec>
-          <elementSpec ident="apparatus" module="setting">
+          <elementSpec ident="crApp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">The root element for the critical apparatus.</desc>
             <classes>
               <memberOf key="att.id"/>
@@ -234,10 +220,10 @@
               <elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="class" module="setting">
+          <elementSpec ident="class" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element that defines a class or category to be used for classifying.</desc>
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <alternate>
@@ -249,11 +235,12 @@
               <constraint>
                 <sch:pattern is-a="checkValues">
                   <sch:param name="elementName" value="class"/>
+                  <sch:param name="attrStr" value="codedval"/>
                 </sch:pattern>
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="classGrp" module="setting">
+          <elementSpec ident="classGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for grouping classes.</desc>
             <classes>
               <memberOf key="att.label"/>
@@ -262,20 +249,23 @@
               <elementRef key="class" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="classifications" module="setting">
+          <elementSpec ident="classifications" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A wrapper to organize classifications.</desc>
             <content>
               <elementRef key="classGrp" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="edition" module="setting">
+          <elementSpec ident="edition" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <classes>
               <memberOf key="att.numbering"/>
               <memberOf key="att.siglum"/>
               <memberOf key="att.target"/>
             </classes>
             <content>
-              <textNode/>
+              <alternate>
+                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                <textNode/>
+              </alternate>
             </content>
             <constraintSpec ident="check-values-edition" scheme="schematron">
               <constraint>
@@ -286,13 +276,13 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="editions" module="remark">
+          <elementSpec ident="editions" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for editions (edition-elements)</desc>
             <content>
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="label" module="setting">
+          <elementSpec ident="label" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element that defines a class or category to be used for classifying.</desc>
             <classes>
               <memberOf key="att.lang"/>
@@ -301,26 +291,26 @@
               <textNode/>
             </content>
           </elementSpec>
-          <elementSpec ident="language" module="setting">
+          <elementSpec ident="language" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element that defines the language used for the settings. Al other labels are treated as translations.</desc>
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <empty/>
             </content>
             <attList>
-              <attDef ident="key" mode="change">
+              <attDef ident="codedval" mode="change">
                 <datatype>
                   <dataRef key="crApp.list.lang"/>
                 </datatype>
               </attDef>
             </attList>
           </elementSpec>
-          <elementSpec ident="layer" module="setting">
+          <elementSpec ident="layer" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element defining a layer as a subordinated unit of a voice.</desc>
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
@@ -334,17 +324,17 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="layerGrp" module="setting">
+          <elementSpec ident="layerGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for layer-elements.</desc>
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="layer" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="mdiv" module="setting">
+          <elementSpec ident="mdiv" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <classes>
               <memberOf key="att.numbering"/>
             </classes>
@@ -363,12 +353,12 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="mdivs" module="setting">
+          <elementSpec ident="mdivs" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <content>
               <elementRef key="mdiv" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="occurance" module="remark">
+          <elementSpec ident="occurance" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <content>
               <alternate>
                 <elementRef key="position" minOccurs="1" maxOccurs="1"/>
@@ -379,15 +369,15 @@
               </alternate>
             </content>
           </elementSpec>
-          <elementSpec ident="occurances" module="remark">
+          <elementSpec ident="occurances" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <content>
               <elementRef key="occurance" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="part" module="setting">
+          <elementSpec ident="part" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element defining a vocal or instrumental part.</desc>
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <alternate>
@@ -410,9 +400,9 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="partGrp" module="setting">
+          <elementSpec ident="partGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <classes>
-              <memberOf key="att.key"/>
+              <memberOf key="att.canonical"/>
             </classes>
             <content>
               <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
@@ -430,7 +420,7 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="parts" module="setting">
+          <elementSpec ident="parts" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for voices (voice-elements)</desc>
             <content>
               <sequence preserveOrder="false" maxOccurs="unbounded">
@@ -439,12 +429,12 @@
               </sequence>
             </content>
           </elementSpec>
-          <elementSpec ident="position" module="remark">
+          <elementSpec ident="position" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <classes>
               <memberOf key="att.timing"/>
             </classes>
           </elementSpec>
-          <elementSpec ident="range" module="remark">
+          <elementSpec ident="range" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <classes>
               <memberOf key="att.timing"/>
             </classes>
@@ -473,25 +463,25 @@
               </attDef>
             </attList>
           </elementSpec>
-          <elementSpec ident="relEditions" module="setting">
+          <elementSpec ident="relEditions" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for editions related to the critical apparatus</desc>
             <content>
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="relSources" module="setting">
+          <elementSpec ident="relSources" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for sources related to the critical apparatus</desc>
             <content>
               <elementRef key="source" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="relWorks" module="setting">
+          <elementSpec ident="relWorks" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for sources related to the critical apparatus</desc>
             <content>
               <elementRef key="work" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="remark" module="remark">
+          <elementSpec ident="remark" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A critical remark.</desc>
             <classes>
               <memberOf key="att.id"/>
@@ -550,16 +540,16 @@
               </egXML>
             </exemplum>
           </elementSpec>
-          <elementSpec ident="remarks" module="remark">
+          <elementSpec ident="remarks" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A wrapper critical remarks.</desc>
             <content>
               <elementRef key="remark" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="setting" module="setting">
+          <elementSpec ident="setting" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</desc>
             <classes>
-              <memberOf key="att.id" mode="add"/>
+              <memberOf key="att.basic" mode="add"/>
             </classes>
             <content>
               <elementRef key="language"/>
@@ -571,14 +561,17 @@
               <elementRef key="classifications"/>
             </content>
           </elementSpec>
-          <elementSpec ident="source" module="setting">
+          <elementSpec ident="source" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <classes>
               <memberOf key="att.numbering"/>
               <memberOf key="att.siglum"/>
               <memberOf key="att.target"/>
             </classes>
             <content>
-              <textNode/>
+              <alternate>
+                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                <textNode/>
+              </alternate>
             </content>
             <constraintSpec ident="check-values-source" scheme="schematron">
               <constraint>
@@ -589,13 +582,13 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="sources" module="remark">
+          <elementSpec ident="sources" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for sources (source-elements)</desc>
             <content>
               <elementRef key="source" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="work" module="setting">
+          <elementSpec ident="work" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A reference to a work this critical apparatus is made for.</desc>
             <classes>
               <memberOf key="att.target"/>
