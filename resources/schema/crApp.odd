@@ -230,7 +230,7 @@
               <memberOf key="att.id"/>
             </classes>
             <content>
-              <elementRef key="include" minOccurs="1" maxOccurs="1"/>
+              <elementRef key="setting" minOccurs="1" maxOccurs="1"/>
               <elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
@@ -240,7 +240,10 @@
               <memberOf key="att.key"/>
             </classes>
             <content>
-              <textNode/>
+              <alternate>
+                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                <textNode/>
+              </alternate>
             </content>
             <constraintSpec ident="check-values-source" scheme="schematron">
               <constraint>
@@ -346,7 +349,10 @@
               <memberOf key="att.numbering"/>
             </classes>
             <content>
-              <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+              <alternate>
+                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                <textNode/>
+              </alternate>
             </content>
             <constraintSpec ident="check-values-mdiv" scheme="schematron">
               <constraint>
@@ -384,11 +390,16 @@
               <memberOf key="att.key"/>
             </classes>
             <content>
-              <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-              <sequence preserveOrder="false" maxOccurs="unbounded">
-                <elementRef key="layerGrp" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="layer" minOccurs="0" maxOccurs="unbounded"/>
-              </sequence>
+              <alternate>
+                <sequence preserveOrder="true" maxOccurs="1">
+                  <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                  <sequence preserveOrder="false" maxOccurs="unbounded">
+                    <elementRef key="layerGrp" minOccurs="0" maxOccurs="unbounded"/>
+                    <elementRef key="layer" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+                </sequence>
+                <textNode/>
+              </alternate>
             </content>
             <constraintSpec ident="check-values-voice" scheme="schematron">
               <constraint>

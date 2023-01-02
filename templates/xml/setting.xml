@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../../resources/schema/out/crApp.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="../../resources/schema/out/crApp.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="../../resources/schema/crApp.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../../resources/schema/crApp.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <setting xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-template-settings">
     <language key="de"/>
     <mdivs>
@@ -16,7 +16,7 @@
     </mdivs>
     <parts>
         <!-- @key is used for the schema -->
-        <!--            <part key="instrumentName.PartNo">InstrumentName</part>-->
+        <!-- <part key="instrumentName.PartNo">InstrumentName</part>-->
         <partGrp key="woods">
             <label xml:lang="de">Holz</label>
             <partGrp key="flutes">
