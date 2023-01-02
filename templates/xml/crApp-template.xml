@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="../../resources/schema/crApp.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="../../resources/schema/crApp.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<apparatus xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-template">
+<crApp xmlns="http://baumann-digital.de/ns/crApp" xml:id="crApp-template">
     <include xmlns="http://www.w3.org/2001/XInclude" href="setting.xml"/>
     <remarks>
         <remark type="reading" xml:id="baudi-30-12345678">
@@ -21,15 +21,15 @@
                 <part>organ</part>
             </parts>
             <annots>
-                <annot>dfghjk</annot>
+                <annot>f</annot>
                 <annot>test text</annot>
             </annots>
             <sources>
                 <source>SV</source>
             </sources>
             <editions>
-                <edition>BauA</edition>
+                <edition>BauDi</edition>
             </editions>
         </remark>
     </remarks>
-</apparatus>
+</crApp>
