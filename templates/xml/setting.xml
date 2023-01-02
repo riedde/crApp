@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../resources/schema/out/crApp.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../../resources/schema/out/crApp.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<setting xmlns="http://baumann-digital.de/ns/criticalApparatus" xml:id="crApp-template-settings">
+    <language key="de"/>
+    <mdivs>
+        <!-- @no is used for the schema values but should be: Use 0 (Vorspiel), 1 (Chor) -->
+        <!--            <mdiv no="NUMBER">TITLE</mdiv>-->
+        <mdiv no="0">
+            <label xml:lang="de">Vorspiel</label>
+            <label xml:lang="en">Prelude</label>
+        </mdiv>
+        <mdiv no="1">
+            <label xml:lang="de">I</label>
+        </mdiv>
+    </mdivs>
+    <parts>
+        <!-- @key is used for the schema -->
+        <!--            <part key="instrumentName.PartNo">InstrumentName</part>-->
+        <partGrp key="woods">
+            <label xml:lang="de">Holz</label>
+            <partGrp key="flutes">
+                <label xml:lang="de">Flöten</label>
+                <part key="flute.i">
+                    <label xml:lang="de">Flöte I</label>
+                </part>
+                <part key="flute.ii">
+                    <label xml:lang="de">Flöte´II</label>
+                </part>
+            </partGrp>
+            <partGrp key="oboes">
+                <label xml:lang="de">Oboen</label>
+                <part key="oboe.i">
+                    <label xml:lang="de">Oboe I</label>
+                </part>
+                <part key="oboe.ii">
+                    <label xml:lang="de">Oboe II</label>
+                </part>
+            </partGrp>
+            <part key="hornEnglish">
+                <label xml:lang="de">Englischhorn</label>
+            </part>
+            <part key="basson">
+                <label xml:lang="de">Fagott</label>
+            </part>
+        </partGrp>
+        <part key="organ">
+            <label xml:lang="en">Organ</label>
+            <label xml:lang="de">Orgel</label>
+            <layerGrp key="organManuals">
+                <label xml:lang="en">Organ (manuals)</label>
+                <label xml:lang="de">Orgel (Manuale)</label>
+                <layer key="organ.left">
+                    <label xml:lang="en">Organ (l.h.)</label>
+                    <label xml:lang="de">Orgel (l.H.)</label>
+                </layer>
+                <layer key="organ.right">
+                    <label xml:lang="en">Organ (r.h.)</label>
+                    <label xml:lang="de">Orgel (r.H.)</label>
+                </layer>
+            </layerGrp>
+            <layer key="organPedals">
+                <label xml:lang="en">Organ (ped.)</label>
+                <label xml:lang="de">Orgel (Ped.)</label>
+            </layer>
+        </part>
+    </parts>
+    <relWorks>
+        <!-- can also be work components -->
+        <work xml:id="ID" target="link.xml"/>
+    </relWorks>
+    <relSources>
+        <!-- @siglum is used for the schema -->
+        <!-- <source siglum="SIG" sortNo="NUM" target="link/to/file.xml">Label of the source</source>-->
+        <source siglum="SV" sortNo="1" target="link/to-file.xml">Stichvorlage</source>
+        <source siglum="ED" sortNo="2">Erstdruck</source>
+    </relSources>
+    <relEditions>
+        <!--<edition siglum="SIGLUM" sortNo="NUM" target="link/to/file.xml">Label of the edition</edition>-->
+        <edition siglum="BauA">Baumann-Ausgabe</edition>
+    </relEditions>
+    <classifications>
+        <classGrp label="Art">
+            <class key="cat.001">
+                <label xml:lang="de">Notentext</label>
+                <label xml:lang="en">Notentext</label>
+            </class>
+            <class key="cat.002">
+                <label xml:lang="de">Bogensetzung</label>
+            </class>
+        </classGrp>
+    </classifications>
+</setting>
