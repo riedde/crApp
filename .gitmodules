@@ -1,0 +1,4 @@
+[submodule "music-encoding"]
+	path = music-encoding
+	url = git@github.com:music-encoding/music-encoding.git
+	shallow = true
