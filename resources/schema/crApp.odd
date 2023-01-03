@@ -105,13 +105,13 @@
               <attDef ident="measure">
                 <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a measure as a time stamp. The value must be a positive integer.</desc>
                 <datatype>
-                  <dataRef key="integer"/>
+                  <dataRef name="nonNegativeInteger"/>
                 </datatype>
               </attDef>
               <attDef ident="count">
                 <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a count (within a measure) as a detailed part of a time stamp. The value must be a positive integer.</desc>
                 <datatype>
-                  <dataRef key="integer"/>
+                  <dataRef name="nonNegativeInteger"/>
                 </datatype>
               </attDef>
             </attList>
