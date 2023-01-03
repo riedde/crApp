@@ -212,6 +212,18 @@
             <content>
               <macroRef key="crApp.annot.content"/>
             </content>
+            <attList>
+              <attDef ident="type" mode="add" usage="opt">
+                <desc xml:lang="en" versionDate="2022-01-03">Classification</desc>
+                <desc xml:lang="de" versionDate="2022-01-03">Klassifikation</desc>
+                <valList type="closed" mode="add">
+                  <valItem ident="intern">
+                    <gloss xml:lang="en" versionDate="2022-01-03">internal</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">intern</gloss>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
           </elementSpec>
           <elementSpec ident="annots" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for annotations (annot-elements)</desc>
