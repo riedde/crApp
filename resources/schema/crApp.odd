@@ -405,10 +405,7 @@
               <alternate>
                 <sequence preserveOrder="true" maxOccurs="1">
                   <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-                  <sequence preserveOrder="false" maxOccurs="unbounded">
-                    <elementRef key="layerGrp" minOccurs="0" maxOccurs="unbounded"/>
-                    <elementRef key="layer" minOccurs="0" maxOccurs="unbounded"/>
-                  </sequence>
+                  <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
                 </sequence>
                 <textNode/>
               </alternate>
@@ -421,6 +418,36 @@
                 </sch:pattern>
               </constraint>
             </constraintSpec>
+            <constraintSpec ident="part-in-part-attr-type-requiring" scheme="schematron">
+              <constraint>
+                <sch:rule context="crapp:part">
+                  <sch:report test=".[parent::crapp:part] and not(@type)" role="error">If part is child of part a @type is required.</sch:report>
+                </sch:rule>
+              </constraint>
+            </constraintSpec>
+            <constraintSpec ident="part-sys-in-sysGrp-requiring" scheme="schematron">
+              <constraint>
+                <sch:rule context="crapp:part[@type='sysGrp']">
+                  <sch:assert test="crapp:part[@type='sys']" role="warning">The part is defined as a system group but does not contain a system.</sch:assert>
+                </sch:rule>
+              </constraint>
+            </constraintSpec>
+            <attList>
+              <attDef ident="type" mode="add" usage="opt">
+                <desc xml:lang="en" versionDate="2022-01-03">Classification</desc>
+                <desc xml:lang="de" versionDate="2022-01-03">Klassifikation</desc>
+                <valList type="closed" mode="add">
+                  <valItem ident="sysGrp">
+                    <gloss xml:lang="en" versionDate="2022-01-03">system group</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">Systemgruppe</gloss>
+                  </valItem>
+                  <valItem ident="sys">
+                    <gloss xml:lang="en" versionDate="2022-01-03">system</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">System</gloss>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
           </elementSpec>
           <elementSpec ident="partGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <classes>
