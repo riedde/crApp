@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-03T08:38:04Z. .
+Schema generated from ODD source 2023-01-03T09:15:28Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -539,6 +539,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                <ref name="app"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="artic"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="beam"/>
             </zeroOrMore>
             <zeroOrMore>
@@ -587,6 +590,10 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <ref name="data.ACCIDENTAL.WRITTEN"/>
          </attribute>
       </optional>
+   </define>
+   <define name="att.artic.log.attributes">
+      <ref name="att.articulation.attributes"/>
+      <ref name="att.controlEvent.attributes"/>
    </define>
    <define name="att.articulation.attributes">
       <ref name="att.articulation.attribute.artic"/>
@@ -2455,6 +2462,7 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
    </define>
    <define name="model.chordPart">
       <choice>
+         <ref name="artic"/>
          <ref name="note"/>
       </choice>
    </define>
@@ -2853,22 +2861,28 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
    <define name="model.noteModifierLike">
       <choice>
          <ref name="accid"/>
+         <ref name="artic"/>
          <ref name="dot"/>
       </choice>
    </define>
    <define name="model.noteModifierLike_alternation">
       <choice>
          <ref name="accid"/>
+         <ref name="artic"/>
          <ref name="dot"/>
       </choice>
    </define>
    <define name="model.noteModifierLike_sequence">
       <ref name="accid"/>
+      <ref name="artic"/>
       <ref name="dot"/>
    </define>
    <define name="model.noteModifierLike_sequenceOptional">
       <optional>
          <ref name="accid"/>
+      </optional>
+      <optional>
+         <ref name="artic"/>
       </optional>
       <optional>
          <ref name="dot"/>
@@ -2879,12 +2893,18 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
          <ref name="accid"/>
       </zeroOrMore>
       <zeroOrMore>
+         <ref name="artic"/>
+      </zeroOrMore>
+      <zeroOrMore>
          <ref name="dot"/>
       </zeroOrMore>
    </define>
    <define name="model.noteModifierLike_sequenceRepeatable">
       <oneOrMore>
          <ref name="accid"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="artic"/>
       </oneOrMore>
       <oneOrMore>
          <ref name="dot"/>
@@ -3265,6 +3285,15 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
          <empty/>
          <ref name="att.common.attributes"/>
          <ref name="att.accid.log.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="artic">
+      <element name="artic">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(articulation) An indication of how to play a note or chord.</a:documentation>
+         <empty/>
+         <ref name="att.common.attributes"/>
+         <ref name="att.artic.log.attributes"/>
          <empty/>
       </element>
    </define>
@@ -6199,6 +6228,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <optional>
          <attribute name="measure">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a measure as a time stamp. The value must be a positive integer.</a:documentation>
+            <data type="nonNegativeInteger"/>
          </attribute>
       </optional>
    </define>
@@ -6206,6 +6236,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <optional>
          <attribute name="count">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An attribute for defining a count (within a measure) as a detailed part of a time stamp. The value must be a positive integer.</a:documentation>
+            <data type="nonNegativeInteger"/>
          </attribute>
       </optional>
    </define>
@@ -6243,6 +6274,16 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <element name="annot" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <ref name="crApp.annot.content"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Classification</a:documentation>
+               <choice>
+                  <value>intern</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(internal) </a:documentation>
+               </choice>
+            </attribute>
+         </optional>
+         <empty/>
       </element>
    </define>
    <define name="annots">
@@ -6381,19 +6422,6 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <empty/>
       </element>
    </define>
-   <define name="layerGrp">
-      <element name="layerGrp" ns="http://baumann-digital.de/ns/crApp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for layer-elements.</a:documentation>
-         <oneOrMore>
-            <ref name="label"/>
-         </oneOrMore>
-         <oneOrMore>
-            <ref name="layer"/>
-         </oneOrMore>
-         <ref name="att.canonical.attributes"/>
-         <empty/>
-      </element>
-   </define>
    <define name="mdiv">
       <element name="mdiv" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
@@ -6452,16 +6480,9 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <oneOrMore>
                   <ref name="label"/>
                </oneOrMore>
-               <oneOrMore>
-                  <group>
-                     <zeroOrMore>
-                        <ref name="layerGrp"/>
-                     </zeroOrMore>
-                     <zeroOrMore>
-                        <ref name="layer"/>
-                     </zeroOrMore>
-                  </group>
-               </oneOrMore>
+               <zeroOrMore>
+                  <ref name="part"/>
+               </zeroOrMore>
             </group>
             <text/>
          </choice>
@@ -6474,7 +6495,31 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             <sch:param name="elementName" value="part"/>
             <sch:param name="attrStr" value="codedval"/>
          </sch:pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-74">
+            <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="crapp:part">
+               <sch:report test=".[parent::crapp:part] and not(@type)" role="error">If part is child of part a @type is required.</sch:report>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-75">
+            <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      context="crapp:part[@type='sysGrp']">
+               <sch:assert test="crapp:part[@type='sys']" role="warning">The part is defined as a system group but does not contain a system.</sch:assert>
+            </sch:rule>
+         </pattern>
          <ref name="att.canonical.attributes"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Classification</a:documentation>
+               <choice>
+                  <value>sysGrp</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(system group) </a:documentation>
+                  <value>sys</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(system) </a:documentation>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
