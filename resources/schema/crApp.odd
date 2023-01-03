@@ -45,11 +45,13 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space syl tempo"/>
+          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.ptrref" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
+          <moduleRef key="MEI.text" source="../../music-encoding/source/mei-source.xml" include="q quote seg"/>
           <macroSpec ident="crApp.list.lang" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
@@ -71,14 +73,27 @@
                 <sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
                   <textNode/>
                   <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
                 </sequence>
             </content>
           </macroSpec>
@@ -477,11 +492,22 @@
           <elementSpec ident="parts" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for voices (voice-elements)</desc>
             <content>
-              <sequence preserveOrder="false" maxOccurs="unbounded">
-                <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
-              </sequence>
+              <alternate>
+               <sequence preserveOrder="false" maxOccurs="unbounded">
+                 <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
+                 <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
+               </sequence>
+               <textNode/>
+              </alternate>
             </content>
+            <constraintSpec ident="setting-values-check" module="core" scheme="schematron">
+              <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called values are defined somewhere in the <gi>setting</gi> element.</desc>
+              <constraint>
+                <sch:rule context="crapp:parts[not(crapp:*)]">
+                  <sch:assert test="text() = 'all'">If no part is given the value 'all' is required.</sch:assert>
+                </sch:rule>
+              </constraint>
+            </constraintSpec>
           </elementSpec>
           <elementSpec ident="position" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <classes>
