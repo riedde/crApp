@@ -401,11 +401,11 @@
                 <textNode/>
               </alternate>
             </content>
-            <constraintSpec ident="check-values-voice" scheme="schematron">
+            <constraintSpec ident="check-values-part" scheme="schematron">
               <constraint>
                 <sch:pattern is-a="checkValues">
-                  <sch:param name="elementName" value="voice"/>
-                  <sch:param name="attrStr" value="key"/>
+                  <sch:param name="elementName" value="part"/>
+                  <sch:param name="attrStr" value="codedval"/>
                 </sch:pattern>
               </constraint>
             </constraintSpec>
@@ -415,17 +415,22 @@
               <memberOf key="att.canonical"/>
             </classes>
             <content>
-              <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-              <sequence preserveOrder="false" maxOccurs="unbounded">
-                <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
-              </sequence>
+              <alternate>
+                <sequence preserveOrder="true" maxOccurs="1">
+                  <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                  <sequence preserveOrder="false" maxOccurs="unbounded">
+                    <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
+                    <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+                </sequence>
+                <textNode/>
+              </alternate>
             </content>
-            <constraintSpec ident="check-values-voiceGrp" scheme="schematron">
+            <constraintSpec ident="check-values-partGrp" scheme="schematron">
               <constraint>
                 <sch:pattern is-a="checkValues">
-                  <sch:param name="elementName" value="voiceGrp"/>
-                  <sch:param name="attrStr" value="key"/>
+                  <sch:param name="elementName" value="partGrp"/>
+                  <sch:param name="attrStr" value="codedval"/>
                 </sch:pattern>
               </constraint>
             </constraintSpec>
