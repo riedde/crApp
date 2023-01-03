@@ -45,7 +45,7 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space syl tempo"/>
+          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
