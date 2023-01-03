@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-02T12:15:10Z. .
+Schema generated from ODD source 2023-01-03T08:04:20Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -527,6 +527,37 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <value>2048</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">2048th note.</a:documentation>
       </choice>
+   </define>
+   <define name="crApp.annot.content">
+      <oneOrMore>
+         <group>
+            <text/>
+            <zeroOrMore>
+               <ref name="accid"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="app"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="beam"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="chord"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="dynam"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="hairpin"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="note"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="rest"/>
+            </zeroOrMore>
+         </group>
+      </oneOrMore>
    </define>
    <define name="att.accid.log.attributes">
       <ref name="att.accidental.attributes"/>
@@ -6211,14 +6242,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    <define name="annot">
       <element name="annot" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-         <choice>
-            <text/>
-            <group>
-               <text/>
-               <ref name="app"/>
-               <text/>
-            </group>
-         </choice>
+         <ref name="crApp.annot.content"/>
       </element>
    </define>
    <define name="annots">

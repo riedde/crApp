@@ -65,6 +65,23 @@
               </valList>
             </content>
           </macroSpec>
+          <macroSpec ident="crApp.annot.content" module="core" mode="add">
+            <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
+            <content>
+                <sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
+                  <textNode/>
+                  <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+            </content>
+          </macroSpec>
           <classSpec type="atts" ident="att.numbering" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
             <attList>
@@ -193,14 +210,7 @@
           </constraintSpec>
           <elementSpec ident="annot" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <content>
-              <alternate>
-                <textNode/>
-                <sequence preserveOrder="false">
-                  <textNode/>
-                  <elementRef key="app"/>
-                  <textNode/>
-                </sequence>
-              </alternate>
+              <macroRef key="crApp.annot.content"/>
             </content>
           </elementSpec>
           <elementSpec ident="annots" module="remark" ns="http://baumann-digital.de/ns/crApp">
