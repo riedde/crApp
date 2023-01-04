@@ -45,10 +45,13 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group keyAccid keySig lb lg name note num ornam pad rest space sb syl tempo"/>
+          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.gestural" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.visual" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.analytical" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.ptrref" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
           <moduleRef key="MEI.text" source="../../music-encoding/source/mei-source.xml" include="q quote seg"/>
@@ -76,13 +79,26 @@
                   <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="bTrem" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="caesura" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
@@ -90,7 +106,9 @@
                   <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
@@ -117,7 +135,7 @@
           <classSpec type="atts" ident="att.timing" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">An attribute class for timing concerns.</desc>
             <attList>
-              <attDef ident="measure">
+              <attDef ident="measure" usage="req">
                 <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a measure as a time stamp. The value must be a positive integer.</desc>
                 <datatype>
                   <dataRef name="nonNegativeInteger"/>
@@ -577,7 +595,7 @@
               <elementRef key="editions" maxOccurs="1"/>
             </content>
             <attList>
-              <attDef ident="type">
+              <attDef ident="type" usage="req">
                 <valList type="closed">
                   <valItem ident="editorial">
                     <desc xml:lang="en" versionDate="2022-04-01">Eingriff (Hg.)</desc>
@@ -603,18 +621,18 @@
                       <range type="stop" measure="2" count="3"/>
                     </occurance>
                   </occurances>
-                  <voices>
-                    <voice>flute.1</voice>
-                    <voice>oboe.1</voice>
-                  </voices>
+                  <parts>
+                    <part>flute.i</part>
+                    <partGrp>oboes</partGrp>
+                  </parts>
                   <annots>
-                    <annot>No dynamics.</annot>
+                    <annot><dynam>f</dynam></annot>
                   </annots>
                   <sources>
-                    <source>SV</source>
+                    <source>A-P3</source>
                   </sources>
                   <editions>
-                    <edition>BauA</edition>
+                    <edition>BauDi-P</edition>
                   </editions>
                 </remark>
               </egXML>
@@ -677,6 +695,17 @@
             <content>
               <textNode/>
             </content>
+          </elementSpec>
+        
+          <elementSpec ident="ptr" module="MEI.ptrref" mode="change" ns="http://baumann-digital.de/ns/crApp">
+            <attList>
+              <attDef ident="type" mode="change">
+                <valList mode="add" type="closed">
+                  <valItem ident="compare"/>
+                  <valItem ident="conjecture"/>
+                </valList>
+              </attDef>
+            </attList>
           </elementSpec>
         </schemaSpec>
       </div>
