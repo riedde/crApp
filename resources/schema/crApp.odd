@@ -45,6 +45,7 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.frbr" source="../../music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
           <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
@@ -55,6 +56,7 @@
           <moduleRef key="MEI.ptrref" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
           <moduleRef key="MEI.text" source="../../music-encoding/source/mei-source.xml" include="q quote seg"/>
+          <moduleRef key="MEI.cmnOrnaments" source="../../music-encoding/source/mei-source.xml" include="trill"/>
           <macroSpec ident="crApp.list.lang" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
@@ -95,6 +97,7 @@
                   <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
@@ -111,6 +114,7 @@
                   <elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
                 </sequence>
             </content>
