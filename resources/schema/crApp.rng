@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-05T09:56:40Z. .
+Schema generated from ODD source 2023-01-05T12:03:26Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -12672,7 +12672,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="crapp:parts[not(crapp:*)]">
-               <sch:assert test="text() = 'all'">If no part is given the value 'all' is required.</sch:assert>
+               <sch:assert test="text() = ('all','none')">If no part is given the value 'all' or 'none' is required.</sch:assert>
             </sch:rule>
          </pattern>
       </element>

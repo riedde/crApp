@@ -590,7 +590,7 @@
               <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called values are defined somewhere in the <gi>setting</gi> element.</desc>
               <constraint>
                 <sch:rule context="crapp:parts[not(crapp:*)]">
-                  <sch:assert test="text() = 'all'">If no part is given the value 'all' is required.</sch:assert>
+                  <sch:assert test="text() = ('all','none')">If no part is given the value 'all' or 'none' is required.</sch:assert>
                 </sch:rule>
               </constraint>
             </constraintSpec>
