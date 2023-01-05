@@ -183,6 +183,74 @@
               </attDef>
             </attList>
           </classSpec>
+          <classSpec ident="att.linking" module="MEI.shared" type="atts" mode="change">
+            <desc xml:lang="en">Attributes that specify element-to-element relationships.</desc>
+            <attList>
+              <attDef ident="corresp" usage="opt" mode="change">
+                <desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
+                <constraintSpec ident="check_correspTarget" scheme="schematron">
+                  <constraint>
+                    <sch:rule context="@corresp">
+                      <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:*/@xml:id">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+                    </sch:rule>
+                  </constraint>
+                </constraintSpec>
+              </attDef>
+            </attList>
+          </classSpec>
+          <classSpec ident="att.source" module="MEI.shared" type="atts" mode="change">
+            <desc xml:lang="en">Attributes common to elements that may refer to a source.</desc>
+            <attList>
+              <attDef ident="source" usage="opt" mode="change">
+                <desc xml:lang="en">Contains a list of one or more pointers indicating the sources which attest to a given reading. Each value should correspond to the ID of a
+                  <gi scheme="MEI">manifestation</gi>
+                  element.</desc>
+                <constraintSpec ident="check_sourceTarget" scheme="schematron">
+                  <constraint>
+                    <sch:rule context="@source">
+                      <sch:assert role="warning" test="not(normalize-space(.) eq '')">@source attribute should have content.</sch:assert>
+                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:manifestation/@xml:id">Each value in @source should correspond to the @xml:id attribute of a source or manifestation element.</sch:assert>
+                    </sch:rule>
+                  </constraint>
+                </constraintSpec>
+              </attDef>
+            </attList>
+          </classSpec>
+          <classSpec ident="att.startEndId" module="MEI.shared" type="atts" mode="change">
+            <desc xml:lang="en">Attributes recording the identifiers of the first and last elements of a sequence of elements to which the current element is associated.</desc>
+            <classes>
+              <memberOf key="att.startId"/>
+            </classes>
+            <attList>
+              <attDef ident="endid" usage="opt" mode="change">
+                <constraintSpec ident="check_endidTarget" scheme="schematron">
+                  <constraint>
+                    <sch:rule context="@endid">
+                      <sch:assert role="warning" test="not(normalize-space(.) eq '')">@endid attribute should have content.</sch:assert>
+                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:*/@xml:id">The value in @endid should correspond to the @xml:id attribute of an element.</sch:assert>
+                    </sch:rule>
+                  </constraint>
+                </constraintSpec>
+              </attDef>
+            </attList>
+          </classSpec>
+          <classSpec ident="att.startId" module="MEI.shared" type="atts" mode="change">
+            <desc xml:lang="en">Attributes that identify a relative starting point.</desc>
+            <attList>
+              <attDef ident="startid" usage="opt" mode="change">
+                <desc xml:lang="en">Holds a reference to the first element in a sequence of events to which the feature applies.</desc>
+                <constraintSpec ident="check_startidTarget" scheme="schematron">
+                  <constraint>
+                    <sch:rule context="@startid">
+                      <sch:assert role="warning" test="not(normalize-space(.) eq '')">@startid attribute should have content.</sch:assert>
+                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:*/@xml:id">The value in @startid should correspond to the @xml:id attribute of an element.</sch:assert>
+                    </sch:rule>
+                  </constraint>
+                </constraintSpec>
+              </attDef>
+            </attList>
+          </classSpec>
           <constraintSpec ident="set_ns" scheme="schematron" mode="add">
             <constraint>
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" uri="http://baumann-digital.de/ns/crApp"/>
