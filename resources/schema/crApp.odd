@@ -57,6 +57,7 @@
           <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
           <moduleRef key="MEI.text" source="../../music-encoding/source/mei-source.xml" include="q quote seg"/>
           <moduleRef key="MEI.cmnOrnaments" source="../../music-encoding/source/mei-source.xml" include="trill"/>
+          <moduleRef key="MEI.usersymbols" source="../../music-encoding/source/mei-source.xml" include="anchoredText"/>
           <macroSpec ident="crApp.list.lang" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
@@ -79,6 +80,7 @@
                   <textNode/>
                   <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="anchoredText" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
@@ -117,6 +119,55 @@
                   <elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
                 </sequence>
+            </content>
+          </macroSpec>
+          <macroSpec ident="data.ARTICULATION" module="MEI" mode="change">
+            <desc xml:lang="en" versionDate="2023-01-05">The following list of articulations mostly corresponds to symbols from the Western Musical Symbols portion of the Unicode Standard. The dot and stroke values may be used in cases where interpretation is difficult or undesirable.</desc>
+            <content>
+              <valList type="closed" mode="change">
+                <valItem ident="arco" mode="add">
+                  <desc xml:lang="en">playing with bow</desc>
+                </valItem>
+                <valItem ident="pizz" mode="add">
+                  <desc xml:lang="en">plucking (strings)</desc>
+                </valItem>
+                <valItem ident="acc">
+                  <desc xml:lang="en">Accent (Unicode 1D17B).</desc>
+                </valItem>
+                <valItem ident="acc-inv">
+                  <desc xml:lang="en">Inverted accent.</desc>
+                </valItem>
+                <valItem ident="stacc">
+                  <desc xml:lang="en">Staccato (Unicode 1D17C).</desc>
+                </valItem>
+                <valItem ident="ten">
+                  <desc xml:lang="en">Tenuto (Unicode 1D17D).</desc>
+                </valItem>
+                <valItem ident="stacciss">
+                  <desc xml:lang="en">Staccatissimo (Unicode 1D17E).</desc>
+                </valItem>
+                <valItem ident="marc">
+                  <desc xml:lang="en">Marcato (Unicode 1D17F).</desc>
+                </valItem>
+                <valItem ident="spicc">
+                  <desc xml:lang="en">Spiccato.</desc>
+                </valItem>
+                <valItem ident="dnbow">
+                  <desc xml:lang="en">Down bow (Unicode 1D1AA).</desc>
+                </valItem>
+                <valItem ident="upbow">
+                  <desc xml:lang="en">Up bow (Unicode 1D1AB).</desc>
+                </valItem>
+                <valItem ident="damp">
+                  <desc xml:lang="en">Stop harp string from sounding (Unicode 1D1B4).</desc>
+                </valItem>
+                <valItem ident="open">
+                  <desc xml:lang="en">Full (as opposed to stopped) tone.</desc>
+                </valItem>
+                <valItem ident="stop">
+                  <desc xml:lang="en">"muffled" tone.</desc>
+                </valItem>
+              </valList>
             </content>
           </macroSpec>
           <classSpec type="atts" ident="att.numbering" module="core">

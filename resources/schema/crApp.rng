@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-05T12:03:26Z. .
+Schema generated from ODD source 2023-01-05T14:17:21Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -139,14 +139,14 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    </define>
    <define name="data.ARTICULATION">
       <choice>
+         <value>arco</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">playing with bow</a:documentation>
+         <value>pizz</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">plucking (strings)</a:documentation>
          <value>acc</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Accent (Unicode 1D17B).</a:documentation>
          <value>acc-inv</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Inverted accent.</a:documentation>
-         <value>acc-long</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Long accent, used to indicate an elongated accent mark. It is the responsibility of the encoder to distinguish between accents and hairpins.</a:documentation>
-         <value>acc-soft</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Soft accent, see SMuFL Articulation supplement (U+ED40–U+ED4F).</a:documentation>
          <value>stacc</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Staccato (Unicode 1D17C).</a:documentation>
          <value>ten</value>
@@ -157,60 +157,16 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Marcato (Unicode 1D17F).</a:documentation>
          <value>spicc</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Spiccato.</a:documentation>
-         <value>doit</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note followed by short slide to higher, indeterminate pitch (Unicode 1D185).</a:documentation>
-         <value>scoop</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note preceded by short slide from lower, indeterminate pitch (Unicode 1D186).</a:documentation>
-         <value>rip</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note preceded by long slide from lower, often indeterminate pitch; also known as "squeeze".</a:documentation>
-         <value>plop</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note preceded by "slide" from higher, indeterminate pitch.</a:documentation>
-         <value>fall</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note followed by short "slide" to lower, indeterminate pitch.</a:documentation>
-         <value>longfall</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note followed by long "slide" to lower, indeterminate pitch.</a:documentation>
-         <value>bend</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">"lip slur" to lower pitch, then return to written pitch.</a:documentation>
-         <value>flip</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Main note followed by quick upward rise, then descent in pitch (Unicode 1D187).</a:documentation>
-         <value>smear</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unicode 1D188).</a:documentation>
-         <value>shake</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Alternation between written pitch and next highest overtone (brass instruments) or note minor third higher (woodwinds).</a:documentation>
          <value>dnbow</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Down bow (Unicode 1D1AA).</a:documentation>
          <value>upbow</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Up bow (Unicode 1D1AB).</a:documentation>
-         <value>harm</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Harmonic (Unicode 1D1AC).</a:documentation>
-         <value>snap</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Snap pizzicato (Unicode 1D1AD).</a:documentation>
-         <value>fingernail</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Fingernail (Unicode 1D1B3).</a:documentation>
          <value>damp</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Stop harp string from sounding (Unicode 1D1B4).</a:documentation>
-         <value>dampall</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Stop all harp strings from sounding (Unicode 1D1B5).</a:documentation>
          <value>open</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Full (as opposed to stopped) tone.</a:documentation>
          <value>stop</value>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">"muffled" tone.</a:documentation>
-         <value>dbltongue</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Double tongue (Unicode 1D18A).</a:documentation>
-         <value>trpltongue</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Triple tongue (Unicode 1D18B).</a:documentation>
-         <value>heel</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Use heel (organ pedal).</a:documentation>
-         <value>toe</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Use toe (organ pedal).</a:documentation>
-         <value>tap</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Percussive effect on guitar string(s).</a:documentation>
-         <value>lhpizz</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Left-hand pizzicato.</a:documentation>
-         <value>dot</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Uninterpreted dot.</a:documentation>
-         <value>stroke</value>
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Uninterpreted stroke.</a:documentation>
       </choice>
    </define>
    <define name="data.AUGMENTDOT">
@@ -1698,6 +1654,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             </zeroOrMore>
             <zeroOrMore>
                <ref name="add"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="anchoredText"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="app"/>
@@ -6523,6 +6482,7 @@ Suggested values include: 1] smufl</a:documentation>
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.relationLike"/>
                <ref name="model.scoreDefLike"/>
@@ -6737,6 +6697,7 @@ Suggested values include: 1] smufl</a:documentation>
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.transcriptionLike"/>
@@ -6892,6 +6853,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             <choice>
                <text/>
                <ref name="model.textPhraseLike.limited"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.editLike"/>
                <ref name="model.transcriptionLike"/>
             </choice>
@@ -6981,6 +6943,9 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
       <element name="scoreDef">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(score definition) Container for score meta-information.</a:documentation>
          <optional>
+            <ref name="model.symbolTableLike"/>
+         </optional>
+         <optional>
             <ref name="model.keySigLike"/>
          </optional>
          <optional>
@@ -7012,6 +6977,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="model.appLike"/>
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.relationLike"/>
                <ref name="model.sectionPart"/>
@@ -7064,6 +7030,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.relationLike"/>
                <ref name="model.staffDefLike"/>
@@ -7367,6 +7334,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             <choice>
                <text/>
                <ref name="model.textPhraseLike.limited"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.editLike"/>
                <ref name="model.transcriptionLike"/>
             </choice>
@@ -7475,6 +7443,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="model.appLike"/>
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.rdgPart"/>
@@ -7504,6 +7473,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="model.appLike"/>
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.rdgPart"/>
@@ -8868,6 +8838,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             <choice>
                <text/>
                <ref name="model.textPhraseLike.limited"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.editLike"/>
                <ref name="model.transcriptionLike"/>
             </choice>
@@ -9332,6 +9303,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.measurePart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.relationLike"/>
@@ -9522,6 +9494,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.transcriptionLike"/>
@@ -9594,6 +9567,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.annotLike"/>
                <ref name="model.appLike"/>
                <ref name="model.editLike"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.relationLike"/>
                <ref name="model.staffDefLike"/>
@@ -9824,6 +9798,9 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                 not duplicate the value of @accid.</sch:assert>
       </sch:rule>
    </pattern>
+   <define name="att.anchoredText.ges.attributes">
+      <empty/>
+   </define>
    <define name="att.arpeg.ges.attributes">
       <empty/>
    </define>
@@ -10240,6 +10217,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.tuplet.ges.attributes"/>
    </define>
    <define name="att.accid.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.placementOnStaff.attributes"/>
@@ -10251,7 +10229,12 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.visualOffset.vo.attributes"/>
       <ref name="att.xy.attributes"/>
    </define>
+   <define name="att.anchoredText.vis.attributes">
+      <ref name="att.visualOffset.attributes"/>
+      <ref name="att.xy.attributes"/>
+   </define>
    <define name="att.arpeg.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10322,6 +10305,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.artic.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.placementOnStaff.attributes"/>
@@ -10342,6 +10326,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.barLine.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.visibility.attributes"/>
       <ref name="att.width.attributes"/>
@@ -10421,6 +10406,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.beam.vis.attributes"/>
    </define>
    <define name="att.beatRpt.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.expandable.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10442,6 +10428,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.curveRend.attributes"/>
    </define>
    <define name="att.bracketSpan.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.lineRend.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10451,6 +10438,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy2.attributes"/>
    </define>
    <define name="att.breath.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
       <ref name="att.staffLoc.attributes"/>
@@ -10463,6 +10451,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.numberPlacement.attributes"/>
    </define>
    <define name="att.caesura.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
       <ref name="att.staffLoc.attributes"/>
@@ -10472,6 +10461,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.chord.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.stems.attributes"/>
@@ -10492,6 +10482,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.clef.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10519,6 +10510,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.dot.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.staffLoc.attributes"/>
       <ref name="att.staffLoc.pitched.attributes"/>
@@ -10540,6 +10532,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.lineRend.attributes"/>
    </define>
    <define name="att.fermata.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
@@ -10624,6 +10617,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.gliss.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.typography.attributes"/>
       <ref name="att.visualOffset.attributes"/>
@@ -10636,6 +10630,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.color.attributes"/>
    </define>
    <define name="att.grpSym.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.typography.attributes"/>
       <ref name="att.visualOffset.attributes"/>
@@ -10688,12 +10683,14 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.halfmRpt.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.expandable.attributes"/>
       <ref name="att.typography.attributes"/>
       <ref name="att.visualOffset.attributes"/>
    </define>
    <define name="att.harpPedal.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10701,6 +10698,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.keyAccid.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.staffLoc.attributes"/>
@@ -10761,6 +10759,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.width.attributes"/>
    </define>
    <define name="att.meterSig.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.typography.attributes"/>
@@ -10805,6 +10804,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.mRest.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.cutout.attributes"/>
       <ref name="att.staffLoc.attributes"/>
@@ -10815,21 +10815,25 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.mRpt.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.expandable.attributes"/>
       <ref name="att.numberPlacement.attributes"/>
       <ref name="att.typography.attributes"/>
    </define>
    <define name="att.mRpt2.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.expandable.attributes"/>
       <ref name="att.typography.attributes"/>
    </define>
    <define name="att.mSpace.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.cutout.attributes"/>
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.multiRest.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.numberPlacement.attributes"/>
       <ref name="att.staffLoc.attributes"/>
@@ -10847,11 +10851,13 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <define name="att.multiRpt.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.expandable.attributes"/>
       <ref name="att.typography.attributes"/>
    </define>
    <define name="att.note.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.noteHeads.attributes"/>
@@ -10873,6 +10879,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.ornam.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
@@ -10888,6 +10895,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <empty/>
    </define>
    <define name="att.pedal.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.lineRend.attributes"/>
       <ref name="att.placementRelStaff.attributes"/>
@@ -10916,6 +10924,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.rest.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.rest.vis.cmn.attributes"/>
@@ -10926,6 +10935,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.xy.attributes"/>
    </define>
    <define name="att.sb.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.typography.attributes"/>
       <ref name="att.sb.vis.attribute.form"/>
    </define>
@@ -11111,6 +11121,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.curveRend.attributes"/>
    </define>
    <define name="att.trill.vis.attributes">
+      <ref name="att.altSym.attributes"/>
       <ref name="att.color.attributes"/>
       <ref name="att.enclosingChars.attributes"/>
       <ref name="att.extender.attributes"/>
@@ -11170,6 +11181,9 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <ref name="att.tuplet.vis.attributes"/>
    </define>
    <define name="att.accid.anl.attributes">
+      <empty/>
+   </define>
+   <define name="att.anchoredText.anl.attributes">
       <empty/>
    </define>
    <define name="att.arpeg.anl.attributes">
@@ -11655,6 +11669,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.sectionPart"/>
@@ -11684,6 +11699,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11729,6 +11745,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11754,6 +11771,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11785,6 +11803,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11811,6 +11830,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
                <ref name="model.sectionPart"/>
@@ -11911,6 +11931,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11935,6 +11956,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11960,6 +11982,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -11997,6 +12020,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -12023,6 +12047,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <ref name="model.divLike"/>
                <ref name="model.editLike"/>
                <ref name="model.editTransPart"/>
+               <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.keyAccidLike"/>
                <ref name="model.layerPart"/>
                <ref name="model.milestoneLike.music"/>
@@ -12329,6 +12354,82 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <empty/>
       </element>
    </define>
+   <define name="att.altSym.attributes">
+      <ref name="att.altSym.attribute.altsym"/>
+   </define>
+   <define name="att.altSym.attribute.altsym">
+      <optional>
+         <attribute name="altsym">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Provides a way of pointing to a user-defined symbol. It must contain a reference to an ID of a <code xmlns="http://www.w3.org/1999/xhtml">&lt;symbolDef&gt;</code> element elsewhere in the document.</a:documentation>
+            <ref name="data.URI"/>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="crApp-att.altSym-altsym-check_altsymTarget-constraint-rule-106">
+      <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:crapp="http://baumann-digital.de/ns/crApp"
+                xmlns:functx="http://www.functx.com"
+                xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                context="@altsym">
+         <sch:assert role="warning" test="not(normalize-space(.) eq '')">@altsym attribute
+                should have content.</sch:assert>
+         <sch:assert role="warning"
+                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//mei:symbolDef/@xml:id">The value in @altsym should correspond to the @xml:id attribute of a symbolDef
+                element.</sch:assert>
+         <sch:assert test="not(substring(., 2) eq ancestor::mei:symbolDef/@xml:id)">The value
+                in @altsym must not correspond to the @xml:id attribute of a symbolDef
+                ancestor.</sch:assert>
+      </sch:rule>
+   </pattern>
+   <define name="att.anchoredText.log.attributes">
+      <ref name="att.startId.attributes"/>
+      <ref name="att.anchoredText.log.attribute.func"/>
+   </define>
+   <define name="att.anchoredText.log.attribute.func">
+      <optional>
+         <attribute name="func">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates the function of the text.
+Suggested values include: 1] unknown</a:documentation>
+            <choice>
+               <value>unknown</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The function of the text is unknown.</a:documentation>
+               <data type="NMTOKEN"/>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
+   <define name="model.graphicPrimitiveLike">
+      <choice>
+         <ref name="anchoredText"/>
+      </choice>
+   </define>
+   <define name="model.symbolTableLike">
+      <notAllowed/>
+   </define>
+   <define name="anchoredText">
+      <element name="anchoredText">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Container for text that is fixed to a particular page location, regardless of changes made to the layout of the measures around it.</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.textPhraseLike.limited"/>
+               <ref name="model.editLike"/>
+               <ref name="model.transcriptionLike"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.common.attributes"/>
+         <ref name="att.lang.attributes"/>
+         <ref name="att.anchoredText.anl.attributes"/>
+         <ref name="att.anchoredText.ges.attributes"/>
+         <ref name="att.anchoredText.log.attributes"/>
+         <ref name="att.anchoredText.vis.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="att.numbering.attributes">
       <ref name="att.numbering.attribute.no"/>
       <ref name="att.numbering.attribute.sortNo"/>
@@ -12585,13 +12686,13 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             <sch:param name="attrStr" value="id"/>
          </sch:pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-108">
+                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-109">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="crapp:part">
                <sch:report test=".[parent::crapp:part] and not(@type)" role="error">If part is child of part a @type is required.</sch:report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-109">
+                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-110">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       context="crapp:part[@type='sysGrp']">
                <sch:assert test="crapp:part[@type='sys']" role="warning">The part is defined as a system group but does not contain a system.</sch:assert>
@@ -12665,7 +12766,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             <text/>
          </choice>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-parts-setting-values-check-constraint-rule-110">
+                  id="crApp-parts-setting-values-check-constraint-rule-111">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
@@ -12874,7 +12975,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
       </sch:pattern>
    </sch:schema>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-check-voice-combination-constraint-rule-107">
+            id="crApp-check-voice-combination-constraint-rule-108">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
