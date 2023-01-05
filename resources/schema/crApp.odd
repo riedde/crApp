@@ -698,9 +698,9 @@
               <memberOf key="att.id"/>
             </classes>
             <content>
-              <elementRef key="class" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="class" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="mdiv"/>
-              <elementRef key="occurances" minOccurs="0" maxOccurs="1"/>
+              <elementRef key="occurances" minOccurs="1" maxOccurs="1"/>
               <elementRef key="parts" maxOccurs="1"/>
               <!--            <elementRef key="layers" maxOccurs="1"/>-->
               <elementRef key="annots" minOccurs="1"/>
