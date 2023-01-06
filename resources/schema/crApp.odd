@@ -825,6 +825,7 @@
                 <valList mode="add" type="closed">
                   <valItem ident="compare"/>
                   <valItem ident="conjecture"/>
+                  <valItem ident="emendation"/>
                 </valList>
               </attDef>
             </attList>
