@@ -372,6 +372,16 @@
                     <gloss xml:lang="en" versionDate="2022-01-03">internal</gloss>
                     <gloss xml:lang="de" versionDate="2022-01-03">intern</gloss>
                   </valItem>
+                  <valItem ident="notRel">
+                    <gloss xml:lang="en" versionDate="2022-01-03">not realized</gloss>
+                    <desc xml:lang="en" versionDate="2022-01-03">Classifies an annotation: The content given in the annotation is not realized in the source</desc>
+                    <gloss xml:lang="de" versionDate="2022-01-03">nicht realisiert</gloss>
+                    <desc xml:lang="de" versionDate="2022-01-03">Klassifiziert eine Annotation: Der Inhalt der Annotation ist in der Quelle nciht realisiert</desc>
+                  </valItem>
+                  <valItem ident="ediDel">
+                    <gloss xml:lang="en" versionDate="2022-01-03">editorial deletion</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">Tilgung (Hg.)</gloss>
+                  </valItem>
                 </valList>
               </attDef>
             </attList>
