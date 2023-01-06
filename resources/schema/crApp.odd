@@ -45,8 +45,9 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.header" source="../../music-encoding/source/mei-source.xml" include="key"/>
           <moduleRef key="MEI.frbr" source="../../music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
-          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
+          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
@@ -91,14 +92,17 @@
                   <elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="dir" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
