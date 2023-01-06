@@ -94,6 +94,7 @@
                   <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
