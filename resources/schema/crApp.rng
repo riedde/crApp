@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-06T18:14:15Z. .
+Schema generated from ODD source 2023-01-08T09:19:04Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1752,6 +1752,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                <ref name="sb"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="section"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="seg"/>
             </zeroOrMore>
             <zeroOrMore>
@@ -3136,19 +3139,33 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
          </attribute>
       </optional>
    </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-corresp-check_correspTarget-constraint-rule-24">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:crapp="http://baumann-digital.de/ns/crApp"
-                xmlns:functx="http://www.functx.com"
-                xmlns:mei="http://www.music-encoding.org/ns/mei"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                context="@corresp">
-         <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
-         <sch:assert role="warning"
-                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:*/@xml:id">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
-      </sch:rule>
-   </pattern>
+   <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+               xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+               xmlns:crapp="http://baumann-digital.de/ns/crApp"
+               xmlns:functx="http://www.functx.com"
+               xmlns:mei="http://www.music-encoding.org/ns/mei"
+               xmlns="http://www.tei-c.org/ns/1.0"
+               queryBinding="xslt2">
+      <sch:ns uri="http://www.functx.com" prefix="functx"/>
+      <xsl:function name="functx:contains-any-of" as="xs:boolean">
+         <xsl:param name="arg" as="xs:string?"/>
+         <xsl:param name="searchStrings" as="xs:string*"/>
+         <xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
+      </xsl:function>
+      <xsl:function name="functx:substring-before-if-contains" as="xs:string?">
+         <xsl:param name="arg" as="xs:string?"/>
+         <xsl:param name="delim" as="xs:string"/>
+         <xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
+      </xsl:function>
+      <sch:pattern id="checkCorrespPointers">
+         <sch:rule context="@corresp">
+            <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+            <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+            <sch:assert role="warning"
+                        test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or (functx:contains-any-of(functx:substring-before-if-contains(substring($i,2),'_m-'),$measurePointers) and matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$')))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </sch:schema>
    <define name="att.linking.attribute.follows">
       <optional>
          <attribute name="follows">
@@ -11645,12 +11662,18 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                <list>
                   <oneOrMore>
                      <choice>
+                        <value>adapt</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(adaption) </a:documentation>
                         <value>compare</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                        <value>conjecture</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                        <value>emendation</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(compare) </a:documentation>
+                        <value>end</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ending point) </a:documentation>
+                        <value>start</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(starting point) </a:documentation>
+                        <value>follow</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(following) </a:documentation>
+                        <value>see</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(see also) </a:documentation>
                      </choice>
                   </oneOrMore>
                </list>
@@ -12600,6 +12623,12 @@ Suggested values include: 1] unknown</a:documentation>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(not realized) Classifies an annotation: The content given in the annotation is not realized in the source</a:documentation>
                   <value>ediDel</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial deletion) </a:documentation>
+                  <value>ediAdd</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial addition) </a:documentation>
+                  <value>ediInt</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial intervention) </a:documentation>
+                  <value>finding</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(finding) </a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -12901,7 +12930,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="crapp:range">
                <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
-               <sch:assert test="parent::node()/crapp:range[2]/@type='stop'">The value of @type in the second range must be 'stop'</sch:assert>
+               <sch:assert test="parent::node()/crapp:range[2]/@type='end'">The value of @type in the second range must be 'stop'</sch:assert>
             </sch:rule>
          </sch:pattern>
          <ref name="att.timing.attributes"/>
@@ -12910,8 +12939,8 @@ Suggested values include: 1] unknown</a:documentation>
             <choice>
                <value>start</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(starting point) The location where the range of the occurance starts.</a:documentation>
-               <value>stop</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(stopping point) The location where the range of the occurance stops.</a:documentation>
+               <value>end</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ending point) The location where the range of the occurance ends.</a:documentation>
             </choice>
          </attribute>
          <empty/>

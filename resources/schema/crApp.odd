@@ -114,6 +114,7 @@
                   <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="section" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
                   <elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
@@ -236,10 +237,26 @@
                 <desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
                 <constraintSpec ident="check_correspTarget" scheme="schematron">
                   <constraint>
-                    <sch:rule context="@corresp">
-                      <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
-                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:*/@xml:id">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
-                    </sch:rule>
+                    <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+                      <sch:ns uri="http://www.functx.com" prefix="functx"/>
+                      <xsl:function name="functx:contains-any-of" as="xs:boolean">
+                        <xsl:param name="arg" as="xs:string?"/>
+                        <xsl:param name="searchStrings" as="xs:string*"/>
+                        <xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
+                      </xsl:function>
+                      <xsl:function name="functx:substring-before-if-contains" as="xs:string?">
+                        <xsl:param name="arg" as="xs:string?"/>
+                        <xsl:param name="delim" as="xs:string"/>
+                        <xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
+                      </xsl:function>
+                      <sch:pattern id="checkCorrespPointers">
+                       <sch:rule context="@corresp">
+                         <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+                         <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+                         <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or (functx:contains-any-of(functx:substring-before-if-contains(substring($i,2),'_m-'),$measurePointers) and matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$')))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+                       </sch:rule>
+                      </sch:pattern>
+                    </sch:schema>
                   </constraint>
                 </constraintSpec>
               </attDef>
@@ -381,6 +398,18 @@
                   <valItem ident="ediDel">
                     <gloss xml:lang="en" versionDate="2022-01-03">editorial deletion</gloss>
                     <gloss xml:lang="de" versionDate="2022-01-03">Tilgung (Hg.)</gloss>
+                  </valItem>
+                  <valItem ident="ediAdd">
+                    <gloss xml:lang="en" versionDate="2022-01-03">editorial addition</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">Hinzufügung (Hg.)</gloss>
+                  </valItem>
+                  <valItem ident="ediInt">
+                    <gloss xml:lang="en" versionDate="2022-01-03">editorial intervention</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-03">Eingriff (Hg.)</gloss>
+                  </valItem>
+                  <valItem ident="finding">
+                    <gloss xml:lang="en" versionDate="2022-01-08">finding</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-08">Befund</gloss>
                   </valItem>
                 </valList>
               </attDef>
@@ -675,7 +704,7 @@
                 <sch:pattern>
                   <sch:rule context="crapp:range">
                     <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
-                    <sch:assert test="parent::node()/crapp:range[2]/@type='stop'">The value of @type in the second range must be 'stop'</sch:assert>
+                    <sch:assert test="parent::node()/crapp:range[2]/@type='end'">The value of @type in the second range must be 'stop'</sch:assert>
                   </sch:rule>
                 </sch:pattern>
               </constraint>
@@ -687,9 +716,9 @@
                     <gloss xml:lang="en">starting point</gloss>
                     <desc xml:lang="en" versionDate="2022-04-01">The location where the range of the occurance starts.</desc>
                   </valItem>
-                  <valItem ident="stop">
-                    <gloss xml:lang="en">stopping point</gloss>
-                    <desc xml:lang="en" versionDate="2022-04-01">The location where the range of the occurance stops.</desc>
+                  <valItem ident="end">
+                    <gloss xml:lang="en">ending point</gloss>
+                    <desc xml:lang="en" versionDate="2022-04-01">The location where the range of the occurance ends.</desc>
                   </valItem>
                 </valList>
               </attDef>
@@ -833,9 +862,30 @@
             <attList>
               <attDef ident="type" mode="change">
                 <valList mode="add" type="closed">
-                  <valItem ident="compare"/>
-                  <valItem ident="conjecture"/>
-                  <valItem ident="emendation"/>
+                  <valItem ident="adapt">
+                    <gloss xml:lang="en" versionDate="2022-01-07">adaption</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">angeglichen</gloss>
+                  </valItem>
+                  <valItem ident="compare">
+                    <gloss xml:lang="en" versionDate="2022-01-07">compare</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">vergleiche</gloss>
+                  </valItem>
+                  <valItem ident="end">
+                    <gloss xml:lang="en" versionDate="2022-01-07">ending point</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">Ende</gloss>
+                  </valItem>
+                  <valItem ident="start">
+                    <gloss xml:lang="en" versionDate="2022-01-07">starting point</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">Beginn</gloss>
+                  </valItem>
+                  <valItem ident="follow">
+                    <gloss xml:lang="en" versionDate="2022-01-07">following</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">folgt</gloss>
+                  </valItem>
+                  <valItem ident="see">
+                    <gloss xml:lang="en" versionDate="2022-01-07">see also</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">siehe auch</gloss>
+                  </valItem>
                 </valList>
               </attDef>
             </attList>
