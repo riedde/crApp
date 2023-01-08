@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-08T09:19:04Z. .
+Schema generated from ODD source 2023-01-08T14:35:21Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -12298,14 +12298,19 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </oneOrMore>
    </define>
    <define name="q">
-      <element name="q">
+      <element name="q" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(quoted) Contains material which is distinguished from the surrounding phrase-level text using quotation marks or a similar method. Use <code xmlns="http://www.w3.org/1999/xhtml">&lt;quote&gt;</code> for block-level quotations.</a:documentation>
-         <zeroOrMore>
-            <choice>
+         <oneOrMore>
+            <group>
                <text/>
-               <ref name="model.textPhraseLike"/>
-            </choice>
-         </zeroOrMore>
+               <optional>
+                  <ref name="model.textPhraseLike"/>
+               </optional>
+               <optional>
+                  <ref name="note"/>
+               </optional>
+            </group>
+         </oneOrMore>
          <ref name="att.basic.attributes"/>
          <ref name="att.classed.attributes"/>
          <ref name="att.labelled.attributes"/>
@@ -12619,7 +12624,7 @@ Suggested values include: 1] unknown</a:documentation>
                <choice>
                   <value>intern</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(internal) </a:documentation>
-                  <value>notRel</value>
+                  <value>notReal</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(not realized) Classifies an annotation: The content given in the annotation is not realized in the source</a:documentation>
                   <value>ediDel</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial deletion) </a:documentation>

@@ -389,7 +389,7 @@
                     <gloss xml:lang="en" versionDate="2022-01-03">internal</gloss>
                     <gloss xml:lang="de" versionDate="2022-01-03">intern</gloss>
                   </valItem>
-                  <valItem ident="notRel">
+                  <valItem ident="notReal">
                     <gloss xml:lang="en" versionDate="2022-01-03">not realized</gloss>
                     <desc xml:lang="en" versionDate="2022-01-03">Classifies an annotation: The content given in the annotation is not realized in the source</desc>
                     <gloss xml:lang="de" versionDate="2022-01-03">nicht realisiert</gloss>
@@ -889,6 +889,15 @@
                 </valList>
               </attDef>
             </attList>
+          </elementSpec>
+          <elementSpec ident="q" module="MEI.text" mode="change" ns="http://baumann-digital.de/ns/crApp">
+            <content>
+                  <sequence preserveOrder="false" maxOccurs="unbounded">
+                    <textNode/>
+                    <classRef key="model.textPhraseLike" minOccurs="0"/>
+                    <elementRef key="note" minOccurs="0"/>
+                  </sequence>
+            </content>
           </elementSpec>
         </schemaSpec>
       </div>
