@@ -1,0 +1,6 @@
+[submodule "submodules/music-encoding"]
+	path = submodules/music-encoding
+	url = git@github.com:music-encoding/music-encoding.git
+[submodule "submodules/TEI-Stylesheets"]
+	path = submodules/TEI-Stylesheets
+	url = git@github.com:TEIC/Stylesheets.git
