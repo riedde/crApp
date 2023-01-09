@@ -4,9 +4,10 @@ module namespace shared="http://baumann-digital.de/ns/shared";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace mei="http://www.music-encoding.org/ns/mei";
+declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
 import module namespace i18n = "http://exist-db.org/xquery/i18n" at "/db/apps/crApp/modules/i18n.xql";
-import module namespace app="http://dennisried.de/templates" at "/db/apps/crApp/modules/app.xql";
+import module namespace app="http://baumann-digital.de/ns/templates" at "/db/apps/crApp/modules/app.xql";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 
@@ -129,3 +130,16 @@ declare function shared:getDate($date as node(), $param as xs:string, $lang as x
       ('Mai.', 'May.'), ('Mai', 'May'))
     
 };
+
+declare function shared:get-preference($key as xs:string) as xs:string* {
+    let $docPrefs:= doc('/db/apps/crApp/prefs.xml')
+    return
+        $docPrefs//crapp:entry[@key=$key]/string(@value)
+};
+
+declare function shared:get-dataCollPath() as xs:string {
+    let $docPrefs:= doc('/db/apps/crApp/prefs.xml')
+    return
+        $docPrefs//crapp:entry[@key='data_path']/string(@value)
+};
+
