@@ -28,7 +28,8 @@
       <divGen type="toc"/>
     </front>
     <body>
-      <include xmlns="http://www.w3.org/2001/XInclude" href="crApp-preamble.xml"/>
+      <include xmlns="http://www.w3.org/2001/XInclude" href="docs/crApp-preamble.xml"/>
+      <include xmlns="http://www.w3.org/2001/XInclude" href="docs/crApp-docu.xml"/>
     </body>
     <back>
       <div>
@@ -44,21 +45,21 @@
             <desc>Module for remark elements.</desc>
           </moduleSpec>
           <!-- mei elements -->
-          <moduleRef key="MEI" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.header" source="../../music-encoding/source/mei-source.xml" include="key"/>
-          <moduleRef key="MEI.frbr" source="../../music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
-          <moduleRef key="MEI.shared" source="../../music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
-          <moduleRef key="MEI.critapp" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.cmn" source="../../music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
-          <moduleRef key="MEI.verse" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.gestural" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.visual" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.analytical" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.ptrref" source="../../music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.edittrans" source="../../music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
-          <moduleRef key="MEI.text" source="../../music-encoding/source/mei-source.xml" include="q quote seg"/>
-          <moduleRef key="MEI.cmnOrnaments" source="../../music-encoding/source/mei-source.xml" include="trill"/>
-          <moduleRef key="MEI.usersymbols" source="../../music-encoding/source/mei-source.xml" include="anchoredText"/>
+          <moduleRef key="MEI" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.header" source="../submodules/music-encoding/source/mei-source.xml" include="key"/>
+          <moduleRef key="MEI.frbr" source="../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
+          <moduleRef key="MEI.shared" source="../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
+          <moduleRef key="MEI.critapp" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.cmn" source="../submodules/music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
+          <moduleRef key="MEI.verse" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.gestural" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.visual" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.analytical" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.ptrref" source="../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.edittrans" source="../submodules/music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
+          <moduleRef key="MEI.text" source="../submodules/music-encoding/source/mei-source.xml" include="q quote seg"/>
+          <moduleRef key="MEI.cmnOrnaments" source="../submodules/music-encoding/source/mei-source.xml" include="trill"/>
+          <moduleRef key="MEI.usersymbols" source="../submodules/music-encoding/source/mei-source.xml" include="anchoredText"/>
           <macroSpec ident="crApp.list.lang" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
