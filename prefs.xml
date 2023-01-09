@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<prefs></prefs>
+<prefs>
+    <version>1.0</version>
+    <entries>
+        <!--<entry key="app_default_lang" value="de"/>-->
+        <!--<entry key="annotation_layout" value="layout1"/>-->
+        <entry key="data_path" value="/db/apps/baudiData"/>
+    </entries>
+</prefs>
