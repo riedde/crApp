@@ -13,7 +13,7 @@ import module namespace i18n = "http://exist-db.org/xquery/i18n-templates" at "/
  : templating.
  :)
 import module namespace config="http://exist-db.org/xquery/config" at "/db/apps/crApp/modules/config.xqm";
-import module namespace app="http://dennisried.de/templates" at "/db/apps/crApp/modules/app.xql";
+import module namespace app="http://baumann-digital.de/ns/templates" at "/db/apps/crApp/modules/app.xql";
 import module namespace shared="http://baumann-digital.de/ns/shared" at "/db/apps/crApp/modules/shared.xql";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
