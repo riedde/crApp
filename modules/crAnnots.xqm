@@ -45,7 +45,19 @@ declare function crAnnot:getPartLabels($partOrGrp as node(), $lang as xs:string)
                       else($part/crapp:label[1])
     
     return
-        $partLabel
+        if($partLabel) then($partLabel) else($partOrGrp)
+};
+
+declare function crAnnot:getClassLabels($class as node()?, $lang as xs:string) as xs:string? {
+    let $setting := $class/ancestor::crapp:crApp/crapp:setting
+    let $settingClasses := $setting//crapp:classifications
+    let $classClass := $settingClasses//crapp:*/id($class)
+    let $classLabel := if ($classClass/crapp:label[@xml:lang])
+                       then($classClass/crapp:label[@xml:lang=$lang]/text())
+                       else($classClass/crapp:label[1]/text())
+    
+    return
+        if($classLabel) then($classLabel) else($class)
 };
 
 
@@ -98,7 +110,9 @@ for $remark in $remarks
     let $annotsList := for $annot in $annots
                         return
                             ($annot,<br/>)
-    let $classes := $remark//crapp:class
+    let $classes := for $each in $remark//crapp:class
+                            return
+                                crAnnot:getClassLabels($each, $lang)
     let $classesList := for $class in $classes
                         return
                             ($classes,<br/>)
