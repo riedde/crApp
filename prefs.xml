@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<prefs>
+<prefs xmlns="http://baumann-digital.de/ns/crApp">
     <version>1.0</version>
     <entries>
         <!--<entry key="app_default_lang" value="de"/>-->
