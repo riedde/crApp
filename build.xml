@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="dist" name="crApp" basedir="." xmlns:unless="ant:unless">
     <dirname property="crApp.basedir" file="${ant.file.crApp}"/>
-    
+
     <!-- import default properties from file -->
     <property file="${crApp.basedir}/local.build.properties"/>
     <property file="${crApp.basedir}/build.properties"/>
-    
+
     <target name="clean-all">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
     </target>
-    
+
     <target name="clean">
         <antcall target="clean-build"/>
         <antcall target="clean-dist"/>
     </target>
-    
+
     <target name="clean-build" if="${build.dir}">
         <delete includeemptydirs="true">
             <fileset dir="${build.dir}" defaultexcludes="false">
-                <!--<include name="*.xml"/>
-                <include name="*.txt"/>-->
                 <include name="**/*"/>
                 <exclude name="*.xar"/>
                 <exclude name="*.tar.gz"/>
             </fileset>
         </delete>
     </target>
-    
+
     <target name="clean-dist" if="${dist.dir}">
         <delete includeemptydirs="true">
             <fileset dir="${dist.dir}" defaultexcludes="false">
@@ -35,25 +33,24 @@
             </fileset>
         </delete>
     </target>
-    
+
     <target name="init" depends="get-current-hash-of-HEAD">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dist.dir}"/>
     </target>
-    
+
     <target name="get-current-hash-of-HEAD">
         <description>Get the hash of the current git HEAD</description>
-        <exec executable="${bash.command}" outputproperty="local.revision">
-            <arg value="-c"/>
-            <arg value="${git.command} rev-parse --short HEAD"/>
-            <env key="LANG" value="C"/>
+        <exec executable="git" outputproperty="local.revision">
+            <arg value="rev-parse"/>
+            <arg value="--short"/>
+            <arg value="HEAD"/>
         </exec>
         <echo>Current HEAD: ${local.revision}</echo>
     </target>
-    
-    <target name="dist" depends="init">
-        <property name="project.app.pkg.name" value="${project.app}-${project.version}-${local.revision}.xar"/>
-        <copy todir="dist/" overwrite="true">
+
+    <target name="collect-data" depends="init">
+        <copy todir="${build.dir}/" overwrite="true">
             <fileset dir=".">
                 <include name="**/*.*"/>
                 <exclude name="build.xml"/>
@@ -64,11 +61,12 @@
                 <exclude name="*.properties"/>
                 <exclude name="build/**"/>
                 <exclude name="dist/**"/>
-<!--                <exclude name="scripts/**"/>-->
+                <exclude name="submodules/**"/>
+                <exclude name="scripts/**/local/**"/>
             </fileset>
         </copy>
-        
-        <copy file="expath-pkg.xml.tmpl" tofile="dist/expath-pkg.xml" filtering="true" overwrite="true">
+
+        <copy file="expath-pkg.xml.tmpl" tofile="${build.dir}/expath-pkg.xml" filtering="true" overwrite="true">
             <filterset>
                 <filter token="project.app" value="${project.app}"/>
                 <filter token="project.name" value="${project.name}"/>
@@ -77,19 +75,25 @@
                 <filter token="project.url" value="${project.url}"/>
             </filterset>
         </copy>
-        <copy file="repo.xml.tmpl" tofile="dist/repo.xml" filtering="true" overwrite="true">
+        <copy file="repo.xml.tmpl" tofile="${build.dir}/repo.xml" filtering="true" overwrite="true">
             <filterset>
                 <filter token="data.target" value="${project.app}"/>
                 <filter token="project.name" value="${project.name}"/>
             </filterset>
         </copy>
-        <copy file="resources/img/crApp-logo-transparent.png" tofile="${dist.dir}/icon.png"></copy>
-        <zip destfile="${build.dir}/${project.app.pkg.name}">
-            <fileset dir="dist/">
+
+        <echo>Get application logo</echo>
+        <copy file="resources/img/crApp-logo-transparent.png" tofile="${build.dir}/icon.png"/>
+
+    </target>
+    <target name="dist" depends="collect-data">
+        <property name="project.app.pkg.name" value="${project.app}-${project.version}-${local.revision}.xar"/>
+        <zip destfile="${dist.dir}/${project.app.pkg.name}">
+            <fileset dir="${build.dir}/">
                 <include name="**/*.*"/>
             </fileset>
         </zip>
         <delete file="expath-pkg.xml"/>
         <delete file="repo.xml"/>
     </target>
-    
+</project>
