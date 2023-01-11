@@ -3,3 +3,5 @@
 dist
 build
 *.xpr
+libs
+node_modules
