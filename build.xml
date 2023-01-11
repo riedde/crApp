@@ -89,6 +89,11 @@
     </target>
     
     <target name="compile" depends="collect-data">
+        <description>Update javascript libraries via yarn</description>
+        <exec executable="${yarn.cmd}" failonerror="yes">
+            <arg value="install"/>
+        </exec>
+        
         <description>Create CSS files via sass</description>
         <exec executable="${sass.cmd}">
             <arg line="resources/sass/main.scss ${build.dir}/resources/css/styles.css"/>
