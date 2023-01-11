@@ -35,6 +35,18 @@ declare function crAnnot:renderOccurance($occurance as node()) as node() {
         <span>{$occuranceRendered}</span>
 };
 
+declare function crAnnot:renderSmufl($annot as node()) as node() {
+    let $annotNodes := for $node in $annot/node()
+                        return
+                            if(local-name($node) = 'artic' and $node/@artic[.='stacc'])
+                            then(<span class="musGlyphStaccato"></span>)
+                            else if(local-name($node) = 'tie')
+                            then(<span>TIE</span>)
+                            else($node)
+    return
+        <annot xmlns="http://www.music-encoding.org/ns/mei">{$annotNodes}</annot>
+};
+
 declare function crAnnot:getCritRemarks($workID as xs:string) as node()* {
     collection(shared:get-dataCollPath())//crapp:crApp[.//crapp:setting//crapp:work[@xml:id=$workID]]//crapp:remark
 };
@@ -71,7 +83,7 @@ declare function crAnnot:getSigla($siglum as node()?) as node()? {
         <span>{$siglumSeq1}<sup>{$siglumSeq2}</sup></span>
 };
 
-declare function crAnnot:makeListElements($sequence as xs:string*, $delim as node()) as item()* {
+declare function crAnnot:makeListElements($sequence as item()*, $delim as node()) as item()* {
     for $each in $sequence
         return
             ($each,$delim)
@@ -134,7 +146,9 @@ for $remark in $remarks
     let $partsText := if((not($parts) and not($partGrps)) and $remark//crapp:parts/text() != '') then($remark//crapp:parts/text() => normalize-space()) else()
     let $partsLabels := crAnnot:getLabels(($parts | $partGrps), 'parts', $lang)
     let $partsLabels := string-join(($partsLabels, $partsText), ', ')
-    let $annots := $remark//crapp:annot/text()
+    let $annots := $remark//crapp:annot
+    let $annots := for $annot in $annots
+                    return crAnnot:renderSmufl($annot)
     let $annotsList := crAnnot:makeListElements($annots,<br/>)
     let $classes := crAnnot:getLabels($remark//crapp:class, 'classes', $lang)
     let $classesList := crAnnot:makeListElements($classes, <br/>)
