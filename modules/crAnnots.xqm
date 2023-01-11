@@ -35,14 +35,55 @@ declare function crAnnot:renderOccurance($occurance as node()) as node() {
         <span>{$occuranceRendered}</span>
 };
 
+declare function crAnnot:getSmuflElem($node as node()) as node() {
+    if($node/@artic[.='stacc'])
+    then(<span class="smufl">&#xE4A2;</span>)
+    else if($node/@artic[.='acc'])
+    then(<span class="smufl">&#xE4A0;</span>)
+    else if(local-name($node) = 'tie')
+    then(<span class="smufl">&#xE1D5;&#xE1FD;&#xE1D5;</span>)
+    else if($node/@form[.='cres'])
+    then(<span class="smufl">&#xE53E;</span>)
+    else if($node/@form[.='dim'])
+    then(<span class="smufl">&#xE53F;</span>)
+    else if(local-name($node) = 'dynam' and $node/text() = 'p')
+    then(<span class="smufl">&#xE520;</span>)
+    else if(local-name($node) = 'dynam' and $node/text() = 'pp')
+    then(<span class="smufl">&#xE520;&#xE520;</span>)
+    else if(local-name($node) = 'dynam' and $node/text() = 'ppp')
+    then(<span class="smufl">&#xE520;&#xE520;&#xE520;</span>)
+    else if(local-name($node) = 'rest' and $node/@dur = 4)
+    then(<span class="smufl">&#xE4E5;</span>)
+    else if(local-name($node) = 'rest' and $node/@dur = 8)
+    then(<span class="smufl">&#xE4E6;</span>)
+    else if(local-name($node) = 'dir')
+    then(<i>{$node/node()}</i>)
+    else if(local-name($node) = 'anchoredText')
+    then(<span class="quote">{$node/text()}</span>)
+    else if(local-name($node) = 'clef' and $node/@shape = 'C')
+    then(<span class="smufl">&#xE05C;</span>)
+    else($node)
+};
+
+declare function crAnnot:getSmuflApp($app as node()) as item()* {
+    let $lem := crAnnot:renderSmufl($app/mei:lem)
+    let $rdg := for $rdg in $app/mei:rdg
+                    return
+                        ('Lesart: ', crAnnot:renderSmufl($rdg), <br/>)
+    return
+        ('Lemma: ',$lem,<br/>,$rdg)
+        
+    };
+
 declare function crAnnot:renderSmufl($annot as node()) as node() {
     let $annotNodes := for $node in $annot/node()
                         return
-                            if(local-name($node) = 'artic' and $node/@artic[.='stacc'])
-                            then(<span class="musGlyphStaccato"></span>)
-                            else if(local-name($node) = 'tie')
-                            then(<span>TIE</span>)
-                            else($node)
+                            typeswitch($node)
+                            case text() return $node
+                            case element() return crAnnot:getSmuflElem($node)
+                            case element(app) return crAnnot:getSmuflApp($node)
+                            default return $node
+                            
     return
         <annot xmlns="http://www.music-encoding.org/ns/mei">{$annotNodes}</annot>
 };
