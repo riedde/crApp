@@ -63,6 +63,7 @@
                 <exclude name="dist/**"/>
                 <exclude name="submodules/**"/>
                 <exclude name="scripts/**/local/**"/>
+                <exclude name="resources/sass/**"/>
             </fileset>
         </copy>
 
@@ -86,7 +87,14 @@
         <copy file="resources/img/crApp-logo-transparent.png" tofile="${build.dir}/icon.png"/>
 
     </target>
-    <target name="dist" depends="collect-data">
+    
+    <target name="compile" depends="collect-data">
+        <description>Create CSS files via sass</description>
+        <exec executable="${sass.cmd}">
+            <arg line="resources/sass/main.scss ${build.dir}/resources/css/styles.css"/>
+        </exec>
+    </target>
+    <target name="dist" depends="compile">
         <property name="project.app.pkg.name" value="${project.app}-${project.version}-${local.revision}.xar"/>
         <zip destfile="${dist.dir}/${project.app.pkg.name}">
             <fileset dir="${build.dir}/">
