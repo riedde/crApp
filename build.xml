@@ -62,6 +62,7 @@
                 <exclude name="build/**"/>
                 <exclude name="dist/**"/>
                 <exclude name="submodules/**"/>
+                <exclude name="node_modules/**"/>
                 <exclude name="scripts/**/local/**"/>
                 <exclude name="resources/sass/**"/>
             </fileset>
