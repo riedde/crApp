@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Bravura';
+    src: url('../fonts/bravura/woff/Bravura.woff') format('woff'),
+        url('../fonts/bravura/otf/Bravura.otf') format('opentype'),
+        url('../fonts/bravura/svg/Bravura.svg#bravuraregular') format('svg'),
+        url('../fonts/bravura/woff/BravuraText.woff') format('woff'),
+        url('../fonts/bravura/otf/BravuraText.otf') format('opentype'),
+        url('../fonts/bravura/svg/BravuraText.svg#bravuraregular') format('svg');
+}
+
+span.smufl {
+    font-family: 'Bravura';
+    font-size: 1.5em;
+    display: inline-block;
+    vertical-align: 4px;
+    padding-left: 2px;
+    line-height: 14px;
+}
