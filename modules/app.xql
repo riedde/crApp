@@ -24,12 +24,13 @@ declare function app:landingPage($node as node(), $model as map(*)) {
         return
             <div>
                 <h3>{$ediromEditionName}</h3>
+                <div class="container">
                 {for $workID at $n in $workIDs
                     let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:work[@xml:id=$workID]]//crapp:mdiv
                     return
+                           (<h5>Werk Nr. {$n} ({count(crAnnot:getCritRemarks($workID))} Anmerkungen)</h5>,
                         <div class="accordion accordion-flush" id="accordionWork-{$n}">
-                           <h5>Werk Nr. {$n} ({count(crAnnot:getCritRemarks($workID))} Anmerkungen)</h5>
-                           <hr/>
+                           <div class="container">
                            {for $mdiv at $i in $mdivs
                                let $mdivNo := $mdiv/@no
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
@@ -45,9 +46,12 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                                       </div>
                                    </div>
                            }
+                           </div>
                         </div>
+                        )
                 }
-           </div>
+            </div>
+       </div>
 };
 
 declare function app:langSwitch($node as node(), $model as map(*)) {
