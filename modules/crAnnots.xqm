@@ -132,13 +132,14 @@ declare function crAnnot:renderSmufl($annot as node()?, $lang as xs:string) as n
         <li><span>{$annotType}&#160;</span> {$annotNodes}</li>
 };
 
+
 declare function crAnnot:getCritRemarks($workID as xs:string) as node()* {
     collection(shared:get-dataCollPath())//crapp:crApp[.//crapp:setting//crapp:work[@xml:id=$workID]]//crapp:remark
 };
 
 (: introduce function to get the setting on remark level and pass it as: param as node() after that this function should work with $partOrGrp as xs:string:)
-declare function crAnnot:getPartLabels($partOrGrp as node(), $lang as xs:string) as xs:string {
-    let $setting := $partOrGrp/ancestor::crapp:crApp/crapp:setting
+
+declare function crAnnot:getPartLabels($partOrGrp as node(), $setting as node(), $lang as xs:string) as xs:string {
     let $settingParts := $setting//crapp:parts
     let $part := $settingParts//crapp:*/id($partOrGrp)
     let $partLabel := if ($lang)
@@ -176,11 +177,11 @@ declare function crAnnot:makeListElements($sequence as item()*, $delim as node()
             ($each,$delim)
 };
 
-declare function crAnnot:getLabels($sequence as node()*, $type as xs:string, $lang as xs:string) as xs:string* {
+declare function crAnnot:getLabels($sequence as node()*, $type as xs:string, $lang as xs:string, $setting as node()) as xs:string* {
     for $each in ($sequence)
         return
             if($type = 'parts')
-            then(crAnnot:getPartLabels($each, $lang))
+            then(crAnnot:getPartLabels($each, $setting, $lang))
             else if($type = 'classes')
             then(crAnnot:getClassLabels($each, $lang))
             else()
@@ -189,28 +190,29 @@ declare function crAnnot:getLabels($sequence as node()*, $type as xs:string, $la
 declare function crAnnot:styleRemarks($remarks as node()*) as node()* {
 
 <div class="col">
-   <div class="row">
+   <div class="row bottom-space">
        <div class="col-2">
         <div class="row">
-          <div class="col-3">Satz</div>
-          <div class="col-9">Takt</div>
+          <div class="col-3 font-weight-bold">{shared:translate('crapp.mdiv.short')}</div>
+          <div class="col-9 font-weight-bold">{shared:translate('crapp.critReport.measure.short')}<sup>{shared:translate('crapp.critReport.beat.short')}</sup></div>
         </div>
        </div>
        <div class="col-5">
         <div class="row">
-         <div class="col">Kategorie</div>
-         <div class="col">Stimmen</div>
-         <div class="col">Quellen</div>
-         <div class="col">Editionen</div>
+         <div class="col font-weight-bold">{shared:translate('crapp.critReport.category')}</div>
+         <div class="col font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
+         <div class="col font-weight-bold">{shared:translate('crapp.source')}</div>
+         <div class="col font-weight-bold">{shared:translate('crapp.edition')}</div>
         </div>
        </div>
        <div class="col-5">
-        <div class="col">Anmerkungen</div>
+        <div class="col font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
        </div>
     </div>
 {
 for $remark in $remarks
     let $lang := shared:get-lang()
+    let $setting := $remark/ancestor::crapp:crApp/crapp:setting
     let $remarkType := switch($remark/@type)
                         case 'editorial' return 'success'
                         case 'reading' return 'info'
@@ -231,13 +233,13 @@ for $remark in $remarks
     let $parts := $remark//crapp:part
     let $partGrps := $remark//crapp:partGrp
     let $partsText := if((not($parts) and not($partGrps)) and $remark//crapp:parts/text() != '') then($remark//crapp:parts/text() => normalize-space()) else()
-    let $partsLabels := crAnnot:getLabels(($parts | $partGrps), 'parts', $lang)
+    let $partsLabels := crAnnot:getLabels(($parts | $partGrps), 'parts', $lang, $setting)
     let $partsLabels := string-join(($partsLabels, $partsText), ', ')
     let $annots := $remark//crapp:annot
     let $annots := for $annot in $annots
                     return crAnnot:renderSmufl($annot,$lang)
     let $annotsList := <ol>{$annots}</ol>
-    let $classes := crAnnot:getLabels($remark//crapp:class, 'classes', $lang)
+    let $classes := crAnnot:getLabels($remark//crapp:class, 'classes', $lang, $setting)
     let $classesList := crAnnot:makeListElements($classes, <br/>)
     
     let $sort1 := $remark//crapp:occurance[1]/(crapp:position|crapp:range[@type='start'])/number(@measure)

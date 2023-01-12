@@ -20,6 +20,7 @@
     <msg key="crapp.source">Source</msg>
     <msg key="crapp.edition">Edition</msg>
     <msg key="crapp.mdiv">Movement</msg>
+    <msg key="crapp.mdiv.short">Mov.</msg>
     <msg key="crapp.no">No.</msg>
 
 </catalogue>

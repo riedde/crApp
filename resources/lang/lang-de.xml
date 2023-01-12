@@ -20,6 +20,7 @@
     <msg key="crapp.source">Quelle</msg>
     <msg key="crapp.edition">Edition</msg>
     <msg key="crapp.mdiv">Satz</msg>
+    <msg key="crapp.mdiv.short">Satz</msg>
     <msg key="crapp.no">Nr.</msg>
     
 </catalogue>
