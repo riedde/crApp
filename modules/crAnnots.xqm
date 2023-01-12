@@ -213,6 +213,7 @@ declare function crAnnot:styleRemarks($remarks as node()*) as node()* {
 for $remark in $remarks
     let $lang := shared:get-lang()
     let $setting := $remark/ancestor::crapp:crApp/crapp:setting
+    let $remarkID := $remark/@xml:id
     let $remarkType := switch($remark/@type)
                         case 'editorial' return 'success'
                         case 'reading' return 'info'
@@ -259,7 +260,8 @@ for $remark in $remarks
     
     order by $sort1, $sort2, $sort3, $sort4
     return
-     <div class="row alert alert-{$remarkType}">
+     <div class="alert alert-{$remarkType}">
+       <div class="row">
        <div class="col-2">
         <div class="row">
            <div class="col-3">{$mdiv}</div>
@@ -277,6 +279,8 @@ for $remark in $remarks
        <div class="col-5">
         <div class="col">{$annotsList}</div>
        </div>
+       </div>
+       <div><a href="{$remarkID || '.html'}">{string($remarkID)}</a></div>
      </div>
 }
 </div>
@@ -312,3 +316,25 @@ for $surface in $surfaces
                         <zone type="iiif">{concat('https://digital.blb-karlsruhe.de/blbihd/i3f/v20/', $vlid, '/pct:', string-join(($ulxNew, $ulyNew, $lrxNew, $lryNew), ','), '/full/0/default.jpg')}</zone>
         }</surface>
 };
+
+declare function crAnnot:styleRemarkSingle($remark as node()?) as node() {
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="font-weight-bold">{shared:translate('crapp.mdiv.short')}</div>
+            <div class="font-weight-bold">{shared:translate('crapp.critReport.measure.short')}<sup>{shared:translate('crapp.critReport.beat.short')}</sup></div>
+        </div>
+        <div class="col">
+            <div class="font-weight-bold">{shared:translate('crapp.critReport.category')}</div>
+            <div class="font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
+            <div class="font-weight-bold">{shared:translate('crapp.source')}</div>
+            <div class="font-weight-bold">{shared:translate('crapp.edition')}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
+    </div>
+</div>
+};
+

@@ -64,3 +64,10 @@ declare function app:langSwitch($node as node(), $model as map(*)) {
                    href="?lang={$lang}">{upper-case($lang)}</a>
     }</div>
 };
+
+declare function app:remark($node as node(), $model as map(*)) {
+    let $remarkID := request:get-parameter('remark-id', ())
+    let $remark := collection(shared:get-dataCollPath())//crapp:remark/id($remarkID)
+    return
+        crAnnot:styleRemarkSingle($remark)
+};
