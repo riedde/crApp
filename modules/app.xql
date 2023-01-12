@@ -17,33 +17,37 @@ declare namespace crapp="http://baumann-digital.de/ns/crApp";
 declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattingText.xsl');
 
 declare function app:landingPage($node as node(), $model as map(*)) {
-    let $ediromEdition := crAnnot:getEditions()
-    let $workID := $ediromEdition//edirom:work/string(@xml:id)
-    let $remarks := crAnnot:getCritRemarks($workID)
-    return
-    <div>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Value</th> 
-        </tr>
-        <tr>
-            <td>Data Collection</td> 
-            <td>{shared:get-dataCollPath()}</td>
-        </tr>
-        <tr>
-            <td>Edirom-Editions</td> 
-            <td>
-                <ol>{for $edition in crAnnot:getEditions()
+    let $ediromEditions := crAnnot:getEditions()
+    for $ediromEdition in $ediromEditions
+        let $workIDs := $ediromEdition//edirom:work/string(@xml:id)
+        let $ediromEditionName := $ediromEdition//edirom:editionName/text()
+        return
+            <div>
+                <h3>{$ediromEditionName}</h3>
+                {for $workID at $n in $workIDs
+                    let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:work[@xml:id=$workID]]//crapp:mdiv
                     return
-                        <li>{$edition//edirom:editionName}</li>}
-                </ol>
-            </td>
-        </tr>
-    </table>
-    <h3>remarks</h3>
-    <div>Count: {crAnnot:styleRemarks($remarks)}</div>
-    </div>
+                        <div class="accordion accordion-flush" id="accordionWork-{$n}">
+                           <h5>Werk Nr. {$n} ({count(crAnnot:getCritRemarks($workID))} Anmerkungen)</h5>
+                           <hr/>
+                           {for $mdiv at $i in $mdivs
+                               let $mdivNo := $mdiv/@no
+                               let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
+                               return
+                                   <div class="accordion-item">
+                                      <h2 class="accordion-header" id="flush-heading-{$i}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{$i}" aria-expanded="false" aria-controls="flush-collapse-{$i}">Satz&#160;{$mdiv}</button>
+                                      </h2>
+                                      <div id="flush-collapse-{$i}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{$i}" data-bs-parent="#accordionWork-{$n}">
+                                        <div class="accordion-body">
+                                            <div>{crAnnot:styleRemarks($remarks)}</div>
+                                        </div>
+                                      </div>
+                                   </div>
+                           }
+                        </div>
+                }
+           </div>
 };
 
 declare function app:langSwitch($node as node(), $model as map(*)) {
