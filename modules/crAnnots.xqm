@@ -35,13 +35,14 @@ declare function crAnnot:renderOccurance($occurance as node()) as node() {
         <span>{$occuranceRendered}</span>
 };
 
-declare function crAnnot:getSmuflElem($node as node()) as node() {
+declare function crAnnot:getSmuflElem($node as node(), $lang as xs:string) as node() {
     if($node/@artic[.='stacc'])
     then(<span class="smufl">&#xE4A2;</span>)
     else if($node/@artic[.='acc'])
     then(<span class="smufl">&#xE4A0;</span>)
     else if(local-name($node) = 'tie')
     then(<span class="smufl">&#xE1D5;&#xE1FD;&#xE1D5;</span>)
+(:    then(<span class="smufl">&#xE0A5;&#xE8E2; &#xE0A5;&#xE8E3;</span>):)
     else if($node/@form[.='cres'])
     then(<span class="smufl">&#xE53E;</span>)
     else if($node/@form[.='dim'])
@@ -62,36 +63,80 @@ declare function crAnnot:getSmuflElem($node as node()) as node() {
     then(<span class="quote">{$node/text()}</span>)
     else if(local-name($node) = 'clef' and $node/@shape = 'C')
     then(<span class="smufl">&#xE05C;</span>)
+    else if(local-name($node) = 'slur')
+    then(<span class="smufl">Bogen</span>)
+    else if(local-name($node) = 'accid')
+    then(if($node/@accid='n')
+         then(<span class="smufl">&#xE261;</span>)
+         else if($node/@accid='s')
+         then(<span class="smufl">&#xE262;</span>)
+         else if($node/@accid='ss')
+         then(<span class="smufl">&#xE263;</span>)
+         else if($node/@accid='f')
+         then(<span class="smufl">&#xE260;</span>)
+         else if($node/@accid='ff')
+         then(<span class="smufl">&#xE264;</span>)
+         else()
+         )
     else($node)
 };
 
-declare function crAnnot:getSmuflApp($app as node()) as item()* {
-    let $lem := crAnnot:renderSmufl($app/mei:lem)
+declare function crAnnot:getSmuflApp($app as node(),$lang as xs:string) as item()* {
+    let $lem := crAnnot:renderSmufl($app/mei:lem,$lang)
     let $rdg := for $rdg in $app/mei:rdg
                     return
-                        ('Lesart: ', crAnnot:renderSmufl($rdg), <br/>)
+                        ('Lesart: ', crAnnot:renderSmufl($rdg,$lang), <br/>)
     return
         ('Lemma: ',$lem,<br/>,$rdg)
         
     };
 
-declare function crAnnot:renderSmufl($annot as node()) as node() {
+declare function crAnnot:renderPtr($ptr as node(), $lang as xs:string) as xs:string {
+    (:<ptr type="adapt" target="#ED-P" corresp="#clarinet.ii"/>:)
+    let $type := switch($ptr/@type)
+                    case 'adapt' return 'angeglichen an'
+                    case 'follow' return 'folgt'
+                    case 'compare' return 'vergleiche'
+                    default return $ptr/@type
+    let $targets := for $target in $ptr/@target
+                      return
+                        substring($target,2)
+    let $targets := string-join($targets,', ')
+(:    let $corresps := crAnnot:getLabels($ptr/@corresp, 'parts', $lang):)
+    let $corresps := for $each in $ptr/@corresp
+                        return
+                            substring($each,2)
+    
+    return
+        string-join(($type, $targets, $corresps),' ')
+};
+
+declare function crAnnot:renderSmufl($annot as node()?, $lang as xs:string) as node() {
     let $annotNodes := for $node in $annot/node()
                         return
                             typeswitch($node)
                             case text() return $node
-                            case element() return crAnnot:getSmuflElem($node)
-                            case element(app) return crAnnot:getSmuflApp($node)
+                            case element() return if(local-name($node) eq 'app') 
+                                                  then(crAnnot:getSmuflApp($node,$lang))
+                                                  else if(local-name($node) eq 'ptr')
+                                                  then(crAnnot:renderPtr($node, $lang))
+                                                  else(crAnnot:getSmuflElem($node,$lang))
                             default return $node
-                            
+    let $annotType := switch($annot/@type)
+                        case 'notReal' return 'ohne'
+                        case 'ediAdd' return 'Hinzufügung:'
+                        case 'ediDel' return 'Tilgung:'
+                        case 'finding' return 'Befund:'
+                        default return $annot/@type
     return
-        <annot xmlns="http://www.music-encoding.org/ns/mei">{$annotNodes}</annot>
+        <li><span>{$annotType}&#160;</span> {$annotNodes}</li>
 };
 
 declare function crAnnot:getCritRemarks($workID as xs:string) as node()* {
     collection(shared:get-dataCollPath())//crapp:crApp[.//crapp:setting//crapp:work[@xml:id=$workID]]//crapp:remark
 };
 
+(: introduce function to get the setting on remark level and pass it as: param as node() after that this function should work with $partOrGrp as xs:string:)
 declare function crAnnot:getPartLabels($partOrGrp as node(), $lang as xs:string) as xs:string {
     let $setting := $partOrGrp/ancestor::crapp:crApp/crapp:setting
     let $settingParts := $setting//crapp:parts
@@ -103,6 +148,7 @@ declare function crAnnot:getPartLabels($partOrGrp as node(), $lang as xs:string)
     return
         if($partLabel) then($partLabel) else($partOrGrp)
 };
+
 
 declare function crAnnot:getClassLabels($class as node()?, $lang as xs:string) as xs:string? {
     let $setting := $class/ancestor::crapp:crApp/crapp:setting
@@ -176,12 +222,12 @@ for $remark in $remarks
     let $occurancesList := for $occurance in $occurances
                             return
                                 ($occurance,<br/>)
-    let $sources := for $siglum in $remark//crapp:manifestation
+    let $sources := for $siglum at $pos in $remark//crapp:manifestation
                         return
-                            (crAnnot:getSigla($siglum),', ')
-    let $editions := for $siglum in $remark//crapp:edition
+                            (crAnnot:getSigla($siglum),if($pos eq count($remark//crapp:manifestation)) then() else(', '))
+    let $editions := for $siglum at $pos in $remark//crapp:edition
                         return
-                            (crAnnot:getSigla($siglum),', ')
+                            (crAnnot:getSigla($siglum), if($pos = count($remark//crapp:edition)) then() else(', '))
     let $parts := $remark//crapp:part
     let $partGrps := $remark//crapp:partGrp
     let $partsText := if((not($parts) and not($partGrps)) and $remark//crapp:parts/text() != '') then($remark//crapp:parts/text() => normalize-space()) else()
@@ -189,8 +235,8 @@ for $remark in $remarks
     let $partsLabels := string-join(($partsLabels, $partsText), ', ')
     let $annots := $remark//crapp:annot
     let $annots := for $annot in $annots
-                    return crAnnot:renderSmufl($annot)
-    let $annotsList := crAnnot:makeListElements($annots,<br/>)
+                    return crAnnot:renderSmufl($annot,$lang)
+    let $annotsList := <ol>{$annots}</ol>
     let $classes := crAnnot:getLabels($remark//crapp:class, 'classes', $lang)
     let $classesList := crAnnot:makeListElements($classes, <br/>)
     
