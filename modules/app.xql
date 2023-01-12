@@ -28,16 +28,16 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                 {for $workID at $n in $workIDs
                     let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:work[@xml:id=$workID]]//crapp:mdiv
                     return
-                           (<h5>Werk Nr. {$n} ({count(crAnnot:getCritRemarks($workID))} Anmerkungen)</h5>,
+                           (<h5>{shared:translate('crapp.work')}&#160;{shared:translate('crapp.no')}&#160;{$n}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
+                           <hr class="m-0"/>,
                         <div class="accordion accordion-flush" id="accordionWork-{$n}">
-                           <div class="container">
                            {for $mdiv at $i in $mdivs
                                let $mdivNo := $mdiv/@no
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
                                return
                                    <div class="accordion-item">
                                       <h2 class="accordion-header" id="flush-heading-{$i}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{$i}" aria-expanded="false" aria-controls="flush-collapse-{$i}">Satz&#160;{$mdiv}</button>
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{$i}" aria-expanded="false" aria-controls="flush-collapse-{$i}">{shared:translate('crapp.mdiv')}&#160;{$mdiv}</button>
                                       </h2>
                                       <div id="flush-collapse-{$i}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{$i}" data-bs-parent="#accordionWork-{$n}">
                                         <div class="accordion-body">
@@ -46,7 +46,6 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                                       </div>
                                    </div>
                            }
-                           </div>
                         </div>
                         )
                 }
