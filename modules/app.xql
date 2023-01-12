@@ -54,14 +54,13 @@ declare function app:landingPage($node as node(), $model as map(*)) {
 };
 
 declare function app:langSwitch($node as node(), $model as map(*)) {
-    <li class="nav-item">{
+    <div class="nav-item">{
         let $supportedLangVals := ('de', 'en')
         for $lang in $supportedLangVals
             return
                 <a id="{concat('lang-switch-', $lang)}"
-                   class="nav-link {if(shared:get-lang() = $lang) then('active')else('')}"
-                   style="display:inline-block; padding-right: 20px; {if (shared:get-lang() = $lang) then ('color: white!important; font-weight: bold;') else ()}"
-                   href="?lang={$lang}"
-                   onclick="{response:set-cookie('forceLang', $lang, 'P1D', true())}">{upper-case($lang)}</a>
-    }</li>
+                   class="nav-link {if(shared:get-lang() = $lang) then('active')else('')} font-weight-bold"
+                   style="display:inline-block; padding-right: 20px; {if (shared:get-lang() = $lang) then ('color: green!important;') else ()}"
+                   href="?lang={$lang}">{upper-case($lang)}</a>
+    }</div>
 };
