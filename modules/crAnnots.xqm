@@ -142,9 +142,9 @@ declare function crAnnot:getCritRemarks($workID as xs:string) as node()* {
 declare function crAnnot:getPartLabels($partOrGrp as node(), $setting as node(), $lang as xs:string) as xs:string {
     let $settingParts := $setting//crapp:parts
     let $part := $settingParts//crapp:*/id($partOrGrp)
-    let $partLabel := if ($lang)
-                      then($part/crapp:label[@xml:lang=$lang])
-                      else($part/crapp:label[1])
+    let $partLabel := if ($part/crapp:label[@xml:lang=$lang])
+                      then($part/crapp:label[@xml:lang=$lang]/text())
+                      else($part/crapp:label[1]/text())
     
     return
         if($partLabel) then($partLabel) else($partOrGrp)
@@ -155,7 +155,7 @@ declare function crAnnot:getClassLabels($class as node()?, $lang as xs:string) a
     let $setting := $class/ancestor::crapp:crApp/crapp:setting
     let $settingClasses := $setting//crapp:classifications
     let $classClass := $settingClasses//crapp:*/id($class)
-    let $classLabel := if ($classClass/crapp:label[@xml:lang])
+    let $classLabel := if ($classClass/crapp:label[@xml:lang=$lang])
                        then($classClass/crapp:label[@xml:lang=$lang]/text())
                        else($classClass/crapp:label[1]/text())
     
