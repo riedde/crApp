@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-09T06:33:23Z. .
+Schema generated from ODD source 2023-01-13T12:39:56Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -12675,7 +12675,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="class"/>
-            <sch:param name="attrStr" value="codedval"/>
+            <sch:param name="attrStr" value="id"/>
          </sch:pattern>
          <ref name="att.canonical.attributes"/>
          <ref name="att.id.attributes"/>
