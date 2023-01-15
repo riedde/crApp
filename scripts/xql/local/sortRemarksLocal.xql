@@ -2,7 +2,7 @@ xquery version "3.1";
 
 declare namespace crapp = "http://baumann-digital.de/ns/crApp";
 
-let $collPath := '../../../BauDi/baudi-data/editions/baudi-14-2b84beeb/criticalAnnots'
+let $collPath := '../../../../../BauDi/baudi-data/editions/baudi-14-2b84beeb/criticalAnnots'
 
 for $document in collection($collPath || '?select=baudi-14-2b84beeb_mdiv-09.xml;recurse=yes')
     let $doc := doc(document-uri($document))
