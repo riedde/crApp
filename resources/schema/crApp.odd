@@ -251,11 +251,11 @@
                         <xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
                       </xsl:function>
                       <sch:pattern id="checkCorrespPointers">
-                       <sch:rule context="@corresp">
-                         <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
-                         <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
-                         <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or (functx:contains-any-of(functx:substring-before-if-contains(substring($i,2),'_m-'),$measurePointers) and matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$')))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
-                       </sch:rule>
+                        <sch:rule context="@corresp">
+                          <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+                          <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+                          <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+                        </sch:rule>
                       </sch:pattern>
                     </sch:schema>
                   </constraint>
@@ -267,14 +267,12 @@
             <desc xml:lang="en">Attributes common to elements that may refer to a source.</desc>
             <attList>
               <attDef ident="source" usage="opt" mode="change">
-                <desc xml:lang="en">Contains a list of one or more pointers indicating the sources which attest to a given reading. Each value should correspond to the ID of a
-                  <gi scheme="MEI">manifestation</gi>
-                  element.</desc>
+                <desc xml:lang="en">Contains a list of one or more pointers indicating the sources which attest to a given reading. Each value should correspond to the ID of a <gi scheme="MEI">manifestation</gi> element.</desc>
                 <constraintSpec ident="check_sourceTarget" scheme="schematron">
                   <constraint>
                     <sch:rule context="@source">
                       <sch:assert role="warning" test="not(normalize-space(.) eq '')">@source attribute should have content.</sch:assert>
-                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:manifestation/@xml:id">Each value in @source should correspond to the @xml:id attribute of a source or manifestation element.</sch:assert>
+                      <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=(//crapp:manifestation/@xml:id,//crapp:edition/@xml:id)">Each value in @source should correspond to the @xml:id attribute of a source or manifestation element.</sch:assert>
                     </sch:rule>
                   </constraint>
                 </constraintSpec>
