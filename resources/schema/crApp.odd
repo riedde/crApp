@@ -46,7 +46,7 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key"/>
+          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter"/>
           <moduleRef key="MEI.frbr" source="../../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
           <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../submodules/music-encoding/source/mei-source.xml"/>
@@ -592,6 +592,30 @@
               <elementRef key="mdiv" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
+          <elementSpec ident="measures" module="setting" ns="http://baumann-digital.de/ns/crApp">
+            <desc xml:lang="en">Defines the number and numbering of the measures</desc>
+            <content>
+              <empty/>
+            </content>
+            <attList>
+              <attDef ident="total" usage="req">
+                <datatype>
+                  <dataRef name="nonNegativeInteger"/>
+                </datatype>
+              </attDef>
+              <attDef ident="upbeat" usage="req">
+                <valList mode="add" type="closed">
+                  <valItem ident="true"/>
+                  <valItem ident="false"/>
+                </valList>
+              </attDef>
+              <attDef ident="startNo" usage="req">
+                <datatype>
+                  <dataRef name="nonNegativeInteger"/>
+                </datatype>
+              </attDef>
+            </attList>
+          </elementSpec>
           <elementSpec ident="occurance" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <content>
               <alternate>
@@ -789,12 +813,6 @@
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="relWorks" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for sources related to the critical apparatus</desc>
-            <content>
-              <elementRef key="work" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
           <elementSpec ident="remark" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A critical remark.</desc>
             <classes>
@@ -872,7 +890,7 @@
               <elementRef key="language"/>
               <elementRef key="mdivs"/>
               <elementRef key="parts"/>
-              <elementRef key="relWorks"/>
+              <elementRef key="work"/>
               <elementRef key="manifestationList"/>
               <elementRef key="relEditions"/>
               <elementRef key="classifications"/>
