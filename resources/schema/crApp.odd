@@ -78,54 +78,54 @@
           <macroSpec ident="crApp.annot.content" module="core" mode="add">
             <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
             <content>
-                <sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
-                  <textNode/>
-                  <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="anchoredText" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="bTrem" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="caesura" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="dir" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="section" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
-                  <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
-                </sequence>
+              <sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
+                <textNode/>
+                <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="anchoredText" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="bTrem" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="caesura" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="dir" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="section" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
+                <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
+              </sequence>
             </content>
           </macroSpec>
           <macroSpec ident="data.ARTICULATION" module="MEI" mode="change">
@@ -496,7 +496,6 @@
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          
           <!--<elementSpec ident="label" mode="add" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element that defines a class or category to be used for classifying.</desc>
             <classes>
@@ -522,8 +521,7 @@
               </attDef>
             </attList>
           </elementSpec>
-<!--          <elementSpec ident="layer" mode="add" prefix="me" module="MEI.shared" ns="http://www.music-encoding.org/ns/mei"/>-->
-          
+          <!--          <elementSpec ident="layer" mode="add" prefix="mei" module="MEI.shared" ns="http://www.music-encoding.org/ns/mei"/>-->
           <elementSpec ident="layer" prefix="crapp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">An Element defining a layer as a subordinated unit of a voice.</desc>
             <classes>
@@ -675,11 +673,11 @@
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for voices (voice-elements)</desc>
             <content>
               <alternate>
-               <sequence preserveOrder="false" maxOccurs="unbounded">
-                 <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
-                 <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
-               </sequence>
-               <textNode/>
+                <sequence preserveOrder="false" maxOccurs="unbounded">
+                  <elementRef key="partGrp" minOccurs="0" maxOccurs="unbounded"/>
+                  <elementRef key="part" minOccurs="0" maxOccurs="unbounded"/>
+                </sequence>
+                <textNode/>
               </alternate>
             </content>
             <constraintSpec ident="setting-values-check" module="core" scheme="schematron">
@@ -695,6 +693,47 @@
             <classes>
               <memberOf key="att.timing"/>
             </classes>
+          </elementSpec>
+          <elementSpec ident="ptr" module="MEI.ptrref" mode="change" ns="http://baumann-digital.de/ns/crApp">
+            <attList>
+              <attDef ident="type" mode="change">
+                <valList mode="add" type="closed">
+                  <valItem ident="adapt">
+                    <gloss xml:lang="en" versionDate="2022-01-07">adaption</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">angeglichen</gloss>
+                  </valItem>
+                  <valItem ident="compare">
+                    <gloss xml:lang="en" versionDate="2022-01-07">compare</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">vergleiche</gloss>
+                  </valItem>
+                  <valItem ident="end">
+                    <gloss xml:lang="en" versionDate="2022-01-07">ending point</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">Ende</gloss>
+                  </valItem>
+                  <valItem ident="start">
+                    <gloss xml:lang="en" versionDate="2022-01-07">starting point</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">Beginn</gloss>
+                  </valItem>
+                  <valItem ident="follow">
+                    <gloss xml:lang="en" versionDate="2022-01-07">following</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">folgt</gloss>
+                  </valItem>
+                  <valItem ident="see">
+                    <gloss xml:lang="en" versionDate="2022-01-07">see also</gloss>
+                    <gloss xml:lang="de" versionDate="2022-01-07">siehe auch</gloss>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+          <elementSpec ident="q" module="MEI.text" mode="change" ns="http://baumann-digital.de/ns/crApp">
+            <content>
+              <sequence preserveOrder="false" maxOccurs="unbounded">
+                <textNode/>
+                <classRef key="model.textPhraseLike" minOccurs="0"/>
+                <elementRef key="note" minOccurs="0"/>
+              </sequence>
+            </content>
           </elementSpec>
           <elementSpec ident="range" module="remark" ns="http://baumann-digital.de/ns/crApp">
             <classes>
@@ -855,52 +894,11 @@
               <memberOf key="att.id"/>
             </classes>
             <content>
-              <textNode/>
+              <elementRef key="measures"/>
+              <elementRef key="meter"/>
             </content>
           </elementSpec>
-        
-          <elementSpec ident="ptr" module="MEI.ptrref" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <attList>
-              <attDef ident="type" mode="change">
-                <valList mode="add" type="closed">
-                  <valItem ident="adapt">
-                    <gloss xml:lang="en" versionDate="2022-01-07">adaption</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">angeglichen</gloss>
-                  </valItem>
-                  <valItem ident="compare">
-                    <gloss xml:lang="en" versionDate="2022-01-07">compare</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">vergleiche</gloss>
-                  </valItem>
-                  <valItem ident="end">
-                    <gloss xml:lang="en" versionDate="2022-01-07">ending point</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">Ende</gloss>
-                  </valItem>
-                  <valItem ident="start">
-                    <gloss xml:lang="en" versionDate="2022-01-07">starting point</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">Beginn</gloss>
-                  </valItem>
-                  <valItem ident="follow">
-                    <gloss xml:lang="en" versionDate="2022-01-07">following</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">folgt</gloss>
-                  </valItem>
-                  <valItem ident="see">
-                    <gloss xml:lang="en" versionDate="2022-01-07">see also</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">siehe auch</gloss>
-                  </valItem>
-                </valList>
-              </attDef>
-            </attList>
-          </elementSpec>
-          <elementSpec ident="q" module="MEI.text" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <content>
-                  <sequence preserveOrder="false" maxOccurs="unbounded">
-                    <textNode/>
-                    <classRef key="model.textPhraseLike" minOccurs="0"/>
-                    <elementRef key="note" minOccurs="0"/>
-                  </sequence>
-            </content>
-          </elementSpec>
-        </schemaSpec>
+          </schemaSpec>
       </div>
     </back>
   </text>
