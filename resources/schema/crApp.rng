@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-13T12:39:56Z. .
+Schema generated from ODD source 2023-01-16T18:36:57Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1835,6 +1835,17 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <empty/>
       </element>
    </define>
+   <define name="meter">
+      <element name="meter">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Captures information about the time signature within bibliographic descriptions.</a:documentation>
+         <text/>
+         <ref name="att.common.attributes"/>
+         <ref name="att.bibl.attributes"/>
+         <ref name="att.lang.attributes"/>
+         <ref name="att.meterSig.log.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="manifestation">
       <element name="manifestation" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A definition of a source</a:documentation>
@@ -3162,7 +3173,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
             <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
             <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
             <sch:assert role="warning"
-                        test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or (functx:contains-any-of(functx:substring-before-if-contains(substring($i,2),'_m-'),$measurePointers) and matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$')))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+                        test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
          </sch:rule>
       </sch:pattern>
    </sch:schema>
@@ -4393,7 +4404,7 @@ Suggested values include: 1] smufl</a:documentation>
                 context="@source">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@source attribute should have content.</sch:assert>
          <sch:assert role="warning"
-                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:manifestation/@xml:id">Each value in @source should correspond to the @xml:id attribute of a source or manifestation element.</sch:assert>
+                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=(//crapp:manifestation/@xml:id,//crapp:edition/@xml:id)">Each value in @source should correspond to the @xml:id attribute of a source or manifestation element.</sch:assert>
       </sch:rule>
    </pattern>
    <define name="att.space.log.attributes">
@@ -12624,8 +12635,8 @@ Suggested values include: 1] unknown</a:documentation>
                <choice>
                   <value>intern</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(internal) </a:documentation>
-                  <value>notReal</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(not realized) Classifies an annotation: The content given in the annotation is not realized in the source</a:documentation>
+                  <value>no</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(no available) The content given in the annotation as not available in the source</a:documentation>
                   <value>ediDel</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial deletion) </a:documentation>
                   <value>ediAdd</value>
@@ -12780,6 +12791,30 @@ Suggested values include: 1] unknown</a:documentation>
          </oneOrMore>
       </element>
    </define>
+   <define name="measures">
+      <element name="measures" ns="http://baumann-digital.de/ns/crApp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Defines the number and numbering of the measures</a:documentation>
+         <empty/>
+         <attribute name="total">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <data type="nonNegativeInteger"/>
+         </attribute>
+         <attribute name="upbeat">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <choice>
+               <value>true</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>false</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            </choice>
+         </attribute>
+         <attribute name="startNo">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <data type="nonNegativeInteger"/>
+         </attribute>
+         <empty/>
+      </element>
+   </define>
    <define name="occurance">
       <element name="occurance" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
@@ -12824,13 +12859,13 @@ Suggested values include: 1] unknown</a:documentation>
             <sch:param name="attrStr" value="id"/>
          </sch:pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-110">
+                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-112">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="crapp:part">
                <sch:report test=".[parent::crapp:part] and not(@type)" role="error">If part is child of part a @type is required.</sch:report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-111">
+                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-113">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       context="crapp:part[@type='sysGrp']">
                <sch:assert test="crapp:part[@type='sys']" role="warning">The part is defined as a system group but does not contain a system.</sch:assert>
@@ -12904,7 +12939,7 @@ Suggested values include: 1] unknown</a:documentation>
             <text/>
          </choice>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-parts-setting-values-check-constraint-rule-112">
+                  id="crApp-parts-setting-values-check-constraint-rule-114">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
@@ -12959,14 +12994,6 @@ Suggested values include: 1] unknown</a:documentation>
          </oneOrMore>
       </element>
    </define>
-   <define name="relWorks">
-      <element name="relWorks" ns="http://baumann-digital.de/ns/crApp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Wrapper for sources related to the critical apparatus</a:documentation>
-         <oneOrMore>
-            <ref name="work"/>
-         </oneOrMore>
-      </element>
-   </define>
    <define name="remark">
       <element name="remark" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A critical remark.</a:documentation>
@@ -13008,7 +13035,7 @@ Suggested values include: 1] unknown</a:documentation>
          <ref name="language"/>
          <ref name="mdivs"/>
          <ref name="parts"/>
-         <ref name="relWorks"/>
+         <ref name="work"/>
          <ref name="manifestationList"/>
          <ref name="relEditions"/>
          <ref name="classifications"/>
@@ -13019,7 +13046,8 @@ Suggested values include: 1] unknown</a:documentation>
    <define name="work">
       <element name="work" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A reference to a work this critical apparatus is made for.</a:documentation>
-         <text/>
+         <ref name="measures"/>
+         <ref name="meter"/>
          <ref name="att.target.attributes"/>
          <ref name="att.id.attributes"/>
          <empty/>
@@ -13111,19 +13139,49 @@ Suggested values include: 1] unknown</a:documentation>
       </sch:pattern>
    </sch:schema>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-check-voice-combination-constraint-rule-109">
+            id="crApp-check-part-combination-constraint-rule-109">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                context="crapp:remark//crapp:voice">
-         <sch:let name="voiceVal" value="./text()"/>
-         <sch:let name="voiceGrpVals"
-                  value="string-join(ancestor::crapp:remark//crapp:voiceGrp/text(),' ')"/>
-         <sch:report test=".[ancestor::crapp:crApp/crapp:setting//crapp:voice[@key = $voiceVal]/ancestor::crapp:voiceGrp[@key][contains($voiceGrpVals, @key)]]"
+                context="crapp:remark//crapp:part">
+         <sch:let name="partVal" value="./text()"/>
+         <sch:let name="partGrpVals" value="ancestor::crapp:remark//crapp:partGrp/text()"/>
+         <sch:report test=".[ancestor::crapp:crApp/crapp:setting//crapp:part[@xml:id = $partVal]/ancestor::crapp:partGrp[@xml:id][@xml:id = ($partGrpVals)]]"
                      role="warning">
-            <sch:value-of select="$voiceVal"/> is part of <sch:value-of select="tokenize($voiceGrpVals, ' ')[last()]"/>. A second call might be redundant.</sch:report>
+            <sch:value-of select="$partVal"/> is part of <sch:value-of select="($partGrpVals)[last()]"/>. A second call might be redundant.</sch:report>
+      </sch:rule>
+   </pattern>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="crApp-check-partGrp-combination-constraint-rule-110">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:crapp="http://baumann-digital.de/ns/crApp"
+                xmlns:functx="http://www.functx.com"
+                xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                context="crapp:remark//crapp:partGrp">
+         <sch:let name="partGrpVal" value="./text()"/>
+         <sch:let name="partGrpVals"
+                  value="ancestor::crapp:remark//crapp:partGrp[not(text() = $partGrpVal)]/text()"/>
+         <sch:report test="ancestor::crapp:crApp/crapp:setting//crapp:partGrp[@xml:id = $partGrpVal]/ancestor::crapp:partGrp[@xml:id][@xml:id = ($partGrpVals)]"
+                     role="warning">
+            <sch:value-of select="$partGrpVal"/> is part of <sch:value-of select="$partGrpVals[last()]"/>. A second call might be redundant.</sch:report>
+      </sch:rule>
+   </pattern>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="crApp-check-measure-count-value-constraint-rule-111">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:crapp="http://baumann-digital.de/ns/crApp"
+                xmlns:functx="http://www.functx.com"
+                xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                context="crapp:measure[@count]|crapp:range[@count]">
+         <sch:let name="meterCount"
+                  value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@count"/>
+         <sch:let name="meterUnit"
+                  value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@unit"/>
+         <sch:report role="fatal" test="./@count/number() gt $meterCount/number()">Unavailable count! The meter is <sch:value-of select="$meterCount"/>/<sch:value-of select="$meterUnit"/>.</sch:report>
       </sch:rule>
    </pattern>
 </grammar>
