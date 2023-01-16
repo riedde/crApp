@@ -1,10 +1,18 @@
 xquery version "3.1";
 
 declare namespace crapp = "http://baumann-digital.de/ns/crApp";
+declare namespace saxon = "http://saxon.sf.net/";
+
+declare option saxon:output "method=xml";
+declare option saxon:output "media-type=text/xml";
+declare option saxon:output "omit-xml-declaration=yes";
+declare option saxon:output "indent=yes";
+declare option saxon:output "indent=yes";
+declare option saxon:output "saxon:line-length=10000";
 
 let $collPath := '../../../../../BauDi/baudi-data/editions/baudi-14-2b84beeb/criticalAnnots'
 
-for $document in collection($collPath || '?select=baudi-14-2b84beeb_mdiv-09.xml;recurse=yes')
+for $document in collection($collPath || '?select=baudi-14-2b84beeb_mdiv-*.xml;recurse=yes')
     let $doc := doc(document-uri($document))
     let $remarks := $doc//crapp:remark
     let $remarksOrdered := for $remark in $remarks
