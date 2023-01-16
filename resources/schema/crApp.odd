@@ -367,14 +367,33 @@
               </sch:schema>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="check-voice-combination" module="core" scheme="schematron">
+          <constraintSpec ident="check-part-combination" module="core" scheme="schematron">
             <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g. if the parent or ancestor group is also called.</desc>
             <constraint>
-              <sch:rule context="crapp:remark//crapp:voice">
-                <sch:let name="voiceVal" value="./text()"/>
-                <sch:let name="voiceGrpVals" value="string-join(ancestor::crapp:remark//crapp:voiceGrp/text(),' ')"/>
-                <sch:report test=".[ancestor::crapp:crApp/crapp:setting//crapp:voice[@key = $voiceVal]/ancestor::crapp:voiceGrp[@key][contains($voiceGrpVals, @key)]]" role="warning"><sch:value-of select="$voiceVal"/> is part of <sch:value-of select="tokenize($voiceGrpVals, ' ')[last()]"/>. A second call might be redundant.</sch:report>
+              <sch:rule context="crapp:remark//crapp:part">
+                <sch:let name="partVal" value="./text()"/>
+                <sch:let name="partGrpVals" value="ancestor::crapp:remark//crapp:partGrp/text()"/>
+                <sch:report test=".[ancestor::crapp:crApp/crapp:setting//crapp:part[@xml:id = $partVal]/ancestor::crapp:partGrp[@xml:id][@xml:id = ($partGrpVals)]]" role="warning"><sch:value-of select="$partVal"/> is part of <sch:value-of select="($partGrpVals)[last()]"/>. A second call might be redundant.</sch:report>
               </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="check-partGrp-combination" module="core" scheme="schematron">
+            <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g. if the parent or ancestor group is also called.</desc>
+            <constraint>
+              <sch:rule context="crapp:remark//crapp:partGrp">
+                <sch:let name="partGrpVal" value="./text()"/>
+                <sch:let name="partGrpVals" value="ancestor::crapp:remark//crapp:partGrp[not(text() = $partGrpVal)]/text()"/>
+                <sch:report test="ancestor::crapp:crApp/crapp:setting//crapp:partGrp[@xml:id = $partGrpVal]/ancestor::crapp:partGrp[@xml:id][@xml:id = ($partGrpVals)]" role="warning"><sch:value-of select="$partGrpVal"/> is part of <sch:value-of select="($partGrpVals)[last()]"/>. A second call might be redundant.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="check-measure-count-value" scheme="schematron">
+            <constraint>
+              <sch:rule context="crapp:measure[@count]|crapp:range[@count]">
+                <sch:let name="meterCount" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@count"/>
+                <sch:let name="meterUnit" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@unit"/>
+                <sch:report role="fatal" test="./@count/number() gt $meterCount/number()">Unavailable count! The meter is <sch:value-of select="$meterCount"/>/<sch:value-of select="$meterUnit"/>.</sch:report>
+                  </sch:rule>
             </constraint>
           </constraintSpec>
           <elementSpec ident="annot" module="remark" ns="http://baumann-digital.de/ns/crApp">
