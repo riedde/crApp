@@ -34,6 +34,7 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                            {for $mdiv at $i in $mdivs
                                let $mdivNo := $mdiv/@no
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
+                               order by number($mdivNo)
                                return
                                    <div class="accordion-item">
                                       <h2 class="accordion-header" id="flush-heading-{$i}">
