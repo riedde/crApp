@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-02-10T13:07:46Z. .
+Schema generated from ODD source 2023-02-10T15:34:03Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1732,6 +1732,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             </zeroOrMore>
             <zeroOrMore>
                <ref name="num"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="octave"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="ornam"/>
@@ -7612,8 +7615,8 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
       </element>
    </define>
    <define name="rdg">
-      <element name="rdg">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reading) – Contains a single reading within a textual variation.</a:documentation>
+      <element name="rdg" ns="http://baumann-digital.de/ns/crApp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reading) Contains a single reading within a textual variation.</a:documentation>
          <zeroOrMore>
             <choice>
                <text/>
@@ -7630,6 +7633,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="expansion"/>
             </choice>
          </zeroOrMore>
+         <ref name="att.evidence.attributes"/>
          <ref name="att.common.attributes"/>
          <ref name="att.crit.attributes"/>
          <ref name="att.pointing.attributes"/>
