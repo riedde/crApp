@@ -271,6 +271,33 @@
                   </constraint>
                 </constraintSpec>
               </attDef>
+            	<attDef ident="sameas" usage="opt" mode="change">
+            		<desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
+            		<constraintSpec ident="check_correspTarget" scheme="schematron">
+            			<constraint>
+            				<sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+            					<sch:ns uri="http://www.functx.com" prefix="functx"/>
+            					<!--<xsl:function name="functx:contains-any-of" as="xs:boolean">
+            						<xsl:param name="arg" as="xs:string?"/>
+            						<xsl:param name="searchStrings" as="xs:string*"/>
+            						<xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
+            					</xsl:function>
+            					<xsl:function name="functx:substring-before-if-contains" as="xs:string?">
+            						<xsl:param name="arg" as="xs:string?"/>
+            						<xsl:param name="delim" as="xs:string"/>
+            						<xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
+            					</xsl:function>-->
+            					<sch:pattern id="checkSameasPointers">
+            						<sch:rule context="@sameas">
+            							<sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+            							<sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+            							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+            						</sch:rule>
+            					</sch:pattern>
+            				</sch:schema>
+            			</constraint>
+            		</constraintSpec>
+            	</attDef>
             </attList>
           </classSpec>
           <classSpec ident="att.source" module="MEI.shared" type="atts" mode="change">
