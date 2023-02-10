@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-01-16T18:36:57Z. .
+Schema generated from ODD source 2023-02-10T13:07:46Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1737,6 +1737,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                <ref name="ornam"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="pb"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="ptr"/>
             </zeroOrMore>
             <zeroOrMore>
@@ -1807,11 +1810,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.notationType-notationsubtype-When_notationsubtype-constraint-rule-5">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[@notationsubtype]">
          <sch:assert test="@notationtype">An element with a notationsubtype attribute must have
@@ -1859,6 +1862,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="manifestation"/>
@@ -1867,11 +1871,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-manifestation-check_singleton-constraint-rule-6">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:manifestation[@singleton eq 'true']">
                <sch:assert test="not(mei:itemList)">Item children are not permitted when @singleton
@@ -1881,11 +1885,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-manifestation-check_singleton_availability-constraint-rule-7">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:manifestation[@singleton eq 'false'] | mei:manifestation[not(@singleton)]">
                <sch:assert test="not(mei:availability)">Availability is only permitted when @singleton equals "true".</sch:assert>
@@ -1978,11 +1982,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.attacca.log-target-check_attaccaTarget-constraint-rule-8">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:attacca/@target">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@target attribute
@@ -2006,11 +2010,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.augmentDots-dots-dots_attribute_requires_dur-constraint-rule-9">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[@dots]">
          <sch:assert test="@dur">An element with a dots attribute must also have a dur
@@ -2076,11 +2080,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.barring-bar.method-check_barmethod-constraint-rule-10">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@bar.method[parent::*[matches(local-name(), '(staffDef|measure)')]]">
          <sch:assert test="not(. eq 'mensur')">"mensur" not allowed in this
@@ -2167,11 +2171,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.classed-class-check_classURI-constraint-rule-11">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@class">
          <sch:assert test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//mei:category/@xml:id or matches($i, '^([a-z]+://|\.{1,2}/)')">The value in @class must either correspond to the @xml:id attribute of a category
@@ -2234,22 +2238,22 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.cleffing.log-clef_shape_requires_clef_line-constraint-rule-12">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[matches(@clef.shape, '[FCG]')]">
          <sch:assert test="@clef.line">An 'F', 'C', or 'G' clef requires that its position be
             specified.</sch:assert>
       </sch:rule>
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[matches(@clef.shape, '(TAB|perc)')]">
          <sch:assert test="@lines">A TAB or percussion clef requires that the number of lines be
@@ -2270,11 +2274,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.clefShape-shape_requires_line-constraint-rule-14">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:clef[matches(@shape, '[FCG]')]">
          <sch:assert test="@line">When @shape is present, @line must also be
@@ -2462,11 +2466,11 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.metadataPointing-decls-check_declsTarget-constraint-rule-15">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@decls">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@decls attribute
@@ -2724,22 +2728,22 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.extent-extent-check_extent-constraint-rule-16">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@extent[matches(normalize-space(.), '^\d+(\.\d+)?$')]">
          <sch:assert role="warning" test="../@unit">The @unit attribute is
                 recommended.</sch:assert>
       </sch:rule>
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@extent[matches(., '\d+(\.\d+)?\s')]">
          <sch:assert role="warning" test="../@unit">Separation into value (@extent) and unit
@@ -2795,11 +2799,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.handIdent-hand-check_handTarget-constraint-rule-18">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@hand">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should
@@ -2860,11 +2864,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.joined-join-check_joinTarget-constraint-rule-19">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@join">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@join attribute should
@@ -2956,11 +2960,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.layer.log-def-check_defTarget_layer-constraint-rule-20">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:layer/@def">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@def attribute should
@@ -3068,11 +3072,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.lineRend.base-lsegs-check_lsegs-constraint-rule-21">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@lsegs">
          <sch:assert test="matches(../@lform, '(dashed|dotted|wavy)')">@lform attribute
@@ -3108,11 +3112,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-copyof-When_copyof_element_empty-constraint-rule-22">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[@copyof]">
          <sch:assert test="count(child::*[not(comment() or processing-instruction())]) = 0">An
@@ -3123,11 +3127,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-copyof-check_copyofTarget-constraint-rule-23">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@copyof">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@copyof attribute
@@ -3155,6 +3159,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
                xmlns:crapp="http://baumann-digital.de/ns/crApp"
                xmlns:functx="http://www.functx.com"
                xmlns:mei="http://www.music-encoding.org/ns/mei"
+               xmlns:rng="http://relaxng.org/ns/structure/1.0"
                xmlns="http://www.tei-c.org/ns/1.0"
                queryBinding="xslt2">
       <sch:ns uri="http://www.functx.com" prefix="functx"/>
@@ -3192,11 +3197,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-follows-check_followsTarget-constraint-rule-25">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@follows">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@follows attribute
@@ -3222,11 +3227,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-next-check_nextTarget-constraint-rule-26">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@next">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@next attribute should
@@ -3252,11 +3257,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-precedes-check_precedesTarget-constraint-rule-27">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@precedes">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@precedes attribute
@@ -3282,11 +3287,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-prev-check_prevTarget-constraint-rule-28">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@prev">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@prev attribute should
@@ -3300,7 +3305,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <define name="att.linking.attribute.sameas">
       <optional>
          <attribute name="sameas">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Points to an element that is the same as the current element but is not a literal copy of the current element.</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to point to other elements that correspond to this one in a generic fashion.</a:documentation>
             <list>
                <oneOrMore>
                   <ref name="data.URI"/>
@@ -3309,24 +3314,24 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
          </attribute>
       </optional>
    </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-sameas-check_sameasTarget-constraint-rule-29">
-      <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:crapp="http://baumann-digital.de/ns/crApp"
-                xmlns:functx="http://www.functx.com"
-                xmlns:mei="http://www.music-encoding.org/ns/mei"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                context="@sameas">
-         <sch:assert role="warning" test="not(normalize-space(.) eq '')">@sameas attribute
-                should have content.</sch:assert>
-         <sch:assert role="warning"
-                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//mei:*/@xml:id">Each
-                value in @sameas should correspond to the @xml:id attribute of an
-                element.</sch:assert>
-      </sch:rule>
-   </pattern>
+   <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+               xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+               xmlns:crapp="http://baumann-digital.de/ns/crApp"
+               xmlns:functx="http://www.functx.com"
+               xmlns:mei="http://www.music-encoding.org/ns/mei"
+               xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               xmlns="http://www.tei-c.org/ns/1.0"
+               queryBinding="xslt2">
+      <sch:ns uri="http://www.functx.com" prefix="functx"/>
+      <sch:pattern id="checkSameasPointers">
+         <sch:rule context="@sameas">
+            <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+            <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+            <sch:assert role="warning"
+                        test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </sch:schema>
    <define name="att.linking.attribute.synch">
       <optional>
          <attribute name="synch">
@@ -3342,11 +3347,11 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.linking-synch-check_synchTarget-constraint-rule-30">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@synch">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@synch attribute
@@ -3643,11 +3648,11 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.name-nymref-check_nymrefTarget-constraint-rule-31">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@nymref">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@nymref attribute
@@ -3739,11 +3744,11 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.noteHeads-head.altsym-check_head.altsymTarget-constraint-rule-32">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@head.altsym">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@head.altsym attribute
@@ -3769,11 +3774,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.noteHeads-head.auth-check_head.auth-constraint-rule-33">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[lower-case(@head.auth) eq 'smufl']">
          <sch:assert test="matches(@head.shape, '^#x') or matches(@head.shape, '^U+')">When
@@ -3836,11 +3841,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.noteHeads-head.shape-check_headshape_num-constraint-rule-34">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[(matches(@head.shape, '#x') or matches(@head.shape, 'U+')) and (lower-case(@head.auth) eq 'smufl')]">
          <sch:assert role="warning"
@@ -4025,11 +4030,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.partIdent-part-check_part_attr_all-constraint-rule-35">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@part[some $i in tokenize(., '\s+') satisfies (matches($i, '^%all$'))]">
          <sch:assert test="count(tokenize(., '\s+')) = 1">'%all' cannot be mixed with other
@@ -4053,17 +4058,20 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.partIdent-partstaff-check_partstaff_attr_all-constraint-rule-36">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@partstaff[some $i in tokenize(., '\s+') satisfies (matches($i, '^%all$'))]">
          <sch:assert test="count(tokenize(., '\s+')) = 1">'%all' cannot be mixed with other
                 values.</sch:assert>
       </sch:rule>
    </pattern>
+   <define name="att.pb.log.attributes">
+      <empty/>
+   </define>
    <define name="att.pitch.attributes">
       <ref name="att.pitch.attribute.pname"/>
    </define>
@@ -4130,11 +4138,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.plist-plist-check_plistTarget-constraint-rule-37">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@plist">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@plist attribute
@@ -4266,11 +4274,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.ranging-confidence-check_confidence-constraint-rule-38">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:*[@confidence]">
          <sch:assert test="@min and @max">The attributes @min and @max are required when
@@ -4295,11 +4303,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.responsibility-resp-check_respTarget-constraint-rule-39">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@resp">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@resp attribute should
@@ -4400,6 +4408,7 @@ Suggested values include: 1] smufl</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@source">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@source attribute should have content.</sch:assert>
@@ -4471,11 +4480,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.staff.log-def-check_defTarget_staff-constraint-rule-41">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:staff/@def">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@def attribute should
@@ -4634,6 +4643,7 @@ Suggested values include: 1] smufl</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@endid">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@endid attribute should have content.</sch:assert>
@@ -4658,6 +4668,7 @@ Suggested values include: 1] smufl</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@startid">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@startid attribute should have content.</sch:assert>
@@ -4719,11 +4730,11 @@ Suggested values include: 1] smufl</a:documentation>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.stems-stem.sameas-check_stem.sameasTarget-constraint-rule-44">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@stem.sameas">
          <sch:let name="layer.n" value="self::node()/ancestor::mei:layer/@n"/>
@@ -4996,8 +5007,10 @@ Suggested values include: 1] smufl</a:documentation>
    <define name="att.timestamp.log.attribute.tstamp">
       <optional>
          <attribute name="tstamp">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Encodes the onset time in terms of musical time, i.e., beats[.fractional beat part], as expressed in the written time signature.</a:documentation>
-            <ref name="data.BEAT"/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(time stamp) Encodes the onset time in terms of musical time, i.e., beats[.fractional beat part], as expressed in the written time signature.</a:documentation>
+            <data type="token">
+               <param name="pattern">(([0-9]+m\s*\+\s*)?[0-9]+(\.?[0-9]*)?)|((\+|-)?[0-9]+m\+[0-9]+(\.[0-9]*)?)|([0-9]+)</param>
+            </data>
          </attribute>
       </optional>
    </define>
@@ -5907,22 +5920,32 @@ Suggested values include: 1] smufl</a:documentation>
       </choice>
    </define>
    <define name="model.pbLike">
-      <notAllowed/>
+      <choice>
+         <ref name="pb"/>
+      </choice>
    </define>
    <define name="model.pbLike_alternation">
-      <notAllowed/>
+      <choice>
+         <ref name="pb"/>
+      </choice>
    </define>
    <define name="model.pbLike_sequence">
-      <empty/>
+      <ref name="pb"/>
    </define>
    <define name="model.pbLike_sequenceOptional">
-      <empty/>
+      <optional>
+         <ref name="pb"/>
+      </optional>
    </define>
    <define name="model.pbLike_sequenceOptionalRepeatable">
-      <empty/>
+      <zeroOrMore>
+         <ref name="pb"/>
+      </zeroOrMore>
    </define>
    <define name="model.pbLike_sequenceRepeatable">
-      <notAllowed/>
+      <oneOrMore>
+         <ref name="pb"/>
+      </oneOrMore>
    </define>
    <define name="model.pLike">
       <notAllowed/>
@@ -6404,11 +6427,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-caesura-caesura_start-type_attributes_required-constraint-rule-45">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:caesura">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -6450,11 +6473,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-clef-Clef_position_lines-constraint-rule-46">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:clef[matches(@shape, '[FCG]')][ancestor::mei:staffDef[@lines]]">
                <sch:let name="thisstaff" value="ancestor::mei:staffDef/@n"/>
@@ -6465,11 +6488,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-clef-Clef_position_nolines-constraint-rule-47">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:clef[ancestor::mei:staffDef[not(@lines)]]">
                <sch:let name="thisstaff" value="ancestor::mei:staffDef/@n"/>
@@ -6501,11 +6524,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-dir-dir_start-type_attributes_required-constraint-rule-48">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:dir[not(ancestor::mei:syllable)]">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -6547,11 +6570,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-dynam-dynam_start-type_attributes_required-constraint-rule-49">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:dynam">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real"> Must have one of
@@ -6561,11 +6584,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-dynam-dynam_end-type_attributes-constraint-rule-50">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:dynam[@val2]">
                <sch:assert test="@dur or @dur.ges or @endid or @tstamp2">When @val2 is present, either
@@ -6649,11 +6672,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-grpSym-check_grpSym_attributes_scoreDef-constraint-rule-51">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:grpSym[parent::mei:scoreDef]">
                <sch:assert test="@startid and @endid and @level">In scoreDef, grpSym must have startid,
@@ -6663,11 +6686,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-grpSym-check_grpSym_attributes_staffDef-constraint-rule-52">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:grpSym[parent::mei:staffGrp]">
                <sch:assert test="not(@startid or @endid or @level)">In staffGrp, grpSym must not have
@@ -6689,11 +6712,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-keyAccid-Check_keyAccidPlacement-constraint-rule-53">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:keyAccid">
                <sch:assert test="(@x and @y) or @pname or @loc">One of the following is required: @x and
@@ -6731,11 +6754,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-keySig-check_keyAccid_oct-constraint-rule-54">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:keySig[mei:keyAccid[@oct]]">
                <sch:assert test="count(mei:keyAccid[@oct]) = count(mei:keyAccid)">If the @oct attribute
@@ -6746,11 +6769,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-keySig-check_keySig_editorial-constraint-rule-55">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:keySig/mei:*[local-name() eq 'add' or local-name() eq 'corr'             or local-name() eq 'damage' or local-name() eq 'del' or local-name() eq 'orig' or              local-name() eq 'reg' or local-name() eq 'restore' or local-name() eq 'sic' or              local-name() eq 'supplied' or local-name() eq 'unclear']">
                <sch:assert test="count(mei:keyAccid) = count(mei:*)">Only keyAccid elements are allowed
@@ -6867,11 +6890,11 @@ Suggested values include: 1] smufl</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-name-nameParts-constraint-rule-56">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:name">
                <sch:assert role="warning" test="not(mei:geogName or mei:persName or mei:corpName)">Recommended practice is to use name elements to capture sub-parts of a generic
@@ -6971,11 +6994,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-ornam-ornam_start-type_attributes_required-constraint-rule-57">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:ornam">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -7002,6 +7025,20 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <empty/>
       </element>
    </define>
+   <define name="pb">
+      <element name="pb" ns="http://baumann-digital.de/ns/crApp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(page beginning) An empty formatting element that forces text to begin on a new page.</a:documentation>
+         <empty/>
+         <ref name="att.common.attributes"/>
+         <ref name="att.pointing.attributes"/>
+         <ref name="att.source.attributes"/>
+         <ref name="att.pb.anl.attributes"/>
+         <ref name="att.pb.ges.attributes"/>
+         <ref name="att.pb.log.attributes"/>
+         <ref name="att.pb.vis.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="rest">
       <element name="rest">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A non-sounding event found in the source being transcribed.</a:documentation>
@@ -7016,11 +7053,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-rest-Check_restline-constraint-rule-58">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:rest[@line]">
                <sch:let name="thisstaff" value="ancestor::mei:staff/@n"/>
@@ -7097,11 +7134,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-section-Check_sectionexpansion-constraint-rule-59">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:section[mei:expansion]">
                <sch:assert test="descendant::mei:section|descendant::mei:ending|descendant::mei:rdg">A
@@ -7151,11 +7188,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staff-checkStaff_n-constraint-rule-60">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staff[@n]">
                <sch:let name="thisstaff" value="@n"/>
@@ -7193,11 +7230,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_staffDefn-constraint-rule-61">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[not(ancestor::mei:staff)]">
                <sch:let name="thisstaff" value="@n"/>
@@ -7212,11 +7249,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_ancestor_staff-constraint-rule-62">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[ancestor::mei:staff and @n]">
                <sch:let name="thisstaff" value="@n"/>
@@ -7227,11 +7264,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_ancestor_staff_lines-constraint-rule-63">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[ancestor::mei:staff and not(@n)]">
                <sch:let name="thisstaff" value="ancestor::mei:staff/@n"/>
@@ -7243,11 +7280,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_clef_position_staffDef-constraint-rule-64">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[@clef.line and @lines]">
                <sch:assert test="number(@clef.line) &lt;= number(@lines)">The clef position must be less
@@ -7257,11 +7294,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_clef_position_staffDef_nolines-constraint-rule-65">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[@clef.line and not(@lines)]">
                <sch:let name="thisstaff" value="@n"/>
@@ -7274,11 +7311,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_tab_strings_lines-constraint-rule-66">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[@tab.strings and @lines]">
                <sch:let name="countTokens"
@@ -7290,11 +7327,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffDef-Check_tab_strings_nolines-constraint-rule-67">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffDef[@tab.strings and not(@lines)]">
                <sch:let name="countTokens"
@@ -7306,11 +7343,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <sch:pattern xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="mei:staffDef[@lines.color and @lines]">
                <sch:let name="countTokens"
@@ -7328,11 +7365,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </sch:pattern>
          <sch:pattern xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="mei:staffDef[@ppq][ancestor::mei:scoreDef[@ppq]]">
                <sch:let name="staffPPQ" value="@ppq"/>
@@ -7342,11 +7379,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </sch:pattern>
          <sch:pattern xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="mei:staffDef[@ppq][preceding::mei:scoreDef[@ppq]]">
                <sch:let name="staffPPQ" value="@ppq"/>
@@ -7393,11 +7430,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-staffGrp-Check_staffGrp_unique_staff_n_values-constraint-rule-72">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:staffGrp">
                <sch:let name="countstaves" value="count(descendant::mei:staffDef)"/>
@@ -7452,11 +7489,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-tempo-tempo_in_header_disallow_most_attrs-constraint-rule-73">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:tempo[not(ancestor::mei:score or ancestor::mei:part)]">
                <sch:assert test="not(@*[name() != 'analog' and name() != 'class' and name() != 'label' and name() != 'mm' and name() != 'mm.dots' and name() != 'translit' and name() != 'type' and name() != 'mm.unit' and name() != 'n' and name() != 'xml:base' and name() != 'xml:id' and name() != 'xml:lang'])">Only analog, class, label, mm, mm.dots, mm.unit, n, translit, type, xml:base, xml:id,
@@ -7467,11 +7504,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-tempo-tempo_start-type_attributes_required-constraint-rule-74">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:tempo[not(ancestor::mei:syllable) and not(ancestor::mei:work) and not(ancestor::mei:expression) and not(count(ancestor::mei:*) = 0)]">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -7708,11 +7745,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.beamRend-place-check_beam_place-constraint-rule-75">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:beam[@place eq 'mixed' and not(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@staff != ./@staff] or descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@staff != ancestor::mei:staff/@n])]">
          <sch:assert test="count(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@stem.dir]) = count(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'])">Stem direction must be specified for all notes and chords under the
@@ -7720,11 +7757,11 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <sch:assert test="count(distinct-values(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord']/@stem.dir)) &gt; 1">Opposing stem directions are required for a beam with @place="mixed".</sch:assert>
       </sch:rule>
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:beam[@place eq 'mixed' and (descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@staff != ./@staff] or descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@staff != ancestor::mei:staff/@n])                 and count(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'][@stem.dir]) = count(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord'])]">
          <sch:assert test="count(distinct-values(descendant::mei:*[local-name() eq 'note' or local-name() eq 'chord']/@stem.dir)) &gt; 1">Opposing stem directions are required for a beam with @place="mixed".</sch:assert>
@@ -8956,11 +8993,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-attacca-attacca_start-type_attributes_required-constraint-rule-77">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:attacca[not(ancestor::mei:syllable)]">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -8991,11 +9028,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-beam-When_not_copyof_beam_content-constraint-rule-78">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:beam[not(@copyof or @sameas)]">
                <sch:assert test="count(descendant::*[local-name()='note' or local-name()='rest' or               local-name()='chord' or local-name()='space']) &gt; 1">A beam that contains neither a copyof nor sameas attribute must have at least 2 note, rest, chord, or space
@@ -9017,11 +9054,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-beamSpan-beamspan_start-_and_end-type_attributes_required-constraint-rule-79">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:beamSpan">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9059,11 +9096,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-bend-bend_start-_and_end-type_attributes_required-constraint-rule-80">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:bend">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9092,11 +9129,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-bracketSpan-bracketSpan_start-_and_end-type_attributes_required-constraint-rule-81">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:bracketSpan">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9120,11 +9157,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-breath-breath_start-type_attributes_required-constraint-rule-82">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:breath">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9161,11 +9198,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-fermata-fermata_start-type_attributes_required-constraint-rule-83">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:fermata">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9225,11 +9262,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-gliss-gliss_start-_and_end-type_attributes_required-constraint-rule-84">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:gliss">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9261,11 +9298,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-graceGrp-When_not_copyof_graceGrp_content-constraint-rule-85">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:graceGrp[not(@copyof)]">
                <sch:assert test="count(descendant::*[local-name()='note' or local-name()='rest' or               local-name()='chord' or local-name()='space']) &gt; 0">A graceGrp without a copyof attribute must have at least 1 note, rest, chord, or space
@@ -9275,11 +9312,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-graceGrp-When_graced-constraint-rule-86">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:graceGrp[@grace]">
                <sch:assert test="not(descendant::mei:*[@grace])">The grace attribute is not allowed on
@@ -9301,11 +9338,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-hairpin-hairpin_start-_and_end-type_attributes_required-constraint-rule-87">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:hairpin">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9341,11 +9378,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-harpPedal-harpPedal_start-type_attributes_required-constraint-rule-88">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:harpPedal">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9366,11 +9403,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-lv-lv_start-_and_end-type_attributes_required-constraint-rule-89">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:lv">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9380,11 +9417,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-lv-lv_containing_curve-constraint-rule-90">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:lv[mei:curve[@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or              @endvo or @x or @y or @x2 or @y2]]">
                <sch:assert test="not(@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or @endvo or @x or @y or @x2 or @y2)"
@@ -9453,11 +9490,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-meterSigGrp-check_meterSigGrpContent-constraint-rule-91">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:meterSigGrp[not(@copyof)]">
                <sch:assert test="count(mei:meterSig) &gt; 1">meterSigGrp must have at least 2 child
@@ -9575,11 +9612,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-octave-octave_start-_and_end-type_attributes_required-constraint-rule-92">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:octave">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9646,11 +9683,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </interleave>
          </choice>
          <sch:pattern xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="mei:measure/mei:ossia">
                <sch:assert test="count(mei:*) = count(mei:staff)+count(mei:oStaff)">In a measure, ossia
@@ -9706,11 +9743,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-pedal-pedal_start-type_attributes_required-constraint-rule-95">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:pedal">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9750,11 +9787,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-slur-slur_start-_and_end-type_attributes_required-constraint-rule-96">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:slur">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9766,11 +9803,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-slur-slur_containing_curve-constraint-rule-97">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:slur[mei:curve[@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or @endvo or @x or @y or @x2 or @y2]]">
                <sch:assert test="not(@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or @endvo or @x or @y or @x2 or @y2)"
@@ -9794,11 +9831,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-tie-tie_start-_and_end-type_attributes_required-constraint-rule-98">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:tie">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9810,11 +9847,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-tie-tie_containing_curve-constraint-rule-99">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:tie[mei:curve[@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or @endvo or @x or @y or @x2 or @y2]]">
                <sch:assert test="not(@bezier or @bulge or @curvedir or @lform or @lwidth or @ho or @startho or @endho or @to or @startto or @endto or @vo or @startvo or @endvo or @x or @y or @x2 or @y2)"
@@ -9859,11 +9896,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-tupletSpan-tupletSpan_start-_and_end-type_attributes_required-constraint-rule-100">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:tupletSpan">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -9897,11 +9934,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.accidental.ges-accid.ges-check_accid_duplication-constraint-rule-101">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@accid.ges">
          <sch:assert role="warning" test="not(. eq ../@accid)">The value of @accid.ges should
@@ -10179,11 +10216,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.note.ges-extremis_disallows_gestural_pitch-constraint-rule-102">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:note[@extremis]">
          <sch:assert test="not(@pname.ges) and not(@oct.ges)">When the @extremis attribute is used,
@@ -10222,6 +10259,9 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <empty/>
    </define>
    <define name="att.pad.ges.attributes">
+      <empty/>
+   </define>
+   <define name="att.pb.ges.attributes">
       <empty/>
    </define>
    <define name="att.pedal.ges.attributes">
@@ -10720,11 +10760,11 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.fTrem.vis-beams.float-check_beams.floating-constraint-rule-103">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="mei:fTrem[@beams and @beams.float]">
          <sch:assert test="@beams.float &lt;= @beams">The number of floating beams must be less
@@ -11016,6 +11056,22 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    </define>
    <define name="att.pad.vis.attributes">
       <empty/>
+   </define>
+   <define name="att.pb.vis.attributes">
+      <ref name="att.pb.vis.attribute.folium"/>
+   </define>
+   <define name="att.pb.vis.attribute.folium">
+      <optional>
+         <attribute name="folium">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">States the side of a leaf (as in a manuscript) on which the content following the <code xmlns="http://www.w3.org/1999/xhtml">&lt;pb&gt;</code> element occurs.</a:documentation>
+            <choice>
+               <value>verso</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The back of a manuscript page.</a:documentation>
+               <value>recto</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The front of a manuscript page.</a:documentation>
+            </choice>
+         </attribute>
+      </optional>
    </define>
    <define name="att.pedal.vis.attributes">
       <ref name="att.altSym.attributes"/>
@@ -11529,6 +11585,9 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
    <define name="att.pad.anl.attributes">
       <empty/>
    </define>
+   <define name="att.pb.anl.attributes">
+      <empty/>
+   </define>
    <define name="att.pedal.anl.attributes">
       <empty/>
    </define>
@@ -12023,6 +12082,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="@new">
                <sch:assert role="warning" test="not(normalize-space(.) eq '')">@new attribute should
@@ -12044,6 +12104,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="@old">
                <sch:assert role="warning" test="not(normalize-space(.) eq '')">@old attribute should
@@ -12474,11 +12535,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="crApp-trill-trill_start-type_attributes_required-constraint-rule-106">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="mei:trill">
                <sch:assert test="@startid or @tstamp or @tstamp.ges or @tstamp.real">Must have one of the
@@ -12507,11 +12568,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="crApp-att.altSym-altsym-check_altsymTarget-constraint-rule-107">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@altsym">
          <sch:assert role="warning" test="not(normalize-space(.) eq '')">@altsym attribute
@@ -12683,6 +12744,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="class"/>
@@ -12724,6 +12786,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="edition"/>
@@ -12774,6 +12837,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="mdiv"/>
@@ -12853,6 +12917,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="part"/>
@@ -12912,6 +12977,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       is-a="checkValues">
             <sch:param name="elementName" value="partGrp"/>
@@ -12944,6 +13010,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0"
                       context="crapp:parts[not(crapp:*)]">
                <sch:assert test="text() = ('all','none')">If no part is given the value 'all' or 'none' is required.</sch:assert>
@@ -12967,6 +13034,7 @@ Suggested values include: 1] unknown</a:documentation>
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
                       xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns="http://www.tei-c.org/ns/1.0">
             <sch:rule context="crapp:range">
                <sch:assert test="parent::node()/crapp:range[1]/@type='start'">The value of @type in the first range must be 'start'</sch:assert>
@@ -13064,12 +13132,14 @@ Suggested values include: 1] unknown</a:documentation>
            xmlns:crapp="http://baumann-digital.de/ns/crApp"
            xmlns:functx="http://www.functx.com"
            xmlns:mei="http://www.music-encoding.org/ns/mei"
+           xmlns:rng="http://relaxng.org/ns/structure/1.0"
            xmlns="http://www.tei-c.org/ns/1.0"
            uri="http://baumann-digital.de/ns/crApp"/>
    <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron"
            xmlns:crapp="http://baumann-digital.de/ns/crApp"
            xmlns:functx="http://www.functx.com"
            xmlns:mei="http://www.music-encoding.org/ns/mei"
+           xmlns:rng="http://relaxng.org/ns/structure/1.0"
            xmlns="http://www.tei-c.org/ns/1.0"
            prefix="crapp"
            uri="http://baumann-digital.de/ns/crApp"/>
@@ -13077,6 +13147,7 @@ Suggested values include: 1] unknown</a:documentation>
            xmlns:crapp="http://baumann-digital.de/ns/crApp"
            xmlns:functx="http://www.functx.com"
            xmlns:mei="http://www.music-encoding.org/ns/mei"
+           xmlns:rng="http://relaxng.org/ns/structure/1.0"
            xmlns="http://www.tei-c.org/ns/1.0"
            prefix="mei"
            uri="http://www.music-encoding.org/ns/mei"/>
@@ -13084,6 +13155,7 @@ Suggested values include: 1] unknown</a:documentation>
            xmlns:crapp="http://baumann-digital.de/ns/crApp"
            xmlns:functx="http://www.functx.com"
            xmlns:mei="http://www.music-encoding.org/ns/mei"
+           xmlns:rng="http://relaxng.org/ns/structure/1.0"
            xmlns="http://www.tei-c.org/ns/1.0"
            prefix="tei"
            uri="http://www.tei-c.org/ns/1.0"/>
@@ -13092,6 +13164,7 @@ Suggested values include: 1] unknown</a:documentation>
                xmlns:crapp="http://baumann-digital.de/ns/crApp"
                xmlns:functx="http://www.functx.com"
                xmlns:mei="http://www.music-encoding.org/ns/mei"
+               xmlns:rng="http://relaxng.org/ns/structure/1.0"
                xmlns="http://www.tei-c.org/ns/1.0"
                queryBinding="xslt2">
       <sch:ns uri="http://baumann-digital.de/ns/crApp" prefix="crapp"/>
@@ -13144,6 +13217,7 @@ Suggested values include: 1] unknown</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="crapp:remark//crapp:part">
          <sch:let name="partVal" value="./text()"/>
@@ -13159,6 +13233,7 @@ Suggested values include: 1] unknown</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="crapp:remark//crapp:partGrp">
          <sch:let name="partGrpVal" value="./text()"/>
@@ -13166,7 +13241,7 @@ Suggested values include: 1] unknown</a:documentation>
                   value="ancestor::crapp:remark//crapp:partGrp[not(text() = $partGrpVal)]/text()"/>
          <sch:report test="ancestor::crapp:crApp/crapp:setting//crapp:partGrp[@xml:id = $partGrpVal]/ancestor::crapp:partGrp[@xml:id][@xml:id = ($partGrpVals)]"
                      role="warning">
-            <sch:value-of select="$partGrpVal"/> is part of <sch:value-of select="$partGrpVals[last()]"/>. A second call might be redundant.</sch:report>
+            <sch:value-of select="$partGrpVal"/> is part of <sch:value-of select="($partGrpVals)[last()]"/>. A second call might be redundant.</sch:report>
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -13175,6 +13250,7 @@ Suggested values include: 1] unknown</a:documentation>
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="crapp:measure[@count]|crapp:range[@count]">
          <sch:let name="meterCount"
