@@ -178,7 +178,16 @@
               </valList>
             </content>
           </macroSpec>
-          <classSpec type="atts" ident="att.numbering" module="core">
+        	<macroSpec ident="data.BEAT.extention" module="MEI" mode="add">
+        		<desc xml:lang="en" versionDate="2023-02-10">Combining data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET</desc>
+        		<content>
+	        			<rng:data type="token">
+	        				<rng:param name="pattern">(([0-9]+m\s*\+\s*)?[0-9]+(\.?[0-9]*)?)|((\+|-)?[0-9]+m\+[0-9]+(\.[0-9]*)?)|([0-9]+)</rng:param>
+	        			</rng:data>
+        		</content>
+        	</macroSpec>
+        	
+        	<classSpec type="atts" ident="att.numbering" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
             <attList>
               <attDef ident="no">
@@ -314,7 +323,22 @@
               </attDef>
             </attList>
           </classSpec>
-          <constraintSpec ident="set_ns" scheme="schematron" mode="add">
+        	<classSpec ident="att.timestamp.log" module="MEI.shared" type="atts" mode="change">
+        		<desc xml:lang="en">Attributes that record a time stamp in terms of musical time,
+        			<abbr>i.e.</abbr>
+        			, beats[.fractional beat part].</desc>
+        		<attList>
+        			<attDef ident="tstamp" usage="opt" mode="change">
+        				<gloss versionDate="2023-02-10" xml:lang="en">time stamp</gloss>
+        				<desc xml:lang="en">Encodes the onset time in terms of musical time,
+        					<abbr>i.e.</abbr>, beats[.fractional beat part], as expressed in the written time signature.</desc>
+        				<datatype>
+        					<dataRef key="data.BEAT.extention"/>
+        				</datatype>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<constraintSpec ident="set_ns" scheme="schematron" mode="add">
             <constraint>
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" uri="http://baumann-digital.de/ns/crApp"/>
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="crapp" uri="http://baumann-digital.de/ns/crApp"/>
