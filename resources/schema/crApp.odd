@@ -109,6 +109,7 @@
                 <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
+              	<elementRef key="octave" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="pb" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
