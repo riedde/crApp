@@ -863,7 +863,14 @@
               </attDef>
             </attList>
           </elementSpec>
-          <elementSpec ident="relEditions" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        	<elementSpec ident="rdg" module="MEI.critapp" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-02-10">reading</gloss>
+        		<desc xml:lang="en" versionDate="2023-02-10">Contains a single reading within a textual variation.</desc>
+        		<classes mode="change">
+        			<memberOf key="att.evidence" mode="add"/>
+        		</classes>
+        	</elementSpec>
+        	<elementSpec ident="relEditions" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for editions related to the critical apparatus</desc>
             <content>
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
