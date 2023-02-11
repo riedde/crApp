@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-02-10T15:34:03Z. .
+Schema generated from ODD source 2023-02-11T16:37:49Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1824,6 +1824,60 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
                 a notationtype attribute.</sch:assert>
       </sch:rule>
    </pattern>
+   <define name="hand">
+      <element name="hand">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Defines a distinct scribe or handwriting style.</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.textPhraseLike.limited"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.common.attributes"/>
+         <ref name="att.bibl.attributes"/>
+         <ref name="att.evidence.attributes"/>
+         <ref name="att.lang.attributes"/>
+         <ref name="att.medium.attributes"/>
+         <optional>
+            <attribute name="initial">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Marks this hand as the first one of the document.</a:documentation>
+               <ref name="data.BOOLEAN"/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="handList">
+      <element name="handList">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Container for one or more hand elements.</a:documentation>
+         <zeroOrMore>
+            <ref name="model.headLike"/>
+         </zeroOrMore>
+         <zeroOrMore>
+            <optional>
+               <ref name="label"/>
+            </optional>
+            <ref name="hand"/>
+         </zeroOrMore>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="crApp-handList-checkHandListLabels-constraint-rule-6">
+            <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:crapp="http://baumann-digital.de/ns/crApp"
+                      xmlns:functx="http://www.functx.com"
+                      xmlns:mei="http://www.music-encoding.org/ns/mei"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns="http://www.tei-c.org/ns/1.0"
+                      context="mei:handList[mei:label]">
+               <sch:assert role="warning" test="count(mei:label) = count(mei:hand)">When labels are used,
+            usually each hand has one.</sch:assert>
+            </sch:rule>
+         </pattern>
+         <ref name="att.common.attributes"/>
+         <ref name="att.bibl.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="key">
       <element name="key">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Key captures information about tonal center and mode.</a:documentation>
@@ -1872,7 +1926,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             <sch:param name="attrStr" value="id"/>
          </sch:pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-manifestation-check_singleton-constraint-rule-6">
+                  id="crApp-manifestation-check_singleton-constraint-rule-7">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -1886,7 +1940,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-manifestation-check_singleton_availability-constraint-rule-7">
+                  id="crApp-manifestation-check_singleton_availability-constraint-rule-8">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -1983,7 +2037,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.attacca.log-target-check_attaccaTarget-constraint-rule-8">
+            id="crApp-att.attacca.log-target-check_attaccaTarget-constraint-rule-9">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2011,7 +2065,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.augmentDots-dots-dots_attribute_requires_dur-constraint-rule-9">
+            id="crApp-att.augmentDots-dots-dots_attribute_requires_dur-constraint-rule-10">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2081,7 +2135,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.barring-bar.method-check_barmethod-constraint-rule-10">
+            id="crApp-att.barring-bar.method-check_barmethod-constraint-rule-11">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2172,7 +2226,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.classed-class-check_classURI-constraint-rule-11">
+            id="crApp-att.classed-class-check_classURI-constraint-rule-12">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2239,7 +2293,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.cleffing.log-clef_shape_requires_clef_line-constraint-rule-12">
+            id="crApp-att.cleffing.log-clef_shape_requires_clef_line-constraint-rule-13">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2275,7 +2329,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.clefShape-shape_requires_line-constraint-rule-14">
+            id="crApp-att.clefShape-shape_requires_line-constraint-rule-15">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2467,7 +2521,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.metadataPointing-decls-check_declsTarget-constraint-rule-15">
+            id="crApp-att.metadataPointing-decls-check_declsTarget-constraint-rule-16">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2729,7 +2783,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.extent-extent-check_extent-constraint-rule-16">
+            id="crApp-att.extent-extent-check_extent-constraint-rule-17">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2800,20 +2854,17 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.handIdent-hand-check_handTarget-constraint-rule-18">
-      <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+            id="crApp-att.handIdent-hand-check_handTarget-constraint-rule-19">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
                 xmlns:mei="http://www.music-encoding.org/ns/mei"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="@hand">
-         <sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should
-                have content.</sch:assert>
+         <sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should have content.</sch:assert>
          <sch:assert role="warning"
-                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//mei:hand/@xml:id">Each value in @hand should correspond to the @xml:id attribute of a hand
-                element.</sch:assert>
+                     test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//*:hand/@xml:id">Each value in @hand should correspond to the @xml:id attribute of a hand element.</sch:assert>
       </sch:rule>
    </pattern>
    <define name="att.horizontalAlign.attributes">
@@ -2865,7 +2916,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.joined-join-check_joinTarget-constraint-rule-19">
+            id="crApp-att.joined-join-check_joinTarget-constraint-rule-20">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -2961,7 +3012,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.layer.log-def-check_defTarget_layer-constraint-rule-20">
+            id="crApp-att.layer.log-def-check_defTarget_layer-constraint-rule-21">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3073,7 +3124,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.lineRend.base-lsegs-check_lsegs-constraint-rule-21">
+            id="crApp-att.lineRend.base-lsegs-check_lsegs-constraint-rule-22">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3113,7 +3164,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-copyof-When_copyof_element_empty-constraint-rule-22">
+            id="crApp-att.linking-copyof-When_copyof_element_empty-constraint-rule-23">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3128,7 +3179,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-copyof-check_copyofTarget-constraint-rule-23">
+            id="crApp-att.linking-copyof-check_copyofTarget-constraint-rule-24">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3198,7 +3249,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-follows-check_followsTarget-constraint-rule-25">
+            id="crApp-att.linking-follows-check_followsTarget-constraint-rule-26">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3228,7 +3279,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-next-check_nextTarget-constraint-rule-26">
+            id="crApp-att.linking-next-check_nextTarget-constraint-rule-27">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3258,7 +3309,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-precedes-check_precedesTarget-constraint-rule-27">
+            id="crApp-att.linking-precedes-check_precedesTarget-constraint-rule-28">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3288,7 +3339,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-prev-check_prevTarget-constraint-rule-28">
+            id="crApp-att.linking-prev-check_prevTarget-constraint-rule-29">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3348,7 +3399,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.linking-synch-check_synchTarget-constraint-rule-30">
+            id="crApp-att.linking-synch-check_synchTarget-constraint-rule-31">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3649,7 +3700,7 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.name-nymref-check_nymrefTarget-constraint-rule-31">
+            id="crApp-att.name-nymref-check_nymrefTarget-constraint-rule-32">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3745,7 +3796,7 @@ Suggested values include: 1] byte; 2] char; 3] cm; 4] deg; 5] in; 6] issue; 7] f
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.noteHeads-head.altsym-check_head.altsymTarget-constraint-rule-32">
+            id="crApp-att.noteHeads-head.altsym-check_head.altsymTarget-constraint-rule-33">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3775,7 +3826,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.noteHeads-head.auth-check_head.auth-constraint-rule-33">
+            id="crApp-att.noteHeads-head.auth-check_head.auth-constraint-rule-34">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -3842,7 +3893,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.noteHeads-head.shape-check_headshape_num-constraint-rule-34">
+            id="crApp-att.noteHeads-head.shape-check_headshape_num-constraint-rule-35">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4031,7 +4082,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.partIdent-part-check_part_attr_all-constraint-rule-35">
+            id="crApp-att.partIdent-part-check_part_attr_all-constraint-rule-36">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4059,7 +4110,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.partIdent-partstaff-check_partstaff_attr_all-constraint-rule-36">
+            id="crApp-att.partIdent-partstaff-check_partstaff_attr_all-constraint-rule-37">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4139,7 +4190,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.plist-plist-check_plistTarget-constraint-rule-37">
+            id="crApp-att.plist-plist-check_plistTarget-constraint-rule-38">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4275,7 +4326,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.ranging-confidence-check_confidence-constraint-rule-38">
+            id="crApp-att.ranging-confidence-check_confidence-constraint-rule-39">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4304,7 +4355,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.responsibility-resp-check_respTarget-constraint-rule-39">
+            id="crApp-att.responsibility-resp-check_respTarget-constraint-rule-40">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4406,7 +4457,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.source-source-check_sourceTarget-constraint-rule-40">
+            id="crApp-att.source-source-check_sourceTarget-constraint-rule-41">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
@@ -4481,7 +4532,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.staff.log-def-check_defTarget_staff-constraint-rule-41">
+            id="crApp-att.staff.log-def-check_defTarget_staff-constraint-rule-42">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -4641,7 +4692,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.startEndId-endid-check_endidTarget-constraint-rule-42">
+            id="crApp-att.startEndId-endid-check_endidTarget-constraint-rule-43">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
@@ -4666,7 +4717,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.startId-startid-check_startidTarget-constraint-rule-43">
+            id="crApp-att.startId-startid-check_startidTarget-constraint-rule-44">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
@@ -4731,7 +4782,7 @@ Suggested values include: 1] smufl</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.stems-stem.sameas-check_stem.sameasTarget-constraint-rule-44">
+            id="crApp-att.stems-stem.sameas-check_stem.sameasTarget-constraint-rule-45">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6428,7 +6479,7 @@ Suggested values include: 1] smufl</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Break, pause, or interruption in the normal tempo of a composition. Typically indicated by "railroad tracks", i.e., two diagonal slashes.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-caesura-caesura_start-type_attributes_required-constraint-rule-45">
+                  id="crApp-caesura-caesura_start-type_attributes_required-constraint-rule-46">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6474,7 +6525,7 @@ Suggested values include: 1] smufl</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indication of the exact location of a particular note on the staff and, therefore, the other notes as well.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-clef-Clef_position_lines-constraint-rule-46">
+                  id="crApp-clef-Clef_position_lines-constraint-rule-47">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6489,7 +6540,7 @@ Suggested values include: 1] smufl</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-clef-Clef_position_nolines-constraint-rule-47">
+                  id="crApp-clef-Clef_position_nolines-constraint-rule-48">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6525,7 +6576,7 @@ Suggested values include: 1] smufl</a:documentation>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-dir-dir_start-type_attributes_required-constraint-rule-48">
+                  id="crApp-dir-dir_start-type_attributes_required-constraint-rule-49">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6571,7 +6622,7 @@ Suggested values include: 1] smufl</a:documentation>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-dynam-dynam_start-type_attributes_required-constraint-rule-49">
+                  id="crApp-dynam-dynam_start-type_attributes_required-constraint-rule-50">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6585,7 +6636,7 @@ Suggested values include: 1] smufl</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-dynam-dynam_end-type_attributes-constraint-rule-50">
+                  id="crApp-dynam-dynam_end-type_attributes-constraint-rule-51">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6673,7 +6724,7 @@ Suggested values include: 1] smufl</a:documentation>
             <ref name="model.labelLike"/>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-grpSym-check_grpSym_attributes_scoreDef-constraint-rule-51">
+                  id="crApp-grpSym-check_grpSym_attributes_scoreDef-constraint-rule-52">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6687,7 +6738,7 @@ Suggested values include: 1] smufl</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-grpSym-check_grpSym_attributes_staffDef-constraint-rule-52">
+                  id="crApp-grpSym-check_grpSym_attributes_staffDef-constraint-rule-53">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6713,7 +6764,7 @@ Suggested values include: 1] smufl</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(key accidental) Accidental in a key signature.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-keyAccid-Check_keyAccidPlacement-constraint-rule-53">
+                  id="crApp-keyAccid-Check_keyAccidPlacement-constraint-rule-54">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6755,7 +6806,7 @@ Suggested values include: 1] smufl</a:documentation>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-keySig-check_keyAccid_oct-constraint-rule-54">
+                  id="crApp-keySig-check_keyAccid_oct-constraint-rule-55">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6770,7 +6821,7 @@ Suggested values include: 1] smufl</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-keySig-check_keySig_editorial-constraint-rule-55">
+                  id="crApp-keySig-check_keySig_editorial-constraint-rule-56">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6891,7 +6942,7 @@ Suggested values include: 1] smufl</a:documentation>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-name-nameParts-constraint-rule-56">
+                  id="crApp-name-nameParts-constraint-rule-57">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -6995,7 +7046,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-ornam-ornam_start-type_attributes_required-constraint-rule-57">
+                  id="crApp-ornam-ornam_start-type_attributes_required-constraint-rule-58">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7054,7 +7105,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-rest-Check_restline-constraint-rule-58">
+                  id="crApp-rest-Check_restline-constraint-rule-59">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7135,7 +7186,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-section-Check_sectionexpansion-constraint-rule-59">
+                  id="crApp-section-Check_sectionexpansion-constraint-rule-60">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7189,7 +7240,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staff-checkStaff_n-constraint-rule-60">
+                  id="crApp-staff-checkStaff_n-constraint-rule-61">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7231,7 +7282,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_staffDefn-constraint-rule-61">
+                  id="crApp-staffDef-Check_staffDefn-constraint-rule-62">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7250,7 +7301,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_ancestor_staff-constraint-rule-62">
+                  id="crApp-staffDef-Check_ancestor_staff-constraint-rule-63">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7265,7 +7316,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_ancestor_staff_lines-constraint-rule-63">
+                  id="crApp-staffDef-Check_ancestor_staff_lines-constraint-rule-64">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7281,7 +7332,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_clef_position_staffDef-constraint-rule-64">
+                  id="crApp-staffDef-Check_clef_position_staffDef-constraint-rule-65">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7295,7 +7346,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_clef_position_staffDef_nolines-constraint-rule-65">
+                  id="crApp-staffDef-Check_clef_position_staffDef_nolines-constraint-rule-66">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7312,7 +7363,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_tab_strings_lines-constraint-rule-66">
+                  id="crApp-staffDef-Check_tab_strings_lines-constraint-rule-67">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7328,7 +7379,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffDef-Check_tab_strings_nolines-constraint-rule-67">
+                  id="crApp-staffDef-Check_tab_strings_nolines-constraint-rule-68">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7431,7 +7482,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             <ref name="grpSym"/>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-staffGrp-Check_staffGrp_unique_staff_n_values-constraint-rule-72">
+                  id="crApp-staffGrp-Check_staffGrp_unique_staff_n_values-constraint-rule-73">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7490,7 +7541,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-tempo-tempo_in_header_disallow_most_attrs-constraint-rule-73">
+                  id="crApp-tempo-tempo_in_header_disallow_most_attrs-constraint-rule-74">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7505,7 +7556,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-tempo-tempo_start-type_attributes_required-constraint-rule-74">
+                  id="crApp-tempo-tempo_start-type_attributes_required-constraint-rule-75">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -7747,7 +7798,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.beamRend-place-check_beam_place-constraint-rule-75">
+            id="crApp-att.beamRend-place-check_beam_place-constraint-rule-76">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -8995,7 +9046,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-attacca-attacca_start-type_attributes_required-constraint-rule-77">
+                  id="crApp-attacca-attacca_start-type_attributes_required-constraint-rule-78">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9030,7 +9081,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-beam-When_not_copyof_beam_content-constraint-rule-78">
+                  id="crApp-beam-When_not_copyof_beam_content-constraint-rule-79">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9056,7 +9107,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(beam span) Alternative element for explicitly encoding beams, particularly those which extend across bar lines.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-beamSpan-beamspan_start-_and_end-type_attributes_required-constraint-rule-79">
+                  id="crApp-beamSpan-beamspan_start-_and_end-type_attributes_required-constraint-rule-80">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9098,7 +9149,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A variation in pitch (often micro-tonal) upwards or downwards during the course of a note.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-bend-bend_start-_and_end-type_attributes_required-constraint-rule-80">
+                  id="crApp-bend-bend_start-_and_end-type_attributes_required-constraint-rule-81">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9131,7 +9182,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-bracketSpan-bracketSpan_start-_and_end-type_attributes_required-constraint-rule-81">
+                  id="crApp-bracketSpan-bracketSpan_start-_and_end-type_attributes_required-constraint-rule-82">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9159,7 +9210,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(breath mark) An indication of a point at which the performer on an instrument requiring breath (including the voice) may breathe.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-breath-breath_start-type_attributes_required-constraint-rule-82">
+                  id="crApp-breath-breath_start-type_attributes_required-constraint-rule-83">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9200,7 +9251,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An indication placed over a note or rest to indicate that it should be held longer than its written value. May also occur over a bar line to indicate the end of a phrase or section. Sometimes called a 'hold' or 'pause'.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-fermata-fermata_start-type_attributes_required-constraint-rule-83">
+                  id="crApp-fermata-fermata_start-type_attributes_required-constraint-rule-84">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9264,7 +9315,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-gliss-gliss_start-_and_end-type_attributes_required-constraint-rule-84">
+                  id="crApp-gliss-gliss_start-_and_end-type_attributes_required-constraint-rule-85">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9300,7 +9351,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-graceGrp-When_not_copyof_graceGrp_content-constraint-rule-85">
+                  id="crApp-graceGrp-When_not_copyof_graceGrp_content-constraint-rule-86">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9314,7 +9365,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-graceGrp-When_graced-constraint-rule-86">
+                  id="crApp-graceGrp-When_graced-constraint-rule-87">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9340,7 +9391,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates continuous dynamics expressed on the score as wedge-shaped graphics, e.g., &lt; and &gt;.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-hairpin-hairpin_start-_and_end-type_attributes_required-constraint-rule-87">
+                  id="crApp-hairpin-hairpin_start-_and_end-type_attributes_required-constraint-rule-88">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9380,7 +9431,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(harp pedal) Harp pedal diagram.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-harpPedal-harpPedal_start-type_attributes_required-constraint-rule-88">
+                  id="crApp-harpPedal-harpPedal_start-type_attributes_required-constraint-rule-89">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9405,7 +9456,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <element name="lv">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(laissez vibrer) A "tie-like" indication that a note should ring beyond its written duration.</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-lv-lv_start-_and_end-type_attributes_required-constraint-rule-89">
+                  id="crApp-lv-lv_start-_and_end-type_attributes_required-constraint-rule-90">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9419,7 +9470,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-lv-lv_containing_curve-constraint-rule-90">
+                  id="crApp-lv-lv_containing_curve-constraint-rule-91">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9492,7 +9543,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             <ref name="meterSig"/>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-meterSigGrp-check_meterSigGrpContent-constraint-rule-91">
+                  id="crApp-meterSigGrp-check_meterSigGrpContent-constraint-rule-92">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9614,7 +9665,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-octave-octave_start-_and_end-type_attributes_required-constraint-rule-92">
+                  id="crApp-octave-octave_start-_and_end-type_attributes_required-constraint-rule-93">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9745,7 +9796,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Piano pedal mark.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-pedal-pedal_start-type_attributes_required-constraint-rule-95">
+                  id="crApp-pedal-pedal_start-type_attributes_required-constraint-rule-96">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9789,7 +9840,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <element name="slur">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indication of 1) a "unified melodic idea" or 2) performance technique.</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-slur-slur_start-_and_end-type_attributes_required-constraint-rule-96">
+                  id="crApp-slur-slur_start-_and_end-type_attributes_required-constraint-rule-97">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9805,7 +9856,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-slur-slur_containing_curve-constraint-rule-97">
+                  id="crApp-slur-slur_containing_curve-constraint-rule-98">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9833,7 +9884,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       <element name="tie">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An indication that two notes of the same pitch form a single note with their combined rhythmic values.</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-tie-tie_start-_and_end-type_attributes_required-constraint-rule-98">
+                  id="crApp-tie-tie_start-_and_end-type_attributes_required-constraint-rule-99">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9849,7 +9900,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-tie-tie_containing_curve-constraint-rule-99">
+                  id="crApp-tie-tie_containing_curve-constraint-rule-100">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9898,7 +9949,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(tuplet span) Alternative element for encoding tuplets, especially useful for tuplets that extend across bar lines.</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-tupletSpan-tupletSpan_start-_and_end-type_attributes_required-constraint-rule-100">
+                  id="crApp-tupletSpan-tupletSpan_start-_and_end-type_attributes_required-constraint-rule-101">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -9936,7 +9987,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.accidental.ges-accid.ges-check_accid_duplication-constraint-rule-101">
+            id="crApp-att.accidental.ges-accid.ges-check_accid_duplication-constraint-rule-102">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -10218,7 +10269,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.note.ges-extremis_disallows_gestural_pitch-constraint-rule-102">
+            id="crApp-att.note.ges-extremis_disallows_gestural_pitch-constraint-rule-103">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -10762,7 +10813,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.fTrem.vis-beams.float-check_beams.floating-constraint-rule-103">
+            id="crApp-att.fTrem.vis-beams.float-check_beams.floating-constraint-rule-104">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -12081,7 +12132,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-handShift-new-check_newTarget-constraint-rule-104">
+                  id="crApp-handShift-new-check_newTarget-constraint-rule-105">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
@@ -12103,7 +12154,7 @@ Suggested values include: 1] sustain; 2] soft; 3] sostenuto; 4] silent</a:docume
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-handShift-old-check_oldTarget-constraint-rule-105">
+                  id="crApp-handShift-old-check_oldTarget-constraint-rule-106">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
@@ -12537,7 +12588,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Rapid alternation of a note with another (usually at the interval of a second above).</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-trill-trill_start-type_attributes_required-constraint-rule-106">
+                  id="crApp-trill-trill_start-type_attributes_required-constraint-rule-107">
             <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -12570,7 +12621,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-att.altSym-altsym-check_altsymTarget-constraint-rule-107">
+            id="crApp-att.altSym-altsym-check_altsymTarget-constraint-rule-108">
       <sch:rule xmlns:xi="http://www.w3.org/2001/XInclude"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
@@ -12928,13 +12979,13 @@ Suggested values include: 1] unknown</a:documentation>
             <sch:param name="attrStr" value="id"/>
          </sch:pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-112">
+                  id="crApp-part-part-in-part-attr-type-requiring-constraint-rule-113">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="crapp:part">
                <sch:report test=".[parent::crapp:part] and not(@type)" role="error">If part is child of part a @type is required.</sch:report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-113">
+                  id="crApp-part-part-sys-in-sysGrp-requiring-constraint-rule-114">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       context="crapp:part[@type='sysGrp']">
                <sch:assert test="crapp:part[@type='sys']" role="warning">The part is defined as a system group but does not contain a system.</sch:assert>
@@ -13009,7 +13060,7 @@ Suggested values include: 1] unknown</a:documentation>
             <text/>
          </choice>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="crApp-parts-setting-values-check-constraint-rule-114">
+                  id="crApp-parts-setting-values-check-constraint-rule-115">
             <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:crapp="http://baumann-digital.de/ns/crApp"
                       xmlns:functx="http://www.functx.com"
@@ -13111,6 +13162,7 @@ Suggested values include: 1] unknown</a:documentation>
          <ref name="manifestationList"/>
          <ref name="relEditions"/>
          <ref name="classifications"/>
+         <ref name="handList"/>
          <ref name="att.basic.attributes"/>
          <empty/>
       </element>
@@ -13216,7 +13268,7 @@ Suggested values include: 1] unknown</a:documentation>
       </sch:pattern>
    </sch:schema>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-check-part-combination-constraint-rule-109">
+            id="crApp-check-part-combination-constraint-rule-110">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
@@ -13232,7 +13284,7 @@ Suggested values include: 1] unknown</a:documentation>
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-check-partGrp-combination-constraint-rule-110">
+            id="crApp-check-partGrp-combination-constraint-rule-111">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
@@ -13249,7 +13301,7 @@ Suggested values include: 1] unknown</a:documentation>
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="crApp-check-measure-count-value-constraint-rule-111">
+            id="crApp-check-measure-count-value-constraint-rule-112">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:crapp="http://baumann-digital.de/ns/crApp"
                 xmlns:functx="http://www.functx.com"
