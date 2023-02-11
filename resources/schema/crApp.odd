@@ -46,7 +46,7 @@
           </moduleSpec>
           <!-- mei elements -->
           <moduleRef key="MEI" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter"/>
+          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter handList hand"/>
           <moduleRef key="MEI.frbr" source="../../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
           <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad pb rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../submodules/music-encoding/source/mei-source.xml"/>
@@ -242,7 +242,21 @@
               </attDef>
             </attList>
           </classSpec>
-          <classSpec ident="att.linking" module="MEI.shared" type="atts" mode="change">
+        	<classSpec ident="att.handIdent" module="MEI.shared" type="atts" mode="change">
+        		<attList>
+        			<attDef ident="hand" usage="opt" mode="change">
+        				<constraintSpec ident="check_handTarget" scheme="schematron">
+        					<constraint>
+        						<sch:rule context="@hand">
+        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should have content.</sch:assert>
+        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//*:hand/@xml:id">Each value in @hand should correspond to the @xml:id attribute of a hand element.</sch:assert>
+        						</sch:rule>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec ident="att.linking" module="MEI.shared" type="atts" mode="change">
             <desc xml:lang="en">Attributes that specify element-to-element relationships.</desc>
             <attList>
               <attDef ident="corresp" usage="opt" mode="change">
@@ -957,6 +971,7 @@
               <elementRef key="manifestationList"/>
               <elementRef key="relEditions"/>
               <elementRef key="classifications"/>
+            	<elementRef key="handList"/>
             </content>
           </elementSpec>
           <elementSpec ident="manifestationList" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
