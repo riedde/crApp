@@ -98,6 +98,7 @@
                 <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
+              	<elementRef key="fTrem" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
@@ -189,6 +190,21 @@
         		</content>
         	</macroSpec>
         	
+        	<classSpec ident="att.classed" module="MEI.shared" type="atts" mode="change">
+<!--        		<desc xml:lang="en">Attributes which can be used to classify features.</desc>-->
+        		<attList>
+        			<attDef ident="class" usage="opt" mode="change">
+<!--        				<desc xml:lang="en">Contains one or more URIs which denote classification terms that apply to the entity bearing this attribute.</desc>-->
+        				<constraintSpec ident="check_classURI" scheme="schematron">
+        					<constraint>
+        						<sch:rule context="@class">
+        							<sch:assert test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//*:class/@xml:id or matches($i, '^([a-z]+://|\.{1,2}/)')">The value in @class must either correspond to the @xml:id attribute of a class element or be an external URL.</sch:assert>
+        						</sch:rule>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        		</attList>
+        	</classSpec>
         	<classSpec type="atts" ident="att.numbering" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
             <attList>
@@ -206,7 +222,26 @@
               </attDef>
             </attList>
           </classSpec>
-          <classSpec type="atts" ident="att.timing" module="core">
+        	<classSpec ident="att.responsibility" module="MEI.shared" type="atts" mode="change">
+        		<desc xml:lang="en">Attributes capturing information regarding responsibility for some aspect of the text's creation, transcription, editing, or encoding.</desc>
+        		<attList>
+        			<attDef ident="resp" usage="opt" mode="change">
+        				<desc xml:lang="en">Indicates the agent(s) responsible for some aspect of the text’s transcription, editing, or encoding. Its value must point to one or more identifiers declared in the document header.</desc>
+        				<datatype maxOccurs="unbounded">
+        					<rng:ref name="data.URI"/>
+        				</datatype>
+        				<constraintSpec ident="check_respTarget" scheme="schematron">
+        					<constraint>
+        						<sch:rule context="@resp">
+        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@resp attribute should have content.</sch:assert>
+        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:classGrp [@label='editor']/crapp:class/@xml:id">The value in @resp should correspond to the @xml:id attribute of a class element within the classGrp with @label='editor'.</sch:assert>
+        						</sch:rule>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec type="atts" ident="att.timing" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">An attribute class for timing concerns.</desc>
             <attList>
               <attDef ident="measure" usage="req">
@@ -233,7 +268,34 @@
               </attDef>
             </attList>
           </classSpec>
-          <classSpec type="atts" ident="att.target" module="core">
+        	<classSpec ident="att.partIdent" module="MEI.shared" type="atts" mode="change">
+<!--        		<desc xml:lang="en">Attributes for identifying the part in which the current feature appears.</desc>-->
+        		<attList>
+        			<attDef ident="part" usage="opt" mode="change">
+        				<desc xml:lang="en">Indicates the part in which the current feature should appear. Use '%all' when the feature should occur in every part.</desc>
+        				<datatype maxOccurs="unbounded">
+        					<rng:data type="token">
+        						<rng:param name="pattern">(%all|#[\i][\c]+)</rng:param>
+        					</rng:data>
+        				</datatype>        				<constraintSpec ident="check_partTarget" scheme="schematron" mode="add">
+        					<constraint>
+        						<sch:rule context="@part">
+        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@part attribute should have content.</sch:assert>
+        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=(//crapp:part/@xml:id,//crapp:partGrp/@xml:id) or $i='%all'">Each value in @part should correspond to the @xml:id attribute of a part or partGrp element.</sch:assert>
+        						</sch:rule>
+        					</constraint>
+        				</constraintSpec>
+        				<constraintSpec ident="check_part_attr_all" scheme="schematron" mode="add">
+        					<constraint>
+        						<sch:rule context="@part[some $i in tokenize(., '\s+') satisfies (matches($i, '^%all$'))]">
+        							<sch:assert test="count(tokenize(., '\s+')) = 1">'%all' cannot be mixed with other values.</sch:assert>
+        						</sch:rule>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec type="atts" ident="att.target" module="core">
             <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining an explicit target to an other destination. The value must be an URI.</desc>
             <attList>
               <attDef ident="target">
