@@ -103,6 +103,7 @@
                 <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
+              	<elementRef key="meterSig" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>

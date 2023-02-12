@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-02-11T16:37:49Z. .
+Schema generated from ODD source 2023-02-12T09:46:11Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1714,6 +1714,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             </zeroOrMore>
             <zeroOrMore>
                <ref name="keySig"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="meterSig"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="mRpt"/>
