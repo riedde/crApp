@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-02-12T13:53:04Z. .
+Schema generated from ODD source 2023-02-28T15:12:23Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1563,6 +1563,18 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
    <define name="data.URI">
       <data type="anyURI"/>
    </define>
+   <define name="data.VERTICALALIGNMENT">
+      <choice>
+         <value>top</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Top aligned.</a:documentation>
+         <value>middle</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Middle aligned.</a:documentation>
+         <value>bottom</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Bottom aligned.</a:documentation>
+         <value>baseline</value>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Baseline aligned.</a:documentation>
+      </choice>
+   </define>
    <define name="data.WORD">
       <data type="token">
          <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})*</param>
@@ -1717,6 +1729,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
             </zeroOrMore>
             <zeroOrMore>
                <ref name="keySig"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="lb"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="meterSig"/>
@@ -5240,6 +5255,17 @@ Suggested values include: 1] smufl</a:documentation>
          </attribute>
       </optional>
    </define>
+   <define name="att.verticalAlign.attributes">
+      <ref name="att.verticalAlign.attribute.valign"/>
+   </define>
+   <define name="att.verticalAlign.attribute.valign">
+      <optional>
+         <attribute name="valign">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Records vertical alignment.</a:documentation>
+            <ref name="data.VERTICALALIGNMENT"/>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.verticalGroup.attributes">
       <ref name="att.verticalGroup.attribute.vgrp"/>
    </define>
@@ -5362,6 +5388,22 @@ Suggested values include: 1] smufl</a:documentation>
          <attribute name="endvo">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Records a vertical adjustment of a feature’s programmatically-determined end point.</a:documentation>
             <ref name="data.MEASUREMENTSIGNED"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.whitespace.attributes">
+      <ref name="att.whitespace.attribute.xmlspace"/>
+   </define>
+   <define name="att.whitespace.attribute.xmlspace">
+      <optional>
+         <attribute name="xml:space">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Allows one to signal to an application whether an element’s white space is "significant". The behavior of xml:space cascades to all descendant elements, but it can be turned off locally by setting the xml:space attribute to the value "default".</a:documentation>
+            <choice>
+               <value>default</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Allows the application to handle white space as necessary. Not including an xml:space attribute produces the same result as using the default value.</a:documentation>
+               <value>preserve</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Instructs the application to maintain white space "as-is", suggesting that it might have meaning.</a:documentation>
+            </choice>
          </attribute>
       </optional>
    </define>
@@ -5777,22 +5819,32 @@ Suggested values include: 1] smufl</a:documentation>
       </choice>
    </define>
    <define name="model.lbLike">
-      <notAllowed/>
+      <choice>
+         <ref name="lb"/>
+      </choice>
    </define>
    <define name="model.lbLike_alternation">
-      <notAllowed/>
+      <choice>
+         <ref name="lb"/>
+      </choice>
    </define>
    <define name="model.lbLike_sequence">
-      <empty/>
+      <ref name="lb"/>
    </define>
    <define name="model.lbLike_sequenceOptional">
-      <empty/>
+      <optional>
+         <ref name="lb"/>
+      </optional>
    </define>
    <define name="model.lbLike_sequenceOptionalRepeatable">
-      <empty/>
+      <zeroOrMore>
+         <ref name="lb"/>
+      </zeroOrMore>
    </define>
    <define name="model.lbLike_sequenceRepeatable">
-      <notAllowed/>
+      <oneOrMore>
+         <ref name="lb"/>
+      </oneOrMore>
    </define>
    <define name="model.measurementLike">
       <choice>
@@ -6051,22 +6103,32 @@ Suggested values include: 1] smufl</a:documentation>
       <notAllowed/>
    </define>
    <define name="model.rendLike">
-      <notAllowed/>
+      <choice>
+         <ref name="rend"/>
+      </choice>
    </define>
    <define name="model.rendLike_alternation">
-      <notAllowed/>
+      <choice>
+         <ref name="rend"/>
+      </choice>
    </define>
    <define name="model.rendLike_sequence">
-      <empty/>
+      <ref name="rend"/>
    </define>
    <define name="model.rendLike_sequenceOptional">
-      <empty/>
+      <optional>
+         <ref name="rend"/>
+      </optional>
    </define>
    <define name="model.rendLike_sequenceOptionalRepeatable">
-      <empty/>
+      <zeroOrMore>
+         <ref name="rend"/>
+      </zeroOrMore>
    </define>
    <define name="model.rendLike_sequenceRepeatable">
-      <notAllowed/>
+      <oneOrMore>
+         <ref name="rend"/>
+      </oneOrMore>
    </define>
    <define name="model.scoreDefLike">
       <choice>
@@ -6577,7 +6639,7 @@ Suggested values include: 1] smufl</a:documentation>
       </element>
    </define>
    <define name="dir">
-      <element name="dir">
+      <element name="dir" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(directive) An instruction expressed as a combination of text and symbols — such as segno and coda symbols, fermatas over a bar line, etc., typically above, below, or between staves, but not on the staff — that is not encoded elsewhere in more specific elements, like <code xmlns="http://www.w3.org/1999/xhtml">&lt;tempo&gt;</code> or <code xmlns="http://www.w3.org/1999/xhtml">&lt;dynam&gt;</code>.</a:documentation>
          <zeroOrMore>
             <choice>
@@ -6586,6 +6648,7 @@ Suggested values include: 1] smufl</a:documentation>
                <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.editLike"/>
                <ref name="model.transcriptionLike"/>
+               <ref name="lb"/>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -6917,6 +6980,15 @@ Suggested values include: 1] smufl</a:documentation>
          <empty/>
       </element>
    </define>
+   <define name="lb">
+      <element name="lb">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(line beginning) An empty formatting element that forces text to begin on a new line.</a:documentation>
+         <empty/>
+         <ref name="att.common.attributes"/>
+         <ref name="att.source.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="lg">
       <element name="lg">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(line group) May be used for any section of text that is organized as a group of lines; however, it is most often used for a group of verse lines functioning as a formal unit, e.g., a stanza, refrain, verse paragraph, etc.</a:documentation>
@@ -7103,6 +7175,34 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
          <ref name="att.pb.ges.attributes"/>
          <ref name="att.pb.log.attributes"/>
          <ref name="att.pb.vis.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="rend">
+      <element name="rend">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(render) A formatting element indicating special visual rendering, e.g., bold or italicized, of a text word or phrase.</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.textPhraseLike"/>
+               <ref name="model.editLike"/>
+               <ref name="model.transcriptionLike"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.color.attributes"/>
+         <ref name="att.common.attributes"/>
+         <ref name="att.horizontalAlign.attributes"/>
+         <ref name="att.lang.attributes"/>
+         <ref name="att.textRendition.attributes"/>
+         <ref name="att.typography.attributes"/>
+         <ref name="att.verticalAlign.attributes"/>
+         <ref name="att.whitespace.attributes"/>
+         <optional>
+            <attribute name="rotation">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A positive value for rotation rotates the text in a counter-clockwise fashion, while negative values produce clockwise rotation.</a:documentation>
+               <ref name="data.DEGREES"/>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -7542,7 +7642,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
       </element>
    </define>
    <define name="tempo">
-      <element name="tempo">
+      <element name="tempo" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Text and symbols descriptive of tempo, mood, or style, e.g., "allarg.", "a tempo", "cantabile", "Moderato", "♩=60", "Moderato ♩ =60").</a:documentation>
          <zeroOrMore>
             <choice>
@@ -7551,6 +7651,7 @@ Suggested values include: 1] person; 2] corporation; 3] location; 4] process; 5]
                <ref name="model.graphicPrimitiveLike"/>
                <ref name="model.editLike"/>
                <ref name="model.transcriptionLike"/>
+               <ref name="note"/>
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"

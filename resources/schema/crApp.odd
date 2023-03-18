@@ -48,7 +48,7 @@
           <moduleRef key="MEI" source="../../submodules/music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter handList hand"/>
           <moduleRef key="MEI.frbr" source="../../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
-          <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lg name note num ornam pad pb rest scoreDef section space staff staffDef staffGrp sb syl tempo"/>
+          <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lb lg name note num ornam pad pb rest rend scoreDef section space staff staffDef staffGrp sb syl tempo"/>
           <moduleRef key="MEI.critapp" source="../../submodules/music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.cmn" source="../../submodules/music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.verse" source="../../submodules/music-encoding/source/mei-source.xml"/>
@@ -570,7 +570,21 @@
               <!-- source="../../MusicEncoding/music-encoding/source/modules/MEI.shared.xml" -->
             </content>
           </elementSpec>
-          <elementSpec ident="crApp" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        	<elementSpec ident="dir" module="MEI.shared" ns="http://baumann-digital.de/ns/crApp" mode="change">
+        		<content>
+        			<rng:zeroOrMore>
+        				<rng:choice>
+        					<rng:text/>
+        					<rng:ref name="model.textPhraseLike.limited"/>
+        					<rng:ref name="model.graphicPrimitiveLike"/>
+        					<rng:ref name="model.editLike"/>
+        					<rng:ref name="model.transcriptionLike"/>
+        					<rng:ref name="lb"/>
+        				</rng:choice>
+        			</rng:zeroOrMore>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="crApp" module="setting" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-01">The root element for the critical apparatus.</desc>
             <classes>
               <memberOf key="att.id"/>
@@ -1037,7 +1051,22 @@
             	<elementRef key="handList"/>
             </content>
           </elementSpec>
-          <elementSpec ident="manifestationList" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        	<elementSpec ident="tempo" module="MEI.shared" ns="http://baumann-digital.de/ns/crApp" mode="change">
+        		<content>
+        				<rng:zeroOrMore>
+        					<rng:choice>
+        						<rng:text/>
+        						<rng:ref name="model.textPhraseLike.limited"/>
+        						<rng:ref name="model.graphicPrimitiveLike"/>
+        						<rng:ref name="model.editLike"/>
+        						<rng:ref name="model.transcriptionLike"/>
+        						<rng:ref name="note"/>
+        					</rng:choice>
+        				</rng:zeroOrMore>
+        		</content>
+        	</elementSpec>
+        	
+        	<elementSpec ident="manifestationList" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
             <desc xml:lang="en" versionDate="2022-04-05">A Wrapper for sources related to the critical apparatus</desc>
             <content>
               <elementRef key="manifestation" minOccurs="1" maxOccurs="unbounded"/>
