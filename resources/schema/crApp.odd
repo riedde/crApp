@@ -33,35 +33,112 @@
     </body>
     <back>
       <div>
-        <head>Specifications of crApp</head>
-        <schemaSpec ident="crApp" xml:lang="en" start="crApp remark setting" ns="http://baumann-digital.de/ns/crApp">
+        <head>Specifications of the crApp schema</head>
+        <schemaSpec ident="crApp" xml:lang="en" start="crApp setting" ns="http://baumann-digital.de/ns/crApp">
+        	
+        	<!-- crapp modules -->
           <moduleSpec ident="core">
-            <desc>Module for attribut classes, macros, datatypes and constraints.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">Core Module</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Modul: core</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Module for attribut classes, macros, datatypes and constraints.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Modul für Attributklassen, Makros, Datentypen und Einschränkungsregeln (contsraints).</desc>
           </moduleSpec>
-          <moduleSpec ident="setting">
-            <desc>Module for setting elements.</desc>
+        	<moduleSpec ident="remark">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Remark Module</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Modul: remark</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Module for remark-like entities.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Modul für Entitäten zu Anmerkungen.</desc>
+        	</moduleSpec>
+        	<moduleSpec ident="setting">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Setting Module</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Modul: setting</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Module for setting-like entities.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Modul für Entitäten zur Grundkonstellation.</desc>
           </moduleSpec>
-          <moduleSpec ident="remark">
-            <desc>Module for remark elements.</desc>
-          </moduleSpec>
-          <!-- mei elements -->
+        	
+          <!-- mei modules -->
           <moduleRef key="MEI" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter handList hand"/>
-          <moduleRef key="MEI.frbr" source="../../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
-          <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lb lg name note num ornam pad pb rest rend scoreDef section space staff staffDef staffGrp sb syl tempo"/>
-          <moduleRef key="MEI.critapp" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.cmn" source="../../submodules/music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
-          <moduleRef key="MEI.verse" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.gestural" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.visual" source="../../submodules/music-encoding/source/mei-source.xml"/>
           <moduleRef key="MEI.analytical" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.ptrref" source="../../submodules/music-encoding/source/mei-source.xml"/>
-          <moduleRef key="MEI.edittrans" source="../../submodules/music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
-          <moduleRef key="MEI.text" source="../../submodules/music-encoding/source/mei-source.xml" include="q quote seg"/>
+          <moduleRef key="MEI.cmn" source="../../submodules/music-encoding/source/mei-source.xml" include="arpeg attacca beam beamSpan beatRpt bend bracketSpan breath bTrem fermata fTrem gliss graceGrp hairpin halfmRpt harpPedal lv measure meterSig meterSigGrp mNum mRest mRpt mRpt2 mSpace multiRest multiRpt octave oLayer ossia oStaff pedal reh slur tie tuplet tupletSpan"/>
           <moduleRef key="MEI.cmnOrnaments" source="../../submodules/music-encoding/source/mei-source.xml" include="trill"/>
+          <moduleRef key="MEI.critapp" source="../../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.edittrans" source="../../submodules/music-encoding/source/mei-source.xml" include="abbr add choice corr damage del expan gap handShift orig reg sic subst supplied unclear"/>
+          <moduleRef key="MEI.frbr" source="../../submodules/music-encoding/source/mei-source.xml" include="manifestation manifestationList"/>
+          <moduleRef key="MEI.gestural" source="../../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.header" source="../../submodules/music-encoding/source/mei-source.xml" include="key meter handList hand"/>
+          <moduleRef key="MEI.ptrref" source="../../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.shared" source="../../submodules/music-encoding/source/mei-source.xml" include="accid artic barLine caesura chord clef dot dir dynam ending expansion genre group grpSym keyAccid keySig label labelAbbr layer lb lg name note num ornam pad pb rest rend scoreDef section space staff staffDef staffGrp sb syl tempo"/>
+          <moduleRef key="MEI.text" source="../../submodules/music-encoding/source/mei-source.xml" include="q quote seg"/>
           <moduleRef key="MEI.usersymbols" source="../../submodules/music-encoding/source/mei-source.xml" include="anchoredText"/>
-          <macroSpec ident="crApp.list.lang" module="core" mode="add">
-            <desc versionDate="2023-01-02" xml:lang="en">Supported languages.</desc>
+          <moduleRef key="MEI.verse" source="../../submodules/music-encoding/source/mei-source.xml"/>
+          <moduleRef key="MEI.visual" source="../../submodules/music-encoding/source/mei-source.xml"/>
+        	
+        	<!-- crapp macros -->
+        	<macroSpec ident="crApp.annot.content" module="core" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Supported MEI elements</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">unterstütze MEI-Elemente</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Supported MEI elements as content of annotations.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Unterstützte MEI-Elemente in den Anmerkungen.</desc>
+        		<content>
+        			<sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
+        				<textNode/>
+        				<elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="anchoredText" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="bTrem" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="caesura" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="dir" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="fTrem" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="meterSig" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="octave" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="pb" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="section" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
+        				<elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
+        			</sequence>
+        		</content>
+        	</macroSpec>
+        	<macroSpec ident="crApp.list.lang" module="core" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Supported languages</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">unterstütze Sprachen</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Supported languages at crApp-WebApp.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Unterstützte Sprachen in der crApp-WebApp.</desc>
             <content>
               <valList mode="add" type="closed">
                 <valItem ident="de">
@@ -75,65 +152,11 @@
               </valList>
             </content>
           </macroSpec>
-        	<macroSpec ident="crApp.annot.content" module="core" mode="add">
-            <desc versionDate="2023-02-10" xml:lang="en">Supported MEI elements for annotations.</desc>
-            <content>
-              <sequence preserveOrder="false" minOccurs="1" maxOccurs="unbounded">
-                <textNode/>
-                <elementRef key="accid" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="add" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="anchoredText" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="app" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="artic" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="barLine" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="beam" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="bTrem" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="caesura" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="chord" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="clef" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="corr" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="del" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="dir" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="dot" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="dynam" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="ending" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="fermata" minOccurs="0" maxOccurs="unbounded"/>
-              	<elementRef key="fTrem" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="hairpin" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="key" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="keyAccid" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="keySig" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="lb" minOccurs="0" maxOccurs="unbounded"/>
-              	<elementRef key="meterSig" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="mRpt" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="mRest" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="mSpace" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="name" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="num" minOccurs="0" maxOccurs="unbounded"/>
-              	<elementRef key="octave" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="ornam" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="pb" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="q" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="rest" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="sb" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="section" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="seg" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="slur" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="space" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="subst" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="syl" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="tempo" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="tie" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="trill" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="tuplet" minOccurs="0" maxOccurs="unbounded"/>
-              </sequence>
-            </content>
-          </macroSpec>
-          <macroSpec ident="data.ARTICULATION" module="MEI" mode="change">
-            <desc xml:lang="en" versionDate="2023-01-05">The following list of articulations mostly corresponds to symbols from the Western Musical Symbols portion of the Unicode Standard. The dot and stroke values may be used in cases where interpretation is difficult or undesirable.</desc>
+        	
+        	<!-- mei macros -->
+        	<macroSpec ident="data.ARTICULATION" module="MEI" mode="change">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Datatype ARTICULATION</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Datentyp ARTICULATION</gloss>
             <content>
               <valList type="closed" mode="change">
                 <valItem ident="arco" mode="add">
@@ -182,7 +205,10 @@
             </content>
           </macroSpec>
         	<macroSpec ident="data.BEAT.extention" module="MEI" mode="add">
-        		<desc xml:lang="en" versionDate="2023-02-10">Combining data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; Can be absolut (Tm+Zz or T) or relative (+/-Tm+Zz). If relative +/- has to be used to differ from absolute values.</desc>
+        		<gloss xml:lang="en" versionDate="2023-03-19">Datatype BEAT (extention)</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Datentyp BEAT (Erweiterung)</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Combining data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; The values can be absolut ([measure]+[count] or [measure]) or relative (+/-[measure]+[count]). If the value is recorded in relative mode the use of +/- has to be used to differ from absolute values.</desc>
+        		<desc xml:lang="en" versionDate="2023-03-19">Kombination aus data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; Die Werte können absolut ([Taktzahl]+[Zählzeit] oder [Taktzahl]) oder relativ (+/-[Taktzahl]+[Zählzeit]) angegeben werden. Falls die Werte im relativen Modus erfasst werden, ist die Verwendung von +/- obligatorisch, um die relativen von absoluten Werten unterscheiden zu können.</desc>
         		<content>
 	        			<rng:data type="token">
 	        				<rng:param name="pattern">(([0-9]+m\s*\+\s*)?[0-9]+(\.?[0-9]*)?)|((\+|-)?[0-9]+m\+[0-9]+(\.[0-9]*)?)|([0-9]+)</rng:param>
@@ -190,8 +216,88 @@
         		</content>
         	</macroSpec>
         	
+        	<!-- crapp classes -->
+        	<classSpec type="atts" ident="att.label" module="core">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class label</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse label</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Class for attributes used to label elements in any way.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Klasse für Attribute, die Elemente in irgendeiner Weise bezeichnen.</desc>
+        		<attList>
+        			<attDef ident="label">
+        				<datatype>
+        					<dataRef key="text"/>
+        				</datatype>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec type="atts" ident="att.numbering" module="core">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class numbering</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse numbering</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Class for attributes used for numbering or counting.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Klasse für Attribute, die für Nummerierungen oder Zählungen verwendet werden.</desc>
+        		<attList>
+        			<attDef ident="num">
+        				<gloss xml:lang="en" versionDate="2023-03-19">number</gloss>
+        				<gloss xml:lang="de" versionDate="2023-03-19">Nummer</gloss>
+        				<desc xml:lang="en" versionDate="2023-03-19">Attribute for numbering. The value must be an integer.</desc>
+        				<desc xml:lang="de" versionDate="2023-03-19">Attribut für eine Nummerierung. Der Wert muss eine Ganzzahl (integer) sein.</desc>
+        				<datatype>
+        					<dataRef key="integer"/>
+        				</datatype>
+        			</attDef>
+        			<attDef ident="sortNo">
+        				<gloss xml:lang="en" versionDate="2023-03-19">sorting number</gloss>
+        				<gloss xml:lang="de" versionDate="2023-03-19">Sortiernummer</gloss>
+        				<desc xml:lang="en" versionDate="2023-03-19">Attribute for sorting purpose. The value must be an integer.</desc>
+        				<desc xml:lang="de" versionDate="2023-03-19">Attribut für Sortierzwecke. Der Wert muss eine Ganzzahl (integer) sein.</desc>
+        				<datatype>
+        					<dataRef key="integer"/>
+        				</datatype>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec type="atts" ident="att.target" module="core">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class target</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse target</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Attributes for defining an explicit target.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Klasse für Attribute, die ein definiertes Ziel angeben.</desc>
+        		<attList>
+        			<attDef ident="target">
+        				<desc xml:lang="en" versionDate="2023-03-19">The value must be an URI.</desc>
+        				<desc xml:lang="de" versionDate="2023-03-19">Der Wert muss vom Typ URI sein.</desc>
+        				<datatype>
+        					<dataRef key="URI"/>
+        				</datatype>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	<classSpec type="atts" ident="att.timing" module="core">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class timing</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse timing</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Attributes concerning timing.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Attribute, die das Timing betreffen.</desc>
+        		<attList>
+        			<attDef ident="measure" usage="req">
+        				<desc xml:lang="en" versionDate="2023-03-19">An attribute for defining a measure as a time stamp. The value must be a positive integer.</desc>
+        				<desc xml:lang="de" versionDate="2023-03-19">Attribut zur Erfassung einer Taktzahl als Zeitstempel. Der Wert muss eine positive Ganzzahl (integer) sein.</desc>
+        				<datatype>
+        					<dataRef name="nonNegativeInteger"/>
+        				</datatype>
+        			</attDef>
+        			<attDef ident="count">
+        				<desc xml:lang="en" versionDate="2023-03-19">An attribute for defining a count as a time stamp. The value must be a positive integer.</desc>
+        				<desc xml:lang="de" versionDate="2023-03-19">Attribut zur Erfassung einer Zählzeit als Zeitstempel. Der Wert muss eine positive Ganzzahl (integer) sein.</desc>
+        				<datatype>
+        					<dataRef name="nonNegativeInteger"/>
+        				</datatype>
+        			</attDef>
+        		</attList>
+        	</classSpec>
+        	
+        	<!-- mei classes -->
         	<classSpec ident="att.classed" module="MEI.shared" type="atts" mode="change">
-<!--        		<desc xml:lang="en">Attributes which can be used to classify features.</desc>-->
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class classed</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse classed</gloss>
         		<attList>
         			<attDef ident="class" usage="opt" mode="change">
 <!--        				<desc xml:lang="en">Contains one or more URIs which denote classification terms that apply to the entity bearing this attribute.</desc>-->
@@ -205,71 +311,85 @@
         			</attDef>
         		</attList>
         	</classSpec>
-        	<classSpec type="atts" ident="att.numbering" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">A class for attributes that are used for numbering or counting</desc>
-            <attList>
-              <attDef ident="no">
-                <desc xml:lang="en" versionDate="2022-04-01">An attribute for a numbering. The value must be an integer.</desc>
-                <datatype>
-                  <dataRef key="integer"/>
-                </datatype>
-              </attDef>
-              <attDef ident="sortNo">
-                <desc xml:lang="en" versionDate="2022-04-01">An attribute for ordering purpose. The value must be a positive integer.</desc>
-                <datatype>
-                  <dataRef key="integer"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
-        	<classSpec ident="att.responsibility" module="MEI.shared" type="atts" mode="change">
-        		<desc xml:lang="en">Attributes capturing information regarding responsibility for some aspect of the text's creation, transcription, editing, or encoding.</desc>
+        	<classSpec ident="att.handIdent" module="MEI.shared" type="atts" mode="change">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class handIdent</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse handIdent</gloss>
         		<attList>
-        			<attDef ident="resp" usage="opt" mode="change">
-        				<desc xml:lang="en">Indicates the agent(s) responsible for some aspect of the text’s transcription, editing, or encoding. Its value must point to one or more identifiers declared in the document header.</desc>
-        				<datatype maxOccurs="unbounded">
-        					<rng:ref name="data.URI"/>
-        				</datatype>
-        				<constraintSpec ident="check_respTarget" scheme="schematron">
+        			<attDef ident="hand" usage="opt" mode="change">
+        				<constraintSpec ident="check_handTarget" scheme="schematron">
         					<constraint>
-        						<sch:rule context="@resp">
-        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@resp attribute should have content.</sch:assert>
-        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:classGrp [@label='editor']/crapp:class/@xml:id">The value in @resp should correspond to the @xml:id attribute of a class element within the classGrp with @label='editor'.</sch:assert>
+        						<sch:rule context="@hand">
+        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should have content.</sch:assert>
+        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//*:hand/@xml:id">Each value in @hand should correspond to the @xml:id attribute of a hand element.</sch:assert>
         						</sch:rule>
         					</constraint>
         				</constraintSpec>
         			</attDef>
         		</attList>
         	</classSpec>
-        	<classSpec type="atts" ident="att.timing" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">An attribute class for timing concerns.</desc>
-            <attList>
-              <attDef ident="measure" usage="req">
-                <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a measure as a time stamp. The value must be a positive integer.</desc>
-                <datatype>
-                  <dataRef name="nonNegativeInteger"/>
-                </datatype>
-              </attDef>
-              <attDef ident="count">
-                <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining a count (within a measure) as a detailed part of a time stamp. The value must be a positive integer.</desc>
-                <datatype>
-                  <dataRef name="nonNegativeInteger"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
-          <classSpec type="atts" ident="att.label" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">An attribute for labelling an element in any way.</desc>
-            <attList>
-              <attDef ident="label">
-                <datatype>
-                  <dataRef key="text"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
+        	<classSpec ident="att.linking" module="MEI.shared" type="atts" mode="change">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class linking</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse linking</gloss>
+        		<attList>
+        			<attDef ident="corresp" usage="opt" mode="change">
+        				<desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
+        				<constraintSpec ident="check_correspTarget" scheme="schematron">
+        					<constraint>
+        						<sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+        							<sch:ns uri="http://www.functx.com" prefix="functx"/>
+        							<xsl:function name="functx:contains-any-of" as="xs:boolean">
+        								<xsl:param name="arg" as="xs:string?"/>
+        								<xsl:param name="searchStrings" as="xs:string*"/>
+        								<xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
+        							</xsl:function>
+        							<xsl:function name="functx:substring-before-if-contains" as="xs:string?">
+        								<xsl:param name="arg" as="xs:string?"/>
+        								<xsl:param name="delim" as="xs:string"/>
+        								<xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
+        							</xsl:function>
+        							<sch:pattern id="checkCorrespPointers">
+        								<sch:rule context="@corresp">
+        									<sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+        									<sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+        									<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+        								</sch:rule>
+        							</sch:pattern>
+        						</sch:schema>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        			<attDef ident="sameas" usage="opt" mode="change">
+        				<desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
+        				<constraintSpec ident="check_correspTarget" scheme="schematron">
+        					<constraint>
+        						<sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+        							<sch:ns uri="http://www.functx.com" prefix="functx"/>
+        							<!--<xsl:function name="functx:contains-any-of" as="xs:boolean">
+            						<xsl:param name="arg" as="xs:string?"/>
+            						<xsl:param name="searchStrings" as="xs:string*"/>
+            						<xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
+            					</xsl:function>
+            					<xsl:function name="functx:substring-before-if-contains" as="xs:string?">
+            						<xsl:param name="arg" as="xs:string?"/>
+            						<xsl:param name="delim" as="xs:string"/>
+            						<xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
+            					</xsl:function>-->
+        							<sch:pattern id="checkSameasPointers">
+        								<sch:rule context="@sameas">
+        									<sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
+        									<sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
+        									<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
+        								</sch:rule>
+        							</sch:pattern>
+        						</sch:schema>
+        					</constraint>
+        				</constraintSpec>
+        			</attDef>
+        		</attList>
+        	</classSpec>
         	<classSpec ident="att.partIdent" module="MEI.shared" type="atts" mode="change">
-<!--        		<desc xml:lang="en">Attributes for identifying the part in which the current feature appears.</desc>-->
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class partIdent</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse partIdent</gloss>
         		<attList>
         			<attDef ident="part" usage="opt" mode="change">
         				<desc xml:lang="en">Indicates the part in which the current feature should appear. Use '%all' when the feature should occur in every part.</desc>
@@ -295,91 +415,29 @@
         			</attDef>
         		</attList>
         	</classSpec>
-        	<classSpec type="atts" ident="att.target" module="core">
-            <desc xml:lang="en" versionDate="2022-04-01">An attribute for defining an explicit target to an other destination. The value must be an URI.</desc>
-            <attList>
-              <attDef ident="target">
-                <datatype>
-                  <dataRef key="URI"/>
-                </datatype>
-              </attDef>
-            </attList>
-          </classSpec>
-        	<classSpec ident="att.handIdent" module="MEI.shared" type="atts" mode="change">
+        	<classSpec ident="att.responsibility" module="MEI.shared" type="atts" mode="change">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class responsibility</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse responsibility</gloss>
         		<attList>
-        			<attDef ident="hand" usage="opt" mode="change">
-        				<constraintSpec ident="check_handTarget" scheme="schematron">
+        			<attDef ident="resp" usage="opt" mode="change">
+        				<desc xml:lang="en">Indicates the agent(s) responsible for some aspect of the text’s transcription, editing, or encoding. Its value must point to one or more identifiers declared in the document header.</desc>
+        				<datatype maxOccurs="unbounded">
+        					<rng:ref name="data.URI"/>
+        				</datatype>
+        				<constraintSpec ident="check_respTarget" scheme="schematron">
         					<constraint>
-        						<sch:rule context="@hand">
-        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@hand attribute should have content.</sch:assert>
-        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//*:hand/@xml:id">Each value in @hand should correspond to the @xml:id attribute of a hand element.</sch:assert>
+        						<sch:rule context="@resp">
+        							<sch:assert role="warning" test="not(normalize-space(.) eq '')">@resp attribute should have content.</sch:assert>
+        							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies substring($i,2)=//crapp:classGrp [@label='editor']/crapp:class/@xml:id">The value in @resp should correspond to the @xml:id attribute of a class element within the classGrp with @label='editor'.</sch:assert>
         						</sch:rule>
         					</constraint>
         				</constraintSpec>
         			</attDef>
         		</attList>
         	</classSpec>
-        	<classSpec ident="att.linking" module="MEI.shared" type="atts" mode="change">
-            <desc xml:lang="en">Attributes that specify element-to-element relationships.</desc>
-            <attList>
-              <attDef ident="corresp" usage="opt" mode="change">
-                <desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
-                <constraintSpec ident="check_correspTarget" scheme="schematron">
-                  <constraint>
-                    <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
-                      <sch:ns uri="http://www.functx.com" prefix="functx"/>
-                      <xsl:function name="functx:contains-any-of" as="xs:boolean">
-                        <xsl:param name="arg" as="xs:string?"/>
-                        <xsl:param name="searchStrings" as="xs:string*"/>
-                        <xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
-                      </xsl:function>
-                      <xsl:function name="functx:substring-before-if-contains" as="xs:string?">
-                        <xsl:param name="arg" as="xs:string?"/>
-                        <xsl:param name="delim" as="xs:string"/>
-                        <xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
-                      </xsl:function>
-                      <sch:pattern id="checkCorrespPointers">
-                        <sch:rule context="@corresp">
-                          <sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
-                          <sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
-                          <sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
-                        </sch:rule>
-                      </sch:pattern>
-                    </sch:schema>
-                  </constraint>
-                </constraintSpec>
-              </attDef>
-            	<attDef ident="sameas" usage="opt" mode="change">
-            		<desc xml:lang="en">Used to point to other elements that correspond to this one in a generic fashion.</desc>
-            		<constraintSpec ident="check_correspTarget" scheme="schematron">
-            			<constraint>
-            				<sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
-            					<sch:ns uri="http://www.functx.com" prefix="functx"/>
-            					<!--<xsl:function name="functx:contains-any-of" as="xs:boolean">
-            						<xsl:param name="arg" as="xs:string?"/>
-            						<xsl:param name="searchStrings" as="xs:string*"/>
-            						<xsl:sequence select="some $searchString in $searchStrings satisfies contains($arg,$searchString)"/>
-            					</xsl:function>
-            					<xsl:function name="functx:substring-before-if-contains" as="xs:string?">
-            						<xsl:param name="arg" as="xs:string?"/>
-            						<xsl:param name="delim" as="xs:string"/>
-            						<xsl:sequence select="if (contains($arg,$delim)) then substring-before($arg,$delim) else $arg"/>
-            					</xsl:function>-->
-            					<sch:pattern id="checkSameasPointers">
-            						<sch:rule context="@sameas">
-            							<sch:let name="measurePointers" value="//crapp:mdiv/concat('mdiv-',@no)"/>
-            							<sch:assert role="error" test="not(normalize-space(.) eq '')">@corresp attribute should have content.</sch:assert>
-            							<sch:assert role="warning" test="every $i in tokenize(., '\s+') satisfies (substring($i,2)=//crapp:*/@xml:id or matches(substring($i,2),'mdiv\-\d+(_m\-\d+)?(_c-\d\d?)?$'))">Each value in @corresp should correspond to the @xml:id attribute of an element.</sch:assert>
-            						</sch:rule>
-            					</sch:pattern>
-            				</sch:schema>
-            			</constraint>
-            		</constraintSpec>
-            	</attDef>
-            </attList>
-          </classSpec>
-          <classSpec ident="att.source" module="MEI.shared" type="atts" mode="change">
-            <desc xml:lang="en">Attributes common to elements that may refer to a source.</desc>
+        	<classSpec ident="att.source" module="MEI.shared" type="atts" mode="change">
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class source</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse source</gloss>
             <attList>
               <attDef ident="source" usage="opt" mode="change">
                 <desc xml:lang="en">Contains a list of one or more pointers indicating the sources which attest to a given reading. Each value should correspond to the ID of a <gi scheme="MEI">manifestation</gi> element.</desc>
@@ -395,7 +453,8 @@
             </attList>
           </classSpec>
           <classSpec ident="att.startEndId" module="MEI.shared" type="atts" mode="change">
-            <desc xml:lang="en">Attributes recording the identifiers of the first and last elements of a sequence of elements to which the current element is associated.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">Attribute class startEndId</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse startEndId</gloss>
             <classes>
               <memberOf key="att.startId"/>
             </classes>
@@ -413,7 +472,8 @@
             </attList>
           </classSpec>
           <classSpec ident="att.startId" module="MEI.shared" type="atts" mode="change">
-            <desc xml:lang="en">Attributes that identify a relative starting point.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">Attribute class startId</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse startId</gloss>
             <attList>
               <attDef ident="startid" usage="opt" mode="change">
                 <desc xml:lang="en">Holds a reference to the first element in a sequence of events to which the feature applies.</desc>
@@ -429,9 +489,8 @@
             </attList>
           </classSpec>
         	<classSpec ident="att.timestamp.log" module="MEI.shared" type="atts" mode="change">
-        		<desc xml:lang="en">Attributes that record a time stamp in terms of musical time,
-        			<abbr>i.e.</abbr>
-        			, beats[.fractional beat part].</desc>
+        		<gloss xml:lang="en" versionDate="2023-03-19">Attribute class timestamp.log</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Attributklasse timestamp.log</gloss>
         		<attList>
         			<attDef ident="tstamp" usage="opt" mode="change">
         				<gloss versionDate="2023-02-10" xml:lang="en">time stamp</gloss>
@@ -443,7 +502,13 @@
         			</attDef>
         		</attList>
         	</classSpec>
-        	<constraintSpec ident="set_ns" scheme="schematron" mode="add">
+        	
+        	<!-- crapp constraints -->
+        	<constraintSpec ident="set_ns" module="core" scheme="schematron" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">set namespace</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">set namespace</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Declaration of namespaces for schematron.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Namensraumdeklarationen für schematron.</desc>
             <constraint>
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" uri="http://baumann-digital.de/ns/crApp"/>
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="crapp" uri="http://baumann-digital.de/ns/crApp"/>
@@ -451,8 +516,11 @@
               <sch:ns xmlns:sch="http://purl.oclc.org/dsdl/schematron" prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="setting-values-check" module="core" scheme="schematron">
-            <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called values are defined somewhere in the <gi>setting</gi> element.</desc>
+        	<constraintSpec ident="setting-values-check" module="core" scheme="schematron" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">value check for setting</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Werteüberprüfung für Setting</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Checks if the used values are defined somwhere in the <gi>setting</gi> element.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Prüft, ob die verwendeten Werte innerhalb des <gi>setting</gi> Elemetns definiert sind.</desc>
             <constraint>
               <sch:schema xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
                 <sch:ns uri="http://baumann-digital.de/ns/crApp" prefix="crapp"/>
@@ -495,8 +563,11 @@
               </sch:schema>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="check-part-combination" module="core" scheme="schematron">
-            <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g. if the parent or ancestor group is also called.</desc>
+        	<constraintSpec ident="check-part-combination" module="core" scheme="schematron" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">value check for part combination</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Werteüberprüfung für Stimmenkombinationen</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Checks if the named parts at a remark are redundant, e.g., if the part groupis called also.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Prüft, ob die genannten Stimmen in einer Anmerkung redundant sind, z.B. ob die Stimmengruppe ebenfalls genannt wird.</desc>
             <constraint>
               <sch:rule context="crapp:remark//crapp:part">
                 <sch:let name="partVal" value="./text()"/>
@@ -505,8 +576,11 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="check-partGrp-combination" module="core" scheme="schematron">
-            <desc xml:lang="en" versionDate="2022-04-01">This constraint checks if the called voices inside a remark are redundant, e.g. if the parent or ancestor group is also called.</desc>
+        	<constraintSpec ident="check-partGrp-combination" module="core" scheme="schematron" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">value check for part group combination</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Werteüberprüfung für Stimmengruppenkombinationen</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Checks if the named part groups at a remark are redundant, e.g., if the parent or ancestor group is called also.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Prüft, ob die genannten Stimmengruppen in einer Anmerkung redundant sind, z.B. ob das Elternelement oder ein anderer Vorfahre ebenso genannt wird.</desc>
             <constraint>
               <sch:rule context="crapp:remark//crapp:partGrp">
                 <sch:let name="partGrpVal" value="./text()"/>
@@ -515,8 +589,12 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="check-measure-count-value" scheme="schematron">
-            <constraint>
+        	<constraintSpec ident="check-measure-count-value" module="core" scheme="schematron" mode="add">
+        		<gloss xml:lang="en" versionDate="2023-03-19">value check for measure count</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Werteüberprüfung für Zählzeit</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Checks if the given count exists in the meter.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Prüft, ob die genannte Zählzeit in der Taktart vorkommt.</desc>
+        		<constraint>
               <sch:rule context="crapp:measure[@count]|crapp:range[@count]">
                 <sch:let name="meterCount" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@count"/>
                 <sch:let name="meterUnit" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@unit"/>
@@ -524,8 +602,14 @@
                   </sch:rule>
             </constraint>
           </constraintSpec>
-          <elementSpec ident="annot" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <content>
+          
+        	<!-- crapp elements -->
+        	<elementSpec ident="annot" module="remark" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">annotation</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Annotation</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Bears an annotation to the critical remark</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Enthält eine Annotation zur kritischen Anmerkung.</desc>
+        		<content>
               <macroRef key="crApp.annot.content"/>
             </content>
             <attList>
@@ -564,38 +648,20 @@
             </attList>
           </elementSpec>
           <elementSpec ident="annots" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for annotations (annot-elements)</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">annotations</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Annotationen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>annot</gi> elements.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>annot</gi> Elemente.</desc>
             <content>
               <elementRef key="annot" minOccurs="1" maxOccurs="unbounded"/>
               <!-- source="../../MusicEncoding/music-encoding/source/modules/MEI.shared.xml" -->
             </content>
           </elementSpec>
-        	<elementSpec ident="dir" module="MEI.shared" ns="http://baumann-digital.de/ns/crApp" mode="change">
-        		<content>
-        			<rng:zeroOrMore>
-        				<rng:choice>
-        					<rng:text/>
-        					<rng:ref name="model.textPhraseLike.limited"/>
-        					<rng:ref name="model.graphicPrimitiveLike"/>
-        					<rng:ref name="model.editLike"/>
-        					<rng:ref name="model.transcriptionLike"/>
-        					<rng:ref name="lb"/>
-        				</rng:choice>
-        			</rng:zeroOrMore>
-        		</content>
-        	</elementSpec>
-        	<elementSpec ident="crApp" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">The root element for the critical apparatus.</desc>
-            <classes>
-              <memberOf key="att.id"/>
-            </classes>
-            <content>
-              <elementRef key="setting" minOccurs="1" maxOccurs="1"/>
-              <elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
-          <elementSpec ident="class" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">An Element that defines a class or category to be used for classifying.</desc>
+        	<elementSpec ident="class" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">class</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Klassifizierung</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Defines a class or category to be used for classifying.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definiert eine Klasse oder Kategorie, die zur Klassifizerung verwendet wird.</desc>
             <classes>
               <memberOf key="att.canonical"/>
               <memberOf key="att.id"/>
@@ -616,7 +682,10 @@
             </constraintSpec>
           </elementSpec>
           <elementSpec ident="classGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for grouping classes.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">class Group</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Klassifizierungsgruppe</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for class definitions.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für Klassendefinitionen.</desc>
             <classes>
               <memberOf key="att.label"/>
             </classes>
@@ -625,13 +694,33 @@
             </content>
           </elementSpec>
           <elementSpec ident="classifications" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A wrapper to organize classifications.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">classifications</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Klassifizierungen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container to organize classifications.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container um Klassifizierungen zu organisieren.</desc>
             <content>
               <elementRef key="classGrp" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="edition" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <classes>
+        	<elementSpec ident="crApp" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">critical apparatus</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Kritischer Apparat</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">The root element of the crApp schema.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Das Wurzelelement des crApp-Schemas.</desc>
+        		<classes>
+        			<memberOf key="att.id"/>
+        		</classes>
+        		<content>
+        			<elementRef key="setting" minOccurs="1" maxOccurs="1"/>
+        			<elementRef key="remarks" minOccurs="1" maxOccurs="unbounded"/>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="edition" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">edition</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Edition</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Defines an edition or a part of an edition.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definiert eine Edition oder einen Teil einer Edition.</desc>
+        		<classes>
               <memberOf key="att.id"/>
               <memberOf key="att.numbering"/>
               <memberOf key="att.target"/>
@@ -651,23 +740,11 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="editions" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for editions (edition-elements)</desc>
-            <content>
-              <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
-          <!--<elementSpec ident="label" mode="add" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">An Element that defines a class or category to be used for classifying.</desc>
-            <classes>
-              <memberOf key="att.lang"/>
-            </classes>
-            <content>
-              <textNode/>
-            </content>
-          </elementSpec>-->
           <elementSpec ident="language" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">An Element that defines the language used for the settings. Al other labels are treated as translations.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">language</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Sprache</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines the main language used.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert die verwendete Hauptsprache.</desc>
             <classes>
               <memberOf key="att.canonical"/>
             </classes>
@@ -682,36 +759,12 @@
               </attDef>
             </attList>
           </elementSpec>
-          <!--          <elementSpec ident="layer" mode="add" prefix="mei" module="MEI.shared" ns="http://www.music-encoding.org/ns/mei"/>-->
-          <elementSpec ident="layer" prefix="crapp" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">An Element defining a layer as a subordinated unit of a voice.</desc>
-            <classes>
-              <memberOf key="att.canonical"/>
-            </classes>
-            <content>
-              <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-            <constraintSpec ident="check-values-layer" scheme="schematron">
-              <constraint>
-                <sch:pattern is-a="checkValues">
-                  <sch:param name="elementName" value="layer"/>
-                  <sch:param name="attrStr" value="key"/>
-                </sch:pattern>
-              </constraint>
-            </constraintSpec>
-          </elementSpec>
-          <elementSpec ident="layerGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for layer-elements.</desc>
-            <classes>
-              <memberOf key="att.canonical"/>
-            </classes>
-            <content>
-              <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-              <elementRef key="layer" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
           <elementSpec ident="mdiv" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <classes>
+          	<gloss xml:lang="en" versionDate="2023-03-19">musical division</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalsicher Abschnitt</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines a musical devision of a work</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert einen musikalischen Abschnitt eines Werkes.</desc>
+          	<classes>
               <memberOf key="att.numbering"/>
             </classes>
             <content>
@@ -730,12 +783,19 @@
             </constraintSpec>
           </elementSpec>
           <elementSpec ident="mdivs" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <content>
+          	<gloss xml:lang="en" versionDate="2023-03-19">musical divisions</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalsiche Abschnitte</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>mdiv</gi> elements.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>mdiv</gi> Elemente.</desc>
+          	<content>
               <elementRef key="mdiv" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
           <elementSpec ident="measures" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en">Defines the number and numbering of the measures</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">measures</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Takte</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Records the Count of measures of a work.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Erfasst die Anzahl der Takte eines Werkes.</desc>
             <content>
               <empty/>
             </content>
@@ -759,7 +819,11 @@
             </attList>
           </elementSpec>
           <elementSpec ident="occurance" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <content>
+          	<gloss xml:lang="en" versionDate="2023-03-19">occurance</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Vorkommen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines a place in the musical structure, represented by a position or range.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert einen Ort in der musikalischen Struktur, repräsentiert durhc eine Position oder einen Bereich.</desc>
+          	<content>
               <alternate>
                 <elementRef key="position" minOccurs="1" maxOccurs="1"/>
                 <sequence>
@@ -770,12 +834,19 @@
             </content>
           </elementSpec>
           <elementSpec ident="occurances" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <content>
+          	<gloss xml:lang="en" versionDate="2023-03-19">occurances</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Vorkommen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>occurance</gi> elements.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>occurance</gi> Elemente.</desc>
+          	<content>
               <elementRef key="occurance" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
           <elementSpec ident="part" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">An Element defining a vocal or instrumental part.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">part</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Stimme</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines an instrumental or vocal part of the work.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert eine Instrumental- oder Vokalstimme eines Werkes.</desc>
             <classes>
               <memberOf key="att.canonical"/>
               <memberOf key="att.id"/>
@@ -829,7 +900,11 @@
             </attList>
           </elementSpec>
           <elementSpec ident="partGrp" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <classes>
+          	<gloss xml:lang="en" versionDate="2023-03-19">part group</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Stimmgruppe</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines a part group.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert eine Stimmgruppe.</desc>
+          	<classes>
               <memberOf key="att.canonical"/>
               <memberOf key="att.id"/>
             </classes>
@@ -855,7 +930,10 @@
             </constraintSpec>
           </elementSpec>
           <elementSpec ident="parts" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for voices (voice-elements)</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">parts</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Stimmen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>partGrp</gi> and <gi>part</gi> elements.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>partGrp</gi> und <gi>part</gi> Elemente.</desc>
             <content>
               <alternate>
                 <sequence preserveOrder="false" maxOccurs="unbounded">
@@ -875,58 +953,20 @@
             </constraintSpec>
           </elementSpec>
           <elementSpec ident="position" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <classes>
+          	<gloss xml:lang="en" versionDate="2023-03-19">measure position</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Taktposition</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Defines a position in the metrical structure.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Definiert eine Posiiton in der metrischen Struktur.</desc>
+          	<classes>
               <memberOf key="att.timing"/>
             </classes>
           </elementSpec>
-        	<elementSpec ident="pb" module="MEI.shared" mode="change" ns="http://baumann-digital.de/ns/crApp">
-          	<content>
-          		<empty/>
-          	</content>
-          </elementSpec>
-        	<elementSpec ident="ptr" module="MEI.ptrref" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <attList>
-              <attDef ident="type" mode="change">
-                <valList mode="add" type="closed">
-                  <valItem ident="adapt">
-                    <gloss xml:lang="en" versionDate="2022-01-07">adaption</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">angeglichen</gloss>
-                  </valItem>
-                  <valItem ident="compare">
-                    <gloss xml:lang="en" versionDate="2022-01-07">compare</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">vergleiche</gloss>
-                  </valItem>
-                  <valItem ident="end">
-                    <gloss xml:lang="en" versionDate="2022-01-07">ending point</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">Ende</gloss>
-                  </valItem>
-                  <valItem ident="start">
-                    <gloss xml:lang="en" versionDate="2022-01-07">starting point</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">Beginn</gloss>
-                  </valItem>
-                  <valItem ident="follow">
-                    <gloss xml:lang="en" versionDate="2022-01-07">following</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">folgt</gloss>
-                  </valItem>
-                  <valItem ident="see">
-                    <gloss xml:lang="en" versionDate="2022-01-07">see also</gloss>
-                    <gloss xml:lang="de" versionDate="2022-01-07">siehe auch</gloss>
-                  </valItem>
-                </valList>
-              </attDef>
-            </attList>
-          </elementSpec>
-          <elementSpec ident="q" module="MEI.text" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <content>
-              <sequence preserveOrder="false" maxOccurs="unbounded">
-                <textNode/>
-                <classRef key="model.textPhraseLike" minOccurs="0"/>
-                <elementRef key="note" minOccurs="0"/>
-              </sequence>
-            </content>
-          </elementSpec>
-          <elementSpec ident="range" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <classes>
+        	<elementSpec ident="range" module="remark" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">measure range</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Taktbereich</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Defines a range in the metrical structure.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definiert einen Bereich in der metrischen Struktur.</desc>
+        		<classes>
               <memberOf key="att.timing"/>
             </classes>
             <constraintSpec ident="range-type-vals" scheme="schematron">
@@ -954,21 +994,35 @@
               </attDef>
             </attList>
           </elementSpec>
-        	<elementSpec ident="rdg" module="MEI.critapp" mode="change" ns="http://baumann-digital.de/ns/crApp">
-        		<gloss xml:lang="en" versionDate="2023-02-10">reading</gloss>
-        		<desc xml:lang="en" versionDate="2023-02-10">Contains a single reading within a textual variation.</desc>
-        		<classes mode="change">
-        			<memberOf key="att.evidence" mode="add"/>
-        		</classes>
-        	</elementSpec>
         	<elementSpec ident="relEditions" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A Wrapper for editions related to the critical apparatus</desc>
+        		<gloss xml:lang="en" versionDate="2023-03-19">related editions</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Assoziierte Editionen</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Defines editions related to the critcal apparatus.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definiert Editionen, die im Zusammenhang zum kritischen Apparat stehen.</desc>
             <content>
               <elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
-          <elementSpec ident="remark" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A critical remark.</desc>
+        	<elementSpec ident="relWork" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        		<desc xml:lang="en" versionDate="2022-04-01">A reference to a work this critical apparatus is made for.</desc>
+        		<gloss xml:lang="en" versionDate="2023-03-19">related Work</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Assoziiertes Werk</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Defines a work.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definiert ein Werk.</desc>
+        		<classes>
+        			<memberOf key="att.target"/>
+        			<memberOf key="att.id"/>
+        		</classes>
+        		<content>
+        			<elementRef key="measures"/>
+        			<elementRef key="meter"/>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="remark" module="remark" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">critical remark</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Kritische Anmerkung</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">A critical remark relating to an edition.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Eine kritische Anermkung, die sich auf eine Edition bezieht.</desc>
             <classes>
               <memberOf key="att.id"/>
             </classes>
@@ -1030,13 +1084,19 @@
             </exemplum>
           </elementSpec>
           <elementSpec ident="remarks" module="remark" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A wrapper critical remarks.</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">remarks</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Anmerkungen</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>remark</gi> elements.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>remark</gi> Elemente.</desc>
             <content>
               <elementRef key="remark" minOccurs="1" maxOccurs="unbounded"/>
             </content>
           </elementSpec>
           <elementSpec ident="setting" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">Die Grundinformationen (Zugehörige Quellen, Instrumente/Stimmen, Editionen)</desc>
+          	<gloss xml:lang="en" versionDate="2023-03-19">setting</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Grundkonstellation</gloss>
+          	<desc xml:lang="en" versionDate="2023-03-19">Records the setting of the described work.</desc>
+          	<desc xml:lang="de" versionDate="2023-03-19">Erfasst die Grundkonstellation des beschriebenen Werkes.</desc>
             <classes>
               <memberOf key="att.basic" mode="add"/>
             </classes>
@@ -1044,68 +1104,126 @@
               <elementRef key="language"/>
               <elementRef key="mdivs"/>
               <elementRef key="parts"/>
-              <elementRef key="work"/>
+              <elementRef key="relWork"/>
               <elementRef key="manifestationList"/>
               <elementRef key="relEditions"/>
               <elementRef key="classifications"/>
             	<elementRef key="handList"/>
             </content>
           </elementSpec>
-        	<elementSpec ident="tempo" module="MEI.shared" ns="http://baumann-digital.de/ns/crApp" mode="change">
+          
+        	<!-- mei elements -->
+        	<elementSpec ident="dir" module="MEI.shared" mode="change" ns="http://baumann-digital.de/ns/crApp">
         		<content>
-        				<rng:zeroOrMore>
-        					<rng:choice>
-        						<rng:text/>
-        						<rng:ref name="model.textPhraseLike.limited"/>
-        						<rng:ref name="model.graphicPrimitiveLike"/>
-        						<rng:ref name="model.editLike"/>
-        						<rng:ref name="model.transcriptionLike"/>
-        						<rng:ref name="note"/>
-        					</rng:choice>
-        				</rng:zeroOrMore>
+        			<rng:zeroOrMore>
+        				<rng:choice>
+        					<rng:text/>
+        					<rng:ref name="model.textPhraseLike.limited"/>
+        					<rng:ref name="model.graphicPrimitiveLike"/>
+        					<rng:ref name="model.editLike"/>
+        					<rng:ref name="model.transcriptionLike"/>
+        					<rng:ref name="lb"/>
+        				</rng:choice>
+        			</rng:zeroOrMore>
         		</content>
         	</elementSpec>
-        	
+        	<elementSpec ident="pb" module="MEI.shared" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<content>
+        			<empty/>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="ptr" module="MEI.ptrref" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<attList>
+        			<attDef ident="type" mode="change">
+        				<valList mode="add" type="closed">
+        					<valItem ident="adapt">
+        						<gloss xml:lang="en" versionDate="2022-01-07">adaption</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">angeglichen</gloss>
+        					</valItem>
+        					<valItem ident="compare">
+        						<gloss xml:lang="en" versionDate="2022-01-07">compare</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">vergleiche</gloss>
+        					</valItem>
+        					<valItem ident="end">
+        						<gloss xml:lang="en" versionDate="2022-01-07">ending point</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">Ende</gloss>
+        					</valItem>
+        					<valItem ident="start">
+        						<gloss xml:lang="en" versionDate="2022-01-07">starting point</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">Beginn</gloss>
+        					</valItem>
+        					<valItem ident="follow">
+        						<gloss xml:lang="en" versionDate="2022-01-07">following</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">folgt</gloss>
+        					</valItem>
+        					<valItem ident="see">
+        						<gloss xml:lang="en" versionDate="2022-01-07">see also</gloss>
+        						<gloss xml:lang="de" versionDate="2022-01-07">siehe auch</gloss>
+        					</valItem>
+        				</valList>
+        			</attDef>
+        		</attList>
+        	</elementSpec>
+        	<elementSpec ident="q" module="MEI.text" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<content>
+        			<sequence preserveOrder="false" maxOccurs="unbounded">
+        				<textNode/>
+        				<classRef key="model.textPhraseLike" minOccurs="0"/>
+        				<elementRef key="note" minOccurs="0"/>
+        			</sequence>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="rdg" module="MEI.critapp" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<classes mode="change">
+        			<memberOf key="att.evidence" mode="add"/>
+        		</classes>
+        	</elementSpec>
+        	<elementSpec ident="tempo" module="MEI.shared" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<content>
+        			<rng:zeroOrMore>
+        				<rng:choice>
+        					<rng:text/>
+        					<rng:ref name="model.textPhraseLike.limited"/>
+        					<rng:ref name="model.graphicPrimitiveLike"/>
+        					<rng:ref name="model.editLike"/>
+        					<rng:ref name="model.transcriptionLike"/>
+        					<rng:ref name="note"/>
+        				</rng:choice>
+        			</rng:zeroOrMore>
+        		</content>
+        	</elementSpec>
         	<elementSpec ident="manifestationList" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-05">A Wrapper for sources related to the critical apparatus</desc>
-            <content>
-              <elementRef key="manifestation" minOccurs="1" maxOccurs="unbounded"/>
-            </content>
-          </elementSpec>
-          <elementSpec ident="manifestation" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-05">A definition of a source</desc>
-            <classes>
-              <memberOf key="att.numbering"/>
-              <memberOf key="att.target"/>
-              <memberOf key="att.id"/>
-            </classes>
-            <content>
-              <alternate>
-                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
-                <textNode/>
-              </alternate>
-            </content>
-            <constraintSpec ident="check-values-source" scheme="schematron">
-              <constraint>
-                <sch:pattern is-a="checkValues">
-                  <sch:param name="elementName" value="manifestation"/>
-                  <sch:param name="attrStr" value="id"/>
-                </sch:pattern>
-              </constraint>
-            </constraintSpec>
-          </elementSpec>
-          <elementSpec ident="work" module="setting" ns="http://baumann-digital.de/ns/crApp">
-            <desc xml:lang="en" versionDate="2022-04-01">A reference to a work this critical apparatus is made for.</desc>
-            <classes>
-              <memberOf key="att.target"/>
-              <memberOf key="att.id"/>
-            </classes>
-            <content>
-              <elementRef key="measures"/>
-              <elementRef key="meter"/>
-            </content>
-          </elementSpec>
-          </schemaSpec>
+        		<desc xml:lang="en" versionDate="2023-03-19">A container for <gi>manifestation</gi> elements.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Ein Container für <gi>manifestation</gi> Elemente.</desc>
+        		<content>
+        			<elementRef key="manifestation" minOccurs="1" maxOccurs="unbounded"/>
+        		</content>
+        	</elementSpec>
+        	<elementSpec ident="manifestation" module="MEI.frbr" mode="change" ns="http://baumann-digital.de/ns/crApp">
+        		<desc xml:lang="en" versionDate="2023-03-19">Definition of a source</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Definition einer Quelle.</desc>
+        		<classes>
+        			<memberOf key="att.numbering"/>
+        			<memberOf key="att.target"/>
+        			<memberOf key="att.id"/>
+        		</classes>
+        		<content>
+        			<alternate>
+        				<elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+        				<textNode/>
+        			</alternate>
+        		</content>
+        		<constraintSpec ident="check-values-source" scheme="schematron">
+        			<constraint>
+        				<sch:pattern is-a="checkValues">
+        					<sch:param name="elementName" value="manifestation"/>
+        					<sch:param name="attrStr" value="id"/>
+        				</sch:pattern>
+        			</constraint>
+        		</constraintSpec>
+        	</elementSpec>
+        	
+        </schemaSpec>
       </div>
     </back>
   </text>
