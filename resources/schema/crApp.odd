@@ -34,7 +34,7 @@
     <back>
       <div>
         <head>Specifications of the crApp schema</head>
-        <schemaSpec ident="crApp" xml:lang="en" start="crApp setting" ns="http://baumann-digital.de/ns/crApp">
+        <schemaSpec ident="crApp" xml:lang="en" start="crApp setting" predeclare="true" ns="http://baumann-digital.de/ns/crApp">
         	
         	<!-- crapp modules -->
           <moduleSpec ident="core">
@@ -740,7 +740,17 @@
               </constraint>
             </constraintSpec>
           </elementSpec>
-          <elementSpec ident="language" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        	<elementSpec ident="editionList" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        		<gloss xml:lang="en" versionDate="2023-03-19">edition list</gloss>
+        		<gloss xml:lang="de" versionDate="2023-03-19">Liste der Edition</gloss>
+        		<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>edition</gi> Elements.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>edition</gi> Elemente.</desc>
+        		<content>
+        				<elementRef key="edition" minOccurs="1" maxOccurs="unbounded"/>
+        		</content>
+        	</elementSpec>
+        	
+        	<elementSpec ident="language" module="setting" ns="http://baumann-digital.de/ns/crApp">
           	<gloss xml:lang="en" versionDate="2023-03-19">language</gloss>
           	<gloss xml:lang="de" versionDate="2023-03-19">Sprache</gloss>
           	<desc xml:lang="en" versionDate="2023-03-19">Defines the main language used.</desc>
@@ -777,7 +787,7 @@
               <constraint>
                 <sch:pattern is-a="checkValues">
                   <sch:param name="elementName" value="mdiv"/>
-                  <sch:param name="attrStr" value="no"/>
+                  <sch:param name="attrStr" value="num"/>
                 </sch:pattern>
               </constraint>
             </constraintSpec>
@@ -1034,7 +1044,7 @@
               <!--            <elementRef key="layers" maxOccurs="1"/>-->
               <elementRef key="annots" minOccurs="1"/>
               <elementRef key="manifestationList" maxOccurs="1"/>
-              <elementRef key="editions" maxOccurs="1"/>
+              <elementRef key="editionList" maxOccurs="1"/>
             </content>
             <attList>
               <attDef ident="type" usage="req">
@@ -1073,12 +1083,12 @@
                   <annots>
                     <annot><dynam>f</dynam></annot>
                   </annots>
-                  <sources>
+                  <manifestationList>
                     <source>A-P3</source>
-                  </sources>
-                  <editions>
+                  </manifestationList>
+                  <editionList>
                     <edition>BauDi-P</edition>
-                  </editions>
+                  </editionList>
                 </remark>
               </egXML>
             </exemplum>

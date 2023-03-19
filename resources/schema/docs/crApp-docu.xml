@@ -44,8 +44,7 @@
     <div xml:id="relWorks">
       <head>Assoziierte Werke (related works)</head>
       <specList>
-        <specDesc key="relWorks"/>
-        <specDesc key="work"/>
+        <specDesc key="relWork"/>
       </specList>
       <p>An dieser Stelle erfolgt die Zuordnung der kritischen Anmerkungen zu einem Werk. Dies kann mittels ID-Verweis geschehen (<att>key</att>) oder über einen expliziten Dateipfad, der im Attribut <att>target</att> angegeben wird. Hier ist zu beachten, welchen Zweck die Zuordnung verfolgen soll bzw. in welchen Kontext die Kritischen Anmekrungen eingebunden werden.</p>
       <p>Sollen die erfassten Anmerkungen über die crApp-Applikation visualisiert werden, so ist es es ausreichend, wenn die Referenzierung über <att>key</att> erfolgt. Vorausgesetzt natürlich, dass sich die Referenzdatensätze in der selben Datenbank befinden in der die Applikation installiert ist.</p>
