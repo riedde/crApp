@@ -37,19 +37,19 @@
         <schemaSpec ident="crApp" xml:lang="en" start="crApp setting" predeclare="true" ns="http://baumann-digital.de/ns/crApp">
         	
         	<!-- crapp modules -->
-          <moduleSpec ident="core">
+          <moduleSpec ident="core" mode="add">
           	<gloss xml:lang="en" versionDate="2023-03-19">Core Module</gloss>
           	<gloss xml:lang="de" versionDate="2023-03-19">Modul: core</gloss>
           	<desc xml:lang="en" versionDate="2023-03-19">Module for attribut classes, macros, datatypes and constraints.</desc>
           	<desc xml:lang="de" versionDate="2023-03-19">Modul für Attributklassen, Makros, Datentypen und Einschränkungsregeln (contsraints).</desc>
           </moduleSpec>
-        	<moduleSpec ident="remark">
+          <moduleSpec ident="remark" mode="add">
         		<gloss xml:lang="en" versionDate="2023-03-19">Remark Module</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">Modul: remark</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Module for remark-like entities.</desc>
         		<desc xml:lang="de" versionDate="2023-03-19">Modul für Entitäten zu Anmerkungen.</desc>
         	</moduleSpec>
-        	<moduleSpec ident="setting">
+          <moduleSpec ident="setting" mode="add">
         		<gloss xml:lang="en" versionDate="2023-03-19">Setting Module</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">Modul: setting</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Module for setting-like entities.</desc>
