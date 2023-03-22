@@ -1,32 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://jenkins.tei-c.org/job/TEIP5-dev/lastStableBuild/artifact/P5/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
-<div xmlns="http://www.tei-c.org/ns/1.0" xml:id="chap-docu" xml:lang="de">
-  <head>Die Infrastruktur</head>
+<div xmlns="http://www.tei-c.org/ns/1.0" xml:id="chap-datamodel" xml:lang="de">
+    <head>Das Datenmodell</head>
+    <div xml:id="chap-usedSchema" xml:lang="de">
+    <head>Verwendete Schemata</head>
+    <p>Das Datenmodell ist stark an MEI angelehnt, stellt jedoch nicht die Codierung von Quellen ode rWerken in den Mittelpunkt. Daher sind die aus MEI entlehnten Elemente zum Teil mehr ode rweniger stark modifiziert worden. Einige nötige, jedoch in MEI nicht enthaltene Elemente wurden neu geschaffen.</p>
+    <p>Innerhalb des crApp-Schemas befinden sich alle Elemente im crApp-Namspace. Eine Unterscheidung in crApp und MEI mittels Präfixierung hat sich als untauglich erwiesen.</p>
+  </div>
+  <div xml:id="chap-modules">
+    <p>Das crApp-Schema ist in drei Module gegliedert</p>
+    <p>
+      <specList>
+        <specDesc key="core"/> 
+        <specDesc key="remark"/>
+        <specDesc key="setting"/>
+      </specList>
+    </p>
+  </div>
   <div xml:id="chap-setting">
-    <head>Setting</head>
-    <p>Um Kritische Anmerkungen systematisch erfassen zu können, müssen zunächst einige Grundparameter festgelegt werden: Welche Quellen gibt es? Welche Instrumente sind beteiligt? Wird auf Editionen referenziert? Usw.</p>
-    <p>Für die Erfassung der Kritischen Anmerkungen ist es grundlegend, dass es die zuvor genannten Objekte definiert sind. Die Abhängigkeiten untereinander (bspw. bei den Quellen [Stemma]), ist an dieser Stelle aus technischer Sicht noch nicht relevant; die Abhängigkeiten untereinander haben keinen Einfluss auf das Datenmodell.</p>
-    <p>Im sogenannten Setting werden die Weichen für die spätere Kodierung gestellt, weshalb dieser Bereich im Folgenden kurz dargestellt werden wird.</p>
-    <specList>
+    <head>Das Setting</head>
+    <p>Für die systematische Erfassung kritischer Anmerkungen müssen Grundparameter definiert: Welche Quellen gibt es? Welche Instrumente sind beteiligt? Wird auf Editionen referenziert? Und vieles mehr. Die Definition dieser Aspekte erfolgt im Element <gi>setting</gi></p>
+    <p>Im Setting werden die Möglichkeiten und Kontrollmechanismen für die spätere Kodierung festgelegt.</p>
+    <p><specList>
       <specDesc key="setting"/>
-    </specList>
-    <p>Hierbei handelt es sich um einen Wrapper, der sämtliche Defintionen für die vorliegende Datei enthält. Dieses Element dient allein der Definition der Infrastruktur.</p>
+    </specList></p>
+    <p>Bei dem Element <gi>setting</gi> handelt es sich um einen Container, der sämtliche Defintionen für den zu erfassenden kritischen Bericht enthält. Dieses Element dient allein der Definition der Infrastruktur.</p>
+    <p>Die Verwendung von <gi>setting</gi> als Wurzelelement ist erlaubt, um die Auslagerung und damit die Nachnutzung einer Definition in mehreren Werkkontexten zu gewährleisten. Wird dieser Teil ausgelagert, kann das Setting durch XInclude in die kritischen Berichte inkludiert werden: <tag>include xmlns="http://www.w3.org/2001/XInclude" href="setting.xml"</tag>.</p>
     <div>
       <head>Musikalische Struktur</head>
-      <specList>
+      <p><specList>
+        <specDesc key="language" atts="atts"/>
+      </specList></p>
+      <p>Zu beginn wird die primäre Sprache definiert, in der die Anmerkungen verfasst sind. Diese wird durch den Wert im Attribut <att>codedval</att> erfasst. Die unterstützen Sprachen sind im Macro <ref target="#TEI.crapp_macro.list.lang">macro.list.lang</ref> erfasst. Das Schema lässt nur diese Sprachen zu, da die crApp-WebApp nur ebendiese Sprachen unterstützt. Eine Erweiterung des Macros für individuelle Zwecke ist möglich und erwünscht. Für die Implementierung der neuen Sprache in die crApp-WebApp wenden Sie sich gerne auch an <ref target="mailto:ried-musikforschung@mail.com">ried-musikforschung@mail.com</ref></p>
+      <p><specList>
+        <specDesc key="mdiv" atts="atts"/>
         <specDesc key="mdivs"/>
-        <specDesc key="mdiv"/>
-      </specList>
-      <p>Das an MEI angelehte Element <gi>mdiv</gi> steht für einen musikalsichen Abschnitt (musical division). Dieses generische Element kann verwendet werden, um Sätze eines Werkes, Lieder oder Stücke einer Sammlung, Nummern einer Oper oder sonstige Strukturen abzubilden. Die Numerierung der <gi>mdiv</gi> Elemente mit dem Atttribut <att>no</att> ist obligatorisch und als technische Zählung zu betrachten. Als Werte sind ausschließlich Natürliche Zahlen (inklusive der <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich, weshalb hier bspw. keine römische Zählung erlaubt ist. Zur verdeutlichung worum es sich konkret handelt, kann der Satztitel inkl. einer Zählung hinzugefügt werden. Der Textknoten des Elementes fungiert als Freitext.
-        </p><p>Das Element <gi>mdivs</gi> fungiert als Wrapper, der alle <gi>mdiv</gi> Elemente in sich beherbergt.</p>
+      </specList></p>
+      <p>Das an MEI angelehte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl dafür verwendet werden, um die Sätze eines Werkes zu definieren, aber auch Werke (bspw. Lieder), Werke oder Teile einer Sammlung, Nummern einer Oper oder sonstige Strukturen. Die Numerierung der <gi>mdiv</gi> Elemente mit dem Atttribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Sätze (o.ä.) nicht nummeriert sind. Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich, weshalb hier ausschließlich eine Zählung in form Arabischer Ziffern erlaubt ist.
+        </p>
+      <p>Um dem <gi>mdiv</gi> einen Bezeichner beizugeben, wird das Element <gi>label</gi> unter Angabe der verwendeten Sprache (<att>xml:lang</att>) verwendet:
+      </p>
+      <p>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <mdiv num="1">
+            <label xml:lang="de">I. Männerchor</label>
+          </mdiv>
+        </egXML>
+        </p>
+      <p>Das Element <gi>mdivs</gi> fungiert als Container für <gi>mdiv</gi> Elemente.</p>
     </div>
     <div>
       <head>Instrumentation bzw. Besetzung</head>
-      <specList>
-        <specDesc key="voices"/>
-        <specDesc key="voiceGrp"/>
-        <specDesc key="voice"/>
-      </specList>
+      <p><specList>
+        <specDesc key="parts"/>
+        <specDesc key="partGrp"/>
+        <specDesc key="part"/>
+      </specList></p>
       <p>Die Instrumentation kann sich äußerst komplex gestalten, weshalb es hier nötig sein kann, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>voices</gi> ist hier wieder ein Wrapper, der die Definition der Instrumentation enthält, egal wie diese organisiert ist.</p>
       <p>Das Element <gi>voiceGrp</gi> ist ebenfalls ein Wrapper, der zur Gruppierung verwendet wird. Dies kann auch auf mehreren Ebenen geschehen, wie das folgende Beispiel zeigt.</p>
       <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -57,7 +86,7 @@
         <specDesc key="source"/>
       </specList>
       <p>Die Refernzierung von Refernzdatensätzen zu Quellen erfolgt wie unter <ref target="#relWorks">Assoziierte Werke</ref> beschrieben.</p>
-      <p>Im Vergleich zu <gi>work</gi> weist das Element <gi>source</gi> zwei Besonderheiten auf: Zum einen wird ein <att>siglum</att> definiert, welches nötig ist, um betroffene Quellen in den Einzelanmerkungen zu referenzieren. Weiter kann das Attribut <att>sortNo</att> dafür verwendet werden, um eine Sortierreihenfolge für die Siglen festzulegen.</p>
+      <p>Im Vergleich zu <gi>work</gi> weist das Element <gi>source</gi> zwei Besonderheiten auf: Zum einen wird ein <att>siglum</att> definiert, welches nötig ist, um betroffene Quellen in den Einzelanmerkungen zu referenzieren. Weiter kann das Attribut <att>sortNo</att> dafür verwendet werden, um eine Sortierreihenfolge für die Siglen festzulegen.<note place="bottom">Abhängigkeiten zwischen Quellen (bspw. Stemma), ist nicht implementiert. Das Datenmodell geht hier agnostisch vor.</note></p>
     </div>
     <div xml:id="relEditions">
       <head>Assoziierte Editionen (related editions)</head>

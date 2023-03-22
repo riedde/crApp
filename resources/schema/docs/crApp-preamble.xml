@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://jenkins.tei-c.org/job/TEIP5-dev/lastStableBuild/artifact/P5/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <div xmlns="http://www.tei-c.org/ns/1.0" xml:id="chap-preamble" xml:lang="de">
-  <head>Einleitung</head>
-  <p>Absatz über Baumann, Projekt und so.</p>
-  <closer>
-    <dateline><name type="settlement">Waldsee</name>, <date when="2022-03-31">31. März 2022</date></dateline>
-    <signed><name type="person"><ref target="https://orcid.org/0000-0001-5545-2088">Dennis Ried</ref></name></signed>
-  </closer>
+  <head>Vorwort</head>
+  <div>
+    <head>Präambel</head>
+    <p>Das crApp-Framework ist im Rahmen meines Dissertationsprojektes zu hybriden Musikeditionen entstanden. Das Dedsiderat, dem ich mich gegenübersah war die Handhabung von kritischen Berichten in digitalen Umgebungen, die sich sowohl technisch als auch inhaltlich nahezu nicht vom analogen Pendant unterschied, obwohl die Rahmenbedingungen und Möglichkeiten digitaler Medien grundlegend andere sind, als im gedruckten Pendant.</p>
+    <p>Bei der Untersuchen des Grades der Digitalität hybrider Musikeditionen rückte der kritische Bericht deshalb ins Zentrum der Betrachtung, da hier das größte Defizit vorgefunden wurde. Dies einfach nur festzustellen hätte vermutlich nichts gebracht, da dieser Aspekt seit etwa 15 Jahren trotz kritischer Anmerkungen nicht einmal im Ansatz weiterentwickelt wurde. Daher wird mit dem critical apparatus-Framework (crApp) ein erster Vorschlag eingebracht, wie kritische Berichte in hybriden Musikeditionen digitaler und damit zeitgemäßer gestaltet werden könnten.</p>
+    <p>Ich bezeichne dieses System – damit meine ich sowohl das Datenschema als auch die WebApp – bewusst als Vorschlag, denn es stellt lediglich eine denkbare Möglichkeit dar, wie dem angesprochenen Desiderat begegnet werden kann. Darüber hinaus steckt dieses System regelrecht in den Kinderschuhen, da sich Datenmodelle und visualisierende bzw. auswertende Software bekanntlich mit der Zeit verfertigen; konkret durch den Gebrauch in unterschiedlichen Kontexten mit verschiedenartigen Forschungsobjekten.</p>
+    <closer>
+      <dateline><name type="settlement">Waldsee</name>, <date when="2023-07-14">14. Juli 2023</date></dateline>
+      <signed><name type="person"><ref target="https://orcid.org/0000-0001-5545-2088">Dennis Ried</ref></name></signed>
+    </closer>
+  </div>
+  <div xml:id="chap-knownBugs" xml:lang="de">
+    <head>Bekannte Probleme/Known Bugs</head>
+    <p>Liste mit den bekannten Problemen</p>
+  </div>
 </div>
