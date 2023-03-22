@@ -74,7 +74,7 @@
           <moduleRef key="MEI.visual" source="../../submodules/music-encoding/source/mei-source.xml"/>
         	
         	<!-- crapp macros -->
-        	<macroSpec ident="crApp.annot.content" module="core" mode="add">
+        	<macroSpec ident="macro.annot.content" module="core" mode="add">
         		<gloss xml:lang="en" versionDate="2023-03-19">Supported MEI elements</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">unterstütze MEI-Elemente</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Supported MEI elements as content of annotations.</desc>
@@ -134,7 +134,7 @@
         			</sequence>
         		</content>
         	</macroSpec>
-        	<macroSpec ident="crApp.list.lang" module="core" mode="add">
+        	<macroSpec ident="macro.list.lang" module="core" mode="add">
         		<gloss xml:lang="en" versionDate="2023-03-19">Supported languages</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">unterstütze Sprachen</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Supported languages at crApp-WebApp.</desc>
@@ -610,7 +610,7 @@
         		<desc xml:lang="en" versionDate="2023-03-19">Bears an annotation to the critical remark</desc>
         		<desc xml:lang="de" versionDate="2023-03-19">Enthält eine Annotation zur kritischen Anmerkung.</desc>
         		<content>
-              <macroRef key="crApp.annot.content"/>
+              <macroRef key="macro.annot.content"/>
             </content>
             <attList>
               <attDef ident="type" mode="add" usage="opt">
@@ -764,7 +764,7 @@
             <attList>
               <attDef ident="codedval" mode="change">
                 <datatype>
-                  <dataRef key="crApp.list.lang"/>
+                  <dataRef key="macro.list.lang"/>
                 </datatype>
               </attDef>
             </attList>
