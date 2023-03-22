@@ -1014,7 +1014,6 @@
             </content>
           </elementSpec>
         	<elementSpec ident="relWork" module="setting" ns="http://baumann-digital.de/ns/crApp">
-        		<desc xml:lang="en" versionDate="2022-04-01">A reference to a work this critical apparatus is made for.</desc>
         		<gloss xml:lang="en" versionDate="2023-03-19">related Work</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">Assoziiertes Werk</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Defines a work.</desc>
