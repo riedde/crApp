@@ -12,8 +12,4 @@
       <signed><name type="person"><ref target="https://orcid.org/0000-0001-5545-2088">Dennis Ried</ref></name></signed>
     </closer>
   </div>
-  <div xml:id="chap-knownBugs" xml:lang="de">
-    <head>Bekannte Probleme/Known Bugs</head>
-    <p>Liste mit den bekannten Problemen</p>
-  </div>
 </div>
