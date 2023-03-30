@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-03-19T17:03:33Z. .
+Schema generated from ODD source 2023-03-30T17:53:30Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -1657,7 +1657,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
          <param name="pattern">[A|a|b|I|i|K|k|M|m|N|n|S|s|T|t|O]|(A|a|S|s|K|k)?(T|t|M|m)(I|i|S|s)?</param>
       </data>
    </define>
-   <define name="crApp.annot.content">
+   <define name="macro.annot.content">
       <oneOrMore>
          <group>
             <text/>
@@ -12858,7 +12858,7 @@ Suggested values include: 1] unknown</a:documentation>
    <define name="annot">
       <element name="annot" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(annotation) Bears an annotation to the critical remark</a:documentation>
-         <ref name="crApp.annot.content"/>
+         <ref name="macro.annot.content"/>
          <optional>
             <attribute name="type">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Classification</a:documentation>
@@ -13233,7 +13233,7 @@ Suggested values include: 1] unknown</a:documentation>
    </define>
    <define name="relWork">
       <element name="relWork" ns="http://baumann-digital.de/ns/crApp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(related Work) A reference to a work this critical apparatus is made for.Defines a work.</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(related Work) Defines a work.</a:documentation>
          <ref name="measures"/>
          <ref name="meter"/>
          <ref name="att.target.attributes"/>
