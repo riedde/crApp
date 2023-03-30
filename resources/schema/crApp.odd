@@ -769,9 +769,9 @@
               </attDef>
             </attList>
           </elementSpec>
-          <elementSpec ident="mdiv" module="setting" ns="http://baumann-digital.de/ns/crApp">
+        	<elementSpec ident="mdiv" module="setting" ns="http://baumann-digital.de/ns/crApp">
           	<gloss xml:lang="en" versionDate="2023-03-19">musical division</gloss>
-          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalsicher Abschnitt</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalischer Abschnitt</gloss>
           	<desc xml:lang="en" versionDate="2023-03-19">Defines a musical devision of a work</desc>
           	<desc xml:lang="de" versionDate="2023-03-19">Definiert einen musikalischen Abschnitt eines Werkes.</desc>
           	<classes>
@@ -794,7 +794,7 @@
           </elementSpec>
           <elementSpec ident="mdivs" module="setting" ns="http://baumann-digital.de/ns/crApp">
           	<gloss xml:lang="en" versionDate="2023-03-19">musical divisions</gloss>
-          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalsiche Abschnitte</gloss>
+          	<gloss xml:lang="de" versionDate="2023-03-19">Musikalische Abschnitte</gloss>
           	<desc xml:lang="en" versionDate="2023-03-19">Container for <gi>mdiv</gi> elements.</desc>
           	<desc xml:lang="de" versionDate="2023-03-19">Container für <gi>mdiv</gi> Elemente.</desc>
           	<content>
