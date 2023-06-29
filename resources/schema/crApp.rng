@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-03-30T17:53:30Z. .
+Schema generated from ODD source 2023-06-29T08:50:25Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -12997,9 +12997,13 @@ Suggested values include: 1] unknown</a:documentation>
       <element name="mdiv" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(musical division) Defines a musical devision of a work</a:documentation>
          <choice>
-            <oneOrMore>
-               <ref name="label"/>
-            </oneOrMore>
+            <group>
+               <oneOrMore>
+                  <ref name="label"/>
+               </oneOrMore>
+               <ref name="measures"/>
+               <ref name="meter"/>
+            </group>
             <text/>
          </choice>
          <sch:pattern xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -13234,8 +13238,7 @@ Suggested values include: 1] unknown</a:documentation>
    <define name="relWork">
       <element name="relWork" ns="http://baumann-digital.de/ns/crApp">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(related Work) Defines a work.</a:documentation>
-         <ref name="measures"/>
-         <ref name="meter"/>
+         <empty/>
          <ref name="att.target.attributes"/>
          <ref name="att.id.attributes"/>
          <empty/>
@@ -13423,9 +13426,9 @@ Suggested values include: 1] unknown</a:documentation>
                 xmlns="http://www.tei-c.org/ns/1.0"
                 context="crapp:measure[@count]|crapp:range[@count]">
          <sch:let name="meterCount"
-                  value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@count"/>
+                  value="./ancestor::crapp:crApp/crapp:setting//crapp:mdiv[@n=./ancestor::crapp:remark/crapp:mdiv/text()]/crapp:meter/@count"/>
          <sch:let name="meterUnit"
-                  value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@unit"/>
+                  value="./ancestor::crapp:crApp/crapp:setting//crapp:mdiv[@n=./ancestor::crapp:remark/crapp:mdiv/text()]/crapp:meter/@unit"/>
          <sch:report role="fatal" test="./@count/number() gt $meterCount/number()">Unavailable count! The meter is <sch:value-of select="$meterCount"/>/<sch:value-of select="$meterUnit"/>.</sch:report>
       </sch:rule>
    </pattern>

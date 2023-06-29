@@ -596,8 +596,8 @@
         		<desc xml:lang="de" versionDate="2023-03-19">Prüft, ob die genannte Zählzeit in der Taktart vorkommt.</desc>
         		<constraint>
               <sch:rule context="crapp:measure[@count]|crapp:range[@count]">
-                <sch:let name="meterCount" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@count"/>
-                <sch:let name="meterUnit" value="./ancestor::crapp:crApp/crapp:setting//crapp:meter/@unit"/>
+                <sch:let name="meterCount" value="./ancestor::crapp:crApp/crapp:setting//crapp:mdiv[@n=./ancestor::crapp:remark/crapp:mdiv/text()]/crapp:meter/@count"/>
+                <sch:let name="meterUnit" value="./ancestor::crapp:crApp/crapp:setting//crapp:mdiv[@n=./ancestor::crapp:remark/crapp:mdiv/text()]/crapp:meter/@unit"/>
                 <sch:report role="fatal" test="./@count/number() gt $meterCount/number()">Unavailable count! The meter is <sch:value-of select="$meterCount"/>/<sch:value-of select="$meterUnit"/>.</sch:report>
                   </sch:rule>
             </constraint>
@@ -779,7 +779,11 @@
             </classes>
             <content>
               <alternate>
-                <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                <sequence>
+                  <elementRef key="label" minOccurs="1" maxOccurs="unbounded"/>
+                  <elementRef key="measures" minOccurs="0" maxOccurs="1"/>
+                  <elementRef key="meter" minOccurs="0" maxOccurs="1"/>
+                </sequence>
                 <textNode/>
               </alternate>
             </content>
@@ -1023,8 +1027,7 @@
         			<memberOf key="att.id"/>
         		</classes>
         		<content>
-        			<elementRef key="measures"/>
-        			<elementRef key="meter"/>
+        			<empty/>
         		</content>
         	</elementSpec>
         	<elementSpec ident="remark" module="remark" ns="http://baumann-digital.de/ns/crApp">
