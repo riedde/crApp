@@ -59,7 +59,7 @@
 					<specDesc key="mdivs"/>
 				</specList>
 			</p>
-			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren, als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Liedersammlung), Werkteile wie die Nummern einer Oper oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Attribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekt nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
+			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Liedersammlung), Werkteile, wie die Nummern einer Oper, oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Attribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekts nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
 			<p>Um dem <gi>mdiv</gi> einen Bezeichner beizugeben, wird das Element <gi>label</gi> unter Angabe der verwendeten Sprache (<att>xml:lang</att>) verwendet: </p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -80,8 +80,8 @@
 					<specDesc key="meter" atts="count unit"/>
 				</specList>
 			</p>
-			<p>Mit der Erfassung statistischer Werte zu den Takten (<gi>measures</gi>) des Satzes (<gi>mdiv</gi>), können weitere Validierungsmechanismen aktiviert werden. So kann neben der Gesamtzahl der Takte (<att>total</att>) auch die Existenz von Auftakten (<att>upbeat</att>) und die erste Taktzahl (<att>startNo</att>) erfasst werden, falls abweichend (z.B. <val>0</val>). Die Gesamtzahl der Takte wird für die Validierung der in den Anmerkungen angegebenen Taktzahlen verwendet.</p>
-			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte, werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Sätzen, in denen die Taktart nicht wechselt, da keine tiefer gehende Satzstruktur erfasst wird.</note></p>
+			<p>Mit der Erfassung statistischer Werte zu den Takten (<gi>measures</gi>) des Satzes (<gi>mdiv</gi>) können weitere Validierungsmechanismen aktiviert werden. So kann neben der Gesamtzahl der Takte (<att>total</att>) auch die Existenz von Auftakten (<att>upbeat</att>) und die erste Taktzahl (<att>startNo</att>) erfasst werden, falls abweichend (z.B. <val>0</val>). Die Gesamtzahl der Takte wird für die Validierung der in den Anmerkungen angegebenen Taktzahlen verwendet.</p>
+			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Sätzen, in denen die Taktart nicht wechselt, da keine tiefer gehende Satzstruktur erfasst wird.</note></p>
 		</div>
 		<div xml:id="parts">
 			<head>Instrumentation und Besetzung</head>
@@ -90,7 +90,7 @@
 					<specDesc key="partGrp"/>
 					<specDesc key="part"/>
 				</specList></p>
-			<p>Die Instrumentation kann äußerst komplex sein. Daher bietet das crApp-Schema die Möglichkeit, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>parts</gi> ist ein Container, der die Definition der Instrumentation enthält, unabhängig davon wie diese im Detail organisiert ist.</p>
+			<p>Die Instrumentation kann äußerst komplex sein. Daher bietet das crApp-Schema die Möglichkeit, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>parts</gi> ist ein Container, der die Definition der Instrumentation enthält, unabhängig davon, wie diese im Detail organisiert ist.</p>
 			<p>Das Element <gi>partGrp</gi> ist ebenfalls ein Container, der nicht nur zur Gruppierung verwendet werden, sondern gleichzeitig auch eine Gruppe von Einzelstimmen definieren kann. Dies lässt sich auf beliebig vielen Ebenen umsetzen.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<parts>
@@ -112,7 +112,7 @@
 					</partGrp>
 				</parts>
 			</egXML>
-			<p>Der im Beispiel gezeigte Wert des Attributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfiehlt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung von Umlauten und Leerzeichen, um technischen Problemen vorzubeugen.</p>
+			<p>Der im Beispiel gezeigte Wert des Attributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfiehlt sich, die Werte wie im vorangegangenen Beispiel generisch zu wählen, unter Vermeidung von Umlauten und Leerzeichen, um technische Probleme vorzubeugen.</p>
 			<p>Mit der Definition einer Gruppierung (bspw. Stimmgruppe »Holz«) wird das Ansteuern dieser Gruppe möglich, ohne dass jede Stimme einzeln adressiert werden muss.</p>
 			<p>Die im vorigen Beispiel abgebildete Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine Gruppe adressiert wurden und warnt ggf. vor entstehenden Redundanzen.</p>
 		</div>
@@ -123,7 +123,7 @@
 			</specList></p>
 			<p>Mit <gi>relWork</gi> erfolgt die Zuordnung des Kritischen Berichts zu einem Werk. Dies kann mittels ID-Verweis geschehen (<att>key</att>) oder über einen expliziten Dateipfad, der im Attribut <att>target</att> angegeben wird.</p>
 			<p>Sind die erfassten Anmerkungen für die Weiterverwendung in der crApp-Applikation vorgesehen, so ist es ausreichend, wenn die Referenzierung über das Attribut <att>key</att> erfolgt. Es wird vorausgesetzt, dass sich die Referenzdatensätze in der selben Datenbank befinden, in der die Applikation installiert ist.</p>
-			<p>Im Falle, dass der Pfad zum Referenzdatensatz zu einem anderen Ort zeigen soll, kann der entsprechende Pfad als Wert von <att>target</att> angegeben werden. Dies bietet sich beispielsweise dann an, wenn lokale Transformationen durchgeführt werden, bei denen eine Ansprache über eine ID zu große Hardware-Kapazitäten erfordern würden.</p>
+			<p>Im Falle, dass der Pfad zum Referenzdatensatz zu einem anderen Ort zeigen soll, kann der entsprechende Pfad als Wert von <att>target</att> angegeben werden. Dies bietet sich beispielsweise dann an, wenn lokale Transformationen durchgeführt werden, bei denen eine Ansprache über eine ID zu große Hardware-Kapazitäten erfordern würde.</p>
 		</div>
 		<div xml:id="relSources">
 			<head>Assoziierte Quellen (related sources)</head>
@@ -249,7 +249,7 @@
 				<specDesc key="mdiv"/>
 			</specList>
 		</p>
-		<p>Über <gi>mdiv</gi> erfolgt eine Zuordnung zu dem musikalischen Abschnitt, in dem die Anmerkung vorkommt. Für den Fall, dass eine Anmerkung sich auf mehrere Sätze bezieht (bspw. eine Parallelstelle, die in einem anderen Satz in Erscheinung tritt), können mehrere <gi>mdiv</gi> Elemente angegeben werden. In diesem Fall weist sie Schematron-Validierung darauf hin, dass dieses Verfahren möglich jedoch eher unüblich ist. Auf <gi>mdiv</gi> kann jedoch auch verzichtet werden, wenn es sich um eine Generalanmerkung handelt.</p>
+		<p>Über <gi>mdiv</gi> erfolgt eine Zuordnung zu dem musikalischen Abschnitt, in dem die Anmerkung vorkommt. Für den Fall, dass eine Anmerkung sich auf mehrere Sätze bezieht (bspw. eine Parallelstelle, die in einem anderen Satz in Erscheinung tritt), können mehrere <gi>mdiv</gi> Elemente angegeben werden. In diesem Fall weist die Schematron-Validierung darauf hin, dass dieses Verfahren möglich, jedoch eher unüblich ist. Auf <gi>mdiv</gi> kann jedoch auch verzichtet werden, wenn es sich um eine Generalanmerkung handelt.</p>
 		<p>
 			<specList>
 				<specDesc key="occurances"/>
@@ -257,7 +257,7 @@
 				<specDesc key="position" atts="count measure"/>
 			</specList>
 		</p>
-		<p>Das Element <gi>occurances</gi> ist ein Container für Alle Vorkommen, bei denen die Kritische Anmerkung relevant ist. Da es durchaus vorkommen kann, dass eine Anmerkung an mehreren Stellen Relevanz ist (bspw. in den Takten 2,4,5 und 8 enden die Bögen bereits eine Achtel früher), kann das Element <gi>occurance</gi> mehrfach verwendet werden.</p>
+		<p>Das Element <gi>occurances</gi> ist ein Container für alle Vorkommen, bei denen die Kritische Anmerkung relevant ist. Da es durchaus vorkommen kann, dass eine Anmerkung an mehreren Stellen Relevanz ist (bspw. in den Takten 2, 4, 5 und 8 enden die Bögen bereits eine Achtel früher), kann das Element <gi>occurance</gi> mehrfach verwendet werden.</p>
 		<p>Eine Taktposition kann auf zwei verschiedene Arten identifiziert werden: als Position (<gi>position</gi>) oder als Bereich. Im ersten Fall werden Taktzahl und ggf. Zählzeit angeben.</p>
 		<egXML xmlns="http://www.tei-c.org/ns/Examples">
 			<occurance>
