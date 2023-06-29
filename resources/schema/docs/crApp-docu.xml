@@ -4,14 +4,13 @@
 	<head>Das Datenmodell</head>
 	<div xml:id="chap-usedSchema" xml:lang="de">
 		<head>Verwendete Schemata</head>
-		<p>Das Datenmodell ist stark an MEI angelehnt, stellt jedoch nicht die Codierung von Quellen oder Werken in den Mittelpunkt. Die aus MEI entlehnten Elemente sind daher mehr oder weniger stark modifiziert worden, um sie in das neue Anwendungsfeld
-			einzupassen. Elemente, die nicht dem MEI-Standard entspringen, wurden für diesen Anwendungszweck neu definiert.</p>
+		<p>Das Datenmodell ist stark an MEI angelehnt, stellt jedoch nicht die (inhaltliche) Codierung von Quellen oder Werken in den Mittelpunkt. Die aus MEI entlehnten Elemente sind bei Bedarf modifiziert worden, um sie für das neue Anwendungsfeld nutzbar zu machen. Elemente, die nicht dem MEI-Standard entspringen, wurden für diesen Anwendungszweck neu definiert.</p>
 		<p>Innerhalb des crApp-Schemas befinden sich alle Elemente im crApp-Namspace. Eine Unterscheidung in crApp und MEI mittels Präfixierung hat sich als untauglich erwiesen.</p>
 	</div>
 	<div xml:id="chap-modules">
-		<p>Das crApp-Schema ist in drei Module gegliedert</p>
+		<p>Das crApp-Schema besteht aus drei Modulen:</p>
 		<p>
-			<table xml:id="tab-mods">
+			<table xml:id="tab-modules">
 				<row role="label">
 					<cell>Modul Name</cell>
 					<cell>Formeller Identifikator</cell>
@@ -24,7 +23,7 @@
 				</row>
 				<row>
 					<cell>remark</cell>
-					<cell>Remark and Annotation</cell>
+					<cell>Remarks and Annotations</cell>
 					<cell><ptr target="#chap-remark"/></cell>
 				</row>
 				<row>
@@ -37,51 +36,60 @@
 	</div>
 	<div xml:id="chap-setting">
 		<head>Grundparameter (setting)</head>
-		<p>Für die systematische Erfassung kritischer Anmerkungen sind Grundparameter zu definieren: Welche Quellen sind verfügbar? Welche Instrumente sind beteiligt? Wird auf Editionen referenziert? Und vieles mehr. Die Definition dieser Aspekte erfolgt im
-			Element <gi>setting</gi>.</p>
-		<p>Ferner werden hier die Möglichkeiten und Kontrollmechanismen für die spätere Kodierung festgelegt.</p>
-		<p><specList>
+		<p>Für die systematische Erfassung Kritischer Anmerkungen sind Grundparameter zu definieren: verfügbare Quellen, beteiligte Instrumente, referenzierte Editionen usw. Die Definition dieser Objekte erfolgt im
+			Element <gi>setting</gi>. Ferner werden hier die mäglichen Codierungsmöglichkeiten und Kontrollmechanismen festgelegt.</p>
+		<p>
+			<specList>
 				<specDesc key="setting"/>
-			</specList></p>
-		<p>Bei dem Element <gi>setting</gi> handelt es sich um einen Container, der sämtliche Defintionen für den zu erfassenden Kritischen Bericht enthält. Dieses Element dient allein zur Definition der Infrastruktur.</p>
-		<p>Die Verwendung von <gi>setting</gi> als Wurzelelement ist erlaubt, um die Auslagerung und damit die Nachnutzung einer Definition in mehreren Werkkontexten zu gewährleisten. Wird dieser Teil ausgelagert, kann das Setting durch XInclude in die Kritischen
-			Berichte inkludiert werden: <eg><tag>include xmlns="http://www.w3.org/2001/XInclude" href="setting.xml"</tag></eg></p>
-		<div>
+			</specList>
+		</p>
+		<p>Beim Element <gi>setting</gi> handelt es sich um einen Container, der sämtliche Defintionen für den zu erfassenden Kritischen Bericht enthält. Dieses Element dient allein zur Definition der Datenstruktur.</p>
+		<p>Die Verwendung von <gi>setting</gi> als Wurzelelement ist erlaubt, um die Auslagerung und damit die Nachnutzung der Definition in mehreren (Werk-)Kontexten zu gewährleisten. Wird dieser Teil ausgelagert, kann das Setting durch XInclude in unterschiedliche Kritische Berichte inkludiert werden: <eg><tag>include xmlns="http://www.w3.org/2001/XInclude" href="setting.xml"</tag></eg></p>
+		<div xml:id="mdivs">
 			<head>Musikalische Struktur</head>
 			<p><specList>
 				<specDesc key="language"/>
 				<specDesc key="macro.list.lang"/>
 				</specList></p>
-			<p>Zu beginn wird die primäre Sprache definiert, in der die Anmerkungen verfasst sind. Diese wird durch den Wert im Attribut <att>codedval</att> erfasst. Die unterstützen Sprachen sind im Macro <ref target="#TEI.crapp_macro.list.lang"
-					>macro.list.lang</ref> erfasst. Das Schema lässt nur diese Sprachen zu, da die crApp-WebApp nur ebendiese Sprachen unterstützt. Eine Erweiterung des Macros für individuelle Zwecke ist möglich und erwünscht. Für die Implementierung der neuen Sprache
-				in die crApp-WebApp wenden Sie sich gerne auch an <ref target="mailto:ried-musikforschung@mail.com">ried-musikforschung@mail.com</ref></p>
-			<p><specList>
+			<p>Zu Beginn wird die primäre Sprache definiert, in der die Anmerkungen verfasst sind. Diese wird durch den Wert im Attribut <att>codedval</att> erfasst. Die unterstützen Sprachen sind im Macro <ref target="#TEI.crapp_macro.list.lang"
+					>macro.list.lang</ref> erfasst. Es sind hier nur Sprachen verfügbar, welche von der crApp-WebApp unterstützt werden. Eine Erweiterung des Macros für individuelle Zwecke ist möglich und auch erwünscht. Für die Implementierung der neuen Sprache in die crApp-WebApp wenden Sie sich gerne auch an <ref target="mailto:ried-musikforschung@mail.com">ried-musikforschung@mail.com</ref>.</p>
+			<p>
+				<specList>
 					<specDesc key="mdiv" atts="num sortNo"/>
 					<specDesc key="mdivs"/>
-				</specList></p>
-			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren, als auch Werke (bspw.
-				Lieder), Werke oder Teile einer Sammlung, Nummern einer Oper oder sonstige Strukturen. Die Numerierung der <gi>mdiv</gi> Elemente mit dem Atttribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine
-				Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte im beschriebene Objekt nicht nummeriert sind. Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
+				</specList>
+			</p>
+			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren, als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Leidersammlung), Werkteile wie die Nummern einer Oper oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Atttribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekt nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
 			<p>Um dem <gi>mdiv</gi> einen Bezeichner beizugeben, wird das Element <gi>label</gi> unter Angabe der verwendeten Sprache (<att>xml:lang</att>) verwendet: </p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples">
+					<mdiv num="0">
+						<label xml:lang="de">Vorspiel</label>
+					</mdiv>
 					<mdiv num="1">
 						<label xml:lang="de">I. Männerchor</label>
 					</mdiv>
 				</egXML>
 			</p>
-			<p>Das Element <gi>mdivs</gi> ist ein Container für <gi>mdiv</gi> Elemente.</p>
+			<p>Das Element <gi>mdivs</gi> ist ein Container für die einzelnen <gi>mdiv</gi>-Elemente.</p>
+			<p>
+				<specList>
+					<specDesc key="measures" atts="total upbeat startNo"/>
+					<specDesc key="meter" atts="count unit"/>
+				</specList>
+			</p>
+			<p>Mit der Erfassung statistischer Werte zu den Takten (<gi>measures</gi>) des Satzes (<gi>mdiv</gi>), können weitere Validierungsmechanismen aktiviert werden. So kann neben der Gesamtzahl der Takte (<att>total</att>) auch die Existenz von Auftakten (<att>upbeat</att>) und die erste Taktzahl (<att>startNo</att>) erfasst werden, falls abweichend (z.B. <val>0</val>). Die Gesamtzahl der Takte wird für die Validierung der in den Anmerkungen angegebenen Taktzahlen verwendet.</p>
+			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte, werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Sätzen, in denen die Taktart nicht wechselt, da keine tiefergehende Satzstruktur erfasst wird.</note></p>
 		</div>
-		<div>
+		<div xml:id="parts">
 			<head>Instrumentation und Besetzung</head>
 			<p><specList>
 					<specDesc key="parts"/>
 					<specDesc key="partGrp"/>
 					<specDesc key="part"/>
 				</specList></p>
-			<p>Die Instrumentation kann äußerst komplex gestaltet sein. Daher bietet das crApp-Schema die Möglichkeit, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>parts</gi> ist hier wieder ein Container, der die Definition der Instrumentation enthält,
-				egal wie diese organisiert ist.</p>
-			<p>Das Element <gi>partGrp</gi> ist ein Wrapper, der nicht nur zur Gruppierung verwendet wird, sondern gleizeitig auch eine Gruppe von Einzelstimmen definiert. Dies lässt sich auf beliebig vielen Ebenen umsetzen, wie das folgende Beispiel zeigt.</p>
+			<p>Die Instrumentation kann äußerst komplex sein. Daher bietet das crApp-Schema die Möglichkeit, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>parts</gi> ist ein Container, der die Definition der Instrumentation enthält, unabhängig davon wie diese im Detail organisiert ist.</p>
+			<p>Das Element <gi>partGrp</gi> ist ebenfalls ein Container, der nicht nur zur Gruppierung verwendet werden, sondern gleizeitig auch eine Gruppe von Einzelstimmen definieren kann. Dies lässt sich auf beliebig vielen Ebenen umsetzen.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<parts>
 					<partGrp xml:id="woods">
@@ -102,27 +110,18 @@
 					</partGrp>
 				</parts>
 			</egXML>
-			<p>Der verwendete Wert im Atttribut <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den betroffenen Stimmen hergestellt wird. Es empfielt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung
-				von Umlauten und Leerzeichen, um technischen Problemen vorzubeugen.</p>
-			<p>Mit der Definition einer Gruppierung (bspw. Stimmgruppe Holz) wird das Ansteuern der Gruppe möglich, ohne dass jede Stimme einzeln verlinkt werden muss.</p>
-			<p>Die im vorigen Beispiel abgebildete Komplexität der Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine Gruppe aufgerufen wurden und warnt vor Redundanzen.</p>
+			<p>Der im Beispiel gezeigte Wert des Atttributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfielt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung von Umlauten und Leerzeichen, um technischen Problemen vorzubeugen.</p>
+			<p>Mit der Definition einer Gruppierung (bspw. Stimmgruppe »Holz«) wird das Ansteuern dieser Gruppe möglich, ohne dass jede Stimme einzeln adressiert werden muss.</p>
+			<p>Die im vorigen Beispiel abgebildete Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine Gruppe adressiert wurden und warnt ggf. vor entstehenden Redundanzen.</p>
 		</div>
 		<div xml:id="relWorks">
 			<head>Assoziierte Werke (related works)</head>
 			<p><specList>
 				<specDesc key="relWork"/>
 			</specList></p>
-			<p>Mit <gi>relWork</gi> erfolgt die Zuordnung des Kritischen Berichts zu einem Werk. Dies kann mittels ID-Verweis geschehen (<att>key</att>) oder über einen expliziten Dateipfad, der im Attribut <att>target</att> erfasst wird; abhängig von Zweck, den die Zuordnung verfolgen soll bzw. nach Kontext in den die Kritischen Anmekrungen eingebunden werden.</p>
-			<p>Sind die erfassten Anmerkungen für die Weiterverwendung in der crApp-Applikation vorgesehen, so ist es ausreichend, wenn die Referenzierung über das Attribut <att>key</att> erfolgt. Es wird vorausgesetzt, dass sich die Referenzdatensätze in der selben Datenbank befinden in der die Applikation installiert ist.</p>
-			<p>Im Falle, dass der Pfad zum Referenzdatensatz an einen anderen Ort zeigen soll, kann der entsprechende Pfad als Wert von <att>target</att> eingegeben werden. Dies bietet sich beispielsweise dann an, wenn lokale Transformationen durchgeführt werden, bei denen eine Ansprache über eine ID zu große Hardware-Kapazitäten erfordern würden.</p>
-			<p>
-			<specList>
-					<specDesc key="measures" atts="total upbeat startNo"/>
-					<specDesc key="meter" atts="count unit"/>
-			</specList>
-			</p>
-			<p>Mit der Erfassung statistischer Werte zu den Takten (<gi>measures</gi>) des Werkes, können weitere Validierungen aktiviert werden. So kann neben der Gesamtzahl der Takte (<att>total</att>) auch die Existenz von Auftakten (<att>upbeat</att>) und die erste Taktzahl (<att>total</att>), falls abweichend (z.B. <val>0</val>) erfasst werden. Die Gesamtzahl der Takte wird für die Validierung der in den Anmerkungen angegebenen Taktzahlen verwendet. Versucht man eine Anmerkung zu einem Takt zu erfassen, der außerhalb des Werkes/Satzes liegt, so wird ein Fehler ausgegeben.</p>
-			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte, werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Werken, in denen die Taktart nicht wechselt, da keine weitere Werkstruktur erfasst wird.</note></p>
+			<p>Mit <gi>relWork</gi> erfolgt die Zuordnung des Kritischen Berichts zu einem Werk. Dies kann mittels ID-Verweis geschehen (<att>key</att>) oder über einen expliziten Dateipfad, der im Attribut <att>target</att> angegeben wird.</p>
+			<p>Sind die erfassten Anmerkungen für die Weiterverwendung in der crApp-Applikation vorgesehen, so ist es ausreichend, wenn die Referenzierung über das Attribut <att>key</att> erfolgt. Es wird vorausgesetzt, dass sich die Referenzdatensätze in der selben Datenbank befinden, in der die Applikation installiert ist.</p>
+			<p>Im Falle, dass der Pfad zum Referenzdatensatz zu einem anderen Ort zeigen soll, kann der entsprechende Pfad als Wert von <att>target</att> angegeben werden. Dies bietet sich beispielsweise dann an, wenn lokale Transformationen durchgeführt werden, bei denen eine Ansprache über eine ID zu große Hardware-Kapazitäten erfordern würden.</p>
 		</div>
 		<div xml:id="relSources">
 			<head>Assoziierte Quellen (related sources)</head>
@@ -253,7 +252,7 @@
 			<specDesc key="position" atts="count measure"/>
 		</specList></p>
 		<p>Das Element <gi>occurances</gi> ist ein Wrapper und verzeichnet diejenigen Stellen, an denen besagte Anmerkung von Relevanz ist. Da es durchaus sein kann, dass eine Anmerkung des öfteren von Relevanz ist (bspw. in den Takten 2,4,5 und 8 enden die Bögen
-			bereits eine Achtel früher), ist es auch möglich das Element <gi>occurance</gi> mehrfach zu verwenden. Ziel dieser Kodierung ist es, dass ein und diesselbe Anmerkung, die für mehrere Stellen gilt nicht mehrfach geschrieben wird, sondern die einzelnen
+			bereits eine Achtel früher), ist es auch möglich das Element <gi>occurance</gi> mehrfach zu verwenden. Ziel dieser Codierung ist es, dass ein und diesselbe Anmerkung, die für mehrere Stellen gilt nicht mehrfach geschrieben wird, sondern die einzelnen
 			Stellen dem Befund zugeordnet werden.</p>
 		<p>Die Stelle kann auf zwei verschiedene Arten identidiziert werden: als Stelle (<gi>position</gi>) oder als Bereich. Im ersten Fall handelt es sich um ein Vorkommen dessen Position sich durch eine Taktzahl und ggf. durch eine Zählzeit angeben lässt. Eine
 			Schema-basierte Validierung von Taktzahlen und Zählzeiten ist derzeit nicht verfügbar, da eine Erfassung der Taktstruktur sowie des möglicherweise wechselnden Metrums zur Zeit nicht vorgesehen ist. Es ist allerdings denkbar, dass diese Struktur später
