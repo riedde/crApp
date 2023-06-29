@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://baumann-digital.de/ns/crApp"><!--
-Schema generated from ODD source 2023-06-29T08:50:25Z. .
+Schema generated from ODD source 2023-06-29T09:28:05Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -13001,8 +13001,12 @@ Suggested values include: 1] unknown</a:documentation>
                <oneOrMore>
                   <ref name="label"/>
                </oneOrMore>
-               <ref name="measures"/>
-               <ref name="meter"/>
+               <optional>
+                  <ref name="measures"/>
+               </optional>
+               <optional>
+                  <ref name="meter"/>
+               </optional>
             </group>
             <text/>
          </choice>

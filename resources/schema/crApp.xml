@@ -169,9 +169,8 @@
 				<specDesc key="manifestationList"/>
 				<specDesc key="manifestation"/>
 			</specList></p>
-			<p>Die Referenzierung von Refernzdatensätzen zu Quellen erfolgt analog zu <ptr target="#relWorks"/>.</p>
-			<p>Im Vergleich zu <gi>relWork</gi> weist das Element <gi>manifestation</gi> eine Erweiterung auf: Das Attribut
-					<att>sortNo</att> kann dafür verwendet werden, um eine Reihenfolge für die Anzeigereihenfolge der Quellen in der crApp-Applikaiton festzulegen.<note place="bottom">die Abbildung von Abhängigkeiten zwischen Quellen (i.e. Stemma) ist nicht implementiert. Das Datenmodell geht diesbezüglich agnostisch vor.</note></p>
+			<p>Die Referenzierung der Refernzdatensätzen zu Quellen erfolgt analog zu <ptr target="#relWorks"/>.</p>
+			<p>Im Vergleich zu <gi>relWork</gi> weist das Element <gi>manifestation</gi> eine Erweiterung auf: Das Attribut <att>sortNo</att> kann dazu verwendet werden, um eine Reihenfolge für die Anzeigereihenfolge der Quellen in der crApp-Applikaiton festzulegen.<note place="bottom">Eine Visualisierung der Abhängigkeiten zwischen Quellen (i.e. Stemma) ist nicht implementiert. Das Datenmodell geht diesbezüglich agnostisch vor.</note></p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples" source="baudi-14-2b84beeb_mdiv-00.xml">
 					<manifestationList>
@@ -184,28 +183,32 @@
 		</div>
 		<div xml:id="relEditions">
 			<head>Assoziierte Editionen (related editions)</head>
-			<p><specList>
+			<p>
+				<specList>
 				<specDesc key="edition"/>
 				<specDesc key="relEditions"/>
-			</specList></p>
+				</specList>
+			</p>
 			<p>Diese Elemente sind von <ptr target="#relSources"/> abgeleitet und verhalten sich analog.</p>
 		</div>
 		<div xml:id="classifications">
 			<head>Klassifikationen</head>
-			<p><specList>
-				<specDesc key="classifications"/>
-				<specDesc key="classGrp"/>
-				<specDesc key="class"/>
-			</specList></p>
-			<p>Klassifikationen sind für die Erfassung strukturierter Daten unabdingbar.</p>
+			<p>
+				<specList>
+					<specDesc key="classifications"/>
+					<specDesc key="classGrp"/>
+					<specDesc key="class"/>
+				</specList>
+			</p>
+			<p>Klassifikationen sind für die Erfassung strukturierter Daten notwendig.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<classifications>
 					<classGrp label="editorialClassifications">
-						<class xml:id="noStart">
+						<class xml:id="noEnd">
 							<label xml:lang="de">Nur beginnend</label>
 							<label xml:lang="en">Only initiating</label>
 						</class>
-						<class xml:id="noEnd">
+						<class xml:id="noStart">
 							<label xml:lang="de">Nur endend</label>
 							<label xml:lang="en">Only terminating</label>
 						</class>
@@ -224,7 +227,7 @@
 					</classGrp>
 				</classifications>
 			</egXML>
-			<p>Im angeführten Beispiel wird eine Klassifikationsgruppe gezeigt, welche die Arten von Anmerkungen definiert. Es können beliebig viele <gi>classGrp</gi>s definiert werden, die wiederum beliebig viele <gi>class</gi> Elemente enthalten können.</p>
+			<p>Im angeführten Beispiel wird eine Klassifikationsgruppe gezeigt, mithilfe derer Elemente in den Anmerkungen klassifiziert werden können. Das Schema erlaubt die Definition beliebig vieler <gi>classGrp</gi>-Elemente, die wiederum beliebig viele <gi>class</gi>-Elemente enthalten können.</p>
 		</div>
 		<div xml:id="hands">
 			<head>Schreibmittel und Schreiber</head>
@@ -232,13 +235,13 @@
 				<specDesc key="handList"/>
 				<specDesc key="hand" atts="cert initial medium"/>
 			</specList></p>
-			<p>Im Container <gi>handList</gi> könnnen die einzelnen Schreibmittel, Schreibstile und Schreibende erfasst werden.</p>
+			<p>Im Container <gi>handList</gi> könnnen Schreibmittel, Schreibstile und Schreibende erfasst werden.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<handList>
 					<hand xml:id="hand.1" medium="ink.black" initial="true"><name>Ludwig Baumann</name></hand>
 				</handList>
 			</egXML>
-			<p>Die Angabe der Attribute <att>cert</att>, <att>initial</att> und <att>medium</att> sind ebenso optional wie die Angbae eines Schreibenden (im Beispiel: Ludwig Baumann).</p>
+			<p>Die Angabe der Attribute <att>cert</att>, <att>initial</att> und <att>medium</att> sind ebenso optional wie die Angabe der Schreibenden (hier: Ludwig Baumann).</p>
 		</div>
 	</div>
 	<div xml:id="chap-remark">
@@ -278,56 +281,58 @@
 		<p><specList>
 			<specDesc key="class"/>
 		</specList></p>
-		<p>Das Element <gi>class</gi> dient der Klassifizierung. Die Werte, die als Text eingegeben werden können, sind in <gi>setting</gi> in der Klassifizierung definiert. Wird ein Wert eingegeben, der zuvor nicht definiert wurde wirft die Schematron-Validierung
-			einen Fehler aus.</p>
-		<p><specList>
-			<specDesc key="mdiv"/>
-		</specList></p>
-		<p>Über <gi>mdiv</gi> erfolgt eine Zuordnung zu dem musikalischen Abschnitt, in dem die Anmerkung vorkommt. Für den eher seltenen Fall, dass eine Anmerkung sich auf mehrere Sätze bezieht (bspw. bei einer Parallelstelle, die in einem anderen Satz in
-			Erscheinung tritt), können mehrere <gi>mdiv</gi> Elemente verwendet werden. In diesem Falle wird von der Schematron-Validierung eine Information angezeigt, dass dieses Verfahren möglich jedoch eher unüblich ist. Ein Validierungsfehler wird dadurch nicht
-			verursacht. Im Gegensatz dazu kann auf <gi>mdiv</gi> verzichtet werden, wenn es sich um eine Generalanmerkung handelt, die für das gesamte Werk oder eine einzelne Quelle gilt.</p>
-		<p><specList>
-			<specDesc key="occurances"/>
-			<specDesc key="occurance"/>
-			<specDesc key="position" atts="count measure"/>
-		</specList></p>
-		<p>Das Element <gi>occurances</gi> ist ein Wrapper und verzeichnet diejenigen Stellen, an denen besagte Anmerkung von Relevanz ist. Da es durchaus sein kann, dass eine Anmerkung des öfteren von Relevanz ist (bspw. in den Takten 2,4,5 und 8 enden die Bögen
-			bereits eine Achtel früher), ist es auch möglich das Element <gi>occurance</gi> mehrfach zu verwenden. Ziel dieser Codierung ist es, dass ein und diesselbe Anmerkung, die für mehrere Stellen gilt nicht mehrfach geschrieben wird, sondern die einzelnen
-			Stellen dem Befund zugeordnet werden.</p>
-		<p>Die Stelle kann auf zwei verschiedene Arten identidiziert werden: als Stelle (<gi>position</gi>) oder als Bereich. Im ersten Fall handelt es sich um ein Vorkommen dessen Position sich durch eine Taktzahl und ggf. durch eine Zählzeit angeben lässt. Eine
-			Schema-basierte Validierung von Taktzahlen und Zählzeiten ist derzeit nicht verfügbar, da eine Erfassung der Taktstruktur sowie des möglicherweise wechselnden Metrums zur Zeit nicht vorgesehen ist. Es ist allerdings denkbar, dass diese Struktur später
-			über die referenzierten Quellen eingebunden werden könnte.</p>
+		<p>Das Element <gi>class</gi> dient der Klassifizierung. Die Werte, die hier als Text eingegeben werden, entsprechen der Klassifizierung in <gi>setting</gi>. Wird ein Wert eingegeben, der nicht zuvor definiert wurde, wirft die Schematron-Validierung einen Fehler aus.</p>
+		<p>
+			<specList>
+				<specDesc key="mdiv"/>
+			</specList>
+		</p>
+		<p>Über <gi>mdiv</gi> erfolgt eine Zuordnung zu dem musikalischen Abschnitt, in dem die Anmerkung vorkommt. Für den Fall, dass eine Anmerkung sich auf mehrere Sätze bezieht (bspw. eine Parallelstelle, die in einem anderen Satz in Erscheinung tritt), können mehrere <gi>mdiv</gi> Elemente angegeben werden. In diesem Fall weist sie Schematron-Validierung darauf hin, dass dieses Verfahren möglich jedoch eher unüblich ist. Auf <gi>mdiv</gi> kann jedoch auch verzichtet werden, wenn es sich um eine Generalanmerkung handelt.</p>
+		<p>
+			<specList>
+				<specDesc key="occurances"/>
+				<specDesc key="occurance"/>
+				<specDesc key="position" atts="count measure"/>
+			</specList>
+		</p>
+		<p>Das Element <gi>occurances</gi> ist ein Container für Alle Vorkommen, bei denen die Kritische Anmerkung relevant ist. Da es durchaus vorkommen kann, dass eine Anmerkung an mehreren Stellen Relevanz ist (bspw. in den Takten 2,4,5 und 8 enden die Bögen bereits eine Achtel früher), kann das Element <gi>occurance</gi> mehrfach verwendet werden.</p>
+		<p>Eine Taktposition kann auf zwei verschiedene Arten identifiziert werden: als Position (<gi>position</gi>) oder als Bereich. Im ersten Fall werden Taktzahl und ggf. Zählzeit angeben.</p>
 		<egXML xmlns="http://www.tei-c.org/ns/Examples">
 			<occurance>
 				<position measure="2" count="3"/>
 			</occurance>
 		</egXML>
-		<p>Betrifft die Anmerkung nicht eine einzelne Position, sondern einen Bereich (bspw. Takt 1 Zählzeit 1 bis Takt 3 Zählzeit 4 ohne Dynamikangaben) kann dieser ebenfalls über das Element <gi>position</gi> unter Verwendung des Attributes <att>type</att>
-			(Werte <val>start</val>/<val>end</val>) erfasst werden.</p>
+		<p>Beschreibt die Anmerkung einen Bereich (bspw. Takt 1 Zählzeit 1 bis Takt 3 Zählzeit 4), können Start- und Endpunkt mit dem Element <gi>range</gi> unter Verwendung des Attributes <att>type</att>
+			(Werte <val>start</val>/<val>end</val>) angegeben werden.</p>
 		<egXML xmlns="http://www.tei-c.org/ns/Examples">
 			<occurance>
-				<range type="start" measure="6" count="1"/>
-				<range type="end" measure="7" count="1"/>
+				<range type="start" measure="1" count="1"/>
+				<range type="end" measure="3" count="4"/>
 			</occurance>
 		</egXML>
-		<p>[…]</p>
 		<p><specList>
 			<specDesc key="parts"/>
+			<specDesc key="partGrp"/>
+			<specDesc key="part"/>
 		</specList></p>
-		<p>[…]</p>
+		<p>Betroffene Stimmen werden im Element <gi>parts</gi> angegeben. Der Wrapper <gi>parts</gi> kann neben den Elementen <gi>part</gi> und <gi>partGrp</gi> auch den Text <val>all</val> und <val>none</val> enthalten, wenn (bspw. in Generalanmerkungen) alle oder keine Stimmen betroffen sind.</p>
+		<p>Die Textknoten von <gi>partGrp</gi> und <gi>part</gi> enthalten die ID der entsprechenden Stimmendefinition in <gi>setting</gi>.</p>
 		<p><specList>
 			<specDesc key="annots"/>
+			<specDesc key="annot"/>
 		</specList></p>
-		<p>[…]</p>
+		<p>Der Wrapper <gi>annots</gi> erlaubt die Erfassung mehrerer Anmerkungen/Befunde. Durch das Attribut <att>type</att> und den Wert <val>intern</val> lassen sich Anmerkungen als kennzeichnen, die nicht für die Publikation vorgesehen sind.</p>
+		<p>Die Codierungsmöglichkeiten innerhalb von <gi>annot</gi> sind im Macro macro.annot.content definiert.</p>
 		<p><specList>
 			<specDesc key="manifestationList"/>
 			<specDesc key="editionList"/>
 		</specList></p>
-		<p>[…]</p>
+		<p>Die Wrapper <gi>manifestationList</gi> und <gi>editionList</gi> verhalten sich analog. Sie enthalten je ein oder mehrere Elemente (<gi>manifestation</gi> bzw. <gi>edition</gi>), deren Textknoten die ID eines in <gi>setting</gi> definierten Objektes darstellt.</p>
 	</div>
 	<div xml:id="chap-core">
 		<head>Datentypen, Klassen, Macros (core)</head>
-		<p>[…]</p></div>
+		<p>Zu den Datentypen, Attributklassen und Macros siehe die Definitionen im Anhang.</p>
+	</div>
 </div>
     </body>
     <back>
@@ -12183,7 +12188,7 @@
               </attDef></attList></elementSpec><elementSpec rend="add" ident="mdiv" module="setting" ns="http://baumann-digital.de/ns/crApp"><gloss xml:lang="en" versionDate="2023-03-19">musical division</gloss><gloss xml:lang="de" versionDate="2023-03-19">Musikalischer Abschnitt</gloss><desc xml:lang="en" versionDate="2023-03-19">Defines a musical devision of a work</desc><desc xml:lang="de" versionDate="2023-03-19">Definiert einen musikalischen Abschnitt eines Werkes.</desc><classes>
               <memberOf key="att.numbering"/>
             </classes><content>
-              <alternate minOccurs="1" maxOccurs="1"><sequence minOccurs="1" maxOccurs="1"><elementRef key="label" minOccurs="1" maxOccurs="unbounded"/><elementRef key="measures" minOccurs="1" maxOccurs="1"/><elementRef key="meter" minOccurs="1" maxOccurs="1"/></sequence><textNode/></alternate>
+              <alternate minOccurs="1" maxOccurs="1"><sequence minOccurs="1" maxOccurs="1"><elementRef key="label" minOccurs="1" maxOccurs="unbounded"/><elementRef key="measures" minOccurs="0" maxOccurs="1"/><elementRef key="meter" minOccurs="0" maxOccurs="1"/></sequence><textNode/></alternate>
             </content><constraintSpec ident="check-values-mdiv" scheme="schematron">
               <constraint>
                 <sch:pattern is-a="checkValues">
