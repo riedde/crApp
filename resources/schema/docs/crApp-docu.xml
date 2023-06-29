@@ -37,13 +37,13 @@
 	<div xml:id="chap-setting">
 		<head>Grundparameter (setting)</head>
 		<p>Für die systematische Erfassung Kritischer Anmerkungen sind Grundparameter zu definieren: verfügbare Quellen, beteiligte Instrumente, referenzierte Editionen usw. Die Definition dieser Objekte erfolgt im
-			Element <gi>setting</gi>. Ferner werden hier die mäglichen Codierungsmöglichkeiten und Kontrollmechanismen festgelegt.</p>
+			Element <gi>setting</gi>. Ferner werden hier die möglichen Codierungsmöglichkeiten und Kontrollmechanismen festgelegt.</p>
 		<p>
 			<specList>
 				<specDesc key="setting"/>
 			</specList>
 		</p>
-		<p>Beim Element <gi>setting</gi> handelt es sich um einen Container, der sämtliche Defintionen für den zu erfassenden Kritischen Bericht enthält. Dieses Element dient allein zur Definition der Datenstruktur.</p>
+		<p>Beim Element <gi>setting</gi> handelt es sich um einen Container, der sämtliche Definitionen für den zu erfassenden Kritischen Bericht enthält. Dieses Element dient allein zur Definition der Datenstruktur.</p>
 		<p>Die Verwendung von <gi>setting</gi> als Wurzelelement ist erlaubt, um die Auslagerung und damit die Nachnutzung der Definition in mehreren (Werk-)Kontexten zu gewährleisten. Wird dieser Teil ausgelagert, kann das Setting durch XInclude in unterschiedliche Kritische Berichte inkludiert werden: <eg><tag>include xmlns="http://www.w3.org/2001/XInclude" href="setting.xml"</tag></eg></p>
 		<div xml:id="mdivs">
 			<head>Musikalische Struktur</head>
@@ -59,15 +59,17 @@
 					<specDesc key="mdivs"/>
 				</specList>
 			</p>
-			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren, als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Leidersammlung), Werkteile wie die Nummern einer Oper oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Atttribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekt nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
+			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren, als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Liedersammlung), Werkteile wie die Nummern einer Oper oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Attribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekt nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
 			<p>Um dem <gi>mdiv</gi> einen Bezeichner beizugeben, wird das Element <gi>label</gi> unter Angabe der verwendeten Sprache (<att>xml:lang</att>) verwendet: </p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples">
 					<mdiv num="0">
 						<label xml:lang="de">Vorspiel</label>
+						<label xml:lang="en">Prelude</label>
 					</mdiv>
 					<mdiv num="1">
 						<label xml:lang="de">I. Männerchor</label>
+						<label xml:lang="en">I. Men's choir</label>
 					</mdiv>
 				</egXML>
 			</p>
@@ -79,7 +81,7 @@
 				</specList>
 			</p>
 			<p>Mit der Erfassung statistischer Werte zu den Takten (<gi>measures</gi>) des Satzes (<gi>mdiv</gi>), können weitere Validierungsmechanismen aktiviert werden. So kann neben der Gesamtzahl der Takte (<att>total</att>) auch die Existenz von Auftakten (<att>upbeat</att>) und die erste Taktzahl (<att>startNo</att>) erfasst werden, falls abweichend (z.B. <val>0</val>). Die Gesamtzahl der Takte wird für die Validierung der in den Anmerkungen angegebenen Taktzahlen verwendet.</p>
-			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte, werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Sätzen, in denen die Taktart nicht wechselt, da keine tiefergehende Satzstruktur erfasst wird.</note></p>
+			<p>Die Erfassung des Metrums (<gi>meter</gi>) erfolgt, wie in MEI, mittels der Attribute <att>count</att> für den Zähler und <att>unit</att> für den Nenner. Mithilfe dieser Werte, werden die Zählzeiten in den Anmerkungen validiert.<note place="bottom">Die Validierung der Zählzeiten funktioniert derzeit nur in Sätzen, in denen die Taktart nicht wechselt, da keine tiefer gehende Satzstruktur erfasst wird.</note></p>
 		</div>
 		<div xml:id="parts">
 			<head>Instrumentation und Besetzung</head>
@@ -89,7 +91,7 @@
 					<specDesc key="part"/>
 				</specList></p>
 			<p>Die Instrumentation kann äußerst komplex sein. Daher bietet das crApp-Schema die Möglichkeit, dass einzelne Stimmen zu Gruppen zusammengefasst werden. Das Element <gi>parts</gi> ist ein Container, der die Definition der Instrumentation enthält, unabhängig davon wie diese im Detail organisiert ist.</p>
-			<p>Das Element <gi>partGrp</gi> ist ebenfalls ein Container, der nicht nur zur Gruppierung verwendet werden, sondern gleizeitig auch eine Gruppe von Einzelstimmen definieren kann. Dies lässt sich auf beliebig vielen Ebenen umsetzen.</p>
+			<p>Das Element <gi>partGrp</gi> ist ebenfalls ein Container, der nicht nur zur Gruppierung verwendet werden, sondern gleichzeitig auch eine Gruppe von Einzelstimmen definieren kann. Dies lässt sich auf beliebig vielen Ebenen umsetzen.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<parts>
 					<partGrp xml:id="woods">
@@ -110,7 +112,7 @@
 					</partGrp>
 				</parts>
 			</egXML>
-			<p>Der im Beispiel gezeigte Wert des Atttributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfielt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung von Umlauten und Leerzeichen, um technischen Problemen vorzubeugen.</p>
+			<p>Der im Beispiel gezeigte Wert des Attributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfiehlt sich die Werte wie im vorangegangenen Beispiel generisch zu wählen unter Vermeidung von Umlauten und Leerzeichen, um technischen Problemen vorzubeugen.</p>
 			<p>Mit der Definition einer Gruppierung (bspw. Stimmgruppe »Holz«) wird das Ansteuern dieser Gruppe möglich, ohne dass jede Stimme einzeln adressiert werden muss.</p>
 			<p>Die im vorigen Beispiel abgebildete Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine Gruppe adressiert wurden und warnt ggf. vor entstehenden Redundanzen.</p>
 		</div>
@@ -129,8 +131,8 @@
 				<specDesc key="manifestationList"/>
 				<specDesc key="manifestation"/>
 			</specList></p>
-			<p>Die Referenzierung der Refernzdatensätzen zu Quellen erfolgt analog zu <ptr target="#relWorks"/>.</p>
-			<p>Im Vergleich zu <gi>relWork</gi> weist das Element <gi>manifestation</gi> eine Erweiterung auf: Das Attribut <att>sortNo</att> kann dazu verwendet werden, um eine Reihenfolge für die Anzeigereihenfolge der Quellen in der crApp-Applikaiton festzulegen.<note place="bottom">Eine Visualisierung der Abhängigkeiten zwischen Quellen (i.e. Stemma) ist nicht implementiert. Das Datenmodell geht diesbezüglich agnostisch vor.</note></p>
+			<p>Die Referenzierung der Referenzdatensätzen zu Quellen erfolgt analog zu <ptr target="#relWorks"/>.</p>
+			<p>Im Vergleich zu <gi>relWork</gi> weist das Element <gi>manifestation</gi> eine Erweiterung auf: Das Attribut <att>sortNo</att> kann dazu verwendet werden, um eine Reihenfolge für die Anzeigereihenfolge der Quellen in der crApp-Applikation festzulegen.<note place="bottom">Eine Visualisierung der Abhängigkeiten zwischen Quellen (i.e. Stemma) ist nicht implementiert. Das Datenmodell geht diesbezüglich agnostisch vor.</note></p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples" source="baudi-14-2b84beeb_mdiv-00.xml">
 					<manifestationList>
@@ -195,7 +197,7 @@
 				<specDesc key="handList"/>
 				<specDesc key="hand" atts="cert initial medium"/>
 			</specList></p>
-			<p>Im Container <gi>handList</gi> könnnen Schreibmittel, Schreibstile und Schreibende erfasst werden.</p>
+			<p>Im Container <gi>handList</gi> können Schreibmittel, Schreibstile und Schreibende erfasst werden.</p>
 			<egXML xmlns="http://www.tei-c.org/ns/Examples">
 				<handList>
 					<hand xml:id="hand.1" medium="ink.black" initial="true"><name>Ludwig Baumann</name></hand>

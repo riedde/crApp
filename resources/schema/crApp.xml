@@ -11932,7 +11932,7 @@
         		<gloss xml:lang="en" versionDate="2023-03-19">Datatype BEAT (extention)</gloss>
         		<gloss xml:lang="de" versionDate="2023-03-19">Datentyp BEAT (Erweiterung)</gloss>
         		<desc xml:lang="en" versionDate="2023-03-19">Combining data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; The values can be absolut ([measure]+[count] or [measure]) or relative (+/-[measure]+[count]). If the value is recorded in relative mode the use of +/- has to be used to differ from absolute values.</desc>
-        		<desc xml:lang="en" versionDate="2023-03-19">Kombination aus data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; Die Werte können absolut ([Taktzahl]+[Zählzeit] oder [Taktzahl]) oder relativ (+/-[Taktzahl]+[Zählzeit]) angegeben werden. Falls die Werte im relativen Modus erfasst werden, ist die Verwendung von +/- obligatorisch, um die relativen von absoluten Werten unterscheiden zu können.</desc>
+        		<desc xml:lang="de" versionDate="2023-03-19">Kombination aus data.BEAT, data.MEASUREBEAT, data.MEASUREBEATOFFSET; Die Werte können absolut ([Taktzahl]+[Zählzeit] oder [Taktzahl]) oder relativ (+/-[Taktzahl]+[Zählzeit]) angegeben werden. Falls die Werte im relativen Modus erfasst werden, ist die Verwendung von +/- obligatorisch, um die relativen von absoluten Werten unterscheiden zu können.</desc>
         		<content>
 	        			<rng:data type="token">
 	        				<rng:param name="pattern">(([0-9]+m\s*\+\s*)?[0-9]+(\.?[0-9]*)?)|((\+|-)?[0-9]+m\+[0-9]+(\.[0-9]*)?)|([0-9]+)</rng:param>
