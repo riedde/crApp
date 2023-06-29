@@ -4,11 +4,11 @@
   <head>Vorwort</head>
   <div>
     <head>Präambel</head>
-    <p>Das crApp-Framework ist im Rahmen meines Dissertationsprojektes zu hybriden Musikeditionen entstanden. Das Dedsiderat, dem ich mich gegenübersah war die Handhabung von kritischen Berichten in digitalen Umgebungen, die sich sowohl technisch als auch inhaltlich nahezu nicht vom analogen Pendant unterschied, obwohl die Rahmenbedingungen und Möglichkeiten digitaler Medien grundlegend andere sind, als im gedruckten Pendant.</p>
-    <p>Bei der Untersuchen des Grades der Digitalität hybrider Musikeditionen rückte der kritische Bericht deshalb ins Zentrum der Betrachtung, da hier das größte Defizit vorgefunden wurde. Dies einfach nur festzustellen hätte vermutlich nichts gebracht, da dieser Aspekt seit etwa 15 Jahren trotz kritischer Anmerkungen nicht einmal im Ansatz weiterentwickelt wurde. Daher wird mit dem critical apparatus-Framework (crApp) ein erster Vorschlag eingebracht, wie kritische Berichte in hybriden Musikeditionen digitaler und damit zeitgemäßer gestaltet werden könnten.</p>
-    <p>Ich bezeichne dieses System – damit meine ich sowohl das Datenschema als auch die WebApp – bewusst als Vorschlag, denn es stellt lediglich eine denkbare Möglichkeit dar, wie dem angesprochenen Desiderat begegnet werden kann. Darüber hinaus steckt dieses System regelrecht in den Kinderschuhen, da sich Datenmodelle und visualisierende bzw. auswertende Software bekanntlich mit der Zeit verfertigen; konkret durch den Gebrauch in unterschiedlichen Kontexten mit verschiedenartigen Forschungsobjekten.</p>
+    <p>Das crApp-Framework ist im Rahmen meines Dissertationsprojektes zu Methodiken in der hybride Musikedition entstanden. 
+      In den digitalen Teilen hybrider Editionen werden zahlreiche Aspekte den digitalen Medien entsprechend anders behandelt als in Printmedien. Die Handhabung von Kritischen Berichten in digitalen Umgebungen hat sich seit dem Aufkommen hybrider Editionen jedoch kaum verändert und stellt im Allgemeinen nur ein elektronisches Abbild des analogen (d.h. gexruckten) Pendant dar. Diesem Desiderat soll hier mit dem Entwurf eines Systems zur digitalen Erfassung Kritischer Anmerkungen in wissenschaftlichen Musikeditionen begegnet werden</p>
+    <p>Dieses Framework – dazu zählen sowohl das Datenmodell (Schema) als auch die WebApp – stellt lediglich eine denkbare Möglichkeit dar, wie dem angesprochenen Desiderat begegnet werden kann. Darüber hinaus steckt das crApp-Framework noch regelrecht ›in den Kinderschuhen‹, da sich Datenmodelle und visualisierende bzw. auswertende Software bekanntlich mit der Zeit verfertigen, durch den Gebrauch in unterschiedlichen Kontexten mit verschiedenartigen Forschungsobjekten.</p>
     <closer>
-      <dateline><name type="settlement">Waldsee</name>, <date when="2023-07-14">14. Juli 2023</date></dateline>
+      <dateline><name type="settlement">Waldsee</name>, <date when="2023-07-31">31. Juli 2023</date></dateline>
       <signed><name type="person"><ref target="https://orcid.org/0000-0001-5545-2088">Dennis Ried</ref></name></signed>
     </closer>
   </div>
