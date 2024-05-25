@@ -18,27 +18,29 @@ declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattin
 
 declare function app:landingPage($node as node(), $model as map(*)) {
     let $ediromEditions := crAnnot:getEditions()
+    let $lang := shared:get-lang()
     for $ediromEdition in $ediromEditions
         let $workIDs := $ediromEdition//edirom:work/@xml:id/string()
         let $ediromEditionName := $ediromEdition//edirom:editionName/text()
         return
             <div>
-                <h3>{$ediromEditionName}</h3>
                 <div class="container">
                 {for $workID at $n in $workIDs
                     let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:relWork[@xml:id=$workID]]//crapp:mdiv
                     return
-                       (<h5>{shared:translate('crapp.work')}&#160;{shared:translate('crapp.no')}&#160;{$n}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
+                       (<h5 style="margin-top: 2em; margin-bottom: 1em;">{$ediromEditionName}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
                         <hr class="m-0"/>,
                         <div class="accordion accordion-flush" id="accordionWork-{$n}">
                            {for $mdiv at $i in $mdivs
                                let $mdivNo := $mdiv/@num
+                               let $mdivTitle := $mdiv/crapp:label[@xml:lang = $lang]
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
+                               let $mdivRemarkCount := count($remarks)
                                order by number($mdivNo)
                                return
                                    <div class="accordion-item">
                                       <h2 class="accordion-header" id="flush-heading-{$i}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{$i}" aria-expanded="false" aria-controls="flush-collapse-{$i}">{shared:translate('crapp.mdiv')}&#160;{$mdiv}</button>
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{$i}" aria-expanded="false" aria-controls="flush-collapse-{$i}">{$mdivTitle}&#160;({$mdivRemarkCount}&#160;{shared:translate('crapp.critReport.annotations')})</button>
                                       </h2>
                                       <div id="flush-collapse-{$i}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{$i}" data-bs-parent="#accordionWork-{$n}">
                                         <div class="accordion-body">
@@ -66,7 +68,7 @@ declare function app:langSwitch($node as node(), $model as map(*)) {
     }</div>
 };
 
-declare function app:remark($node as node(), $model as map(*)) {
+declare function app:remark($node as node(), $model as map(*)) as map(){
     let $remarkID := request:get-parameter('remark-id', ())
     let $remark := collection(shared:get-dataCollPath())//crapp:remark/id($remarkID)
     return
