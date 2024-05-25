@@ -10,6 +10,7 @@ declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
 import module namespace functx="http://www.functx.com";
 import module namespace shared="http://baumann-digital.de/ns/shared" at "shared.xql";
+import module namespace app="http://baumann-digital.de/ns/templates" at "app.xql";
 
 declare function crAnnot:getEditions() as node()* {
     collection(shared:get-dataCollPath())//edirom:edition
@@ -187,26 +188,66 @@ declare function crAnnot:getLabels($sequence as node()*, $type as xs:string, $la
             else()
 };
 
+declare function crAnnot:getOccurances($remark as node()) as node()* {
+    for $occurance in $remark//crapp:occurance
+        return crAnnot:renderOccurance($occurance)
+};
+
+declare function crAnnot:getSources($remark as node()) as xs:string* {
+    for $siglum at $pos in $remark//crapp:manifestation
+        return
+            (crAnnot:getSigla($siglum),if($pos eq count($remark//crapp:manifestation)) then() else(', '))
+};
+
+declare function crAnnot:getEditions($remark as node()) as xs:string* {
+    for $siglum at $pos in $remark//crapp:edition
+        return
+            (crAnnot:getSigla($siglum), if($pos = count($remark//crapp:edition)) then() else(', '))
+};
+
+declare function crAnnot:getParts($remark as node(), $lang as xs:string) as xs:string* {
+    let $parts := $remark//crapp:part
+    let $partGrps := $remark//crapp:partGrp
+    let $partsText := if((not($parts) and not($partGrps)) and $remark//crapp:parts/text() != '') then($remark//crapp:parts/text() => normalize-space()) else()
+    let $partsLabels := crAnnot:getLabels(($parts | $partGrps), 'parts', $lang, $remark/ancestor::crapp:crApp/crapp:setting)
+    return
+        string-join(($partsLabels, $partsText), ', ')
+};
+
+declare function crAnnot:getAnnots($remark as node(), $lang as xs:string) as node()* {
+    for $annot in $remark//crapp:annot
+        return
+            crAnnot:renderSmufl($annot, $lang)
+};
+
+declare function crAnnot:getRemarkType($remark as node(), $switched as xs:boolean) as xs:string {
+    
+    if ($switched = true())
+    then(
+        switch($remark/@type)
+            case 'editorial' return 'success'
+            case 'reading' return 'info'
+            case 'annotation' return 'dark'
+            default return($remark/@type)
+        )
+    else($remark/@type/string())
+};
+
 declare function crAnnot:styleRemarks($remarks as node()*) as node()* {
 
 <div class="col">
    <div class="row bottom-space">
-       <div class="col-2">
         <div class="row">
-          <div class="col-3 font-weight-bold">{shared:translate('crapp.mdiv.short')}</div>
-          <div class="col-9 font-weight-bold">{shared:translate('crapp.critReport.measure.short')}<sup>{shared:translate('crapp.critReport.beat.short')}</sup></div>
-        </div>
-       </div>
-       <div class="col-5">
-        <div class="row">
-         <div class="col font-weight-bold">{shared:translate('crapp.critReport.category')}</div>
-         <div class="col font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
-         <div class="col font-weight-bold">{shared:translate('crapp.source')}</div>
-         <div class="col font-weight-bold">{shared:translate('crapp.edition')}</div>
-        </div>
-       </div>
-       <div class="col-5">
-        <div class="col font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
+          <!--<div class="col-3 font-weight-bold">{shared:translate('crapp.mdiv.short')}</div>-->
+          <div class="col-2 font-weight-bold">ID</div>
+          <div class="col-1 font-weight-bold">{shared:translate('crapp.critReport.measure.short')}<sup>{shared:translate('crapp.critReport.beat.short')}</sup></div>
+         <div class="col-3 font-weight-bold">{shared:translate('crapp.critReport.category')}</div>
+         <div class="col-3 font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
+         <!--<div class="col font-weight-bold">{shared:translate('crapp.source')}</div>-->
+         <div class="col-3 font-weight-bold">{shared:translate('crapp.edition')}</div>
+       <!--<div class="col-2">
+         <div class="col font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
+       </div>-->
        </div>
     </div>
 {
@@ -214,32 +255,16 @@ for $remark in $remarks
     let $lang := shared:get-lang()
     let $setting := $remark/ancestor::crapp:crApp/crapp:setting
     let $remarkID := $remark/@xml:id
-    let $remarkType := switch($remark/@type)
-                        case 'editorial' return 'success'
-                        case 'reading' return 'info'
-                        case 'annotation' return 'dark'
-                        default return($remark/@type)
+    let $remarkType := crAnnot:getRemarkType($remark, true())
     let $mdiv := $remark/crapp:mdiv
-    let $occurances := for $occurance in $remark//crapp:occurance
-                        return crAnnot:renderOccurance($occurance)
+    let $occurances := crAnnot:getOccurances($remark)
     let $occurancesList := for $occurance in $occurances
                             return
                                 ($occurance,<br/>)
-    let $sources := for $siglum at $pos in $remark//crapp:manifestation
-                        return
-                            (crAnnot:getSigla($siglum),if($pos eq count($remark//crapp:manifestation)) then() else(', '))
-    let $editions := for $siglum at $pos in $remark//crapp:edition
-                        return
-                            (crAnnot:getSigla($siglum), if($pos = count($remark//crapp:edition)) then() else(', '))
-    let $parts := $remark//crapp:part
-    let $partGrps := $remark//crapp:partGrp
-    let $partsText := if((not($parts) and not($partGrps)) and $remark//crapp:parts/text() != '') then($remark//crapp:parts/text() => normalize-space()) else()
-    let $partsLabels := crAnnot:getLabels(($parts | $partGrps), 'parts', $lang, $setting)
-    let $partsLabels := string-join(($partsLabels, $partsText), ', ')
-    let $annots := $remark//crapp:annot
-    let $annots := for $annot in $annots
-                    return crAnnot:renderSmufl($annot,$lang)
-    let $annotsList := <ol>{$annots}</ol>
+    let $sources := crAnnot:getSources($remark)
+    let $editions := crAnnot:getEditions($remark)
+    let $partsLabels := crAnnot:getParts($remark, $lang)
+    let $annotsList := <ol>{crAnnot:getAnnots($remark, $lang)}</ol>
     let $classes := crAnnot:getLabels($remark//crapp:class, 'classes', $lang, $setting)
     let $classesList := crAnnot:makeListElements($classes, <br/>)
     
@@ -262,25 +287,33 @@ for $remark in $remarks
     return
      <div class="alert alert-{$remarkType}">
        <div class="row">
-       <div class="col-2">
-        <div class="row">
-           <div class="col-3">{$mdiv}</div>
-           <div class="col-9">{$occurancesList}</div>
-        </div>
+            <div class="col-2"><a data-bs-toggle="modal" data-bs-target="#{$remarkID}" href="{$remarkID || '.html'}">{string($remarkID)}</a></div>
+           <!--<div class="col-3">{$mdiv}</div>-->
+           <div class="col-1">{$occurancesList}</div>
+            <div class="col-3">{$classesList}</div>
+            <div class="col-3">{$partsLabels}</div>
+            <!--<div class="col">{$sources}</div>-->
+            <div class="col-3">{$editions}</div>
        </div>
-       <div class="col-5">
-        <div class="row">
-            <div class="col">{$classesList}</div>
-            <div class="col">{$partsLabels}</div>
-            <div class="col">{$sources}</div>
-            <div class="col">{$editions}</div>
-        </div>
-       </div>
-       <div class="col-5">
+       <!--<div class="col-5">
         <div class="col">{$annotsList}</div>
-       </div>
-       </div>
-       <div><a href="{$remarkID || '.html'}">{string($remarkID)}</a></div>
+       </div>-->
+       <div class="modal fade" id="{$remarkID}" tabindex="-1" aria-labelledby="{$remarkID}-Label" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"> <!-- modal-lg -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="{$remarkID}-Label">{shared:translate('crapp.critReport.annotation')}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {crAnnot:styleRemarkSingle($remark)}
+              </div>
+              <!--<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>-->
+            </div>
+          </div>
+        </div>
      </div>
 }
 </div>
@@ -318,22 +351,52 @@ for $surface in $surfaces
 };
 
 declare function crAnnot:styleRemarkSingle($remark as node()?) as node() {
+    let $lang := shared:get-lang()
+    
+    return
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            <div class="font-weight-bold">{shared:translate('crapp.mdiv.short')}</div>
+        <div class="col-2">
             <div class="font-weight-bold">{shared:translate('crapp.critReport.measure.short')}<sup>{shared:translate('crapp.critReport.beat.short')}</sup></div>
         </div>
-        <div class="col">
+        <div class="col-10">{crAnnot:getOccurances($remark)}</div>
+    </div>
+    <div class="row">
+        <div class="col-2">
             <div class="font-weight-bold">{shared:translate('crapp.critReport.category')}</div>
-            <div class="font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
-            <div class="font-weight-bold">{shared:translate('crapp.source')}</div>
-            <div class="font-weight-bold">{shared:translate('crapp.edition')}</div>
+        </div>
+        <div class="col-10">
+            <div class="font-weight-bold">{crAnnot:makeListElements(crAnnot:getLabels($remark//crapp:class, 'classes', $lang, $remark/ancestor::crapp:crApp/crapp:setting), <br/>)}</div>
         </div>
     </div>
     <div class="row">
-        <div class="font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
+        <div class="col-2">
+            <div class="font-weight-bold">{shared:translate('crapp.critReport.part')}</div>
+        </div>
+        <div class="col-10">
+            <div class="font-weight-bold">{crAnnot:getParts($remark, $lang)}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="font-weight-bold">{shared:translate('crapp.source')}</div>
+        </div>
+        <div class="col-10">
+            <div class="font-weight-bold">{crAnnot:getSources($remark)}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="font-weight-bold">{shared:translate('crapp.edition')}</div>
+        </div>
+        <div class="col-10">
+            <div class="font-weight-bold">{crAnnot:getEditions($remark)}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
+        <div class="col-10 font-weight-bold"><ol>{crAnnot:getAnnots($remark, $lang)}</ol></div>
     </div>
 </div>
 };
