@@ -2,12 +2,12 @@ xquery version "3.1";
 
 module namespace app="http://baumann-digital.de/ns/templates";
 
-import module namespace i18n = "http://exist-db.org/xquery/i18n" at "/db/apps/crApp/modules/i18n.xql";
+import module namespace i18n = "http://exist-db.org/xquery/i18n" at "i18n.xql";
 import module namespace templates="http://exist-db.org/xquery/html-templating";
-import module namespace config="http://exist-db.org/xquery/config" at "/db/apps/crApp/modules/config.xqm";
-import module namespace shared="http://baumann-digital.de/ns/shared" at "/db/apps/crApp/modules/shared.xql";
-import module namespace functx="http://www.functx.com" at "/db/apps/crApp/modules/functx.xqm";
-import module namespace crAnnot="http://baumann-digital.de/ns/crAnnots" at "/db/apps/crApp/modules/crAnnots.xqm";
+import module namespace config="http://exist-db.org/xquery/config" at "config.xqm";
+import module namespace shared="http://baumann-digital.de/ns/shared" at "shared.xql";
+import module namespace functx="http://www.functx.com";
+import module namespace crAnnot="http://baumann-digital.de/ns/crAnnots" at "crAnnots.xqm";
 
 declare namespace tei = "http://www.tei-c.org/ns/1.0";
 declare namespace mei = "http://www.music-encoding.org/ns/mei";
@@ -19,20 +19,20 @@ declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattin
 declare function app:landingPage($node as node(), $model as map(*)) {
     let $ediromEditions := crAnnot:getEditions()
     for $ediromEdition in $ediromEditions
-        let $workIDs := $ediromEdition//edirom:work/string(@xml:id)
+        let $workIDs := $ediromEdition//edirom:work/@xml:id/string()
         let $ediromEditionName := $ediromEdition//edirom:editionName/text()
         return
             <div>
                 <h3>{$ediromEditionName}</h3>
                 <div class="container">
                 {for $workID at $n in $workIDs
-                    let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:work[@xml:id=$workID]]//crapp:mdiv
+                    let $mdivs := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:relWork[@xml:id=$workID]]//crapp:mdiv
                     return
-                           (<h5>{shared:translate('crapp.work')}&#160;{shared:translate('crapp.no')}&#160;{$n}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
-                           <hr class="m-0"/>,
+                       (<h5>{shared:translate('crapp.work')}&#160;{shared:translate('crapp.no')}&#160;{$n}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
+                        <hr class="m-0"/>,
                         <div class="accordion accordion-flush" id="accordionWork-{$n}">
                            {for $mdiv at $i in $mdivs
-                               let $mdivNo := $mdiv/@no
+                               let $mdivNo := $mdiv/@num
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
                                order by number($mdivNo)
                                return

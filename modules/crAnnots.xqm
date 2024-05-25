@@ -9,7 +9,7 @@ declare namespace edirom="http://www.edirom.de/ns/1.3";
 declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
 import module namespace functx="http://www.functx.com";
-import module namespace shared="http://baumann-digital.de/ns/shared" at "/db/apps/crApp/modules/shared.xql";
+import module namespace shared="http://baumann-digital.de/ns/shared" at "shared.xql";
 
 declare function crAnnot:getEditions() as node()* {
     collection(shared:get-dataCollPath())//edirom:edition
@@ -134,7 +134,7 @@ declare function crAnnot:renderSmufl($annot as node()?, $lang as xs:string) as n
 
 
 declare function crAnnot:getCritRemarks($workID as xs:string) as node()* {
-    collection(shared:get-dataCollPath())//crapp:crApp[.//crapp:setting//crapp:work[@xml:id=$workID]]//crapp:remark
+    collection(shared:get-dataCollPath())//crapp:crApp[.//crapp:setting//crapp:relWork[@xml:id=$workID]]//crapp:remark
 };
 
 (: introduce function to get the setting on remark level and pass it as: param as node() after that this function should work with $partOrGrp as xs:string:)

@@ -1,7 +1,7 @@
 xquery version "3.1";
 
 declare namespace mei = "http://www.music-encoding.org/ns/mei";
-import module namespace functx="http://www.functx.com" at "../baudiResources/data/libraries/functx.xqm";
+import module namespace functx="http://www.functx.com";
 
 
 (: this script extracts the zones from an mei file and provides a link for the image snippet. Specialized for images at BLB-Karlsruhe :)

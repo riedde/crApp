@@ -6,15 +6,15 @@
 xquery version "3.1";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating" ;
-import module namespace i18n = "http://exist-db.org/xquery/i18n-templates" at "/db/apps/crApp/modules/i18n-templates.xql";
+import module namespace i18n = "http://exist-db.org/xquery/i18n-templates" at "i18n-templates.xql";
 
 (: 
  : The following modules provide functions which will be called by the 
  : templating.
  :)
-import module namespace config="http://exist-db.org/xquery/config" at "/db/apps/crApp/modules/config.xqm";
-import module namespace app="http://baumann-digital.de/ns/templates" at "/db/apps/crApp/modules/app.xql";
-import module namespace shared="http://baumann-digital.de/ns/shared" at "/db/apps/crApp/modules/shared.xql";
+import module namespace config="http://exist-db.org/xquery/config" at "config.xqm";
+import module namespace app="http://baumann-digital.de/ns/templates" at "app.xql";
+import module namespace shared="http://baumann-digital.de/ns/shared" at "shared.xql";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 

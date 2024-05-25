@@ -6,17 +6,17 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace mei="http://www.music-encoding.org/ns/mei";
 declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
-import module namespace i18n = "http://exist-db.org/xquery/i18n" at "/db/apps/crApp/modules/i18n.xql";
-import module namespace app="http://baumann-digital.de/ns/templates" at "/db/apps/crApp/modules/app.xql";
+import module namespace i18n = "http://exist-db.org/xquery/i18n" at "i18n.xql";
+import module namespace app="http://baumann-digital.de/ns/templates" at "app.xql";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 
-import module namespace config="http://exist-db.org/xquery/config" at "/db/apps/crApp/modules/config.xqm";
+import module namespace config="http://exist-db.org/xquery/config" at "config.xqm";
 (:import module namespace request="http://exist-db.org/xquery/request";:)
 (:import module namespace range="http://exist-db.org/xquery/range";:)
 (:import module namespace transform="http://exist-db.org/xquery/transform";:)
 
-import module namespace functx="http://www.functx.com" at "/db/apps/crApp/modules/functx.xqm";
+import module namespace functx="http://www.functx.com";
 import module namespace json="http://www.json.org";
 import module namespace jsonp="http://www.jsonp.org";
 
