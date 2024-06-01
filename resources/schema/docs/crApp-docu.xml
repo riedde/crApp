@@ -5,7 +5,7 @@
 	<div xml:id="chap-usedSchema" xml:lang="de">
 		<head>Verwendete Schemata</head>
 		<p>Das Datenmodell ist stark an MEI angelehnt, stellt jedoch nicht die (inhaltliche) Codierung von Quellen oder Werken in den Mittelpunkt. Die aus MEI entlehnten Elemente sind bei Bedarf modifiziert worden, um sie für das neue Anwendungsfeld nutzbar zu machen. Elemente, die nicht dem MEI-Standard entspringen, wurden für diesen Anwendungszweck neu definiert.</p>
-		<p>Innerhalb des crApp-Schemas befinden sich alle Elemente im crApp-Namspace. Eine Unterscheidung in crApp und MEI mittels Präfixierung hat sich als untauglich erwiesen.</p>
+		<p>Innerhalb des crApp-Schemas befinden sich alle Elemente im crApp-Namspace. Eine Unterscheidung in crApp und MEI mittels Präfixierung hat sich zunächst als untauglich erwiesen.</p>
 	</div>
 	<div xml:id="chap-modules">
 		<p>Das crApp-Schema besteht aus drei Modulen:</p>
@@ -52,14 +52,14 @@
 				<specDesc key="macro.list.lang"/>
 				</specList></p>
 			<p>Zu Beginn wird die primäre Sprache definiert, in der die Anmerkungen verfasst sind. Diese wird durch den Wert im Attribut <att>codedval</att> erfasst. Die unterstützen Sprachen sind im Macro <ref target="#TEI.crapp_macro.list.lang"
-					>macro.list.lang</ref> erfasst. Es sind hier nur Sprachen verfügbar, welche von der crApp-WebApp unterstützt werden. Eine Erweiterung des Macros für individuelle Zwecke ist möglich und auch erwünscht. Für die Implementierung der neuen Sprache in die crApp-WebApp wenden Sie sich gerne auch an <ref target="mailto:ried-musikforschung@mail.com">ried-musikforschung@mail.com</ref>.</p>
+				>macro.list.lang</ref> erfasst. Hier sind nur Sprachen verfügbar, welche von der crApp-WebApp unterstützt werden. Eine Erweiterung des Macros für individuelle Zwecke ist möglich und auch erwünscht.<note place="bottom">Für die Implementierung der neuen Sprache in die crApp-WebApp wenden Sie sich gerne auch an <ref target="mailto:forschung@dennisried.de">forschung@dennisried.de</ref>.</note></p>
 			<p>
 				<specList>
 					<specDesc key="mdiv" atts="num sortNo"/>
 					<specDesc key="mdivs"/>
 				</specList>
 			</p>
-			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Liedersammlung), Werkteile, wie die Nummern einer Oper, oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Attribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekts nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
+			<p>Das an MEI angelehnte Element <gi>mdiv</gi> steht für einen musikalischen Abschnitt (musical division). Dieses Element ist generisch angelegt und kann sowohl die Sätze eines Werkes definieren als auch Teilwerke einer Sammlung (bspw. einzelne Lieder einer Liedersammlung), Werkteile, wie die Nummern einer Oper oder sonstige Strukturen. Die Nummerierung der <gi>mdiv</gi>-Elemente durch das Attribut <att>num</att> ist obligatorisch und als eine technische Zählung zu betrachten. Das heißt, dass eine Nummerierung auch dann vergeben werden muss, wenn die einzelnen Abschnitte des beschriebenen Objekts nicht nummeriert sind! Als Werte sind ausschließlich Natürliche Zahlen (inkl. <val>0</val>) erlaubt. Diese Zählung ist für die spätere Zuordnung und Sortierung maßgeblich; daher ist die Verwendung arabischer Ziffern vorgegeben.</p>
 			<p>Um dem <gi>mdiv</gi> einen Bezeichner beizugeben, wird das Element <gi>label</gi> unter Angabe der verwendeten Sprache (<att>xml:lang</att>) verwendet: </p>
 			<p>
 				<egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -114,7 +114,7 @@
 			</egXML>
 			<p>Der im Beispiel gezeigte Wert des Attributs <att>xml:id</att> muss eindeutig sein, da hierüber die Zuordnung der Anmerkungen zu den adressierten Stimmen hergestellt wird. Es empfiehlt sich, die Werte wie im vorangegangenen Beispiel generisch zu wählen, unter Vermeidung von Umlauten und Leerzeichen, um technische Probleme vorzubeugen.</p>
 			<p>Mit der Definition einer Gruppierung (bspw. Stimmgruppe »Holz«) wird das Ansteuern dieser Gruppe möglich, ohne dass jede Stimme einzeln adressiert werden muss.</p>
-			<p>Die im vorigen Beispiel abgebildete Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine Gruppe adressiert wurden und warnt ggf. vor entstehenden Redundanzen.</p>
+			<p>Die im vorigen Beispiel abgebildete Verschachtelung kann durch das Schema validiert werden. Eine Schematron-Regel prüft, ob die in der Anmerkung als Partizipatoren angegebenen Stimmen bereits durch eine übergeordnete Gruppe adressiert wurden und warnt ggf. vor entstehenden Redundanzen.</p>
 		</div>
 		<div xml:id="relWorks">
 			<head>Assoziierte Werke (related works)</head>
@@ -243,7 +243,7 @@
 		<p><specList>
 			<specDesc key="class"/>
 		</specList></p>
-		<p>Das Element <gi>class</gi> dient der Klassifizierung. Die Werte, die hier als Text eingegeben werden, entsprechen der Klassifizierung in <gi>setting</gi>. Wird ein Wert eingegeben, der nicht zuvor definiert wurde, wirft die Schematron-Validierung einen Fehler aus.</p>
+		<p>Das Element <gi>class</gi> dient der Klassifizierung. Die Werte, die hier als Text eingegeben werden, entsprechen der Klassifizierung in <gi>setting</gi>. Wird ein Wert eingegeben, der nicht zuvor definiert wurde, meldet die Schematron-Validierung einen Fehler.</p>
 		<p>
 			<specList>
 				<specDesc key="mdiv"/>
@@ -255,10 +255,11 @@
 				<specDesc key="occurances"/>
 				<specDesc key="occurance"/>
 				<specDesc key="position" atts="count measure"/>
+				<specDesc key="range" atts="count measure type"/>
 			</specList>
 		</p>
 		<p>Das Element <gi>occurances</gi> ist ein Container für alle Vorkommen, bei denen die Kritische Anmerkung relevant ist. Da es durchaus vorkommen kann, dass eine Anmerkung an mehreren Stellen Relevanz ist (bspw. in den Takten 2, 4, 5 und 8 enden die Bögen bereits eine Achtel früher), kann das Element <gi>occurance</gi> mehrfach verwendet werden.</p>
-		<p>Eine Taktposition kann auf zwei verschiedene Arten identifiziert werden: als Position (<gi>position</gi>) oder als Bereich. Im ersten Fall werden Taktzahl und ggf. Zählzeit angeben.</p>
+		<p>Eine Taktposition kann auf zwei verschiedene Arten identifiziert werden: als Position (<gi>position</gi>) oder als Bereich (<gi>range</gi>). Im ersten Fall werden Taktzahl und ggf. Zählzeit angeben.</p>
 		<egXML xmlns="http://www.tei-c.org/ns/Examples">
 			<occurance>
 				<position measure="2" count="3"/>
@@ -278,6 +279,12 @@
 			<specDesc key="part"/>
 		</specList></p>
 		<p>Betroffene Stimmen werden im Element <gi>parts</gi> angegeben. Der Wrapper <gi>parts</gi> kann neben den Elementen <gi>part</gi> und <gi>partGrp</gi> auch den Text <val>all</val> und <val>none</val> enthalten, wenn (bspw. in Generalanmerkungen) alle oder keine Stimmen betroffen sind.</p>
+		<egXML xmlns="http://www.tei-c.org/ns/Examples">
+			<parts>
+				<part>trombone.i</part>
+				<part>trombone.iii</part>
+			</parts>
+		</egXML>
 		<p>Die Textknoten von <gi>partGrp</gi> und <gi>part</gi> enthalten die ID der entsprechenden Stimmendefinition in <gi>setting</gi>.</p>
 		<p><specList>
 			<specDesc key="annots"/>
