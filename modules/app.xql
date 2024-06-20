@@ -16,6 +16,25 @@ declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
 declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattingText.xsl');
 
+declare function app:editionFilterBar($mdiv as node(), $lang as xs:string) as node()? {
+    let $editions := $mdiv/ancestor::crapp:setting//crapp:relEditions/crapp:edition
+    
+    let $filters := for $edition in $editions
+                        let $siglum := $edition/@xml:id/string()
+                        let $label := $edition/crapp:label[if(@xml:lang) then(@xml:lang=$lang) else(true())]
+                        return
+                            <div class="custom-control custom-switch" >
+                               <input class="custom-control-input" type="checkbox" id="{$siglum}" oninput="filterEdition('{$siglum}')"/>
+                               <label class="custom-control-label" style="padding-right:20px;" for="{$siglum}">{$label}</label>
+                            </div>
+    return
+       <div class="alert alert-dark" role="alert">
+           <div class="row">
+               {$filters}
+           </div>
+       </div>
+};
+
 declare function app:landingPage($node as node(), $model as map(*)) {
     let $ediromEditions := crAnnot:getEditions()
     let $lang := shared:get-lang()
@@ -44,6 +63,7 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                                       </h2>
                                       <div id="flush-collapse-{$i}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{$i}" data-bs-parent="#accordionWork-{$n}">
                                         <div class="accordion-body">
+                                            {app:editionFilterBar($mdiv, $lang)}
                                             <div>{crAnnot:styleRemarks($remarks)}</div>
                                         </div>
                                       </div>
