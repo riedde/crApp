@@ -227,7 +227,8 @@ declare function crAnnot:getSources($remark as node()) as xs:string* {
 declare function crAnnot:getEditions($remark as node()) as xs:string* {
     for $siglum at $pos in $remark//crapp:edition
         return
-            (crAnnot:getSigla($siglum), if($pos = count($remark//crapp:edition)) then() else(', '))
+            (: deactivate crAnnot:getSigla():)
+            ($siglum, if($pos = count($remark//crapp:edition)) then() else(', '))
 };
 
 declare function crAnnot:getParts($remark as node(), $lang as xs:string) as xs:string* {
