@@ -7,10 +7,35 @@ declare namespace mei = "http://www.music-encoding.org/ns/mei";
 declare namespace crApp="http://www.baumann-digital.de/ns/crApp";
 declare namespace edirom="http://www.edirom.de/ns/1.3"; 
 declare namespace crapp="http://baumann-digital.de/ns/crApp";
+declare namespace xhtml="http://www.w3.org/1999/xhtml";
+declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 
 import module namespace functx="http://www.functx.com";
 import module namespace shared="http://baumann-digital.de/ns/shared" at "shared.xql";
 import module namespace app="http://baumann-digital.de/ns/templates" at "app.xql";
+
+(:~
+ : Processing XML files for display (and download)
+ : Comments and not-greenlisted facsimile information will be removed
+ :
+ : @author Peter Stadler 
+ : @param $nodes the nodes to transform
+ : @return transformed nodes
+~:)
+declare function crAnnot:process-xml-for-display($nodes as node()*) as node()* {
+    for $node in $nodes
+    return
+        typeswitch($node)
+        case comment() return $node
+        case element() return 
+            element {node-name($node)} {
+                $node/@*,
+                crAnnot:process-xml-for-display($node/node())
+            }
+        case document-node() return document { crAnnot:process-xml-for-display($node/node()) }
+        
+        default return $node
+};
 
 declare function crAnnot:getEditions() as node()* {
     collection(shared:get-dataCollPath())//edirom:edition
@@ -216,8 +241,11 @@ declare function crAnnot:getParts($remark as node(), $lang as xs:string) as xs:s
 
 declare function crAnnot:getAnnots($remark as node(), $lang as xs:string) as node()* {
     for $annot in $remark//crapp:annot
+        let $annotMod := for $element in $annot return concat('&lt;', local-name($element),'&gt;')
+        let $serialisationParam := <output:serialization-parameters><output:method>xml</output:method><output:media-type>application/xml</output:media-type><output:indent>no</output:indent></output:serialization-parameters>
         return
-            crAnnot:renderSmufl($annot, $lang)
+(:            crAnnot:renderSmufl($annot, $lang):)
+            <xhtml:span>{serialize(crAnnot:process-xml-for-display($annot), $serialisationParam)}</xhtml:span>
 };
 
 declare function crAnnot:getRemarkType($remark as node(), $switched as xs:boolean) as xs:string {
@@ -396,7 +424,11 @@ declare function crAnnot:styleRemarkSingle($remark as node()?) as node() {
     </div>
     <div class="row">
         <div class="col-2 font-weight-bold">{shared:translate('crapp.critReport.annotation')}</div>
-        <div class="col-10 font-weight-bold"><ol>{crAnnot:getAnnots($remark, $lang)}</ol></div>
+        <div class="col-10 font-weight-bold">
+            {if(count(crAnnot:getAnnots($remark, $lang)) gt 1)
+             then(<ol>{for $each in crAnnot:getAnnots($remark, $lang) return <li>{$each}</li>}</ol>)
+             else(<ul>{crAnnot:getAnnots($remark, $lang)}</ul>)}
+        </div>
     </div>
 </div>
 };
