@@ -22,7 +22,7 @@
     "frontend-dependencies": "^0.2.1",
     "minify": "^6.0.1",
     "prettydiff": "^99.0.1",
-    "sass": "^1.22.12"
+    "sass": "^1.62.1"
   },
   "frontendDependencies": {
     "target": "libs",
