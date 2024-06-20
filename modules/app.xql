@@ -16,17 +16,17 @@ declare namespace crapp="http://baumann-digital.de/ns/crApp";
 
 declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattingText.xsl');
 
-declare function app:editionFilterBar($mdiv as node(), $lang as xs:string) as node()? {
-    let $editions := $mdiv/ancestor::crapp:setting//crapp:relEditions/crapp:edition
-    
-    let $filters := for $edition in $editions
-                        let $siglum := $edition/@xml:id/string()
-                        let $label := $edition/crapp:label[if(@xml:lang) then(@xml:lang=$lang) else(true())]
+declare function app:editionFilterBar($workID as xs:string, $lang as xs:string) as node()? {
+    let $settings := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:relWork[@xml:id=$workID]]
+    let $editions := $settings//crapp:relEditions/crapp:edition
+    let $filters := for $siglum in distinct-values($editions/@xml:id)
+                        order by $siglum
                         return
-                            <div class="custom-control custom-switch" >
-                               <input class="custom-control-input" type="checkbox" id="{$siglum}" oninput="filterEdition('{$siglum}')"/>
-                               <label class="custom-control-label" style="padding-right:20px;" for="{$siglum}">{$label}</label>
+                            <div class="col form-check form-switch">
+                              <input class="form-check-input" type="checkbox" role="switch" id="{$siglum}" oninput="filterEdition('{$siglum}')" checked=""/>
+                              <label class="form-check-label" for="{$siglum}">{$siglum}</label>
                             </div>
+
     return
        <div class="alert alert-dark" role="alert">
            <div class="row">
@@ -50,7 +50,8 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                        (<h5 style="margin-top: 2em; margin-bottom: 1em;">{$ediromEditionName}&#160;({count(crAnnot:getCritRemarks($workID))}&#160;{shared:translate('crapp.critReport.annotations')})</h5>,
                         <hr class="m-0"/>,
                         <div class="accordion accordion-flush" id="accordionWork-{$n}">
-                           {for $mdiv at $i in $mdivs
+                            {app:editionFilterBar($workID, $lang),
+                            for $mdiv at $i in $mdivs
                                let $mdivNo := $mdiv/@num
                                let $mdivTitle := $mdiv/crapp:label[@xml:lang = $lang]
                                let $remarks := crAnnot:getCritRemarks($workID)[.//crapp:mdiv = $mdivNo]
@@ -63,7 +64,6 @@ declare function app:landingPage($node as node(), $model as map(*)) {
                                       </h2>
                                       <div id="flush-collapse-{$i}" class="accordion-collapse collapse" aria-labelledby="flush-heading-{$i}" data-bs-parent="#accordionWork-{$n}">
                                         <div class="accordion-body">
-                                            {app:editionFilterBar($mdiv, $lang)}
                                             <div>{crAnnot:styleRemarks($remarks)}</div>
                                         </div>
                                       </div>

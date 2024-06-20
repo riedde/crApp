@@ -1,13 +1,13 @@
 /* Filtern der Cards im Katalog nach Ampelsystem */
-function filterEdition(edition) {
-    if(document.getElementById(edition).checked) {
+function filterEdition(siglum) {
+    if(document.getElementById(siglum).checked) {
         const divs = document.getElementsByClassName('col-3');
         for (let x = 0; x < divs.length; x++) {
             const div = divs[x];
             const content = div.textContent.trim();
             const container = div.parentElement.parentElement;
         
-            if (content.includes(edition)) { container.style.display = 'block'; }
+            if (content.includes(siglum)) { container.style.display = 'block'; }
         }
     }
     else {
@@ -17,7 +17,7 @@ function filterEdition(edition) {
             const content = div.textContent.trim();
             const container = div.parentElement.parentElement;
         
-            if (content.includes(edition)) { container.style.display = 'none'; }
+            if (content.includes(siglum)) { container.style.display = 'none'; }
         }
     }
 }
