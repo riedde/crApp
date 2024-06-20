@@ -18,13 +18,13 @@ declare variable $app:formatText := doc('/db/apps/crApp/resources/xslt/formattin
 
 declare function app:editionFilterBar($workID as xs:string, $lang as xs:string) as node()? {
     let $settings := collection(shared:get-dataCollPath())//crapp:crApp//crapp:setting[.//crapp:relWork[@xml:id=$workID]]
-    let $editions := $settings//crapp:relEditions/crapp:edition
-    let $filters := for $siglum in distinct-values($editions/@xml:id)
+    let $editions := $settings//crapp:relEditions/crapp:edition => functx:distinct-deep()
+    let $filters := for $siglum in $editions/@xml:id
                         order by $siglum
                         return
                             <div class="col form-check form-switch">
                               <input class="form-check-input" type="checkbox" role="switch" id="{$siglum}" oninput="filterEdition('{$siglum}')" checked=""/>
-                              <label class="form-check-label" for="{$siglum}">{$siglum}</label>
+                              <label class="form-check-label" for="{$siglum}">{crAnnot:getSigla($siglum, false())}</label>
                             </div>
 
     return

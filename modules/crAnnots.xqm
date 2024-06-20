@@ -189,12 +189,14 @@ declare function crAnnot:getClassLabels($class as node()?, $lang as xs:string) a
         if($classLabel) then($classLabel) else($class)
 };
 
-declare function crAnnot:getSigla($siglum as node()?) as node()? {
+declare function crAnnot:getSigla($siglum as node()?, $attr as xs:boolean) as node()? {
     let $siglumTokens := tokenize($siglum,'-')
     let $siglumSeq1 := subsequence($siglumTokens,1,1)
     let $siglumSeq2 := subsequence($siglumTokens,2) => string-join('-')
     return
-        <span>{$siglumSeq1}<sup>{$siglumSeq2}</sup></span>
+        if($attr = true())
+        then(<span siglum="{$siglum}">{$siglumSeq1}<sup>{$siglumSeq2}</sup></span>)
+        else(<span>{$siglumSeq1}<sup>{$siglumSeq2}</sup></span>)
 };
 
 declare function crAnnot:makeListElements($sequence as item()*, $delim as node()) as item()* {
@@ -218,17 +220,16 @@ declare function crAnnot:getOccurances($remark as node()) as node()* {
         return crAnnot:renderOccurance($occurance)
 };
 
-declare function crAnnot:getSources($remark as node()) as xs:string* {
+declare function crAnnot:getSources($remark as node()) as node()* {
     for $siglum at $pos in $remark//crapp:manifestation
         return
-            (crAnnot:getSigla($siglum),if($pos eq count($remark//crapp:manifestation)) then() else(', '))
+            <span>{crAnnot:getSigla($siglum, true()),if($pos eq count($remark//crapp:manifestation)) then() else(', ')}</span>
 };
 
-declare function crAnnot:getEditions($remark as node()) as xs:string* {
+declare function crAnnot:getEditions($remark as node()) as node()* {
     for $siglum at $pos in $remark//crapp:edition
         return
-            (: deactivate crAnnot:getSigla():)
-            ($siglum, if($pos = count($remark//crapp:edition)) then() else(', '))
+            <span>{crAnnot:getSigla($siglum, true()),if($pos eq count($remark//crapp:edition)) then() else(', ')}</span>
 };
 
 declare function crAnnot:getParts($remark as node(), $lang as xs:string) as xs:string* {
