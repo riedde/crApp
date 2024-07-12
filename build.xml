@@ -109,5 +109,6 @@
         </zip>
         <delete file="expath-pkg.xml"/>
         <delete file="repo.xml"/>
+        <delete dir="${build.dir}"/>
     </target>
 </project>
